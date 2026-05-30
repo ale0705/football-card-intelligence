@@ -1,0 +1,14 @@
+PitchValue AI Scan placeholder
+
+Purpose:
+This file marks the future location of the AI Scan guided workflow.
+
+Migration target:
+- image upload guidance
+- prompt generation
+- extracted data parsing
+- AI confidence handling
+- user confirmation before saving
+
+Rule:
+AI Scan must be made easier for testers before adding advanced features.
