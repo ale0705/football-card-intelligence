@@ -1,60 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PitchValue v19</title>
-<style>
-body{margin:0;font-family:Inter,Arial,sans-serif;background:#f4f7fb;color:#0f172a;}
-#boot{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;}
-.boot-card{max-width:620px;background:white;border:1px solid #e5edf6;border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(15,23,42,.12);}
-.boot-card h1{margin:0 0 8px;font-size:34px;letter-spacing:-.04em}.boot-card p{color:#64748b;line-height:1.5}.loader{width:42px;height:42px;border:4px solid #dbeafe;border-top-color:#2563eb;border-radius:50%;animation:spin 1s linear infinite;margin:18px auto}@keyframes spin{to{transform:rotate(360deg)}}
-.boot-error{display:none;margin-top:16px;padding:12px;border-radius:14px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;text-align:left;font-size:14px;}
-</style>
+<meta http-equiv="refresh" content="0; url=https://ale0705.github.io/football-card-intelligence/">
+<title>PitchValue</title>
 </head>
 <body>
-<div id="boot"><div class="boot-card"><h1>PitchValue</h1><p>Caricamento piattaforma portfolio intelligence...</p><div class="loader"></div><div id="err" class="boot-error"></div></div></div>
-<script>
-const SOURCE_URL = "https://raw.githubusercontent.com/ale0705/football-card-intelligence/e23331e63732187826d902a6c5a1a749293536a6/index.html";
-
-const V19_PATCH = String.raw`
-<style id="pv19-style">
-.pv19-hero{background:linear-gradient(135deg,#07111f,#0f1f35 55%,#2563eb);color:white;border-radius:30px;padding:28px;margin:0 0 22px;box-shadow:0 24px 70px rgba(15,23,42,.22);position:relative;overflow:hidden}.pv19-hero:after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08)}.pv19-hero h2{margin:0 0 8px;font-size:34px;letter-spacing:-.05em}.pv19-hero p{max-width:760px;margin:0;color:#dbeafe;line-height:1.5}.pv19-badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}.pv19-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:20px}.pv19-action{background:white!important;color:#0f172a!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:20px!important;padding:16px!important;min-height:98px;text-align:left!important;width:100%!important;box-shadow:0 14px 34px rgba(15,23,42,.14)!important}.pv19-action.primary{background:linear-gradient(135deg,#2563eb,#06b6d4)!important;color:white!important;border:0!important}.pv19-action b{display:block;font-size:16px;margin-bottom:5px}.pv19-action small{display:block;color:#64748b;line-height:1.35;font-weight:700}.pv19-action.primary small{color:#dbeafe}.pv19-guided{background:linear-gradient(135deg,#eff6ff,#ffffff);border:1px solid #dbeafe;border-radius:24px;padding:18px;margin:0 0 18px;box-shadow:0 14px 34px rgba(15,23,42,.07)}.pv19-guided h3{margin:0 0 6px;font-size:22px;letter-spacing:-.03em}.pv19-guided p{margin:0 0 14px;color:#64748b}.pv19-help{position:fixed;right:22px;bottom:22px;z-index:9998;border-radius:999px!important;background:linear-gradient(135deg,#2563eb,#06b6d4)!important;box-shadow:0 18px 34px rgba(37,99,235,.32)!important;padding:13px 16px!important;font-size:14px!important}.pv19-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.68);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)}.pv19-modal{max-width:760px;width:100%;background:#fff;border-radius:28px;padding:24px;box-shadow:0 28px 80px rgba(2,6,23,.35);border:1px solid #e2e8f0;color:#0f172a}.pv19-modal h2{margin:0 0 8px;font-size:26px;letter-spacing:-.04em}.pv19-modal p{color:#64748b;line-height:1.5}.pv19-steps{display:grid;gap:10px;margin:16px 0}.pv19-step{display:flex;gap:12px;align-items:flex-start;background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:12px}.pv19-num{width:30px;height:30px;border-radius:999px;display:grid;place-items:center;background:#2563eb;color:white;font-weight:900;flex:0 0 auto}.pv19-step b{display:block;margin-bottom:2px}.pv19-step small{color:#64748b;line-height:1.35}.pv19-modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pv19-modal-actions button{width:auto!important;border-radius:999px!important;padding:11px 15px!important}.pv19-muted{background:#f1f5f9!important;color:#0f172a!important;border:1px solid #cbd5e1!important}.pv19-price-btn{background:#16a34a!important;color:white!important}@media(max-width:720px){.pv19-help{right:12px;bottom:12px}.pv19-modal{padding:18px}.pv19-hero{padding:22px}.pv19-hero h2{font-size:28px}}
-</style>
-<script>
-(function(){
-function closeModal(){var e=document.getElementById('pv19-modal');if(e)e.remove();}
-window.pv19Close=closeModal;
-function modal(html){closeModal();var d=document.createElement('div');d.id='pv19-modal';d.className='pv19-backdrop';d.innerHTML='<div class="pv19-modal">'+html+'</div>';document.body.appendChild(d);}
-window.pv19Welcome=function(){modal('<h2>Cosè PitchValue?</h2><p>Non è solo un cerca-prezzi. È una piattaforma per gestire il portfolio di football cards, capire ROI, valore, vendita, lotti e target futuri.</p><div class="pv19-actions"><button class="pv19-action primary" onclick="pv19Close();openNewCardForm()"><b>➕ Aggiungi carta</b><small>Registra una carta nel portfolio</small></button><button class="pv19-action" onclick="pv19Close();openNewCardForm();setTimeout(pv19AIScan,300)"><b>🧠 AI Scan guidato</b><small>Analizza una foto passo passo</small></button><button class="pv19-action" onclick="pv19Close();showSection(\'portfolioPage\')"><b>💶 Controlla valore</b><small>Apri una carta e usa Controlla valore</small></button><button class="pv19-action" onclick="pv19Close();showSection(\'watchlistPage\');loadWatchlist()"><b>🎯 Watchlist</b><small>Monitora carte da comprare</small></button></div><div class="pv19-modal-actions"><button onclick="pv19Close()">Ok</button></div>');}
-window.pv19AIScan=function(next){modal('<h2>AI Scan guidato</h2><p>Il flusso attuale usa una finestra AI esterna. Segui questi passi. In futuro diventerà automatico con un click.</p><div class="pv19-steps"><div class="pv19-step"><div class="pv19-num">1</div><div><b>Carica la foto</b><small>In Nuova Carta usa il campo Foto carta.</small></div></div><div class="pv19-step"><div class="pv19-num">2</div><div><b>Clicca AI Scan</b><small>Se il browser chiede popup o appunti, premi Consenti.</small></div></div><div class="pv19-step"><div class="pv19-num">3</div><div><b>Trascina la foto nella finestra AI</b><small>Usa la foto aperta o il file immagine.</small></div></div><div class="pv19-step"><div class="pv19-num">4</div><div><b>Incolla il prompt e invia</b><small>Il prompt è già copiato.</small></div></div><div class="pv19-step"><div class="pv19-num">5</div><div><b>Copia il BLOCCO WEBAPP</b><small>Rientra nellapp, incolla in Analisi AI e premi Estrai dati AI.</small></div></div></div><div class="pv19-modal-actions"><button id="pv19-go">Continua con AI Scan</button><button class="pv19-muted" onclick="pv19Close()">Annulla</button></div>');document.getElementById('pv19-go').onclick=function(){pv19Close();if(typeof next==='function')next();};}
-function addHero(){var dash=document.getElementById('dashboard');if(!dash||document.getElementById('pv19-hero'))return;var h=document.createElement('div');h.id='pv19-hero';h.className='pv19-hero';h.innerHTML='<span class="pv19-badge">Football Card Portfolio Intelligence</span><h2>Analizza, valuta e gestisci il tuo portfolio di football cards.</h2><p>PitchValue non si limita a cercare prezzi: ti aiuta a decidere cosa tenere, vendere, monitorare o mettere in lotto, collegando carte, box, ROI, AI e watchlist.</p><div class="pv19-actions"><button class="pv19-action primary" onclick="openNewCardForm()"><b>➕ Aggiungi carta</b><small>Inserisci foto e dati base</small></button><button class="pv19-action" onclick="openNewCardForm();setTimeout(pv19AIScan,300)"><b>🧠 AI Scan guidato</b><small>Fatti guidare passo passo</small></button><button class="pv19-action" onclick="showSection(\'portfolioPage\')"><b>💶 Controlla valore</b><small>Apri portfolio e cerca prezzi/venduti</small></button><button class="pv19-action" onclick="showSection(\'watchlistPage\');loadWatchlist()"><b>🎯 Watchlist</b><small>Monitora target futuri</small></button></div>';dash.prepend(h);}
-function addGuided(){var box=document.getElementById('dashboardBox');if(!box||document.getElementById('pv19-guided'))return;var g=document.createElement('div');g.id='pv19-guided';g.className='pv19-guided';g.innerHTML='<h3>Da dove vuoi iniziare?</h3><p>Se sei nuovo, parti da una di queste azioni. Il portfolio resta sotto.</p><div class="pv19-actions"><button class="pv19-action primary" onclick="openNewCardForm()"><b>➕ Nuova carta</b><small>Salva una carta</small></button><button class="pv19-action" onclick="openNewCardForm();setTimeout(pv19AIScan,300)"><b>🧠 AI Scan</b><small>Guida passo passo</small></button><button class="pv19-action" onclick="showSection(\'portfolioPage\')"><b>💶 Controlla valore</b><small>Cerca attivi e venduti</small></button><button class="pv19-action" onclick="showSection(\'watchlistPage\');loadWatchlist()"><b>🎯 Watchlist</b><small>Target da monitorare</small></button></div>';box.prepend(g);}
-function addHelp(){if(document.getElementById('pv19-help'))return;var b=document.createElement('button');b.id='pv19-help';b.className='pv19-help';b.textContent='? Guida';b.onclick=pv19Welcome;document.body.appendChild(b);}
-function patchButtons(){document.querySelectorAll('button').forEach(function(b){var t=(b.textContent||'').trim();if(t==='🔎'||t==='🔎 Ricerca'||t==='Ricerca'){b.textContent='💶 Controlla valore';b.classList.add('pv19-price-btn');}if(t==='Apri'){b.textContent='Apri scheda';}});}
-function wrapAI(){if(window.__pv19Wrapped)return;var old=window.aiScanCurrentCard;if(typeof old==='function'){window.__pv19Wrapped=true;window.aiScanCurrentCard=function(){pv19AIScan(function(){old();});};}}
-function init(){addHero();addGuided();addHelp();patchButtons();wrapAI();var old=window.loadDashboard;if(typeof old==='function'&&!window.__pv19Dash){window.__pv19Dash=true;window.loadDashboard=function(){old();setTimeout(function(){addHero();addGuided();patchButtons();},30);};}setTimeout(function(){addHero();addGuided();patchButtons();},500);}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
-`;
-
-async function boot(){
-  try{
-    const res = await fetch(SOURCE_URL, {cache:"no-store"});
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    let html = await res.text();
-    html = html.replace("</body>", V19_PATCH + "\n</body>");
-    document.open();
-    document.write(html);
-    document.close();
-  }catch(err){
-    const e = document.getElementById("err");
-    e.style.display = "block";
-    e.innerHTML = "Errore caricamento app: " + err.message + "<br>Riprova con Ctrl+F5. Se persiste, avvisa Alessandro.";
-  }
-}
-boot();
-</script>
+Reindirizzamento...
 </body>
 </html>
