@@ -12,22 +12,37 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-
 </style>
 </head>
 <body>
-<div class="box"><h1>PitchValue</h1><p>Ripristino versione stabile...</p><div class="loader"></div><div id="error"></div></div>
+<div class="box"><h1>PitchValue</h1><p>Caricamento versione stabile con onboarding leggero...</p><div class="loader"></div><div id="error"></div></div>
 <script>
 (async function(){
   const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b/index.html';
+  const patch = `
+<style id="pv19-lite-style">
+.pv19-lite{background:linear-gradient(135deg,#07111f,#0f1f35 55%,#2563eb);color:white;border-radius:26px;padding:22px;margin:0 0 18px;box-shadow:0 18px 48px rgba(15,23,42,.18)}
+.pv19-lite h2{margin:0 0 8px;font-size:30px;letter-spacing:-.04em;color:white}.pv19-lite p{margin:0;color:#dbeafe;line-height:1.45;max-width:780px}.pv19-lite small{display:block;margin-top:10px;color:#bfdbfe;font-weight:700}.pv19-lite-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pv19-lite-actions button{width:auto!important;border-radius:999px!important;padding:10px 14px!important;margin:0!important}.pv19-green{background:#16a34a!important}.pv19-help{position:fixed;right:20px;bottom:20px;z-index:9999;border-radius:999px!important;padding:12px 15px!important;background:linear-gradient(135deg,#2563eb,#06b6d4)!important;box-shadow:0 16px 32px rgba(37,99,235,.28)!important}.pv19-modal-bg{position:fixed;inset:0;background:rgba(2,6,23,.66);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px}.pv19-modal{background:white;color:#0f172a;max-width:620px;width:100%;border-radius:24px;padding:22px;box-shadow:0 28px 80px rgba(2,6,23,.35);text-align:left}.pv19-modal h2{margin:0 0 8px}.pv19-modal p{color:#64748b;line-height:1.5}.pv19-modal button{width:auto!important;border-radius:999px!important;padding:10px 14px!important;margin-right:8px!important}.pv19-muted{background:#64748b!important}
+</style>
+<script>
+(function(){
+function close(){var e=document.getElementById('pv19-modal');if(e)e.remove();}
+window.pv19LiteClose=close;
+window.pv19LiteHelp=function(){close();var d=document.createElement('div');d.id='pv19-modal';d.className='pv19-modal-bg';d.innerHTML='<div class="pv19-modal"><h2>Cosè PitchValue?</h2><p>PitchValue non è solo una ricerca prezzi. Serve a trasformare la tua collezione di football cards in un portfolio intelligente: valore, ROI dei box, decisioni di vendita, lotti e watchlist.</p><p><b>Per iniziare:</b> aggiungi una carta, fai AI Scan se hai la foto, poi usa Portfolio per controllare valore e strategia.</p><button onclick="pv19LiteClose();openNewCardForm()">Aggiungi carta</button><button class="pv19-muted" onclick="pv19LiteClose()">Chiudi</button></div>';document.body.appendChild(d);}
+function add(){var dash=document.getElementById('dashboard');if(!dash||document.getElementById('pv19-lite'))return;var h=document.createElement('div');h.id='pv19-lite';h.className='pv19-lite';h.innerHTML='<h2>PitchValue · Football Card Intelligence</h2><p>Analizza, valuta e gestisci il tuo portfolio di football cards con supporto AI. Non solo prezzi: decisioni su hold, vendita, lotti, box ROI e watchlist.</p><small>Primo utilizzo: parti da Nuova carta oppure apri Portfolio per controllare le carte già inserite.</small><div class="pv19-lite-actions"><button onclick="openNewCardForm()">➕ Aggiungi carta</button><button onclick="openNewCardForm();setTimeout(function(){alert(\'AI Scan guidato: carica la foto, clicca AI Scan, consenti popup/appunti se richiesto, trascina la foto nella finestra AI, copia il BLOCCO WEBAPP e incollalo in Analisi AI.\')},300)">🧠 AI Scan guidato</button><button class="pv19-green" onclick="showSection(\'portfolioPage\')">💶 Controlla valore</button><button onclick="showSection(\'watchlistPage\');loadWatchlist()">🎯 Watchlist</button></div>';dash.prepend(h);if(!document.getElementById('pv19-help')){var b=document.createElement('button');b.id='pv19-help';b.className='pv19-help';b.textContent='? Guida';b.onclick=pv19LiteHelp;document.body.appendChild(b);} }
+setTimeout(add,400);var old=window.loadDashboard;if(typeof old==='function'){window.loadDashboard=function(){old();setTimeout(add,50);};}
+})();
+<\/script>`;
   try{
     const res = await fetch(stableUrl, {cache:'no-store'});
     if(!res.ok){ throw new Error('HTTP ' + res.status); }
     let html = await res.text();
     if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
+    html = html.replace('</body>', patch + '\n</body>');
     document.open();
     document.write(html);
     document.close();
   }catch(e){
     const err = document.getElementById('error');
     err.style.display='block';
-    err.innerHTML='Errore ripristino: '+e.message+'<br>Apri il repo GitHub e ripristina il commit aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b.';
+    err.innerHTML='Errore caricamento: '+e.message+'<br>Riprova con Ctrl+F5.';
   }
 })();
 </script>
