@@ -1,0 +1,14 @@
+PitchValue UI placeholder
+
+Purpose:
+This file marks the future location of UI rendering helpers.
+
+Migration target:
+- dashboard rendering
+- cards table/list rendering
+- modal rendering
+- form helpers
+- onboarding components
+
+Rule:
+UI changes should be previewed on the refactor branch before any release.
