@@ -1,0 +1,15 @@
+PitchValue app logic placeholder
+
+Purpose:
+This file marks the future location of the main application logic.
+
+Migration target:
+- app initialization
+- dashboard calculations
+- portfolio actions
+- box ROI logic
+- lot builder logic
+- watchlist logic
+
+Rule:
+Do not move production logic here until it can be tested on the refactor branch without touching main.
