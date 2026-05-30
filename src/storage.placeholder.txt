@@ -1,0 +1,14 @@
+PitchValue storage placeholder
+
+Purpose:
+This file marks the future location of local storage and persistence helpers.
+
+Migration target:
+- save collection
+- load collection
+- import/export JSON
+- data migrations
+- versioned schema handling
+
+Rule:
+Storage code must be migrated carefully because it protects the user's card data.
