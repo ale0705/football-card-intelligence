@@ -20,6 +20,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-
     const res = await fetch(stableUrl, {cache:'no-store'});
     if(!res.ok){ throw new Error('HTTP ' + res.status); }
     let html = await res.text();
+    if(html.trim().startsWith('!DOCTYPE')) html = '<' + html;
     if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
     document.open();
     document.write(html);
