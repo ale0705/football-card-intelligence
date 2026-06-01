@@ -88,7 +88,13 @@ transition:.3s
 <div class="step">
 <h1>Primo scan guidato</h1>
 <p>Carica una carta. PitchValue la analizzerà e costruirà il tuo portfolio.</p>
-<button class="btn">Scansiona prima carta</button>
+<button class="btn" onclick="startScan()">Scansiona prima carta</button>
+
+<div id="scanArea" style="display:none;margin-top:24px">
+<div id="scanStatus" style="padding:20px;background:#1e293b;border-radius:16px;text-align:center">
+Upload immagine...
+</div>
+</div>
 </div>
 
 </div>
@@ -105,6 +111,34 @@ if(current<steps.length){
 steps[current].classList.add('active');
 fill.style.width=((current+1)/steps.length*100)+'%';
 }
+}
+
+function startScan(){
+const area=document.getElementById('scanArea');
+const status=document.getElementById('scanStatus');
+
+area.style.display='block';
+
+status.innerHTML='📸 Caricamento carta...';
+
+setTimeout(()=>{
+status.innerHTML='🤖 Analisi AI in corso...';
+},1500);
+
+setTimeout(()=>{
+status.innerHTML='🔍 Match database...';
+},3000);
+
+setTimeout(()=>{
+status.innerHTML=`
+<h3>Carta riconosciuta</h3>
+<p>Player: Jude Bellingham</p>
+<p>Set: Topps Chrome</p>
+<p>Valore stimato: €42</p>
+<p>Confidence: 94%</p>
+<button class="btn">Aggiungi al portfolio</button>
+`;
+},5000);
 }
 </script>
 
