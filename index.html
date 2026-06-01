@@ -15,12 +15,12 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-
 <div class="box"><h1>PitchValue</h1><p>Ripristino versione stabile...</p><div class="loader"></div><div id="error"></div></div>
 <script>
 (async function(){
-  const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/ca3cc05d27f1811e485ab9ec3721d4d55852d99e/index.html';
+  const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b/index.html';
   try{
     const res = await fetch(stableUrl, {cache:'no-store'});
     if(!res.ok){ throw new Error('HTTP ' + res.status); }
     let html = await res.text();
-    html = html.replace(/<script src="ai-scan-fix\.js" defer><\/script>/g, '');
+    if(html.trim().startsWith('!DOCTYPE')) html = '<' + html;
     if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
     document.open();
     document.write(html);
