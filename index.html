@@ -2,35 +2,176 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PitchValue</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}
-.box{background:white;border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(15,23,42,.12);max-width:560px}
-.loader{width:40px;height:40px;border:4px solid #dbeafe;border-top-color:#2563eb;border-radius:50%;animation:spin 1s linear infinite;margin:18px auto}@keyframes spin{to{transform:rotate(360deg)}}
-#error{display:none;margin-top:15px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px;border-radius:14px;text-align:left}
-</style>
+<title>PitchValue v18 Watchlist</title>
+<link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
-<div class="box"><h1>PitchValue</h1><p>Ripristino versione stabile...</p><div class="loader"></div><div id="error"></div></div>
-<script>
-(async function(){
-  const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b/index.html';
-  try{
-    const res = await fetch(stableUrl, {cache:'no-store'});
-    if(!res.ok){ throw new Error('HTTP ' + res.status); }
-    let html = await res.text();
-    if(html.trim().startsWith('!DOCTYPE')) html = '<' + html;
-    if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
-    document.open();
-    document.write(html);
-    document.close();
-  }catch(e){
-    const err = document.getElementById('error');
-    err.style.display='block';
-    err.innerHTML='Errore ripristino: '+e.message+'<br>Riprova con Ctrl+F5.';
-  }
-})();
-</script>
+
+<header class="app-sidebar">
+<div class="brand-block">
+<div class="brand-icon">⚽</div>
+<div><h1>PitchValue</h1><p>Football Card Intelligence</p></div>
+</div>
+<nav class="side-nav">
+<button onclick="showSection('dashboard')"><span>📊</span>Dashboard</button>
+<button onclick="showSection('portfolioPage')"><span>🗂️</span>Portfolio</button>
+<button onclick="showSection('watchlistPage'); loadWatchlist();"><span>🎯</span>Watchlist</button>
+<button onclick="openNewCardForm()"><span>➕</span>Nuova Carta</button>
+<button onclick="showSection('lotsPage'); loadLots();"><span>📦</span>Lotti</button>
+<button onclick="showSection('boxesPage')"><span>🎁</span>Box</button>
+<button onclick="showSection('soldPage'); loadSoldCards();"><span>💰</span>Vendute</button>
+<button onclick="showSection('backup')"><span>🛟</span>Backup</button>
+</nav>
+<div class="quick-start-card">
+<h3>Quick Start</h3>
+<ol>
+<li>Aggiungi una nuova carta e carica la foto.</li>
+<li>Clicca <b>AI Scan</b>.</li>
+<li>Al primo utilizzo consenti <b>popup</b> e <b>copia appunti</b> se il browser lo chiede.</li>
+<li>Trascina la foto aperta dentro la finestra AI.</li>
+<li>Incolla il prompt già copiato e invia.</li>
+<li>Copia il <b>BLOCCO WEBAPP</b> dalla risposta AI.</li>
+<li>Incollalo in Analisi AI e clicca <b>Estrai dati AI</b>.</li>
+</ol>
+<div class="mini-warning" style="margin-top:10px;padding:10px;border-radius:14px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;line-height:1.35;">
+<b>Primo utilizzo:</b> se AI Scan non apre le finestre, abilita i popup per questa pagina. Se non copia il prompt, premi Consenti quando il browser chiede accesso agli appunti.
+</div>
+<small style="display:block;margin-top:10px;"><b>Rookie</b>: prima release rilevante. <b>Academy</b>: giovane da monitorare. <b>Prospect</b>: potenziale futuro.</small>
+</div>
+<div class="sidebar-footer">v18 Watchlist<br><small>local-first · AI assisted</small></div>
+</header>
+
+<main>
+<div class="topbar"><div><span class="eyebrow">Football card portfolio</span><h2 id="pageTitle">Dashboard</h2></div><button class="primary-pill" onclick="openNewCardForm()">+ Nuova carta</button></div>
+
+<section id="dashboard" class="section active">
+<div class="box" style="margin-bottom:12px;">
+<label>Scenario dashboard AI</label>
+<select id="dashboardScenario" onchange="setDashboardScenario(this.value)">
+<option value="avg">Realistico · usa AI medio</option>
+<option value="min">Prudente · usa AI minimo</option>
+<option value="max">Ottimistico · usa AI massimo</option>
+</select>
+</div>
+<div id="dashboardBox" class="box"></div>
+</section>
+
+<section id="search" class="section">
+<div class="box">
+<div class="section-title-row"><div><h2 id="searchTitle" style="margin:0;">Nuova carta</h2><p class="page-subtitle">Inserisci i dati essenziali, poi lascia che l’AI compili valutazione, query e strategia.</p></div><button id="closeEditModalBtn" type="button" class="secondary-button compact-btn" style="display:none;" onclick="closeEditModal()">Chiudi modifica</button></div>
+<input type="hidden" id="editIndex">
+<div class="form-card manual"><h3>1 · Dati da compilare a mano</h3><p class="helper">La parte minima per registrare la carta. Il resto può arrivare dall’AI Scan.</p><div class="field-grid">
+<div><label>Giocatore</label><input id="player" placeholder="es. Roony Bardghji"></div><div><label>Set / prodotto</label><input id="set" placeholder="es. Topps Chrome UEFA"></div><div><label>Parallel</label><input id="parallel" placeholder="es. Aqua / Refractor"></div><div><label>Numerazione</label><input id="numbering" placeholder="es. /199"></div><div><label>Prezzo pagato</label><input id="paid" placeholder="es. pull oppure 20"></div><div><label>Valore stimato manuale</label><input id="estimated" placeholder="facoltativo"></div><div><label>Data inserimento</label><input id="dateAdded" type="date"></div><div><label>Box di provenienza</label><select id="boxId"><option value="">Nessun box / acquisto singolo</option></select></div><div><label>Foto carta</label><input id="imageFile" type="file" accept="image/*"></div><div><label>Status collezione</label><select id="status"><option value="HOLD">HOLD</option><option value="MONITOR">MONITOR</option><option value="SELL">SELL</option><option value="SOLD">VENDUTA</option></select></div>
+</div></div>
+<div class="form-card ai-auto"><h3>2 · AI Scan e import automatico</h3><p class="helper">Usa AI Scan, poi incolla qui il BLOCCO WEBAPP. La mini scheda resta pulita nel portfolio.</p><div class="action-row"><button type="button" onclick="aiScanCurrentCard()">🧠 AI Scan</button><button type="button" class="secondary-button" onclick="copyAIPrompt()">Copia prompt</button><button type="button" class="ghost-button" onclick="visualSearchCurrentCard()">Apri foto</button></div><label>Analisi AI / BLOCCO WEBAPP</label><textarea id="aiAnalysis" placeholder="Incolla qui il BLOCCO WEBAPP generato dall’AI"></textarea><div class="action-row"><button type="button" onclick="extractAIValuationFromText()">📌 Estrai dati AI</button></div><div class="field-grid"><div><label>AI min €</label><input id="aiMin" placeholder="min"></div><div><label>AI medio €</label><input id="aiAvg" placeholder="medio"></div><div><label>AI max €</label><input id="aiMax" placeholder="max"></div><div><label>Liquidità</label><select id="aiLiquidity"><option value="">Liquidità</option><option value="BASSA">BASSA</option><option value="MEDIA">MEDIA</option><option value="ALTA">ALTA</option></select></div><div><label>Consiglio AI</label><select id="aiAdvice"><option value="">Consiglio AI</option><option value="LOTTO">LOTTO</option><option value="VENDI SINGOLA">VENDI SINGOLA</option><option value="HOLD">HOLD</option><option value="MONITORA">MONITORA</option></select></div><div><label>Sintesi breve</label><input id="aiSummary" placeholder="es. 2-5€, meglio in lotto"></div></div><div id="aiHistoryBox" class="card" style="display:none;background:#f8fafc;margin-top:10px;"></div></div>
+<div class="form-card market"><h3>3 · Query e ricerche mercato</h3><p class="helper">Campi riempiti dall’AI per controllare eBay, venduti e 130Point.</p><label>Query precisa / titolo migliore</label><textarea id="aiQuery" placeholder="Query principale estratta dall'analisi AI"></textarea><div class="field-grid"><div><label>Query ampia</label><textarea id="aiQueryWide" placeholder="Query ampia"></textarea></div><div><label>Query venduti</label><textarea id="aiQuerySold" placeholder="Query venduti/completed"></textarea></div><div><label>Parole da escludere</label><input id="aiExclude" placeholder="box case pack sealed lot"></div><div><label>Escludi manuale</label><input id="exclude" placeholder="auto sapphire gold"></div></div><div class="action-row"><button type="button" class="secondary-button" onclick="searchAIQueryType('precise')">Cerca precisa</button><button type="button" class="secondary-button" onclick="searchAIQueryType('wide')">Cerca ampia</button><button type="button" class="secondary-button" onclick="searchAIQueryType('sold')">Cerca venduti</button></div></div>
+<div class="form-card football"><h3>4 · Football layer</h3><p class="helper">Dati calcio per club exposure, academy radar, prospect e lotti più sensati.</p><div class="field-grid"><div><label>Club</label><input id="club" placeholder="Barcelona / Arsenal / Milan"></div><div><label>Competizione</label><select id="competition"><option value="">Competizione</option><option value="Club Competitions">Club Competitions</option><option value="Champions League">Champions League</option><option value="Domestic League">Domestic League</option><option value="National Team">National Team</option><option value="Youth / Academy">Youth / Academy</option><option value="Friendly / Other">Friendly / Other</option></select></div><div><label>Prospect level</label><select id="prospectLevel"><option value="">Prospect level</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select></div><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="rookieFlag" type="checkbox" style="width:auto;margin-right:8px;"> Rookie card</label><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="academyFlag" type="checkbox" style="width:auto;margin-right:8px;"> Academy monitored</label></div></div>
+<div class="form-card sales"><h3>5 · Strategia e vendita</h3><p class="helper">Compila solo per listing, lotto, vendita reale o monitoraggio futuro.</p><div class="field-grid"><div><label>Strategia vendita</label><select id="saleStrategy"><option value="">Automatica da AI</option><option value="SINGOLA">Singola</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option></select></div><div><label>Nome lotto</label><input id="lotGroup" placeholder="Barça low value / Rookie lotto"></div><div><label>Stato vendita</label><select id="saleStatus"><option value="IN_PORTFOLIO">In portfolio</option><option value="LISTED">In vendita</option><option value="SOLD">Venduta</option><option value="SHIPPED">Spedita</option></select></div><div><label>Prezzo annuncio</label><input id="listingPrice" placeholder="es. 9.99"></div><div><label>Prezzo vendita reale</label><input id="salePrice" placeholder="es. 60"></div><div><label>Fee / commissioni</label><input id="saleFees" placeholder="es. 1.20"></div><div><label>Spedizione a tuo carico</label><input id="shippingCost" placeholder="es. 1.50"></div><div><label>Data vendita</label><input id="soldDate" type="date"></div><div><label>Data spedizione</label><input id="shippedDate" type="date"></div><div><label>Motivo monitoraggio</label><input id="watchReason" placeholder="primo gol / trasferimento / hype"></div><div><label>Prossima rivalutazione</label><input id="nextReviewDate" type="date"></div></div></div>
+<div class="form-footer-sticky"><button onclick="saveCard()">Salva nuova carta</button><button onclick="updateCard()" class="secondary-button">Aggiorna carta</button><button onclick="searchCard(true)" class="ghost-button">Ricerca mirata</button><button onclick="searchCard(false)" class="ghost-button">Ricerca ampia</button><button onclick="resetFields()" class="danger-button">Reset</button></div><div id="results"></div>
+</div></section>
+
+<section id="portfolioPage" class="section">
+<div class="box"><div class="section-title-row"><div><h2 style="margin:0;">Portfolio</h2><p class="page-subtitle">Compatta per panoramica rapida, dettaglio per lavorare sulle singole carte.</p></div><div class="view-toggle"><button class="chip-btn active" id="compactViewBtn" onclick="setPortfolioView('compact')">Compatta</button><button class="chip-btn" id="detailViewBtn" onclick="setPortfolioView('detail')">Dettaglio</button></div></div>
+<div class="toolbar"><button class="chip-btn" onclick="setPortfolioFilter('ALL')">Tutte</button><button class="chip-btn" onclick="setPortfolioFilter('HOLD')">HOLD</button><button class="chip-btn" onclick="setPortfolioFilter('MONITOR')">MONITOR</button><button class="chip-btn" onclick="setPortfolioFilter('SELL')">SELL</button><button class="chip-btn" onclick="showSection('soldPage'); loadSoldCards();">Vendute</button><input class="search-input" id="portfolioSearch" placeholder="Cerca giocatore, set, club..." onkeyup="loadPortfolio()"><select id="portfolioBoxFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i box</option><option value="NOBOX">Acquisto singolo / non collegate</option></select><select id="portfolioStrategyFilter" onchange="loadPortfolio()"><option value="ALL">Tutte le strategie</option><option value="SINGOLA">Singole</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option><option value="NON ASSEGNATA">Non assegnata</option></select><select id="portfolioClubFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i club</option></select><select id="portfolioProspectFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i prospect</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select><select id="portfolioFootballFilter" onchange="loadPortfolio()"><option value="ALL">Tutte</option><option value="ROOKIE">Rookie</option><option value="ACADEMY">Academy</option></select><select id="portfolioSort" onchange="loadPortfolio()"><option value="default">Ordine inserimento</option><option value="dateDesc">Più recenti</option><option value="dateAsc">Meno recenti</option><option value="valueDesc">Valore più alto</option><option value="valueAsc">Valore più basso</option><option value="profitDesc">Profitto più alto</option><option value="profitAsc">Profitto più basso</option><option value="nameAsc">Nome A-Z</option></select></div><div id="portfolio" class="portfolio-grid compact-view"></div></div>
+</section>
+
+
+<section id="watchlistPage" class="section">
+<div class="box">
+<div class="section-title-row"><div><h2 style="margin:0;">Watchlist</h2><p class="page-subtitle">Giocatori e carte da monitorare prima dell'acquisto. È il ponte tra scouting e portfolio reale.</p></div></div>
+<input type="hidden" id="watchEditIndex">
+<div class="form-card football">
+<h3>Aggiungi target</h3>
+<p class="helper">Inserisci giocatori/carte che vuoi seguire. Quando acquisti, usa “Porta nel portfolio”.</p>
+<div class="watch-form">
+<div><label>Giocatore</label><input id="watchPlayer" placeholder="es. Max Dowman"></div>
+<div><label>Club</label><input id="watchClub" placeholder="Arsenal / Barcelona"></div>
+<div><label>Età</label><input id="watchAge" placeholder="es. 15"></div>
+<div><label>Categoria</label><select id="watchCategory"><option value="Prospect">Prospect</option><option value="Rookie">Rookie</option><option value="Breakout">Breakout</option><option value="Undervalued">Undervalued</option><option value="Speculative">Speculative</option></select></div>
+<div><label>Target buy €</label><input id="watchTargetPrice" placeholder="es. 15"></div>
+<div><label>Priorità</label><select id="watchPriority"><option value="Medium">Medium</option><option value="High">High</option><option value="Low">Low</option></select></div>
+<div><label>Status</label><select id="watchStatus"><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+<textarea id="watchNotes" placeholder="Motivo interesse, evento da controllare, carta target, link utili..."></textarea>
+</div>
+<div class="action-row"><button onclick="saveWatchTarget()">Salva target</button><button class="secondary-button" onclick="updateWatchTarget()">Aggiorna target</button><button class="ghost-button" onclick="resetWatchForm()">Reset</button></div>
+</div>
+<div class="toolbar"><input class="search-input" id="watchSearch" placeholder="Cerca watchlist..." onkeyup="loadWatchlist()"><select id="watchPriorityFilter" onchange="loadWatchlist()"><option value="ALL">Tutte le priorità</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select><select id="watchStatusFilter" onchange="loadWatchlist()"><option value="ALL">Tutti gli status</option><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+<div id="watchlist" class="watchlist-grid"></div>
+</div>
+</section>
+
+<section id="quickSearchPage" class="section">
+<div id="quickSearchBox" class="box"></div>
+</section>
+
+<section id="soldPage" class="section">
+<div class="box">
+<h2>Carte vendute</h2>
+<p class="small-muted">Qui finiscono le carte vendute: non stanno più nel portfolio attivo, ma continuano a contribuire al ROI del box con il prezzo di vendita reale.</p>
+<div id="soldCards" class="portfolio-grid"></div>
+</div>
+</section>
+
+<section id="lotsPage" class="section">
+<div class="box">
+<h2>Lotto builder</h2>
+<p class="small-muted">Qui trovi le carte che l’AI consiglia per lotto. Puoi assegnare un nome lotto e poi filtrare/organizzare le inserzioni.</p>
+<div id="lotsBox"></div>
+</div>
+</section>
+
+<section id="boxesPage" class="section">
+<div class="box">
+<h2>Box acquistati</h2>
+<input type="hidden" id="editBoxIndex">
+
+<input id="boxName" placeholder="Nome box es Topps Chrome UEFA">
+<input id="boxCost" placeholder="Costo box es 95">
+<input id="boxDate" type="date">
+
+<button onclick="saveBox()">Salva nuovo Box</button>
+<button onclick="updateBox()" class="secondary-button">Aggiorna Box caricato</button>
+<button onclick="resetBoxFields()" class="secondary-button">Reset campi box</button>
+
+<div id="boxes"></div>
+</div>
+</section>
+
+<section id="backup" class="section">
+<div class="box">
+<h2>Backup</h2>
+<p class="small-muted">Esporta un file JSON completo con carte, foto, box, analisi AI, storico, stati vendita e impostazioni dashboard. Tienine una copia prima di usare nuove versioni.</p>
+
+<div class="dashboard-grid">
+<div class="kpi">
+<div class="kpi-title">Carte salvate</div>
+<div class="kpi-value" id="backupCardsCount">0</div>
+</div>
+<div class="kpi">
+<div class="kpi-title">Box salvati</div>
+<div class="kpi-value" id="backupBoxesCount">0</div>
+</div>
+<div class="kpi">
+<div class="kpi-title">Analisi AI</div>
+<div class="kpi-value" id="backupAiCount">0</div>
+</div>
+</div>
+
+<button onclick="exportPortfolio()">Esporta backup completo</button>
+<button onclick="exportPortfolioLite()" class="secondary-button">Esporta backup leggero senza foto</button>
+<input type="file" id="importFile" style="display:none" onchange="importPortfolio(event)">
+<button onclick="document.getElementById('importFile').click()">Importa backup</button>
+
+<div id="backupInfo" class="card" style="margin-top:15px;"></div>
+</div>
+</section>
+
+</main>
+
+<script src="app.js" defer></script>
+
+
 </body>
 </html>
