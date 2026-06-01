@@ -171,7 +171,9 @@ function pvOpenImageAndAI(card, prompt){
 }
 
 function aiScanCard(index){
-  showAIScanGuidanceOverlay();
+  if (typeof showAIScanGuidanceOverlay === 'function') {
+    showAIScanGuidanceOverlay();
+  }
   const cards = JSON.parse(localStorage.getItem('cards')) || [];
   const card = cards[index];
   if(!card){ return; }
@@ -180,7 +182,9 @@ function aiScanCard(index){
 }
 
 function aiScanCurrentCard(){
-  showAIScanGuidanceOverlay();
+  if (typeof showAIScanGuidanceOverlay === 'function') {
+    showAIScanGuidanceOverlay();
+  }
   const editIndex = document.getElementById('editIndex')?.value || '';
   const cards = JSON.parse(localStorage.getItem('cards')) || [];
   if(editIndex !== '' && cards[parseInt(editIndex)]){
