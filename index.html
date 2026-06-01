@@ -131,14 +131,43 @@ status.innerHTML='🔍 Match database...';
 
 setTimeout(()=>{
 status.innerHTML=`
-<h3>Carta riconosciuta</h3>
-<p>Player: Jude Bellingham</p>
-<p>Set: Topps Chrome</p>
-<p>Valore stimato: €42</p>
-<p>Confidence: 94%</p>
-<button class="btn">Aggiungi al portfolio</button>
+<div style="text-align:left">
+  <div style="background:linear-gradient(135deg,#2563eb,#06b6d4);padding:18px;border-radius:18px;margin-bottom:16px">
+    <div style="font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#dbeafe">Carta riconosciuta</div>
+    <h2 style="margin:8px 0 4px">Jude Bellingham</h2>
+    <p style="margin:0;color:#e0f2fe">Topps Chrome · Refractor</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+    <div style="background:#0f172a;padding:14px;border-radius:14px">
+      <div style="font-size:12px;color:#94a3b8">Valore stimato</div>
+      <strong style="font-size:24px">€42</strong>
+    </div>
+    <div style="background:#0f172a;padding:14px;border-radius:14px">
+      <div style="font-size:12px;color:#94a3b8">Confidence</div>
+      <strong style="font-size:24px">94%</strong>
+    </div>
+  </div>
+
+  <div style="background:#052e16;border:1px solid #22c55e;padding:14px;border-radius:14px;margin-bottom:16px">
+    <strong>Insight AI</strong>
+    <p style="margin:8px 0 0;color:#bbf7d0">Strategia consigliata: HOLD. Rivalutare dopo prossima partita europea.</p>
+  </div>
+
+  <button class="btn" onclick="addToPortfolio()">Aggiungi al portfolio</button>
+</div>
 `;
 },5000);
+}
+  function addToPortfolio(){
+const status=document.getElementById('scanStatus');
+status.innerHTML=`
+<div style="text-align:center">
+  <h2>Carta aggiunta al portfolio ✅</h2>
+  <p>Jude Bellingham è stata salvata nella tua collezione.</p>
+  <button class="btn" onclick="location.reload()">Torna alla dashboard</button>
+</div>
+`;
 }
 </script>
 
