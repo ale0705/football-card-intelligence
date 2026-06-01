@@ -641,20 +641,52 @@ let prompt = buildAIPrompt(card);
 copyText(prompt, "Prompt AI Scan copiato. Ora carica/trascina la foto in AI Mode e incolla il prompt.");
 }
 
+function openAIScanSimpleModal(){
+  let modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,23,42,0.65);display:flex;justify-content:center;align-items:center;z-index:9999;';
+
+  let box = document.createElement('div');
+  box.style.cssText = 'background:white;border-radius:12px;padding:20px;max-width:400px;width:90%;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+
+  box.innerHTML = `
+    <h3 style="margin:0 0 16px;font-size:18px;color:#0f172a;">AI Scan</h3>
+
+    <div style="margin-bottom:16px;">
+      <label style="display:block;font-size:13px;margin-bottom:8px;color:#475569;font-weight:bold;">Carica foto</label>
+      <input type="file" id="aiScanFile" accept="image/*" style="width:100%;padding:8px;border:1px solid #e2e8f0;border-radius:8px;">
+    </div>
+
+    <div style="display:flex;gap:8px;">
+      <button onclick="
+        const file=document.getElementById('aiScanFile').files[0];
+        if(!file){alert('Seleziona una foto');return;}
+        this.closest('div').parentElement.parentElement.remove();
+      " style="flex:1;padding:10px;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;">
+        Continua
+      </button>
+
+      <button onclick="this.closest('div').parentElement.parentElement.remove()" style="flex:1;padding:10px;background:#64748b;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;">
+        Chiudi
+      </button>
+    </div>
+  `;
+
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+
+  modal.onclick = function(e){
+    if(e.target === modal){
+      modal.remove();
+    }
+  };
+}
+
 function aiScanCard(index){
-let cards = JSON.parse(localStorage.getItem("cards")) || [];
-let card = cards[index];
-if(!card){return;}
-if(card.image){ openImagePreview(card.image, card.player || "Foto carta"); }
-copyAIPromptForCard(index);
-setTimeout(openAIModePage, 400);
+  openAIScanSimpleModal();
 }
 
 function aiScanCurrentCard(){
-let index = document.getElementById("editIndex")?.value;
-if(index !== ""){
-let cards = JSON.parse(localStorage.getItem("cards")) || [];
-if(cards[index]){ aiScanCard(parseInt(index)); return; }
+  openAIScanSimpleModal();
 }
 copyAIPrompt();
 openAIModePage();
