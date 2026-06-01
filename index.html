@@ -12,23 +12,25 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-
 </style>
 </head>
 <body>
-<div class="box"><h1>PitchValue</h1><p>Ripristino versione stabile...</p><div class="loader"></div><div id="error"></div></div>
+<div class="box"><h1>PitchValue</h1><p>Caricamento versione stabile...</p><div class="loader"></div><div id="error"></div></div>
 <script>
 (async function(){
   const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b/index.html';
+  const onboardingPatch = '<style id="pv-onboarding-style">#pvOnboarding{position:fixed;inset:0;background:rgba(2,6,23,.76);z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}#pvOnboarding .pvbox{max-width:760px;width:100%;background:#fff;border-radius:28px;padding:24px;box-shadow:0 30px 90px rgba(2,6,23,.35);text-align:left;color:#0f172a}#pvOnboarding h2{margin:0 0 8px;font-size:28px;letter-spacing:-.04em}#pvOnboarding p{color:#64748b;line-height:1.45}#pvOnboarding .pvopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:16px 0}#pvOnboarding button{border:0;border-radius:16px;padding:13px 14px;font-weight:800;background:#eff6ff;color:#0f172a;cursor:pointer}#pvOnboarding button:hover{background:#dbeafe}.pv-primary{background:linear-gradient(135deg,#2563eb,#06b6d4)!important;color:white!important}.pv-step{font-size:13px;font-weight:900;color:#2563eb;text-transform:uppercase;letter-spacing:.08em}</style><script>(function(){var questions=[{k:"type",t:"Che tipo di collezionista sei?",o:["Nuovo collector","Hobby collector","Trader attivo","Investor"]},{k:"focus",t:"Qual è il tuo focus?",o:["Rookie / prospect","Academy talent","Top player","Box ripping","Mix portfolio"]},{k:"goal",t:"Obiettivo principale?",o:["Catalogare meglio","Capire quando vendere","Monitorare ROI","Crescita valore"]},{k:"size",t:"Quanto è grande il portfolio?",o:["<25","25–100","100–500","500+"]},{k:"sell",t:"Come vendi di solito?",o:["Non vendo","Singole","Lotti","Flipping rapido"]}];var step=0,answers={};function profile(){var t=answers.type||"";var g=answers.goal||"";var s=answers.sell||"";if(t.indexOf("Investor")>=0||g.indexOf("Crescita")>=0)return"Investor";if(t.indexOf("Trader")>=0||g.indexOf("vendere")>=0||g.indexOf("ROI")>=0||s.indexOf("Flipping")>=0)return"Trader";return"Collector";}function render(){var q=questions[step];var root=document.getElementById("pvOnboarding");if(!root){root=document.createElement("div");root.id="pvOnboarding";document.body.appendChild(root);}root.innerHTML="<div class=\\"pvbox\\"><div class=\\"pv-step\\">Setup "+(step+1)+"/"+questions.length+"</div><h2>"+q.t+"</h2><p>PitchValue personalizza la dashboard in base al tuo modo di collezionare carte calcistiche.</p><div class=\\"pvopts\\">"+q.o.map(function(x){return"<button type=\\"button\\" data-v=\\""+x+"\\">"+x+"</button>"}).join("")+"</div><button class=\\"pv-primary\\" type=\\"button\\" data-skip=\\"1\\">Salta setup</button></div>";root.querySelectorAll("[data-v]").forEach(function(b){b.onclick=function(){answers[q.k]=b.getAttribute("data-v");step++;if(step>=questions.length){var p=profile();localStorage.setItem("pvOnboardingDone","1");localStorage.setItem("pvUserProfile",p);localStorage.setItem("pvOnboardingAnswers",JSON.stringify(answers));root.remove();alert("Profilo PitchValue: "+p);}else{render();}}});root.querySelector("[data-skip]").onclick=function(){localStorage.setItem("pvOnboardingDone","1");localStorage.setItem("pvUserProfile","Collector");root.remove();};}window.pvResetOnboarding=function(){localStorage.removeItem("pvOnboardingDone");localStorage.removeItem("pvUserProfile");localStorage.removeItem("pvOnboardingAnswers");render();};setTimeout(function(){if(localStorage.getItem("pvOnboardingDone")!=="1")render();},500);})();<\/script>';
   try{
     const res = await fetch(stableUrl, {cache:'no-store'});
     if(!res.ok){ throw new Error('HTTP ' + res.status); }
     let html = await res.text();
     if(html.trim().startsWith('!DOCTYPE')) html = '<' + html;
     if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
+    html = html.replace('</body>', onboardingPatch + '\n</body>');
     document.open();
     document.write(html);
     document.close();
   }catch(e){
     const err = document.getElementById('error');
     err.style.display='block';
-    err.innerHTML='Errore ripristino: '+e.message+'<br>Riprova con Ctrl+F5.';
+    err.innerHTML='Errore caricamento: '+e.message+'<br>Riprova con Ctrl+F5.';
   }
 })();
 </script>
