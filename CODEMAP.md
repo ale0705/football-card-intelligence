@@ -251,6 +251,44 @@ Nota:
 Target futuro:
 - pv-onboarding.js
 
+## Onboarding audit
+
+### Current trigger
+- On app load, `window.onload` calls `initApp()`.
+- If `localStorage.getItem('pv_onboarding_done') !== 'true'`, the onboarding overlay is shown after a short delay.
+
+### Current inputs
+- `use`: Colleziono / Investo / Entrambe
+- `size`: <50 carte / 50–200 / 200+ / 500+
+- `goal`: Monitorare valore / Vendere meglio / Organizzare portfolio / Scoprire occasioni / Seguire prospect e valore futuro
+- `experience`: Nuovo / Intermedio / Avanzato
+
+### Current profile logic
+- Investor if use includes Investo, or goal includes prospect / valore futuro.
+- Trader if goal includes Vendere / occasioni, or experience includes Avanzato.
+- Collector otherwise.
+
+### Current saved keys
+- `pv_onboarding_done`
+- `pv_collector_profile`
+- `pv_onboarding_answers`
+
+### Current usage status
+- Audit indicates the onboarding data is saved but not actively used elsewhere in the app.
+- This means onboarding is currently passive: it collects user intent, but does not yet personalize dashboard, AI Scan, alerts, or watchlist.
+
+### Product implication
+Onboarding v2 should make the saved profile actionable.
+
+Possible first uses:
+- Dashboard headline / strategy card based on profile.
+- Default dashboard focus:
+  - Collector: collection value and organization.
+  - Trader: liquidity, profit, cards to list.
+  - Investor: prospect exposure, academy radar, future value.
+- Alert suggestions based on profile.
+- AI Scan prompt emphasis based on profile.
+
 ## Strategia di refactor sicura
 
 ### Regola 1 — Nessun refactor globale
@@ -283,15 +321,19 @@ Ogni modifica deve preservare:
 ### Step A — Documentation complete
 - app.js has been mapped into functional areas.
 - DEVELOPMENT_CHECKLIST.md and CODEMAP.md are the source of truth for planning.
+- Onboarding audit completed.
 
-### Step B — Safe extraction candidate
-The best first extraction target is onboarding, because:
-- it is already isolated near the end of app.js;
-- it has clear functions;
-- it does not affect portfolio calculations;
-- it is product-critical.
+### Step B — Safe product improvement candidate
+The best next product step is to make onboarding actionable without extracting code yet.
 
-Suggested module:
-- pv-onboarding.js
+Suggested first micro-feature:
+- Add an onboarding-based strategy card to the dashboard.
+- Read `pv_collector_profile` and `pv_onboarding_answers`.
+- Show a profile-specific recommendation card.
+- Do this in `dashboard-fix.js`, not in app.js.
 
-Do not remove old functions from app.js initially. First create an override/wrapper module, test, then decide whether to remove duplicated legacy code later.
+Reason:
+- Dashboard is already isolated.
+- No need to touch the loader.
+- No need to refactor onboarding yet.
+- Immediate visible value for users/testers.
