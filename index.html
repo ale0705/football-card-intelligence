@@ -1,37 +1,2757 @@
+!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>PitchValue v18 Watchlist</title>
+<style>
+body{font-family:Arial;padding:0;margin:0;background:#eef2f7;color:#222;}
+header{background:white;padding:20px 30px;box-shadow:0 3px 12px rgba(0,0,0,0.08);}
+h1{margin:0;color:#1e3a8a;}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;}
+nav button{width:auto;padding:10px 16px;background:#2f6fed;color:white;border:none;border-radius:10px;cursor:pointer;font-weight:bold;}
+nav button:hover{background:#2457bc;}
+main{max-width:1100px;margin:25px auto;padding:0 20px;}
+.section{display:none;}
+.section.active{display:block;}
+.box{background:white;padding:25px;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,0.08);margin-bottom:20px;}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;box-sizing:border-box;border:1px solid #d8dee8;border-radius:10px;background:#f9fbfd;color:#222;}
+textarea{min-height:86px;resize:vertical;font-family:Arial;}
+button{width:100%;padding:14px;background:#2f6fed;color:white;border:none;border-radius:10px;cursor:pointer;margin-top:10px;font-weight:bold;}
+button:hover{background:#2457bc;}
+a{display:block;margin:10px 0;color:#2f6fed;text-decoration:none;}
+.card{border:1px solid #e3e8ef;padding:16px;margin:14px 0;border-radius:14px;background:white;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.profit{font-weight:bold;font-size:16px;}
+.badge{
+display:inline-block;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+margin:8px 0;
+}
+
+.badge-HOLD{
+background:#dcfce7;
+color:#166534;
+}
+
+.badge-MONITOR{
+background:#fef3c7;
+color:#92400e;
+}
+
+.badge-SELL{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.badge-SOLD{
+background:#e0e7ff;
+color:#3730a3;
+}
+
+.status-HOLD{border-left:8px solid #22c55e;}
+.status-MONITOR{border-left:8px solid #f59e0b;}
+.status-SELL{border-left:8px solid #ef4444;}
+.status-SOLD{border-left:8px solid #4f46e5;}
+#dashboardBox{background:#f3f7ff;border:1px solid #c9dafc;}
+.card img{width:100%;border-radius:12px;margin-bottom:10px;max-height:360px;object-fit:contain;background:#f3f4f6;}
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:14px;
+}
+
+.kpi{
+background:white;
+padding:18px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.06);
+border:1px solid #e3e8ef;
+}
+
+.kpi-title{
+font-size:13px;
+color:#64748b;
+font-weight:bold;
+}
+
+.kpi-value{
+font-size:26px;
+font-weight:bold;
+margin-top:8px;
+color:#1e3a8a;
+}
+
+.kpi-positive{
+color:#16a34a;
+}
+
+.kpi-negative{
+color:#dc2626;
+}
+.small-muted{font-size:12px;color:#64748b;}
+.box-summary{background:#f8fafc;border:1px solid #e2e8f0;}
+.secondary-button{background:#64748b;}
+.secondary-button:hover{background:#475569;}
+.danger-button{background:#dc2626;}
+.danger-button:hover{background:#991b1b;}
+.inline-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.inline-actions button{width:auto;flex:1;min-width:120px;}
+.linked-list{margin-top:10px;padding:10px;background:white;border-radius:12px;border:1px dashed #cbd5e1;}
+
+
+.ai-mini-card{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:10px;margin:10px 0;font-size:13px;}
+.ai-summary{margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.ai-mini-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed #e2e8f0;padding:4px 0;}
+.ai-mini-row:last-child{border-bottom:none;}
+.ai-chip{display:inline-block;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:bold;background:#e0f2fe;color:#075985;margin:2px 4px 2px 0;}
+.ai-chip-low{background:#fee2e2;color:#991b1b;}
+.ai-chip-mid{background:#fef3c7;color:#92400e;}
+.ai-chip-high{background:#dcfce7;color:#166534;}
+
+.visual-search-box{
+background:#f8fafc;
+border:1px dashed #cbd5e1;
+padding:12px;
+border-radius:12px;
+margin:8px 0 14px;
+}
+.visual-search-box button{margin-top:0;}
+.due-badge{background:#fee2e2;color:#991b1b;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:bold;}
+
+/* UX refactor */
+.section.modal-section.active{
+position:fixed;
+inset:0;
+z-index:9999;
+background:rgba(15,23,42,0.65);
+overflow:auto;
+padding:24px;
+box-sizing:border-box;
+}
+.section.modal-section.active .box{
+max-width:920px;
+margin:20px auto;
+}
+.quick-actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px;}
+.quick-actions-grid button{margin-top:0;}
+
+
+
+/* v16 UX clean overhaul */
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--muted:#64748b;--border:#e2e8f0;--surface:#ffffff;--soft:#f8fafc;--soft-blue:#eff6ff;--good:#16a34a;--warn:#f59e0b;--bad:#dc2626;--ink:#0f172a;}
+body{background:linear-gradient(180deg,#eef5ff 0,#f8fafc 260px,#eef2f7 100%);}
+header{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border);} 
+nav button,.btn-small,button.compact-btn{width:auto;padding:9px 12px;border-radius:999px;margin-top:0;font-size:13px;}
+button.secondary-button{background:#64748b;} button.danger-button{background:#dc2626;} button.ghost-button{background:#f1f5f9;color:#0f172a;border:1px solid #cbd5e1;} button.success-button{background:#16a34a;}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0;}.action-row button{width:auto;margin-top:0;padding:9px 12px;border-radius:999px;}
+.form-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 4px 14px rgba(15,23,42,.05);} .form-card h3{margin:0 0 6px;color:#0f172a;font-size:16px;} .form-card p.helper{margin:0 0 12px;color:var(--muted);font-size:13px;}
+.form-card.manual{border-left:6px solid #2563eb}.form-card.ai-auto{border-left:6px solid #8b5cf6;background:#fbfaff}.form-card.market{border-left:6px solid #f59e0b;background:#fffaf0}.form-card.football{border-left:6px solid #16a34a;background:#f7fef9}.form-card.sales{border-left:6px solid #0ea5e9;background:#f7fbff}
+.field-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;align-items:end}.field-grid label{font-size:12px;color:#475569;font-weight:bold;display:block;margin-top:6px}.field-grid input,.field-grid select,.field-grid textarea,.form-card input,.form-card select,.form-card textarea{margin:4px 0 8px}.form-card textarea{min-height:70px}
+.section-title-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.page-subtitle{color:#64748b;font-size:14px;margin:6px 0 0}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:15px;background:#f8fafc;border:1px solid var(--border);border-radius:16px;padding:10px}.toolbar input,.toolbar select{width:auto;min-width:150px;flex:1;margin:0;padding:9px 11px;border-radius:999px;font-size:13px}.toolbar .search-input{min-width:240px;flex:2}
+.chip-btn{width:auto!important;margin-top:0!important;padding:8px 11px!important;border-radius:999px!important;background:#e0ecff!important;color:#1e3a8a!important;border:1px solid #bfdbfe!important}.chip-btn.active{background:#2563eb!important;color:#fff!important}.view-toggle{margin-left:auto;display:flex;gap:6px}
+.portfolio-grid.compact-view{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.portfolio-grid.detailed-view{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.portfolio-card.compact{padding:10px;border-radius:16px}.compact-top{display:flex;gap:10px;align-items:center}.thumb{width:56px;height:76px;object-fit:cover;border-radius:10px;background:#e2e8f0;flex:0 0 auto}.compact-info strong{font-size:14px;color:#0f172a;display:block;line-height:1.2}.compact-meta{font-size:12px;color:#64748b;line-height:1.35;margin-top:2px}.compact-value{font-size:13px;font-weight:bold;color:#1e3a8a;margin-top:4px}.compact-actions{display:flex;gap:6px;margin-top:10px}.compact-actions button{flex:1;width:auto;margin-top:0;padding:7px 8px;border-radius:999px;font-size:12px}.card-header-row{display:flex;justify-content:space-between;gap:8px;align-items:start}.card-header-row strong{font-size:17px;color:#0f172a}
+.box-card,.lot-card{border:1px solid var(--border);border-radius:18px;padding:16px;margin:14px 0;background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.05)}.box-card{border-left:6px solid #2563eb}.lot-card{border-left:6px solid #f59e0b}.metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:10px 0}.metric-pill{background:#f8fafc;border:1px solid var(--border);border-radius:14px;padding:10px}.metric-pill small{display:block;color:#64748b;font-weight:bold;font-size:11px}.metric-pill b{display:block;color:#1e3a8a;font-size:18px;margin-top:3px}
+.form-footer-sticky{position:sticky;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;padding:10px;margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:0 -4px 18px rgba(15,23,42,.08)}.form-footer-sticky button{width:auto;flex:1;min-width:130px;margin-top:0;border-radius:999px;padding:11px 13px}
+@media(max-width:700px){main{padding:0 12px}.box{padding:16px}.toolbar input,.toolbar select{width:100%;min-width:100%}.view-toggle{margin-left:0}.field-grid{grid-template-columns:1fr}.portfolio-grid.compact-view{grid-template-columns:1fr 1fr;gap:10px}.compact-top{display:block}.thumb{width:100%;height:140px;object-fit:contain}.compact-actions{display:block}.compact-actions button{width:100%;margin-top:6px}}
+
+
+
+/* v17 SaaS UI stable override */
+:root{
+  --nav:#07111f;--nav2:#0f1f35;--bg:#f4f7fb;--panel:#ffffff;--panel2:#f8fbff;
+  --text:#0f172a;--muted:#64748b;--line:#e5edf6;--blue:#2563eb;--cyan:#06b6d4;
+  --green:#16a34a;--amber:#f59e0b;--red:#ef4444;--purple:#7c3aed;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.app-sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;background:linear-gradient(180deg,var(--nav),var(--nav2));padding:22px 18px;color:#fff;box-shadow:18px 0 40px rgba(15,23,42,.16);z-index:1000;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.08)}
+.brand-block{display:flex;gap:12px;align-items:center;margin-bottom:26px;padding:8px 6px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.brand-icon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 12px 24px rgba(37,99,235,.3);font-size:22px}
+.brand-block h1{font-size:22px;line-height:1;margin:0;color:#fff;letter-spacing:.2px}.brand-block p{margin:4px 0 0;color:#93a4b8;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.side-nav{display:flex;flex-direction:column;gap:8px;margin:0}.side-nav button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;margin:0;padding:12px 14px;border-radius:14px;background:transparent;color:#cbd5e1;border:1px solid transparent;font-size:14px;font-weight:800}.side-nav button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1);color:#fff}.side-nav button span{width:22px;text-align:center}.quick-start-card{margin-top:auto;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:14px 13px;color:#dbeafe;font-size:12px;line-height:1.45}
+.quick-start-card h3{font-size:13px;margin:0 0 8px;color:#fff;letter-spacing:.02em}
+.quick-start-card ol{margin:0 0 10px 18px;padding:0}.quick-start-card li{margin:4px 0}.quick-start-card small{display:block;color:#93a4b8}.sidebar-footer{margin-top:12px;color:#8392a8;font-size:12px;line-height:1.45;padding:14px 10px;border-top:1px solid rgba(255,255,255,.1)}
+main{max-width:none;margin:0 0 0 270px;padding:28px;min-height:100vh}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.topbar h2{margin:2px 0 0;font-size:30px;letter-spacing:-.04em}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.primary-pill{width:auto!important;margin:0!important;border-radius:999px!important;padding:12px 18px!important;background:linear-gradient(135deg,#2563eb,#06b6d4)!important;box-shadow:0 12px 24px rgba(37,99,235,.22)}
+.box{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px rgba(15,23,42,.08);padding:22px;margin-bottom:22px;overflow:hidden}#dashboardBox{background:linear-gradient(180deg,#fff,#f8fbff);border-color:var(--line)}
+.dashboard-grid{grid-template-columns:repeat(4,minmax(180px,1fr));gap:14px}.kpi{border-radius:20px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(15,23,42,.06);background:linear-gradient(180deg,#fff,#fbfdff)}.kpi-title{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7b8aa2}.kpi-value{font-size:28px;color:#0f172a}.kpi-positive{color:var(--green)!important}.kpi-negative{color:var(--red)!important}
+button{width:auto;padding:10px 14px;border-radius:12px;margin-top:0;background:var(--blue);font-size:13px;box-shadow:none;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(.98)}.danger-button{background:var(--red)!important}.secondary-button{background:#475569!important}.ghost-button{background:#f8fafc!important;color:#0f172a!important;border:1px solid var(--line)!important}.success-button{background:var(--green)!important}.action-row,.inline-actions,.quick-actions-grid{gap:8px}.quick-actions-grid{display:flex;flex-wrap:wrap}.quick-actions-grid button,.inline-actions button,.action-row button{flex:0 0 auto;min-width:0;border-radius:999px;padding:9px 12px}
+input,select,textarea{border:1px solid var(--line);background:#f8fafc;border-radius:14px;padding:11px 12px;color:var(--text)}input:focus,select:focus,textarea:focus{outline:none;border-color:#93c5fd;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px;box-shadow:0 8px 24px rgba(15,23,42,.04)}.toolbar input,.toolbar select{flex:0 1 190px;min-width:160px;background:#f8fafc;border-radius:999px}.toolbar .search-input{flex:1 1 260px}.chip-btn{background:#eef4ff!important;color:#17428e!important;border:1px solid #d7e6ff!important}.chip-btn.active{background:#0f172a!important;color:#fff!important;border-color:#0f172a!important}.view-toggle{background:#f1f5f9;border-radius:999px;padding:4px;gap:4px}
+.portfolio-grid{display:grid;gap:18px;align-items:stretch}.portfolio-grid.compact-view{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important}.portfolio-grid.detailed-view{grid-template-columns:repeat(auto-fill,minmax(330px,1fr))!important}.portfolio-card{position:relative;margin:0!important;border:1px solid var(--line)!important;border-radius:22px!important;background:#fff!important;box-shadow:0 14px 34px rgba(15,23,42,.07)!important;overflow:hidden;min-width:0;display:flex;flex-direction:column}.portfolio-card.compact{min-height:258px;padding:0!important}.compact-top{display:block!important}.portfolio-card .thumb{width:100%!important;height:154px!important;object-fit:contain!important;border-radius:0!important;background:linear-gradient(180deg,#f3f7ff,#eef2f7)!important;margin:0!important;padding:8px}.compact-info{padding:12px}.compact-info strong{font-size:15px!important;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}.compact-meta{min-height:32px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.compact-value{font-size:15px;color:var(--blue)!important}.compact-actions{display:grid!important;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:auto;padding:0 12px 12px}.compact-actions button{width:100%;padding:8px 6px;border-radius:10px;font-size:12px}.portfolio-card.detailed{padding:14px}.portfolio-card.detailed>img{height:260px;max-height:260px;object-fit:contain;border-radius:16px;background:#f3f7ff}.card-header-row strong{font-size:19px;letter-spacing:-.02em}.badge,.ai-chip{border-radius:999px;padding:5px 9px;font-size:11px;margin:3px 4px 3px 0}.badge-HOLD{background:#dcfce7;color:#166534}.badge-MONITOR{background:#fef3c7;color:#92400e}.badge-SELL{background:#fee2e2;color:#991b1b}.ai-mini-card{background:#f8fbff;border-color:#dbeafe;border-radius:16px}.ai-summary{-webkit-line-clamp:2}.status-HOLD,.status-MONITOR,.status-SELL,.status-SOLD{border-left-width:0!important}.status-HOLD:before,.status-MONITOR:before,.status-SELL:before,.status-SOLD:before{content:"";position:absolute;inset:0 auto auto 0;height:4px;width:100%}.status-HOLD:before{background:var(--green)}.status-MONITOR:before{background:var(--amber)}.status-SELL:before{background:var(--red)}.status-SOLD:before{background:var(--purple)}
+.form-card{border-radius:22px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(15,23,42,.055);padding:18px}.form-card h3{font-size:17px;letter-spacing:-.02em}.field-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.form-footer-sticky{border-radius:20px;box-shadow:0 -8px 24px rgba(15,23,42,.08)}
+.box-card,.lot-card{border:1px solid var(--line);border-radius:24px;padding:18px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 14px 36px rgba(15,23,42,.07);margin:16px 0}.box-card{border-left:0;position:relative}.box-card:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(#2563eb,#06b6d4)}.lot-card{border-left:0;position:relative}.lot-card:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(#f59e0b,#f97316)}.box-card strong,.lot-card h3{font-size:18px;letter-spacing:-.02em}.metric-row{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.metric-pill{background:#f8fafc;border:1px solid var(--line);border-radius:16px}.metric-pill b{color:#0f172a}.linked-list{border:1px solid var(--line);background:#f8fafc;border-radius:16px;max-height:180px;overflow:auto}
+.section.modal-section.active{background:rgba(3,7,18,.72);backdrop-filter:blur(4px)}.section.modal-section.active .box{max-width:1120px;border-radius:26px}
+@media(max-width:980px){.app-sidebar{position:sticky;width:auto;height:auto;bottom:auto;padding:14px}.brand-block{margin-bottom:10px;padding-bottom:10px}.side-nav{flex-direction:row;overflow:auto}.side-nav button{min-width:max-content;width:auto}.sidebar-footer{display:none}main{margin:0;padding:18px}.topbar{align-items:flex-start}.dashboard-grid{grid-template-columns:repeat(2,minmax(150px,1fr))}.portfolio-grid.compact-view{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important}.portfolio-card .thumb{height:132px!important}}
+@media(max-width:620px){.topbar{display:block}.primary-pill{margin-top:12px!important}.dashboard-grid{grid-template-columns:1fr}.toolbar input,.toolbar select{min-width:100%;width:100%}.portfolio-grid.compact-view,.portfolio-grid.detailed-view{grid-template-columns:1fr!important}.portfolio-card .thumb{height:190px!important}.compact-actions{grid-template-columns:1fr 1fr 1fr}.field-grid{grid-template-columns:1fr}.box{padding:16px}}
+
+
+/* v17.4 REAL sidebar scroll fix - final override */
+html, body { min-height: 100%; }
+.app-sidebar{
+  position:fixed !important;
+  left:0 !important;
+  top:0 !important;
+  bottom:auto !important;
+  height:100vh !important;
+  max-height:100vh !important;
+  box-sizing:border-box !important;
+  overflow-y:scroll !important;
+  overflow-x:hidden !important;
+  display:block !important;
+  overscroll-behavior:contain !important;
+  padding-bottom:24px !important;
+}
+.app-sidebar .brand-block,
+.app-sidebar .side-nav,
+.app-sidebar .quick-start-card,
+.app-sidebar .sidebar-footer{
+  display:block !important;
+  flex:none !important;
+}
+.quick-start-card{
+  margin-top:18px !important;
+  margin-bottom:14px !important;
+  max-height:none !important;
+}
+.sidebar-footer{
+  margin-top:12px !important;
+  margin-bottom:8px !important;
+}
+@media(max-width:980px){
+  .app-sidebar{
+    position:relative !important;
+    width:auto !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
+
+/* v18 Watchlist */
+.watchlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.watch-card{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 14px 34px rgba(15,23,42,.07);padding:16px;position:relative;overflow:hidden}
+.watch-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(#7c3aed,#06b6d4)}
+.watch-card h3{margin:0 0 4px;font-size:18px;letter-spacing:-.02em}
+.watch-meta{font-size:13px;color:var(--muted);line-height:1.45}
+.priority-high{background:#fee2e2;color:#991b1b}.priority-medium{background:#fef3c7;color:#92400e}.priority-low{background:#dcfce7;color:#166534}
+.watch-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;align-items:end}
+.watch-form textarea{grid-column:1/-1;min-height:70px}
+
+</style>
+</head>
+
+<body>
+
+<header class="app-sidebar">
+<div class="brand-block">
+<div class="brand-icon">⚽</div>
+<div><h1>PitchValue</h1><p>Football Card Intelligence</p></div>
+</div>
+<nav class="side-nav">
+<button onclick="showSection('dashboard')"><span>📊</span>Dashboard</button>
+<button onclick="showSection('portfolioPage')"><span>🗂️</span>Portfolio</button>
+<button onclick="showSection('watchlistPage'); loadWatchlist();"><span>🎯</span>Watchlist</button>
+<button onclick="openNewCardForm()"><span>➕</span>Nuova Carta</button>
+<button onclick="showSection('lotsPage'); loadLots();"><span>📦</span>Lotti</button>
+<button onclick="showSection('boxesPage')"><span>🎁</span>Box</button>
+<button onclick="showSection('soldPage'); loadSoldCards();"><span>💰</span>Vendute</button>
+<button onclick="showSection('backup')"><span>🛟</span>Backup</button>
+</nav>
+<div class="quick-start-card">
+<h3>Quick Start</h3>
+<ol>
+<li>Aggiungi una nuova carta e carica la foto.</li>
+<li>Clicca <b>AI Scan</b>.</li>
+<li>Al primo utilizzo consenti <b>popup</b> e <b>copia appunti</b> se il browser lo chiede.</li>
+<li>Trascina la foto aperta dentro la finestra AI.</li>
+<li>Incolla il prompt già copiato e invia.</li>
+<li>Copia il <b>BLOCCO WEBAPP</b> dalla risposta AI.</li>
+<li>Incollalo in Analisi AI e clicca <b>Estrai dati AI</b>.</li>
+</ol>
+<div class="mini-warning" style="margin-top:10px;padding:10px;border-radius:14px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;line-height:1.35;">
+<b>Primo utilizzo:</b> se AI Scan non apre le finestre, abilita i popup per questa pagina. Se non copia il prompt, premi Consenti quando il browser chiede accesso agli appunti.
+</div>
+<small style="display:block;margin-top:10px;"><b>Rookie</b>: prima release rilevante. <b>Academy</b>: giovane da monitorare. <b>Prospect</b>: potenziale futuro.</small>
+</div>
+<div class="sidebar-footer">v18 Watchlist<br><small>local-first · AI assisted</small></div>
+</header>
+
+<main>
+<div class="topbar"><div><span class="eyebrow">Football card portfolio</span><h2 id="pageTitle">Dashboard</h2></div><button class="primary-pill" onclick="openNewCardForm()">+ Nuova carta</button></div>
+
+<section id="dashboard" class="section active">
+<div class="box" style="margin-bottom:12px;">
+<label>Scenario dashboard AI</label>
+<select id="dashboardScenario" onchange="setDashboardScenario(this.value)">
+<option value="avg">Realistico · usa AI medio</option>
+<option value="min">Prudente · usa AI minimo</option>
+<option value="max">Ottimistico · usa AI massimo</option>
+</select>
+</div>
+<div id="dashboardBox" class="box"></div>
+</section>
+
+<section id="search" class="section">
+<div class="box">
+<div class="section-title-row"><div><h2 id="searchTitle" style="margin:0;">Nuova carta</h2><p class="page-subtitle">Inserisci i dati essenziali, poi lascia che l’AI compili valutazione, query e strategia.</p></div><button id="closeEditModalBtn" type="button" class="secondary-button compact-btn" style="display:none;" onclick="closeEditModal()">Chiudi modifica</button></div>
+<input type="hidden" id="editIndex">
+<div class="form-card manual"><h3>1 · Dati da compilare a mano</h3><p class="helper">La parte minima per registrare la carta. Il resto può arrivare dall’AI Scan.</p><div class="field-grid">
+<div><label>Giocatore</label><input id="player" placeholder="es. Roony Bardghji"></div><div><label>Set / prodotto</label><input id="set" placeholder="es. Topps Chrome UEFA"></div><div><label>Parallel</label><input id="parallel" placeholder="es. Aqua / Refractor"></div><div><label>Numerazione</label><input id="numbering" placeholder="es. /199"></div><div><label>Prezzo pagato</label><input id="paid" placeholder="es. pull oppure 20"></div><div><label>Valore stimato manuale</label><input id="estimated" placeholder="facoltativo"></div><div><label>Data inserimento</label><input id="dateAdded" type="date"></div><div><label>Box di provenienza</label><select id="boxId"><option value="">Nessun box / acquisto singolo</option></select></div><div><label>Foto carta</label><input id="imageFile" type="file" accept="image/*"></div><div><label>Status collezione</label><select id="status"><option value="HOLD">HOLD</option><option value="MONITOR">MONITOR</option><option value="SELL">SELL</option><option value="SOLD">VENDUTA</option></select></div>
+</div></div>
+<div class="form-card ai-auto"><h3>2 · AI Scan e import automatico</h3><p class="helper">Usa AI Scan, poi incolla qui il BLOCCO WEBAPP. La mini scheda resta pulita nel portfolio.</p><div class="action-row"><button type="button" onclick="aiScanCurrentCard()">🧠 AI Scan</button><button type="button" class="secondary-button" onclick="copyAIPrompt()">Copia prompt</button><button type="button" class="ghost-button" onclick="visualSearchCurrentCard()">Apri foto</button></div><label>Analisi AI / BLOCCO WEBAPP</label><textarea id="aiAnalysis" placeholder="Incolla qui il BLOCCO WEBAPP generato dall’AI"></textarea><div class="action-row"><button type="button" onclick="extractAIValuationFromText()">📌 Estrai dati AI</button></div><div class="field-grid"><div><label>AI min €</label><input id="aiMin" placeholder="min"></div><div><label>AI medio €</label><input id="aiAvg" placeholder="medio"></div><div><label>AI max €</label><input id="aiMax" placeholder="max"></div><div><label>Liquidità</label><select id="aiLiquidity"><option value="">Liquidità</option><option value="BASSA">BASSA</option><option value="MEDIA">MEDIA</option><option value="ALTA">ALTA</option></select></div><div><label>Consiglio AI</label><select id="aiAdvice"><option value="">Consiglio AI</option><option value="LOTTO">LOTTO</option><option value="VENDI SINGOLA">VENDI SINGOLA</option><option value="HOLD">HOLD</option><option value="MONITORA">MONITORA</option></select></div><div><label>Sintesi breve</label><input id="aiSummary" placeholder="es. 2-5€, meglio in lotto"></div></div><div id="aiHistoryBox" class="card" style="display:none;background:#f8fafc;margin-top:10px;"></div></div>
+<div class="form-card market"><h3>3 · Query e ricerche mercato</h3><p class="helper">Campi riempiti dall’AI per controllare eBay, venduti e 130Point.</p><label>Query precisa / titolo migliore</label><textarea id="aiQuery" placeholder="Query principale estratta dall'analisi AI"></textarea><div class="field-grid"><div><label>Query ampia</label><textarea id="aiQueryWide" placeholder="Query ampia"></textarea></div><div><label>Query venduti</label><textarea id="aiQuerySold" placeholder="Query venduti/completed"></textarea></div><div><label>Parole da escludere</label><input id="aiExclude" placeholder="box case pack sealed lot"></div><div><label>Escludi manuale</label><input id="exclude" placeholder="auto sapphire gold"></div></div><div class="action-row"><button type="button" class="secondary-button" onclick="searchAIQueryType('precise')">Cerca precisa</button><button type="button" class="secondary-button" onclick="searchAIQueryType('wide')">Cerca ampia</button><button type="button" class="secondary-button" onclick="searchAIQueryType('sold')">Cerca venduti</button></div></div>
+<div class="form-card football"><h3>4 · Football layer</h3><p class="helper">Dati calcio per club exposure, academy radar, prospect e lotti più sensati.</p><div class="field-grid"><div><label>Club</label><input id="club" placeholder="Barcelona / Arsenal / Milan"></div><div><label>Competizione</label><select id="competition"><option value="">Competizione</option><option value="Club Competitions">Club Competitions</option><option value="Champions League">Champions League</option><option value="Domestic League">Domestic League</option><option value="National Team">National Team</option><option value="Youth / Academy">Youth / Academy</option><option value="Friendly / Other">Friendly / Other</option></select></div><div><label>Prospect level</label><select id="prospectLevel"><option value="">Prospect level</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select></div><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="rookieFlag" type="checkbox" style="width:auto;margin-right:8px;"> Rookie card</label><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="academyFlag" type="checkbox" style="width:auto;margin-right:8px;"> Academy monitored</label></div></div>
+<div class="form-card sales"><h3>5 · Strategia e vendita</h3><p class="helper">Compila solo per listing, lotto, vendita reale o monitoraggio futuro.</p><div class="field-grid"><div><label>Strategia vendita</label><select id="saleStrategy"><option value="">Automatica da AI</option><option value="SINGOLA">Singola</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option></select></div><div><label>Nome lotto</label><input id="lotGroup" placeholder="Barça low value / Rookie lotto"></div><div><label>Stato vendita</label><select id="saleStatus"><option value="IN_PORTFOLIO">In portfolio</option><option value="LISTED">In vendita</option><option value="SOLD">Venduta</option><option value="SHIPPED">Spedita</option></select></div><div><label>Prezzo annuncio</label><input id="listingPrice" placeholder="es. 9.99"></div><div><label>Prezzo vendita reale</label><input id="salePrice" placeholder="es. 60"></div><div><label>Fee / commissioni</label><input id="saleFees" placeholder="es. 1.20"></div><div><label>Spedizione a tuo carico</label><input id="shippingCost" placeholder="es. 1.50"></div><div><label>Data vendita</label><input id="soldDate" type="date"></div><div><label>Data spedizione</label><input id="shippedDate" type="date"></div><div><label>Motivo monitoraggio</label><input id="watchReason" placeholder="primo gol / trasferimento / hype"></div><div><label>Prossima rivalutazione</label><input id="nextReviewDate" type="date"></div></div></div>
+<div class="form-footer-sticky"><button onclick="saveCard()">Salva nuova carta</button><button onclick="updateCard()" class="secondary-button">Aggiorna carta</button><button onclick="searchCard(true)" class="ghost-button">Ricerca mirata</button><button onclick="searchCard(false)" class="ghost-button">Ricerca ampia</button><button onclick="resetFields()" class="danger-button">Reset</button></div><div id="results"></div>
+</div></section>
+
+<section id="portfolioPage" class="section">
+<div class="box"><div class="section-title-row"><div><h2 style="margin:0;">Portfolio</h2><p class="page-subtitle">Compatta per panoramica rapida, dettaglio per lavorare sulle singole carte.</p></div><div class="view-toggle"><button class="chip-btn active" id="compactViewBtn" onclick="setPortfolioView('compact')">Compatta</button><button class="chip-btn" id="detailViewBtn" onclick="setPortfolioView('detail')">Dettaglio</button></div></div>
+<div class="toolbar"><button class="chip-btn" onclick="setPortfolioFilter('ALL')">Tutte</button><button class="chip-btn" onclick="setPortfolioFilter('HOLD')">HOLD</button><button class="chip-btn" onclick="setPortfolioFilter('MONITOR')">MONITOR</button><button class="chip-btn" onclick="setPortfolioFilter('SELL')">SELL</button><button class="chip-btn" onclick="showSection('soldPage'); loadSoldCards();">Vendute</button><input class="search-input" id="portfolioSearch" placeholder="Cerca giocatore, set, club..." onkeyup="loadPortfolio()"><select id="portfolioBoxFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i box</option><option value="NOBOX">Acquisto singolo / non collegate</option></select><select id="portfolioStrategyFilter" onchange="loadPortfolio()"><option value="ALL">Tutte le strategie</option><option value="SINGOLA">Singole</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option><option value="NON ASSEGNATA">Non assegnata</option></select><select id="portfolioClubFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i club</option></select><select id="portfolioProspectFilter" onchange="loadPortfolio()"><option value="ALL">Tutti i prospect</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select><select id="portfolioFootballFilter" onchange="loadPortfolio()"><option value="ALL">Tutte</option><option value="ROOKIE">Rookie</option><option value="ACADEMY">Academy</option></select><select id="portfolioSort" onchange="loadPortfolio()"><option value="default">Ordine inserimento</option><option value="dateDesc">Più recenti</option><option value="dateAsc">Meno recenti</option><option value="valueDesc">Valore più alto</option><option value="valueAsc">Valore più basso</option><option value="profitDesc">Profitto più alto</option><option value="profitAsc">Profitto più basso</option><option value="nameAsc">Nome A-Z</option></select></div><div id="portfolio" class="portfolio-grid compact-view"></div></div>
+</section>
+
+
+<section id="watchlistPage" class="section">
+<div class="box">
+<div class="section-title-row"><div><h2 style="margin:0;">Watchlist</h2><p class="page-subtitle">Giocatori e carte da monitorare prima dell'acquisto. È il ponte tra scouting e portfolio reale.</p></div></div>
+<input type="hidden" id="watchEditIndex">
+<div class="form-card football">
+<h3>Aggiungi target</h3>
+<p class="helper">Inserisci giocatori/carte che vuoi seguire. Quando acquisti, usa “Porta nel portfolio”.</p>
+<div class="watch-form">
+<div><label>Giocatore</label><input id="watchPlayer" placeholder="es. Max Dowman"></div>
+<div><label>Club</label><input id="watchClub" placeholder="Arsenal / Barcelona"></div>
+<div><label>Età</label><input id="watchAge" placeholder="es. 15"></div>
+<div><label>Categoria</label><select id="watchCategory"><option value="Prospect">Prospect</option><option value="Rookie">Rookie</option><option value="Breakout">Breakout</option><option value="Undervalued">Undervalued</option><option value="Speculative">Speculative</option></select></div>
+<div><label>Target buy €</label><input id="watchTargetPrice" placeholder="es. 15"></div>
+<div><label>Priorità</label><select id="watchPriority"><option value="Medium">Medium</option><option value="High">High</option><option value="Low">Low</option></select></div>
+<div><label>Status</label><select id="watchStatus"><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+<textarea id="watchNotes" placeholder="Motivo interesse, evento da controllare, carta target, link utili..."></textarea>
+</div>
+<div class="action-row"><button onclick="saveWatchTarget()">Salva target</button><button class="secondary-button" onclick="updateWatchTarget()">Aggiorna target</button><button class="ghost-button" onclick="resetWatchForm()">Reset</button></div>
+</div>
+<div class="toolbar"><input class="search-input" id="watchSearch" placeholder="Cerca watchlist..." onkeyup="loadWatchlist()"><select id="watchPriorityFilter" onchange="loadWatchlist()"><option value="ALL">Tutte le priorità</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select><select id="watchStatusFilter" onchange="loadWatchlist()"><option value="ALL">Tutti gli status</option><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+<div id="watchlist" class="watchlist-grid"></div>
+</div>
+</section>
+
+<section id="quickSearchPage" class="section">
+<div id="quickSearchBox" class="box"></div>
+</section>
+
+<section id="soldPage" class="section">
+<div class="box">
+<h2>Carte vendute</h2>
+<p class="small-muted">Qui finiscono le carte vendute: non stanno più nel portfolio attivo, ma continuano a contribuire al ROI del box con il prezzo di vendita reale.</p>
+<div id="soldCards" class="portfolio-grid"></div>
+</div>
+</section>
+
+<section id="lotsPage" class="section">
+<div class="box">
+<h2>Lotto builder</h2>
+<p class="small-muted">Qui trovi le carte che l’AI consiglia per lotto. Puoi assegnare un nome lotto e poi filtrare/organizzare le inserzioni.</p>
+<div id="lotsBox"></div>
+</div>
+</section>
+
+<section id="boxesPage" class="section">
+<div class="box">
+<h2>Box acquistati</h2>
+<input type="hidden" id="editBoxIndex">
+
+<input id="boxName" placeholder="Nome box es Topps Chrome UEFA">
+<input id="boxCost" placeholder="Costo box es 95">
+<input id="boxDate" type="date">
+
+<button onclick="saveBox()">Salva nuovo Box</button>
+<button onclick="updateBox()" class="secondary-button">Aggiorna Box caricato</button>
+<button onclick="resetBoxFields()" class="secondary-button">Reset campi box</button>
+
+<div id="boxes"></div>
+</div>
+</section>
+
+<section id="backup" class="section">
+<div class="box">
+<h2>Backup</h2>
+<p class="small-muted">Esporta un file JSON completo con carte, foto, box, analisi AI, storico, stati vendita e impostazioni dashboard. Tienine una copia prima di usare nuove versioni.</p>
+
+<div class="dashboard-grid">
+<div class="kpi">
+<div class="kpi-title">Carte salvate</div>
+<div class="kpi-value" id="backupCardsCount">0</div>
+</div>
+<div class="kpi">
+<div class="kpi-title">Box salvati</div>
+<div class="kpi-value" id="backupBoxesCount">0</div>
+</div>
+<div class="kpi">
+<div class="kpi-title">Analisi AI</div>
+<div class="kpi-value" id="backupAiCount">0</div>
+</div>
+</div>
+
+<button onclick="exportPortfolio()">Esporta backup completo</button>
+<button onclick="exportPortfolioLite()" class="secondary-button">Esporta backup leggero senza foto</button>
+<input type="file" id="importFile" style="display:none" onchange="importPortfolio(event)">
+<button onclick="document.getElementById('importFile').click()">Importa backup</button>
+
+<div id="backupInfo" class="card" style="margin-top:15px;"></div>
+</div>
+</section>
+
+</main>
+
+<script>
+let portfolioFilter = "ALL";
+
+function generateId(){
+return Date.now().toString(36) + Math.random().toString(36).substring(2,8);
+}
+
+function todayString(){
+return new Date().toISOString().slice(0,10);
+}
+
+function getBoxes(){
+return JSON.parse(localStorage.getItem("boxes")) || [];
+}
+
+function getBoxLabel(box){
+let date = box.date ? " - " + box.date : "";
+let cost = box.cost ? " - " + box.cost + " €" : "";
+return (box.name || "Box senza nome") + date + cost;
+}
+
+function getBoxNameById(boxId){
+let boxes = getBoxes();
+let box = boxes.find(b => b.id === boxId);
+return box ? getBoxLabel(box) : "Non collegata a un box";
+}
+
+function populateBoxSelect(){
+let select = document.getElementById("boxId");
+if(!select){return;}
+let selected = select.value;
+let boxes = getBoxes();
+let html = `<option value="">Nessun box / acquisto singolo</option>`;
+for(let box of boxes){
+html += `<option value="${box.id}">${getBoxLabel(box)}</option>`;
+}
+select.innerHTML = html;
+select.value = selected;
+}
+
+
+function populatePortfolioBoxFilter(){
+let select = document.getElementById("portfolioBoxFilter");
+if(!select){return;}
+let selected = select.value || "ALL";
+let boxes = getBoxes();
+let html = `<option value="ALL">Tutti i box</option><option value="NOBOX">Acquisto singolo / non collegate</option>`;
+for(let box of boxes){
+html += `<option value="${box.id}">${getBoxLabel(box)}</option>`;
+}
+select.innerHTML = html;
+select.value = [...select.options].some(option => option.value === selected) ? selected : "ALL";
+}
+
+function showSection(id){
+if(id !== "search"){
+  let searchSection = document.getElementById("search");
+  if(searchSection){ searchSection.classList.remove("modal-section"); }
+  let closeBtn = document.getElementById("closeEditModalBtn");
+  if(closeBtn){ closeBtn.style.display = "none"; }
+}
+let sections=document.querySelectorAll(".section");
+sections.forEach(sec=>sec.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function openNewCardForm(){
+let searchSection = document.getElementById("search");
+if(searchSection){ searchSection.classList.remove("modal-section"); }
+let closeBtn = document.getElementById("closeEditModalBtn");
+if(closeBtn){ closeBtn.style.display = "none"; }
+let title = document.getElementById("searchTitle");
+if(title){ title.textContent = "Nuova carta"; }
+resetFields();
+showSection("search");
+}
+
+function openEditCard(index){
+loadCard(index);
+let searchSection = document.getElementById("search");
+if(searchSection){ searchSection.classList.add("modal-section"); }
+let closeBtn = document.getElementById("closeEditModalBtn");
+if(closeBtn){ closeBtn.style.display = "block"; }
+let title = document.getElementById("searchTitle");
+if(title){ title.textContent = "Modifica carta"; }
+showSection("search");
+}
+
+function closeEditModal(){
+let searchSection = document.getElementById("search");
+if(searchSection){ searchSection.classList.remove("modal-section"); }
+let closeBtn = document.getElementById("closeEditModalBtn");
+if(closeBtn){ closeBtn.style.display = "none"; }
+let title = document.getElementById("searchTitle");
+if(title){ title.textContent = "Nuova carta"; }
+resetFields();
+showSection("portfolioPage");
+}
+
+
+function buildAIPrompt(cardOverride){
+let card = cardOverride || null;
+let baseQuery = card ? [card.player, card.set, card.parallel, card.numbering].filter(Boolean).join(" ") : buildQuery(false);
+let aiQuery = card ? (card.aiQuery || "") : (document.getElementById("aiQuery")?.value.trim() || "");
+let hint = aiQuery || baseQuery || "questa trading card";
+
+return `Analizza questa trading card dalla foto e dai dati disponibili. Voglio una risposta utile per catalogarla e decidere se venderla.
+
+Carta/foto da analizzare: ${hint}
+
+Obiettivo:
+- identifica la carta nel modo più preciso possibile
+- trova query di ricerca efficaci per eBay/130Point
+- stima il mercato reale, non solo il prezzo teorico
+- valuta se conviene venderla singola, tenerla o metterla in lotto
+
+Restituisci in italiano con questo formato:
+
+IDENTIFICAZIONE
+1. Giocatore:
+2. Squadra:
+3. Brand/produttore:
+4. Set/collezione:
+5. Anno/stagione:
+6. Parallel/variant/refractor:
+7. Numerazione seriale:
+8. Rookie card: sì/no/incerto
+
+RICERCHE
+- Query precisa eBay:
+- Query ampia eBay:
+- Query venduti/completed:
+- Parole da escludere: box case pack packs sealed lotto lot case break
+
+ANALISI MERCATO
+- Stima valore minimo:
+- Stima valore medio:
+- Stima valore massimo:
+- Liquidità: BASSA / MEDIA / ALTA
+- Consiglio: LOTTO / VENDI SINGOLA / HOLD / MONITORA
+- Motivo breve:
+
+BLOCCO WEBAPP
+MIN:
+MEDIO:
+MAX:
+LIQUIDITA:
+CONSIGLIO:
+SINTESI: massimo 140 caratteri
+QUERY MIGLIORE:
+QUERY PRECISA:
+QUERY AMPIA:
+QUERY VENDUTI:
+ESCLUDI:
+
+Regole: se non trovi annunci identici, usa comparabili ragionati e dillo chiaramente. Non inventare vendite certe se non sono verificabili.`;
+}
+function showTempMessage(message){
+let results = document.getElementById("results");
+if(results){
+let box = document.createElement("div");
+box.className = "card";
+box.style.borderLeft = "6px solid #2f6fed";
+box.innerHTML = message;
+results.prepend(box);
+setTimeout(() => { try{ box.remove(); }catch(e){} }, 4500);
+} else {
+alert(message.replace(/<[^>]*>/g, ""));
+}
+}
+
+function fallbackCopyText(text){
+let textarea = document.createElement("textarea");
+textarea.value = text;
+textarea.style.position = "fixed";
+textarea.style.left = "-9999px";
+document.body.appendChild(textarea);
+textarea.focus();
+textarea.select();
+let ok = false;
+try{
+ok = document.execCommand("copy");
+}catch(e){ ok = false; }
+textarea.remove();
+return ok;
+}
+
+function copyText(text, successMessage){
+if(navigator.clipboard && window.isSecureContext){
+navigator.clipboard.writeText(text).then(function(){
+showTempMessage(successMessage || "Copiato negli appunti.");
+}).catch(function(){
+let ok = fallbackCopyText(text);
+if(ok){ showTempMessage(successMessage || "Copiato negli appunti."); }
+else{ alert("Copia non riuscita. Seleziona e copia manualmente:\n\n" + text); }
+});
+} else {
+let ok = fallbackCopyText(text);
+if(ok){ showTempMessage(successMessage || "Copiato negli appunti."); }
+else{ alert("Copia non riuscita. Seleziona e copia manualmente:\n\n" + text); }
+}
+}
+
+function copyAIPrompt(){
+let prompt = buildAIPrompt();
+copyText(prompt, "Prompt AI copiato. Ora apri AI Mode, carica la foto e incolla il prompt.");
+}
+
+function copyCurrentAIQuery(){
+let query = document.getElementById("aiQuery")?.value.trim() || buildQuery(false);
+if(!query){
+alert("Non c'è ancora una query da copiare.");
+return;
+}
+copyText(query, "Query copiata.");
+}
+
+function openAIModePage(){
+let win = window.open("https://www.google.com/search?udm=50", "_blank");
+if(!win){
+alert("Popup bloccato: consenti i popup oppure apri manualmente Google AI Mode.");
+}
+}
+
+
+function copyAIPromptForCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+let prompt = buildAIPrompt(card);
+copyText(prompt, "Prompt AI Scan copiato. Ora carica/trascina la foto in AI Mode e incolla il prompt.");
+}
+
+function aiScanCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+if(card.image){ openImagePreview(card.image, card.player || "Foto carta"); }
+copyAIPromptForCard(index);
+setTimeout(openAIModePage, 400);
+}
+
+function aiScanCurrentCard(){
+let index = document.getElementById("editIndex")?.value;
+if(index !== ""){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+if(cards[index]){ aiScanCard(parseInt(index)); return; }
+}
+copyAIPrompt();
+openAIModePage();
+}
+
+function normalizeMoneyText(value){
+if(value === null || value === undefined){ return ""; }
+let text = String(value).replace("€","").replace(",",".").trim();
+let match = text.match(/-?\d+(?:\.\d+)?/);
+return match ? match[0] : "";
+}
+
+function getAIBlockValue(text, label){
+let re = new RegExp(label + "\\s*:\\s*([^\\n\\r]+)", "i");
+let m = text.match(re);
+return m ? m[1].trim() : "";
+}
+
+
+function normalizeQueryText(value){
+if(!value){ return ""; }
+return String(value)
+.replace(/^[-•\s]+/, "")
+.replace(/^['"“”]+|['"“”]+$/g, "")
+.trim();
+}
+
+function cleanAIValue(value){
+if(!value){ return ""; }
+return String(value)
+.replace(/[\r\n]+/g, " ")
+.replace(/\s+/g, " ")
+.trim();
+}
+
+function cutAtNextAILabel(value){
+let cleaned = cleanAIValue(value);
+let labels = [
+"QUERY MIGLIORE", "QUERY PRECISA", "QUERY AMPIA", "QUERY VENDUTI", "QUERY COMPLETED",
+"ESCLUDI", "PAROLE DA ESCLUDERE", "MIN:", "MEDIO:", "MAX:", "LIQUIDITA", "LIQUIDITÀ", "CONSIGLIO", "SINTESI"
+];
+for(let label of labels){
+let idx = cleaned.toUpperCase().indexOf(label);
+if(idx > 0){ cleaned = cleaned.slice(0, idx).trim(); }
+}
+return cleaned.trim();
+}
+
+function cleanAISummary(value){
+let cleaned = cutAtNextAILabel(value);
+cleaned = cleaned.replace(/^[-•\s]+/, "").trim();
+if(cleaned.length > 145){ cleaned = cleaned.slice(0, 142).trim() + "..."; }
+return cleaned;
+}
+
+function cleanAIQuery(value){
+let cleaned = cutAtNextAILabel(value);
+cleaned = normalizeQueryText(cleaned);
+cleaned = cleaned.replace(/^eBay\s*:?\s*/i, "").trim();
+return cleaned;
+}
+
+function cleanAIExclude(value){
+let cleaned = cutAtNextAILabel(value);
+return normalizeExcludeText(cleaned);
+}
+
+function normalizeExcludeText(value){
+if(!value){ return ""; }
+let cleaned = String(value)
+.replace(/[,;]+/g, " ")
+.replace(/\s+/g, " ")
+.replace(/\bda escludere\b/gi, "")
+.trim();
+return cleaned;
+}
+
+function applyExclusionsToQuery(query, excludeWords){
+query = normalizeQueryText(query);
+let exclude = normalizeExcludeText(excludeWords);
+if(!query || !exclude){ return query; }
+let words = exclude.split(" ").map(w => w.trim()).filter(Boolean);
+for(let word of words){
+let clean = word.replace(/^-/, "");
+if(clean && !query.toLowerCase().includes("-" + clean.toLowerCase())){
+query += " -" + clean;
+}
+}
+return query;
+}
+
+function getAIBlockValueMulti(text, labels){
+for(let label of labels){
+let value = getAIBlockValue(text, label);
+if(value){ return value; }
+}
+return "";
+}
+
+function extractAIValuationFromText(){
+let text = document.getElementById("aiAnalysis")?.value || "";
+if(!text.trim()){
+alert("Incolla prima la risposta completa di AI Mode nel campo Analisi AI completa.");
+return;
+}
+let min = getAIBlockValueMulti(text, ["MIN", "Stima valore minimo", "Valore minimo", "Minimo"]);
+let avg = getAIBlockValueMulti(text, ["MEDIO", "Stima valore medio", "Valore medio", "Medio"]);
+let max = getAIBlockValueMulti(text, ["MAX", "Stima valore massimo", "Valore massimo", "Massimo"]);
+let liquidity = (getAIBlockValueMulti(text, ["LIQUIDITA", "LIQUIDITÀ", "Liquidità"]) || "").toUpperCase();
+let advice = (getAIBlockValueMulti(text, ["CONSIGLIO", "Consiglio"]) || "").toUpperCase();
+let summary = cleanAISummary(getAIBlockValueMulti(text, ["SINTESI", "Motivo breve", "Sintesi breve"]));
+
+let preciseQuery = cleanAIQuery(getAIBlockValueMulti(text, ["QUERY MIGLIORE", "Query precisa eBay", "Query precisa", "QUERY PRECISA"]));
+let wideQuery = cleanAIQuery(getAIBlockValueMulti(text, ["Query ampia eBay", "Query ampia", "QUERY AMPIA"]));
+let soldQuery = cleanAIQuery(getAIBlockValueMulti(text, ["Query venduti/completed", "Query venduti", "Query completed", "QUERY VENDUTI"]));
+let excludes = cleanAIExclude(getAIBlockValueMulti(text, ["Parole da escludere", "ESCLUDI", "Escludi"]));
+
+if(!excludes){ excludes = "box case pack packs sealed lotto lot break"; }
+
+if(liquidity.includes("BASS")){ liquidity = "BASSA"; }
+else if(liquidity.includes("MED")){ liquidity = "MEDIA"; }
+else if(liquidity.includes("ALT")){ liquidity = "ALTA"; }
+else{ liquidity = ""; }
+
+if(advice.includes("LOT")){ advice = "LOTTO"; }
+else if(advice.includes("SING") || advice.includes("VEND")){ advice = "VENDI SINGOLA"; }
+else if(advice.includes("HOLD") || advice.includes("TIEN")){ advice = "HOLD"; }
+else if(advice.includes("MON")){ advice = "MONITORA"; }
+else{ advice = ""; }
+
+if(min){ document.getElementById("aiMin").value = normalizeMoneyText(min); }
+if(avg){ document.getElementById("aiAvg").value = normalizeMoneyText(avg); }
+if(max){ document.getElementById("aiMax").value = normalizeMoneyText(max); }
+if(liquidity){ document.getElementById("aiLiquidity").value = liquidity; }
+if(advice){ document.getElementById("aiAdvice").value = advice; }
+if(summary){ document.getElementById("aiSummary").value = summary; }
+if(preciseQuery){ document.getElementById("aiQuery").value = preciseQuery; }
+if(wideQuery){ document.getElementById("aiQueryWide").value = wideQuery; }
+if(soldQuery){ document.getElementById("aiQuerySold").value = soldQuery; }
+if(excludes){ document.getElementById("aiExclude").value = excludes; }
+if(avg && !document.getElementById("estimated").value){ document.getElementById("estimated").value = normalizeMoneyText(avg); }
+
+let found = [];
+if(preciseQuery){ found.push("query precisa"); }
+if(wideQuery){ found.push("query ampia"); }
+if(soldQuery){ found.push("query venduti"); }
+if(excludes){ found.push("esclusioni"); }
+showTempMessage("Analisi AI importata: mini scheda" + (found.length ? " + " + found.join(", ") : "") + ". Controlla e clicca Aggiorna Carta.");
+}
+
+function renderAIMiniCard(card){
+let hasAI = card.aiMin || card.aiAvg || card.aiMax || card.aiLiquidity || card.aiAdvice || card.aiSummary;
+if(!hasAI){ return ""; }
+let liqClass = card.aiLiquidity === "ALTA" ? "ai-chip-high" : card.aiLiquidity === "MEDIA" ? "ai-chip-mid" : card.aiLiquidity === "BASSA" ? "ai-chip-low" : "";
+let range = [card.aiMin, card.aiAvg, card.aiMax].filter(Boolean).join(" / ");
+return `<div class="ai-mini-card">
+<strong>AI valuation</strong><br>
+${range ? `<div class="ai-mini-row"><span>Min/Med/Max</span><strong>${range} €</strong></div>` : ""}
+<div>${card.aiLiquidity ? `<span class="ai-chip ${liqClass}">${card.aiLiquidity}</span>` : ""}${card.aiAdvice ? `<span class="ai-chip">${card.aiAdvice}</span>` : ""}</div>
+${card.aiSummary ? `<div class="small-muted ai-summary">${card.aiSummary}</div>` : ""}
+</div>`;
+}
+
+function renderAIHistory(card){
+let history = Array.isArray(card.aiHistory) ? [...card.aiHistory] : [];
+let hasCurrentAI = card.aiMin || card.aiAvg || card.aiMax || card.aiLiquidity || card.aiAdvice || card.aiSummary;
+if(history.length === 0 && hasCurrentAI){
+  history.push({
+    date: card.aiLastUpdated || card.dateAdded || "Analisi attuale",
+    min: card.aiMin || "",
+    avg: card.aiAvg || "",
+    max: card.aiMax || "",
+    liquidity: card.aiLiquidity || "",
+    advice: card.aiAdvice || "",
+    summary: card.aiSummary || ""
+  });
+}
+if(history.length === 0){
+  return `<strong>Storico valutazioni AI</strong><br><span class="small-muted">Nessuna valutazione AI salvata.</span>`;
+}
+let rows = history.slice().reverse().map((h, idx) => {
+  let range = [h.min, h.avg, h.max].filter(Boolean).join(" / ");
+  let label = idx === 0 ? "Ultima" : "Precedente";
+  return `<div style="border-top:1px solid #e2e8f0;padding:8px 0;">
+    <strong>${label}</strong> <span class="small-muted">${h.date || "Data non indicata"}</span><br>
+    ${range ? `Min/Med/Max: <strong>${range} €</strong><br>` : ""}
+    ${h.liquidity ? `<span class="ai-chip">${h.liquidity}</span>` : ""}
+    ${h.advice ? `<span class="ai-chip">${h.advice}</span>` : ""}
+    ${h.summary ? `<div class="small-muted">${h.summary}</div>` : ""}
+  </div>`;
+}).join("");
+return `<strong>Storico valutazioni AI</strong><br>${rows}`;
+}
+
+
+function openImagePreview(imageData, title){
+let win = window.open("", "_blank");
+if(!win){
+alert("Popup bloccato: consenti i popup per aprire la foto.");
+return;
+}
+win.document.write(`
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PitchValue</title>
+<title>${title || "Foto carta"}</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#0f172a;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}
-.box{background:white;border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(15,23,42,.12);max-width:560px}
-.loader{width:40px;height:40px;border:4px solid #dbeafe;border-top-color:#2563eb;border-radius:50%;animation:spin 1s linear infinite;margin:18px auto}@keyframes spin{to{transform:rotate(360deg)}}
-#error{display:none;margin-top:15px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px;border-radius:14px;text-align:left}
+body{font-family:Arial;background:#0f172a;color:white;margin:0;padding:20px;text-align:center;}
+img{max-width:95vw;max-height:85vh;object-fit:contain;border-radius:14px;background:white;}
+p{color:#cbd5e1;}
+/* UX refactor */
+.section.modal-section.active{
+position:fixed;
+inset:0;
+z-index:9999;
+background:rgba(15,23,42,0.65);
+overflow:auto;
+padding:24px;
+box-sizing:border-box;
+}
+.section.modal-section.active .box{
+max-width:920px;
+margin:20px auto;
+}
+.quick-actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:10px;}
+.quick-actions-grid button{margin-top:0;}
+
+
+
+/* v17 SaaS UI stable override */
+:root{
+  --nav:#07111f;--nav2:#0f1f35;--bg:#f4f7fb;--panel:#ffffff;--panel2:#f8fbff;
+  --text:#0f172a;--muted:#64748b;--line:#e5edf6;--blue:#2563eb;--cyan:#06b6d4;
+  --green:#16a34a;--amber:#f59e0b;--red:#ef4444;--purple:#7c3aed;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.app-sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;background:linear-gradient(180deg,var(--nav),var(--nav2));padding:22px 18px;color:#fff;box-shadow:18px 0 40px rgba(15,23,42,.16);z-index:1000;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.08)}
+.brand-block{display:flex;gap:12px;align-items:center;margin-bottom:26px;padding:8px 6px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.brand-icon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#06b6d4);box-shadow:0 12px 24px rgba(37,99,235,.3);font-size:22px}
+.brand-block h1{font-size:22px;line-height:1;margin:0;color:#fff;letter-spacing:.2px}.brand-block p{margin:4px 0 0;color:#93a4b8;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.side-nav{display:flex;flex-direction:column;gap:8px;margin:0}.side-nav button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;margin:0;padding:12px 14px;border-radius:14px;background:transparent;color:#cbd5e1;border:1px solid transparent;font-size:14px;font-weight:800}.side-nav button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.1);color:#fff}.side-nav button span{width:22px;text-align:center}.quick-start-card{margin-top:auto;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:14px 13px;color:#dbeafe;font-size:12px;line-height:1.45}
+.quick-start-card h3{font-size:13px;margin:0 0 8px;color:#fff;letter-spacing:.02em}
+.quick-start-card ol{margin:0 0 10px 18px;padding:0}.quick-start-card li{margin:4px 0}.quick-start-card small{display:block;color:#93a4b8}.sidebar-footer{margin-top:12px;color:#8392a8;font-size:12px;line-height:1.45;padding:14px 10px;border-top:1px solid rgba(255,255,255,.1)}
+main{max-width:none;margin:0 0 0 270px;padding:28px;min-height:100vh}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.topbar h2{margin:2px 0 0;font-size:30px;letter-spacing:-.04em}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.primary-pill{width:auto!important;margin:0!important;border-radius:999px!important;padding:12px 18px!important;background:linear-gradient(135deg,#2563eb,#06b6d4)!important;box-shadow:0 12px 24px rgba(37,99,235,.22)}
+.box{background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px rgba(15,23,42,.08);padding:22px;margin-bottom:22px;overflow:hidden}#dashboardBox{background:linear-gradient(180deg,#fff,#f8fbff);border-color:var(--line)}
+.dashboard-grid{grid-template-columns:repeat(4,minmax(180px,1fr));gap:14px}.kpi{border-radius:20px;border:1px solid var(--line);box-shadow:0 10px 28px rgba(15,23,42,.06);background:linear-gradient(180deg,#fff,#fbfdff)}.kpi-title{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7b8aa2}.kpi-value{font-size:28px;color:#0f172a}.kpi-positive{color:var(--green)!important}.kpi-negative{color:var(--red)!important}
+button{width:auto;padding:10px 14px;border-radius:12px;margin-top:0;background:var(--blue);font-size:13px;box-shadow:none;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(.98)}.danger-button{background:var(--red)!important}.secondary-button{background:#475569!important}.ghost-button{background:#f8fafc!important;color:#0f172a!important;border:1px solid var(--line)!important}.success-button{background:var(--green)!important}.action-row,.inline-actions,.quick-actions-grid{gap:8px}.quick-actions-grid{display:flex;flex-wrap:wrap}.quick-actions-grid button,.inline-actions button,.action-row button{flex:0 0 auto;min-width:0;border-radius:999px;padding:9px 12px}
+input,select,textarea{border:1px solid var(--line);background:#f8fafc;border-radius:14px;padding:11px 12px;color:var(--text)}input:focus,select:focus,textarea:focus{outline:none;border-color:#93c5fd;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px;box-shadow:0 8px 24px rgba(15,23,42,.04)}.toolbar input,.toolbar select{flex:0 1 190px;min-width:160px;background:#f8fafc;border-radius:999px}.toolbar .search-input{flex:1 1 260px}.chip-btn{background:#eef4ff!important;color:#17428e!important;border:1px solid #d7e6ff!important}.chip-btn.active{background:#0f172a!important;color:#fff!important;border-color:#0f172a!important}.view-toggle{background:#f1f5f9;border-radius:999px;padding:4px;gap:4px}
+.portfolio-grid{display:grid;gap:18px;align-items:stretch}.portfolio-grid.compact-view{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important}.portfolio-grid.detailed-view{grid-template-columns:repeat(auto-fill,minmax(330px,1fr))!important}.portfolio-card{position:relative;margin:0!important;border:1px solid var(--line)!important;border-radius:22px!important;background:#fff!important;box-shadow:0 14px 34px rgba(15,23,42,.07)!important;overflow:hidden;min-width:0;display:flex;flex-direction:column}.portfolio-card.compact{min-height:258px;padding:0!important}.compact-top{display:block!important}.portfolio-card .thumb{width:100%!important;height:154px!important;object-fit:contain!important;border-radius:0!important;background:linear-gradient(180deg,#f3f7ff,#eef2f7)!important;margin:0!important;padding:8px}.compact-info{padding:12px}.compact-info strong{font-size:15px!important;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}.compact-meta{min-height:32px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.compact-value{font-size:15px;color:var(--blue)!important}.compact-actions{display:grid!important;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:auto;padding:0 12px 12px}.compact-actions button{width:100%;padding:8px 6px;border-radius:10px;font-size:12px}.portfolio-card.detailed{padding:14px}.portfolio-card.detailed>img{height:260px;max-height:260px;object-fit:contain;border-radius:16px;background:#f3f7ff}.card-header-row strong{font-size:19px;letter-spacing:-.02em}.badge,.ai-chip{border-radius:999px;padding:5px 9px;font-size:11px;margin:3px 4px 3px 0}.badge-HOLD{background:#dcfce7;color:#166534}.badge-MONITOR{background:#fef3c7;color:#92400e}.badge-SELL{background:#fee2e2;color:#991b1b}.ai-mini-card{background:#f8fbff;border-color:#dbeafe;border-radius:16px}.ai-summary{-webkit-line-clamp:2}.status-HOLD,.status-MONITOR,.status-SELL,.status-SOLD{border-left-width:0!important}.status-HOLD:before,.status-MONITOR:before,.status-SELL:before,.status-SOLD:before{content:"";position:absolute;inset:0 auto auto 0;height:4px;width:100%}.status-HOLD:before{background:var(--green)}.status-MONITOR:before{background:var(--amber)}.status-SELL:before{background:var(--red)}.status-SOLD:before{background:var(--purple)}
+.form-card{border-radius:22px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(15,23,42,.055);padding:18px}.form-card h3{font-size:17px;letter-spacing:-.02em}.field-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.form-footer-sticky{border-radius:20px;box-shadow:0 -8px 24px rgba(15,23,42,.08)}
+.box-card,.lot-card{border:1px solid var(--line);border-radius:24px;padding:18px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 14px 36px rgba(15,23,42,.07);margin:16px 0}.box-card{border-left:0;position:relative}.box-card:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(#2563eb,#06b6d4)}.lot-card{border-left:0;position:relative}.lot-card:before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:linear-gradient(#f59e0b,#f97316)}.box-card strong,.lot-card h3{font-size:18px;letter-spacing:-.02em}.metric-row{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.metric-pill{background:#f8fafc;border:1px solid var(--line);border-radius:16px}.metric-pill b{color:#0f172a}.linked-list{border:1px solid var(--line);background:#f8fafc;border-radius:16px;max-height:180px;overflow:auto}
+.section.modal-section.active{background:rgba(3,7,18,.72);backdrop-filter:blur(4px)}.section.modal-section.active .box{max-width:1120px;border-radius:26px}
+@media(max-width:980px){.app-sidebar{position:sticky;width:auto;height:auto;bottom:auto;padding:14px}.brand-block{margin-bottom:10px;padding-bottom:10px}.side-nav{flex-direction:row;overflow:auto}.side-nav button{min-width:max-content;width:auto}.sidebar-footer{display:none}main{margin:0;padding:18px}.topbar{align-items:flex-start}.dashboard-grid{grid-template-columns:repeat(2,minmax(150px,1fr))}.portfolio-grid.compact-view{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important}.portfolio-card .thumb{height:132px!important}}
+@media(max-width:620px){.topbar{display:block}.primary-pill{margin-top:12px!important}.dashboard-grid{grid-template-columns:1fr}.toolbar input,.toolbar select{min-width:100%;width:100%}.portfolio-grid.compact-view,.portfolio-grid.detailed-view{grid-template-columns:1fr!important}.portfolio-card .thumb{height:190px!important}.compact-actions{grid-template-columns:1fr 1fr 1fr}.field-grid{grid-template-columns:1fr}.box{padding:16px}}
+
+
+/* v17.3 Sidebar scroll fix: make Quick Start fully readable on smaller screens */
+.app-sidebar{
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  scrollbar-width:thin;
+  max-height:100vh;
+}
+.app-sidebar::-webkit-scrollbar{width:8px}
+.app-sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.22);border-radius:999px}
+.app-sidebar::-webkit-scrollbar-track{background:transparent}
+.quick-start-card{
+  margin-top:16px !important;
+  flex:0 0 auto !important;
+  max-height:none !important;
+}
+.sidebar-footer{
+  flex:0 0 auto !important;
+}
+.side-nav{
+  flex:0 0 auto !important;
+}
+.brand-block{
+  flex:0 0 auto !important;
+}
+@media(max-height:760px){
+  .app-sidebar{padding-top:16px !important;padding-bottom:16px !important}
+  .side-nav button{padding:10px 12px !important}
+  .quick-start-card{font-size:11.5px !important;padding:12px !important}
+  .sidebar-footer{padding:10px !important}
+}
+
+
+/* v18 Watchlist */
+.watchlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.watch-card{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 14px 34px rgba(15,23,42,.07);padding:16px;position:relative;overflow:hidden}
+.watch-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(#7c3aed,#06b6d4)}
+.watch-card h3{margin:0 0 4px;font-size:18px;letter-spacing:-.02em}
+.watch-meta{font-size:13px;color:var(--muted);line-height:1.45}
+.priority-high{background:#fee2e2;color:#991b1b}.priority-medium{background:#fef3c7;color:#92400e}.priority-low{background:#dcfce7;color:#166534}
+.watch-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;align-items:end}
+.watch-form textarea{grid-column:1/-1;min-height:70px}
+
 </style>
 </head>
 <body>
-<div class="box"><h1>PitchValue</h1><p>Ripristino versione stabile...</p><div class="loader"></div><div id="error"></div></div>
-<script>
-(async function(){
-  const stableUrl = 'https://raw.githubusercontent.com/ale0705/football-card-intelligence/aad778cfbf7fe20aa47e32858f3355ac5dd5fe9b/index.html';
-  try{
-    const res = await fetch(stableUrl, {cache:'no-store'});
-    if(!res.ok){ throw new Error('HTTP ' + res.status); }
-    let html = await res.text();
-    if(html.trim().startsWith('!DOCTYPE')) html = '<' + html;
-    if(!html.includes('<html')){ throw new Error('file stabile non valido'); }
-    html = html.replace('</body>', '<script src="dashboard-fix.js?v=1"><\\/script><script src="ai-scan-fix.js?v=5"><\\/script></body>');
-    document.open();
-    document.write(html);
-    document.close();
-  }catch(e){
-    const err = document.getElementById('error');
-    err.style.display='block';
-    err.innerHTML='Errore ripristino: '+e.message+'<br>Riprova con Ctrl+F5.';
+<h2>${title || "Foto carta"}</h2>
+<p>Usa questa immagine per Google Lens: salvala oppure trascinala nella pagina di Lens.</p>
+<img src="${imageData}">
+</body>
+</html>
+`);
+win.document.close();
+}
+
+function openLensPage(){
+let win = window.open("https://lens.google.com/upload", "_blank");
+if(!win){ alert("Popup bloccato: consenti i popup oppure apri manualmente Google Lens."); }
+}
+
+function safeFileName(text){
+return (text || "foto-carta")
+.toLowerCase()
+.replace(/[^a-z0-9\-\_ ]/gi, "")
+.trim()
+.replace(/\s+/g, "-") || "foto-carta";
+}
+
+function downloadImageData(imageData, title){
+if(!imageData){
+alert("Nessuna foto disponibile per questa carta.");
+return;
+}
+let a = document.createElement("a");
+a.href = imageData;
+a.download = safeFileName(title) + ".jpg";
+document.body.appendChild(a);
+a.click();
+a.remove();
+}
+
+function openVisualSearchTools(imageData, title){
+if(!imageData){
+alert("Nessuna foto disponibile per questa carta.");
+return;
+}
+openImagePreview(imageData, title);
+}
+
+function openVisualSearchGuide(imageData, title){
+if(!imageData){
+alert("Nessuna foto disponibile per questa carta.");
+return;
+}
+openImagePreview(imageData, title);
+openLensPage();
+}
+
+function getCardTitle(card){
+return ((card.player || "Carta") + " " + (card.set || "") + " " + (card.parallel || "") + " " + (card.numbering || "")).trim();
+}
+
+function visualSearchCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card || !card.image){
+alert("Questa carta non ha una foto salvata.");
+return;
+}
+openVisualSearchGuide(card.image, getCardTitle(card));
+}
+
+function openPhotoCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card || !card.image){
+alert("Questa carta non ha una foto salvata.");
+return;
+}
+openImagePreview(card.image, getCardTitle(card));
+}
+
+function downloadPhotoCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card || !card.image){
+alert("Questa carta non ha una foto salvata.");
+return;
+}
+downloadImageData(card.image, getCardTitle(card));
+}
+
+function visualSearchCurrentCard(){
+let fileInput = document.getElementById("imageFile");
+let file = fileInput.files[0];
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+resizeImage(e.target.result, function(resized){
+let title = buildQuery(false) || "Foto carta";
+openVisualSearchTools(resized, title);
+});
+};
+reader.readAsDataURL(file);
+return;
+}
+
+let index = document.getElementById("editIndex").value;
+if(index !== ""){
+visualSearchCard(parseInt(index));
+return;
+}
+
+alert("Carica una foto o apri una carta già salvata prima di usare la ricerca visuale.");
+}
+
+function buildQuery(useExclude){
+let player=document.getElementById("player").value;
+let set=document.getElementById("set").value;
+let parallel=document.getElementById("parallel").value;
+let numbering=document.getElementById("numbering").value;
+let exclude=document.getElementById("exclude").value;
+
+let query = player + " " + set + " " + parallel + " " + numbering;
+
+if(useExclude && exclude){
+let words = exclude.split(" ");
+for(let w of words){
+if(w.trim() !== ""){
+query += " -" + w.trim();
+}
+}
+}
+return query.trim();
+}
+
+function renderSearchResults(query, label){
+let encoded = encodeURIComponent(query);
+let googleEbay = encodeURIComponent(`site:ebay.com OR site:ebay.it ${query}`);
+let googleSold = encodeURIComponent(`site:ebay.com ${query} sold completed`);
+
+document.getElementById("results").innerHTML=
+`
+<h3>${label || "Query"}:</h3>
+<p>${query || "Nessuna query"}</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;">
+<button type="button" style="width:auto;" onclick="copyCurrentAIQuery()">📋 Copia query</button>
+<button type="button" style="width:auto;" onclick="copyAIPrompt()">🤖 Copia prompt AI</button>
+
+</div>
+<a href="https://www.ebay.it/sch/i.html?_nkw=${encoded}" target="_blank">eBay Italia attivi</a>
+<a href="https://www.ebay.it/sch/i.html?_nkw=${encoded}&LH_Sold=1&LH_Complete=1" target="_blank">eBay Italia venduti</a>
+<a href="https://www.ebay.com/sch/i.html?_nkw=${encoded}" target="_blank">eBay internazionale attivi</a>
+<a href="https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Sold=1&LH_Complete=1" target="_blank">eBay internazionale venduti</a>
+<a href="https://www.google.com/search?q=${googleEbay}" target="_blank">Google solo annunci eBay</a>
+<a href="https://www.google.com/search?q=${googleSold}" target="_blank">Google eBay sold/completed</a>
+<a href="https://www.vinted.it/catalog?search_text=${encoded}" target="_blank">Vinted</a>
+<a href="https://130point.com/sales/" target="_blank">130Point - copia la query sopra</a>
+<button onclick="visualSearchCurrentCard()">🖼️ Apri foto carta</button>
+`;
+}
+
+function searchCard(useExclude){
+let query = buildQuery(useExclude);
+renderSearchResults(query, useExclude ? "Query mirata" : "Query ampia");
+}
+
+
+function searchAIQueryType(type){
+let id = type === "wide" ? "aiQueryWide" : type === "sold" ? "aiQuerySold" : "aiQuery";
+let label = type === "wide" ? "Query AI ampia" : type === "sold" ? "Query AI venduti" : "Query AI precisa";
+let query = document.getElementById(id)?.value.trim() || "";
+let excludes = document.getElementById("aiExclude")?.value.trim() || "";
+if(!query){
+alert("Questa query non è ancora stata estratta. Incolla l'analisi completa e clicca Estrai mini scheda AI.");
+return;
+}
+if(type !== "sold"){
+query = applyExclusionsToQuery(query, excludes);
+}
+renderSearchResults(query, label);
+}
+
+function searchAIQuery(){
+let query = document.getElementById("aiQuery").value.trim();
+if(!query){
+alert("Incolla prima una query generata da AI Mode nel campo Query AI");
+return;
+}
+renderSearchResults(query, "Query AI");
+}
+
+function getFormCard(imageData, existingCard){
+let next = {
+player:document.getElementById("player").value,
+set:document.getElementById("set").value,
+parallel:document.getElementById("parallel").value,
+numbering:document.getElementById("numbering").value,
+exclude:document.getElementById("exclude").value,
+aiQuery:document.getElementById("aiQuery").value,
+aiQueryWide:document.getElementById("aiQueryWide")?.value || "",
+aiQuerySold:document.getElementById("aiQuerySold")?.value || "",
+aiExclude:document.getElementById("aiExclude")?.value || "",
+aiAnalysis:document.getElementById("aiAnalysis").value,
+aiMin:document.getElementById("aiMin").value,
+aiAvg:document.getElementById("aiAvg").value,
+aiMax:document.getElementById("aiMax").value,
+aiLiquidity:document.getElementById("aiLiquidity").value,
+aiAdvice:document.getElementById("aiAdvice").value,
+aiSummary:document.getElementById("aiSummary").value,
+saleStrategy:document.getElementById("saleStrategy")?.value || "",
+lotGroup:document.getElementById("lotGroup")?.value || "",
+club:normalizeClubName(document.getElementById("club")?.value || ""),
+competition:document.getElementById("competition")?.value || "",
+rookieFlag:document.getElementById("rookieFlag")?.checked || false,
+academyFlag:document.getElementById("academyFlag")?.checked || false,
+prospectLevel:document.getElementById("prospectLevel")?.value || "",
+saleStatus:document.getElementById("saleStatus")?.value || "IN_PORTFOLIO",
+listingPrice:document.getElementById("listingPrice")?.value || "",
+saleFees:document.getElementById("saleFees")?.value || "",
+shippingCost:document.getElementById("shippingCost")?.value || "",
+shippedDate:document.getElementById("shippedDate")?.value || "",
+watchReason:document.getElementById("watchReason")?.value || "",
+nextReviewDate:document.getElementById("nextReviewDate")?.value || "",
+paid:document.getElementById("paid").value,
+estimated:document.getElementById("estimated").value,
+salePrice:document.getElementById("salePrice").value,
+soldDate:document.getElementById("soldDate").value,
+status:document.getElementById("status").value,
+image:imageData || "",
+dateAdded:document.getElementById("dateAdded").value || existingCard?.dateAdded || todayString(),
+boxId:document.getElementById("boxId").value || ""
+};
+if(next.saleStatus === "SOLD" || next.saleStatus === "SHIPPED"){
+next.status = "SOLD";
+}
+let history = Array.isArray(existingCard?.aiHistory) ? [...existingCard.aiHistory] : [];
+let hasNextAI = next.aiMin || next.aiAvg || next.aiMax || next.aiLiquidity || next.aiAdvice || next.aiSummary;
+let changedAI = !existingCard || ["aiMin","aiAvg","aiMax","aiLiquidity","aiAdvice","aiSummary"].some(k => String(existingCard[k] || "") !== String(next[k] || ""));
+if(hasNextAI && (history.length === 0 || changedAI)){
+  let last = history[history.length - 1] || {};
+  let duplicateLast = ["min","avg","max","liquidity","advice","summary"].every(k => String(last[k] || "") === String(({min:next.aiMin, avg:next.aiAvg, max:next.aiMax, liquidity:next.aiLiquidity, advice:next.aiAdvice, summary:next.aiSummary})[k] || ""));
+  if(!duplicateLast){
+    history.push({date:todayString(), min:next.aiMin, avg:next.aiAvg, max:next.aiMax, liquidity:next.aiLiquidity, advice:next.aiAdvice, summary:next.aiSummary});
   }
-})();
+}
+next.aiHistory = history;
+next.aiLastUpdated = history.length ? history[history.length - 1].date : (existingCard?.aiLastUpdated || "");
+return next;
+}
+function readSelectedImage(callback){
+let fileInput = document.getElementById("imageFile");
+let file = fileInput.files[0];
+
+if(!file){
+callback("");
+return;
+}
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+resizeImage(e.target.result, function(resized){
+callback(resized);
+});
+};
+
+reader.readAsDataURL(file);
+}
+
+function resizeImage(dataUrl, callback){
+let img = new Image();
+
+img.onload = function(){
+let maxSize = 900;
+let width = img.width;
+let height = img.height;
+
+if(width > height && width > maxSize){
+height = Math.round(height * maxSize / width);
+width = maxSize;
+} else if(height > maxSize){
+width = Math.round(width * maxSize / height);
+height = maxSize;
+}
+
+let canvas = document.createElement("canvas");
+canvas.width = width;
+canvas.height = height;
+
+let ctx = canvas.getContext("2d");
+ctx.drawImage(img, 0, 0, width, height);
+
+callback(canvas.toDataURL("image/jpeg", 0.75));
+};
+
+img.src = dataUrl;
+}
+
+function saveCard(){
+readSelectedImage(function(imageData){
+let card = getFormCard(imageData, null);
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+
+cards.push(card);
+localStorage.setItem("cards", JSON.stringify(cards));
+
+loadPortfolio();
+loadDashboard();
+resetFields();
+alert("Carta salvata");
+});
+}
+
+function setPortfolioFilter(status){
+portfolioFilter = status;
+loadPortfolio();
+}
+
+function quickSearchCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+let baseQuery = (card.aiQuery || [card.player, card.set, card.parallel, card.numbering].filter(Boolean).join(" ")).trim();
+let wideQuery = (card.aiQueryWide || [card.player, card.set].filter(Boolean).join(" ")).trim();
+let soldQuery = (card.aiQuerySold || baseQuery).trim();
+let excludes = card.aiExclude || card.exclude || "box case pack packs sealed lot";
+let precise = applyExclusionsToQuery(baseQuery, excludes);
+let wide = applyExclusionsToQuery(wideQuery, excludes);
+let box = document.getElementById("quickSearchBox");
+if(!baseQuery){
+  alert("Questa carta non ha dati sufficienti per generare una ricerca.");
+  return;
+}
+box.innerHTML = `
+<h2>Ricerche rapide</h2>
+<div class="card">
+<strong>${card.player || "Carta"}</strong><br>
+${card.set || ""} ${card.parallel || ""} ${card.numbering || ""}<br>
+${card.image ? `<img src="${card.image}" style="max-width:180px;margin-top:10px;">` : ""}
+</div>
+<div class="card">
+<strong>Query precisa</strong>
+<p>${precise}</p>
+${renderSearchLinks(precise)}
+</div>
+<div class="card">
+<strong>Query ampia</strong>
+<p>${wide}</p>
+${renderSearchLinks(wide)}
+</div>
+<div class="card">
+<strong>Query venduti</strong>
+<p>${soldQuery}</p>
+${renderSearchLinks(soldQuery, true)}
+</div>
+<button onclick="showSection('portfolioPage')">Torna al portfolio</button>
+`;
+showSection("quickSearchPage");
+}
+
+function renderSearchLinks(query, soldOnly){
+let encoded = encodeURIComponent(query);
+return `
+<a href="https://www.ebay.it/sch/i.html?_nkw=${encoded}" target="_blank">eBay Italia attivi</a>
+<a href="https://www.ebay.it/sch/i.html?_nkw=${encoded}&LH_Sold=1&LH_Complete=1" target="_blank">eBay Italia venduti</a>
+<a href="https://www.ebay.com/sch/i.html?_nkw=${encoded}" target="_blank">eBay internazionale attivi</a>
+<a href="https://www.ebay.com/sch/i.html?_nkw=${encoded}&LH_Sold=1&LH_Complete=1" target="_blank">eBay internazionale venduti</a>
+<a href="https://www.google.com/search?q=${encodeURIComponent(query + ' site:ebay.com') }" target="_blank">Google solo eBay</a>
+<a href="https://130point.com/sales/" target="_blank">130Point</a>
+`;
+}
+
+
+let portfolioViewMode = localStorage.getItem("portfolioViewMode") || "compact";
+function setPortfolioView(mode){
+portfolioViewMode = mode === "detail" ? "detail" : "compact";
+localStorage.setItem("portfolioViewMode", portfolioViewMode);
+let compactBtn = document.getElementById("compactViewBtn");
+let detailBtn = document.getElementById("detailViewBtn");
+if(compactBtn && detailBtn){ compactBtn.classList.toggle("active", portfolioViewMode === "compact"); detailBtn.classList.toggle("active", portfolioViewMode === "detail"); }
+loadPortfolio();
+}
+function renderPortfolioItem(card, index){
+let aiValue = aiNumericValue(card);
+let valueText = aiValue > 0 ? aiValue.toFixed(2) + " € AI" : ((card.estimated || "") ? card.estimated + " €" : "Valore n/d");
+let subtitle = `${card.parallel || ""} ${card.numbering || ""}`.trim();
+let img = card.image ? `<img class="thumb" src="${card.image}" alt="${card.player || "carta"}">` : `<div class="thumb"></div>`;
+let club = getCardClub(card);
+let compactBadges = `${renderStrategyBadge(card)} ${card.rookieFlag ? '<span class="ai-chip">Rookie</span>' : ''} ${card.academyFlag ? '<span class="ai-chip">Academy</span>' : ''}`;
+if(portfolioViewMode === "compact"){
+return `<div class="card portfolio-card compact status-${card.status || "MONITOR"}">
+${img}
+<div class="compact-info">
+<strong>${card.player || "Carta senza nome"}</strong>
+<div class="compact-meta">${subtitle || card.set || ""}${club ? `<br>${club}` : ""}</div>
+<div class="compact-badges">${compactBadges}</div>
+<div class="compact-value">${valueText}</div>
+</div>
+<div class="compact-actions"><button onclick="quickSearchCard(${index})">🔎</button><button onclick="openEditCard(${index})">✏️</button><button onclick="setPortfolioView('detail')">Apri</button></div>
+</div>`;
+}
+let paid = parseFloat(card.paid), estimated = parseFloat(card.estimated), salePrice = parseFloat(card.salePrice);
+let estimatedOrSale = (card.status === "SOLD" && !isNaN(salePrice)) ? salePrice : estimated;
+let profit = "";
+if(!isNaN(paid) && !isNaN(estimatedOrSale)){ let diff = estimatedOrSale - paid; let color = diff >= 0 ? "#16a34a" : "#dc2626"; profit = `<span style="color:${color}">Profit/Loss: ${diff.toFixed(2)} €</span>`; }
+return `<div class="card portfolio-card detailed status-${card.status || "MONITOR"}">
+${card.image ? `<img src="${card.image}" alt="${card.player}"><div class="action-row"><button onclick="openPhotoCard(${index})">🖼️ Foto</button><button onclick="aiScanCard(${index})">🧠 AI</button><button onclick="downloadPhotoCard(${index})">⬇️</button></div>` : ""}
+<div class="card-header-row"><strong>${card.player || "Carta"}</strong><span class="badge badge-${card.status || "MONITOR"}">${card.status || "MONITOR"}</span></div>
+<div class="small-muted">${card.set || ""}</div><div>${card.parallel || ""} ${card.numbering || ""}</div>
+${renderAIMiniCard(card)}
+<div>${renderFootballBadges(card)}</div><div>${renderStrategyBadge(card)} ${renderLotOverrideButton(card, index)}</div>
+<div><span class="ai-chip">${saleStatusLabel(card)}</span>${card.lotGroup ? `<span class="ai-chip">Lotto: ${card.lotGroup}</span>` : ""}</div>
+<div class="metric-row"><div class="metric-pill"><small>Valore</small><b>${valueText}</b></div><div class="metric-pill"><small>Box</small><b style="font-size:13px;line-height:1.25">${card.boxId ? getBoxNameById(card.boxId) : "Singola"}</b></div><div class="metric-pill"><small>Data</small><b style="font-size:14px">${card.dateAdded || "n/d"}</b></div></div>
+Prezzo pagato: ${card.paid || ""}<br>Valore stimato: ${card.estimated || ""}<br><span class="profit">${profit}</span>
+<div class="quick-actions-grid"><button onclick="quickSearchCard(${index})">🔎 Ricerca</button><button onclick="openEditCard(${index})">✏️ Modifica</button><button onclick="markCardSold(${index})">💰 Venduta</button><button class="danger-button" onclick="deleteCard(${index})">Elimina</button></div>
+</div>`;
+}
+
+function loadPortfolio(){
+populateFootballFilters();
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let sort = document.getElementById("portfolioSort")?.value || "default";
+let selectedBox = document.getElementById("portfolioBoxFilter")?.value || "ALL";
+let selectedStrategy = document.getElementById("portfolioStrategyFilter")?.value || "ALL";
+let selectedClub = document.getElementById("portfolioClubFilter")?.value || "ALL";
+let selectedProspect = document.getElementById("portfolioProspectFilter")?.value || "ALL";
+let selectedFootball = document.getElementById("portfolioFootballFilter")?.value || "ALL";
+let html="";
+if(sort !== "default"){
+cards = cards.map((card, index) => ({...card, originalIndex:index}));
+
+cards.sort((a,b) => {
+let valueA = parseFloat(a.estimated) || 0;
+let valueB = parseFloat(b.estimated) || 0;
+let paidA = parseFloat(a.paid) || 0;
+let paidB = parseFloat(b.paid) || 0;
+let profitA = valueA - paidA;
+let profitB = valueB - paidB;
+
+let dateA = new Date(a.dateAdded || "1970-01-01").getTime();
+let dateB = new Date(b.dateAdded || "1970-01-01").getTime();
+if(sort === "dateDesc"){ return dateB - dateA; }
+if(sort === "dateAsc"){ return dateA - dateB; }
+if(sort === "valueDesc"){ return valueB - valueA; }
+if(sort === "valueAsc"){ return valueA - valueB; }
+if(sort === "profitDesc"){ return profitB - profitA; }
+if(sort === "profitAsc"){ return profitA - profitB; }
+if(sort === "nameAsc"){ return (a.player || "").localeCompare(b.player || ""); }
+
+return 0;
+});
+}
+let search = document.getElementById("portfolioSearch")?.value.toLowerCase() || "";
+
+for(let i=0;i<cards.length;i++){
+if(isCardSold(cards[i])){
+continue;
+}
+    if(portfolioFilter !== "ALL" && (cards[i].status || "MONITOR") !== portfolioFilter){
+continue;
+}
+let searchable = (
+(cards[i].player || "") + " " +
+(cards[i].set || "") + " " +
+(cards[i].parallel || "") + " " +
+(cards[i].club || "") + " " +
+(cards[i].competition || "")
+).toLowerCase();
+
+if(search && !searchable.includes(search)){
+continue;
+}
+if(selectedBox === "NOBOX" && cards[i].boxId){
+continue;
+}
+if(selectedBox !== "ALL" && selectedBox !== "NOBOX" && cards[i].boxId !== selectedBox){
+continue;
+}
+if(selectedStrategy !== "ALL" && getCardStrategy(cards[i]) !== selectedStrategy){
+continue;
+}
+let cardClub = getCardClub(cards[i]);
+if(selectedClub !== "ALL" && cardClub !== selectedClub){
+continue;
+}
+if(selectedProspect !== "ALL" && (cards[i].prospectLevel || "") !== selectedProspect){
+continue;
+}
+if(selectedFootball === "ROOKIE" && !cards[i].rookieFlag){
+continue;
+}
+if(selectedFootball === "ACADEMY" && !cards[i].academyFlag){
+continue;
+}
+let paid = parseFloat(cards[i].paid);
+let estimated = parseFloat(cards[i].estimated);
+let salePrice = parseFloat(cards[i].salePrice);
+let estimatedOrSale = (cards[i].status === "SOLD" && !isNaN(salePrice)) ? salePrice : estimated;
+let profit = "";
+
+if(!isNaN(paid) && !isNaN(estimatedOrSale)){
+let diff = estimatedOrSale - paid;
+let color = diff >= 0 ? "#16a34a" : "#dc2626";
+profit = `<span style="color:${color}">Profit/Loss: ${diff.toFixed(2)} €</span>`;
+}
+
+html += renderPortfolioItem(cards[i], cards[i].originalIndex ?? i);}
+
+let portfolioEl = document.getElementById("portfolio");
+if(portfolioEl){
+portfolioEl.classList.toggle("compact-view", portfolioViewMode === "compact");
+portfolioEl.classList.toggle("detailed-view", portfolioViewMode !== "compact");
+portfolioEl.innerHTML = html || '<p class="small-muted">Nessuna carta trovata con questi filtri.</p>';
+}
+let compactBtn = document.getElementById("compactViewBtn");
+let detailBtn = document.getElementById("detailViewBtn");
+if(compactBtn && detailBtn){ compactBtn.classList.toggle("active", portfolioViewMode === "compact"); detailBtn.classList.toggle("active", portfolioViewMode === "detail"); }
+}
+
+function loadCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let sort = document.getElementById("portfolioSort")?.value || "default";
+let card = cards[index];
+
+document.getElementById("editIndex").value = index;
+document.getElementById("player").value = card.player || "";
+document.getElementById("set").value = card.set || "";
+document.getElementById("parallel").value = card.parallel || "";
+document.getElementById("numbering").value = card.numbering || "";
+document.getElementById("exclude").value = card.exclude || "";
+document.getElementById("aiQuery").value = card.aiQuery || "";
+document.getElementById("aiQueryWide").value = card.aiQueryWide || "";
+document.getElementById("aiQuerySold").value = card.aiQuerySold || "";
+document.getElementById("aiExclude").value = card.aiExclude || "";
+document.getElementById("aiAnalysis").value = card.aiAnalysis || "";
+document.getElementById("aiMin").value = card.aiMin || "";
+document.getElementById("aiAvg").value = card.aiAvg || "";
+document.getElementById("aiMax").value = card.aiMax || "";
+document.getElementById("aiLiquidity").value = card.aiLiquidity || "";
+document.getElementById("aiAdvice").value = card.aiAdvice || "";
+document.getElementById("aiSummary").value = card.aiSummary || "";
+document.getElementById("saleStrategy").value = card.saleStrategy || "";
+document.getElementById("lotGroup").value = card.lotGroup || "";
+document.getElementById("club").value = card.club || inferClubFromCard(card);
+document.getElementById("competition").value = card.competition || "";
+document.getElementById("rookieFlag").checked = !!card.rookieFlag;
+document.getElementById("academyFlag").checked = !!card.academyFlag;
+document.getElementById("prospectLevel").value = card.prospectLevel || "";
+document.getElementById("saleStatus").value = card.saleStatus || ((card.status || "") === "SOLD" ? "SOLD" : "IN_PORTFOLIO");
+document.getElementById("listingPrice").value = card.listingPrice || "";
+document.getElementById("saleFees").value = card.saleFees || "";
+document.getElementById("shippingCost").value = card.shippingCost || "";
+document.getElementById("shippedDate").value = card.shippedDate || "";
+document.getElementById("watchReason").value = card.watchReason || "";
+document.getElementById("nextReviewDate").value = card.nextReviewDate || "";
+document.getElementById("paid").value = card.paid || "";
+document.getElementById("estimated").value = card.estimated || "";
+document.getElementById("salePrice").value = card.salePrice || "";
+document.getElementById("soldDate").value = card.soldDate || "";
+document.getElementById("status").value = card.status || "MONITOR";
+document.getElementById("dateAdded").value = card.dateAdded || todayString();
+populateBoxSelect();
+document.getElementById("boxId").value = card.boxId || "";
+document.getElementById("imageFile").value = "";
+let historyBox = document.getElementById("aiHistoryBox");
+if(historyBox){
+  historyBox.style.display = "block";
+  historyBox.innerHTML = renderAIHistory(card);
+}
+
+searchCard(true);
+}
+
+function updateCard(){
+let index = document.getElementById("editIndex").value;
+
+if(index === ""){
+alert("Carica prima una carta da modificare");
+return;
+}
+
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+
+readSelectedImage(function(imageData){
+let existingImage = cards[index].image || "";
+let finalImage = imageData || existingImage;
+
+cards[index] = getFormCard(finalImage, cards[index]);
+
+localStorage.setItem("cards", JSON.stringify(cards));
+
+loadPortfolio();
+loadDashboard();
+let wasModal = document.getElementById("search")?.classList.contains("modal-section");
+resetFields();
+alert("Carta aggiornata");
+if(wasModal){ closeEditModal(); }
+});
+}
+
+
+function markCardSold(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+let suggested = card.estimated || "";
+let price = prompt("Prezzo vendita reale?", suggested);
+if(price === null){return;}
+price = price.replace(",", ".").trim();
+if(price === "" || isNaN(parseFloat(price))){
+alert("Inserisci un prezzo di vendita valido");
+return;
+}
+let date = prompt("Data vendita? Formato AAAA-MM-GG", todayString());
+if(date === null){return;}
+cards[index] = {
+...card,
+status:"SOLD",
+saleStatus:"SOLD",
+salePrice:price,
+soldDate:date || todayString()
+};
+localStorage.setItem("cards", JSON.stringify(cards));
+loadPortfolio();
+loadSoldCards();
+loadBoxes();
+loadDashboard();
+alert("Carta segnata come venduta");
+}
+
+function restoreSoldCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+if(!cards[index]){return;}
+cards[index] = {
+...cards[index],
+status:"MONITOR",
+saleStatus:"IN_PORTFOLIO"
+};
+localStorage.setItem("cards", JSON.stringify(cards));
+loadPortfolio();
+loadSoldCards();
+loadBoxes();
+loadDashboard();
+}
+
+function loadSoldCards(){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let html = "";
+let soldTotal = 0;
+let soldProfit = 0;
+for(let i=0;i<cards.length;i++){
+let card = cards[i];
+if(!isCardSold(card)){
+continue;
+}
+let sale = grossSaleValue(card);
+let net = netSaleValue(card);
+let paid = parseMoneyValue(card.paid);
+let profit = net - paid;
+soldTotal += net;
+soldProfit += profit;
+let profitClass = profit >= 0 ? "kpi-positive" : "kpi-negative";
+html += `
+<div class="card status-SOLD">
+${card.image ? `<img src="${card.image}" alt="${card.player}">` : ""}
+<strong>${card.player || "Carta senza nome"}</strong><br>
+${card.set || ""}<br>
+${card.parallel || ""} ${card.numbering || ""}<br>
+<div class="badge badge-SOLD">VENDUTA</div><br>
+<span class="small-muted">Box: ${card.boxId ? getBoxNameById(card.boxId) : "Acquisto singolo / non collegata"}</span><br>
+Prezzo pagato: ${card.paid || ""}<br>
+Valore stimato precedente: ${card.estimated || ""}<br>
+Prezzo vendita lordo: ${card.salePrice || ""} €<br>
+Netto stimato: ${net.toFixed(2)} €<br>
+Fee/spedizione: ${card.saleFees || "0"} / ${card.shippingCost || "0"} €<br>
+Stato: ${saleStatusLabel(card)}<br>
+Data vendita: ${card.soldDate || "Non indicata"}<br>
+Data spedizione: ${card.shippedDate || "Non indicata"}<br>
+<span class="profit ${profitClass}">Profitto reale netto: ${profit.toFixed(2)} €</span><br><br>
+<button onclick="openEditCard(${i})">Modifica</button>
+<button onclick="restoreSoldCard(${i})" class="secondary-button">Rimetti nel portfolio</button>
+<button onclick="deleteCard(${i})" class="danger-button">Elimina definitivamente</button>
+</div>`;
+}
+if(!html){
+html = `<div class="card">Nessuna carta venduta.</div>`;
+}
+document.getElementById("soldCards").innerHTML = `
+<div class="card" style="grid-column:1/-1;">
+<strong>Totale vendite:</strong> ${soldTotal.toFixed(2)} €<br>
+<strong>Profitto reale vendite:</strong> <span class="${soldProfit >= 0 ? "kpi-positive" : "kpi-negative"}">${soldProfit.toFixed(2)} €</span>
+</div>
+${html}`;
+}
+
+function assignLotGroup(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+let current = card.lotGroup || suggestedLotName(card);
+let group = prompt("Nome lotto", current || "Lotto low value");
+if(group === null){return;}
+cards[index] = {...card, lotGroup:group.trim(), saleStrategy:"LOTTO"};
+localStorage.setItem("cards", JSON.stringify(cards));
+refreshAllViews();
+}
+
+function forceCardIntoLot(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+cards[index] = {...card, saleStrategy:"LOTTO", lotGroup:card.lotGroup || ""};
+localStorage.setItem("cards", JSON.stringify(cards));
+refreshAllViews();
+}
+
+function removeCardFromLot(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let card = cards[index];
+if(!card){return;}
+cards[index] = {...card, saleStrategy:"MONITOR", lotGroup:""};
+localStorage.setItem("cards", JSON.stringify(cards));
+refreshAllViews();
+}
+
+function clearLotGroup(index){
+removeCardFromLot(index);
+}
+
+function refreshAllViews(){
+loadPortfolio();
+loadLots();
+loadDashboard();
+loadSoldCards();
+loadBoxes();
+}
+
+function renderLotOverrideButton(card, index){
+let st = getCardStrategy(card);
+if(st === "LOTTO"){
+return `<button style="width:auto;background:#64748b;" onclick="removeCardFromLot(${index})">Rimuovi da lotto</button>`;
+}
+return `<button style="width:auto;background:#0f766e;" onclick="forceCardIntoLot(${index})">Forza in lotto</button>`;
+}
+
+function cardAiRange(card){
+let min = parseMoneyValue(card.aiMin);
+let avg = parseMoneyValue(card.aiAvg);
+let max = parseMoneyValue(card.aiMax);
+let est = parseMoneyValue(card.estimated);
+if(!avg && max && min){ avg = (min + max) / 2; }
+if(!avg){ avg = est || max || min || 0; }
+if(!min){ min = avg; }
+if(!max){ max = avg; }
+return {min, avg, max};
+}
+
+function cleanTextForLot(value){
+return String(value || "")
+.toLowerCase()
+.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+.replace(/æ/g,"ae")
+.replace(/[^a-z0-9]+/g," ")
+.trim();
+}
+
+function normalizeClubName(raw){
+let t = cleanTextForLot(raw);
+if(!t){return "";}
+if(/\b(barca|barcelona|fc barcelona|fcb)\b/.test(t)){ return "Barcelona"; }
+if(/\barsenal\b/.test(t)){ return "Arsenal"; }
+if(/\breal madrid\b/.test(t)){ return "Real Madrid"; }
+if(/\bmanchester city\b|\bman city\b/.test(t)){ return "Manchester City"; }
+if(/\bmanchester united\b|\bman united\b|\bman utd\b/.test(t)){ return "Manchester United"; }
+if(/\bchelsea\b/.test(t)){ return "Chelsea"; }
+if(/\bliverpool\b/.test(t)){ return "Liverpool"; }
+if(/\bjuventus\b/.test(t)){ return "Juventus"; }
+if(/\binter\b|\binternazionale\b/.test(t)){ return "Inter"; }
+if(/\bmilan\b|\bac milan\b/.test(t)){ return "Milan"; }
+if(/\bajax\b/.test(t)){ return "Ajax"; }
+if(/\bbenfica\b/.test(t)){ return "Benfica"; }
+if(/\bsporting\b/.test(t)){ return "Sporting"; }
+return "";
+}
+
+function detectClub(card){
+let fields = [card.club, card.team, card.aiSummary, card.aiAnalysis, card.aiQuery, card.player, card.set, card.parallel].join(" ");
+return normalizeClubName(fields);
+}
+
+function normalizeSetName(raw){
+let t = cleanTextForLot(raw);
+if(!t){return "";}
+if(/\bdaka\b/.test(t)){ return "DAKA"; }
+if(/\btopps chrome\b/.test(t)){ return "Topps Chrome"; }
+if(/\bmerlin\b/.test(t)){ return "Merlin"; }
+if(/\bfinest\b/.test(t)){ return "Finest"; }
+if(/\bprizm\b/.test(t)){ return "Prizm"; }
+let words = t.split(" ").filter(Boolean).slice(0,3);
+return words.map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
+}
+
+function detectSet(card){
+return normalizeSetName([card.set, card.aiQuery, card.aiAnalysis].join(" "));
+}
+
+function normalizeLotKey(value){
+return String(value || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/gi,"-").replace(/^-+|-+$/g,"");
+}
+
+function suggestedLotName(card){
+let manual = (card.lotGroup || "").trim();
+if(manual){ return manual; }
+let club = detectClub(card);
+let setName = detectSet(card);
+let summary = cleanTextForLot((card.aiSummary || "") + " " + (card.aiAdvice || "") + " " + (card.aiAnalysis || ""));
+let prospect = /\b(rookie|prospect|academy|young|wonderkid)\b/.test(summary);
+
+if(club && setName){ return `Lotto ${club} ${setName}`; }
+if(club){ return `Lotto ${club}`; }
+if(prospect){ return "Lotto prospects / rookie"; }
+if(setName){ return `Lotto ${setName}`; }
+return "Lotto low value football";
+}
+
+function lotSummaryValues(arr){
+let totals = arr.reduce((acc, card) => {
+let r = cardAiRange(card);
+acc.min += r.min;
+acc.avg += r.avg;
+acc.max += r.max;
+return acc;
+}, {min:0, avg:0, max:0});
+let suggested = totals.avg * 0.75;
+let minimum = totals.avg * 0.60;
+return {...totals, suggested, minimum};
+}
+
+function guessFootballLotGroupName(card){
+let club = getCardClub(card);
+let level = card.prospectLevel || "";
+if(club && (card.academyFlag || level.includes("Prospect") || level.includes("Potential"))){ return `Lotto ${club} prospects`; }
+if(club){ return `Lotto ${club}`; }
+return "";
+}
+
+function buildSmartLotGroups(cards){
+let lotCards = cards.map((c,i)=>({...c, originalIndex:i})).filter(c => !isCardSold(c) && getCardStrategy(c) === "LOTTO");
+let rawGroups = {};
+let miscSingles = [];
+
+for(let card of lotCards){
+let name = suggestedLotName(card);
+let key = normalizeLotKey(name) || "lotto-low-value-football";
+if(!rawGroups[key]){ rawGroups[key] = {key, name, cards:[]}; }
+rawGroups[key].cards.push(card);
+}
+
+let finalGroups = [];
+for(let group of Object.values(rawGroups)){
+let values = lotSummaryValues(group.cards);
+if(group.cards.length >= 2 || values.avg >= 25){
+finalGroups.push(group);
+} else {
+miscSingles.push(...group.cards);
+}
+}
+
+if(miscSingles.length >= 2){
+finalGroups.push({
+key:"lotto-misto-low-value",
+name:"Lotto misto low value",
+cards:miscSingles
+});
+}
+
+return finalGroups.sort((a,b)=>{
+let va = lotSummaryValues(a.cards).avg;
+let vb = lotSummaryValues(b.cards).avg;
+return vb - va;
+});
+}
+
+function openLotDetail(key){
+showSection('lotsPage');
+loadLots(key);
+setTimeout(()=>{
+let el = document.getElementById('lot-' + key);
+if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+}, 80);
+}
+
+function setLotStatus(key, status){
+let statuses = JSON.parse(localStorage.getItem("lotStatuses")) || {};
+statuses[key] = status;
+localStorage.setItem("lotStatuses", JSON.stringify(statuses));
+loadLots();
+}
+
+function lotStatusSelect(key){
+let statuses = JSON.parse(localStorage.getItem("lotStatuses")) || {};
+let current = statuses[key] || "BOZZA";
+let options = ["BOZZA","PRONTO DA LISTARE","LISTATO","VENDUTO"];
+return `<select onchange="setLotStatus('${key}', this.value)">${options.map(o => `<option value="${o}" ${current===o?"selected":""}>${o}</option>`).join("")}</select>`;
+}
+
+function loadLots(highlightKey){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let groups = buildSmartLotGroups(cards);
+let html = "";
+
+for(let group of groups){
+let arr = group.cards;
+let key = group.key || normalizeLotKey(group.name);
+let v = lotSummaryValues(arr);
+let highlightStyle = highlightKey && highlightKey === key ? "border:2px solid #2f6fed;box-shadow:0 0 0 4px rgba(47,111,237,0.12);" : "";
+html += `<div class="lot-card" id="lot-${key}" style="${highlightStyle}">
+<h3>${group.name}</h3>
+<p class="small-muted">${arr.length} carte · prudente ${v.min.toFixed(2)} € · realistico ${v.avg.toFixed(2)} € · ottimistico ${v.max.toFixed(2)} €</p>
+<div class="metric-row"><div class="metric-pill"><small>Prezzo suggerito</small><b>${v.suggested.toFixed(2)} €</b></div><div class="metric-pill"><small>Minimo accettabile</small><b>${v.minimum.toFixed(2)} €</b></div><div class="metric-pill"><small>Stato lotto</small>${lotStatusSelect(key)}</div></div>`;
+html += arr.map(c => {
+let r = cardAiRange(c);
+return `<div style="border-top:1px solid #e2e8f0;padding:8px 0;">
+<strong>${c.player || "Carta"}</strong> ${c.parallel || ""} ${c.numbering || ""}<br>
+<span class="small-muted">AI ${r.min.toFixed(2)} / ${r.avg.toFixed(2)} / ${r.max.toFixed(2)} € · ${c.aiSummary || ""}</span><br>
+<button style="width:auto;" onclick="openEditCard(${c.originalIndex})">Apri carta</button>
+<button style="width:auto;" class="secondary-button" onclick="removeCardFromLot(${c.originalIndex})">Rimuovi dal lotto</button>
+</div>`;
+}).join("");
+html += `</div>`;
+}
+if(!html){ html = `<div class="card">Nessun lotto suggerito. Le carte marcate LOTTO vengono raggruppate solo se formano un lotto sensato; i micro-lotti da una carta vengono nascosti o fusi.</div>`; }
+document.getElementById("lotsBox").innerHTML = html;
+}
+
+function deleteCard(index){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+cards.splice(index,1);
+localStorage.setItem("cards", JSON.stringify(cards));
+loadPortfolio();
+loadDashboard();
+}
+
+function resetFields(){
+document.getElementById("player").value = "";
+document.getElementById("set").value = "";
+document.getElementById("parallel").value = "";
+document.getElementById("numbering").value = "";
+document.getElementById("exclude").value = "";
+document.getElementById("aiQuery").value = "";
+document.getElementById("aiQueryWide").value = "";
+document.getElementById("aiQuerySold").value = "";
+document.getElementById("aiExclude").value = "";
+document.getElementById("aiAnalysis").value = "";
+document.getElementById("aiMin").value = "";
+document.getElementById("aiAvg").value = "";
+document.getElementById("aiMax").value = "";
+document.getElementById("aiLiquidity").value = "";
+document.getElementById("aiAdvice").value = "";
+document.getElementById("aiSummary").value = "";
+document.getElementById("saleStrategy").value = "";
+document.getElementById("lotGroup").value = "";
+document.getElementById("club").value = "";
+document.getElementById("competition").value = "";
+document.getElementById("rookieFlag").checked = false;
+document.getElementById("academyFlag").checked = false;
+document.getElementById("prospectLevel").value = "";
+document.getElementById("saleStatus").value = "IN_PORTFOLIO";
+document.getElementById("listingPrice").value = "";
+document.getElementById("saleFees").value = "";
+document.getElementById("shippingCost").value = "";
+document.getElementById("shippedDate").value = "";
+document.getElementById("watchReason").value = "";
+document.getElementById("nextReviewDate").value = "";
+document.getElementById("paid").value = "";
+document.getElementById("estimated").value = "";
+document.getElementById("salePrice").value = "";
+document.getElementById("soldDate").value = "";
+document.getElementById("status").value = "MONITOR";
+document.getElementById("dateAdded").value = todayString();
+document.getElementById("boxId").value = "";
+document.getElementById("editIndex").value = "";
+document.getElementById("imageFile").value = "";
+document.getElementById("results").innerHTML = "";
+let historyBox = document.getElementById("aiHistoryBox");
+if(historyBox){ historyBox.style.display = "none"; historyBox.innerHTML = ""; }
+}
+
+function saveBox(){
+let box = {
+id:generateId(),
+name:document.getElementById("boxName").value,
+cost:document.getElementById("boxCost").value,
+date:document.getElementById("boxDate").value
+};
+
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+boxes.push(box);
+localStorage.setItem("boxes", JSON.stringify(boxes));
+
+document.getElementById("boxName").value = "";
+document.getElementById("boxCost").value = "";
+document.getElementById("boxDate").value = "";
+
+loadBoxes();
+populateBoxSelect();
+populatePortfolioBoxFilter();
+loadDashboard();
+}
+
+function loadBoxes(){
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+let html="";
+
+let total=0;
+let monthlyTotal=0;
+
+let now = new Date();
+let currentMonth = now.getMonth();
+let currentYear = now.getFullYear();
+
+for(let i=0;i<boxes.length;i++){
+let cost=parseFloat(boxes[i].cost) || 0;
+total += cost;
+
+if(boxes[i].date){
+let boxDate = new Date(boxes[i].date);
+if(boxDate.getMonth() === currentMonth && boxDate.getFullYear() === currentYear){
+monthlyTotal += cost;
+}
+}
+
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let linkedCards = cards.filter(card => card.boxId === boxes[i].id);
+let estimatedCards = linkedCards.reduce((sum, card) => sum + (isCardSold(card) ? netSaleValue(card) : aiNumericValue(card)), 0);
+let soldCardsCount = linkedCards.filter(card => isCardSold(card)).length;
+let boxResult = estimatedCards - cost;
+let boxRoi = cost > 0 ? ((boxResult / cost) * 100).toFixed(1) : "0.0";
+let boxClass = boxResult >= 0 ? "kpi-positive" : "kpi-negative";
+
+let linkedList = linkedCards.length ? `
+<div class="linked-list">
+<strong>Carte in questo box:</strong><br>
+${linkedCards.map(card => `• ${card.player || "Carta senza nome"} ${card.parallel || ""} ${card.numbering || ""} — ${isCardSold(card) ? "netto vendita " : "AI "}${(isCardSold(card) ? netSaleValue(card) : aiNumericValue(card)).toFixed(2)} €`).join("<br>")}
+</div>` : `<div class="linked-list small-muted">Nessuna carta collegata a questo box.</div>`;
+
+html += `
+<div class="box-card box-summary">
+<strong>${getBoxLabel(boxes[i])}</strong><br>
+Costo: ${boxes[i].cost} €<br>
+Data acquisto: ${boxes[i].date || "Non indicata"}<br>
+Carte collegate: ${linkedCards.length} (${soldCardsCount} vendute)<br>
+Valore AI attivo + vendite reali: ${estimatedCards.toFixed(2)} €<br>
+Risultato box: <span class="${boxClass}">${boxResult.toFixed(2)} €</span><br>
+ROI box: <span class="${boxClass}">${boxRoi}%</span><br>
+${linkedList}
+<div class="inline-actions">
+<button onclick="editBox(${i})" class="secondary-button">Modifica Box</button>
+<button onclick="filterPortfolioByBox('${boxes[i].id}')">Vedi carte</button>
+<button onclick="deleteBox(${i})" class="danger-button">Elimina Box</button>
+</div>
+</div>
+`;
+}
+
+html += `
+<h3>Totale mese corrente: ${monthlyTotal.toFixed(2)} €</h3>
+<h3>Totale generale box: ${total.toFixed(2)} €</h3>
+`;
+
+document.getElementById("boxes").innerHTML = html;
+}
+
+
+function editBox(index){
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+let box = boxes[index];
+if(!box){return;}
+document.getElementById("editBoxIndex").value = index;
+document.getElementById("boxName").value = box.name || "";
+document.getElementById("boxCost").value = box.cost || "";
+document.getElementById("boxDate").value = box.date || "";
+}
+
+function updateBox(){
+let index = document.getElementById("editBoxIndex").value;
+if(index === ""){
+alert("Carica prima un box da modificare");
+return;
+}
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+if(!boxes[index]){
+alert("Box non trovato");
+return;
+}
+boxes[index] = {
+...boxes[index],
+name:document.getElementById("boxName").value,
+cost:document.getElementById("boxCost").value,
+date:document.getElementById("boxDate").value
+};
+localStorage.setItem("boxes", JSON.stringify(boxes));
+resetBoxFields();
+loadBoxes();
+populateBoxSelect();
+populatePortfolioBoxFilter();
+loadPortfolio();
+loadDashboard();
+alert("Box aggiornato");
+}
+
+function resetBoxFields(){
+document.getElementById("editBoxIndex").value = "";
+document.getElementById("boxName").value = "";
+document.getElementById("boxCost").value = "";
+document.getElementById("boxDate").value = "";
+}
+
+function filterPortfolioByBox(boxId){
+showSection('portfolioPage');
+populatePortfolioBoxFilter();
+document.getElementById("portfolioBoxFilter").value = boxId;
+loadPortfolio();
+}
+
+function deleteBox(index){
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+let removedBox = boxes[index];
+let cardsBeforeDelete = JSON.parse(localStorage.getItem("cards")) || [];
+let linkedCount = removedBox?.id ? cardsBeforeDelete.filter(card => card.boxId === removedBox.id).length : 0;
+if(linkedCount > 0 && !confirm(`Questo box ha ${linkedCount} carte collegate. Se lo elimini, le carte resteranno nel portfolio ma verranno scollegate dal box. Continuare?`)){
+return;
+}
+boxes.splice(index,1);
+localStorage.setItem("boxes", JSON.stringify(boxes));
+
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+if(removedBox?.id){
+cards = cards.map(card => card.boxId === removedBox.id ? {...card, boxId:""} : card);
+localStorage.setItem("cards", JSON.stringify(cards));
+}
+
+loadBoxes();
+populateBoxSelect();
+populatePortfolioBoxFilter();
+loadPortfolio();
+loadDashboard();
+}
+
+
+function getDashboardScenario(){
+return localStorage.getItem("dashboardScenario") || "avg";
+}
+
+function setDashboardScenario(value){
+localStorage.setItem("dashboardScenario", value || "avg");
+loadDashboard();
+}
+
+function syncDashboardScenario(){
+let el = document.getElementById("dashboardScenario");
+if(el){ el.value = getDashboardScenario(); }
+}
+
+function parseMoneyValue(value){
+let n = parseFloat(String(value || "").replace("€", "").replace(",", "."));
+return isNaN(n) ? 0 : n;
+}
+
+function isCardSold(card){
+let ss = (card.saleStatus || "").toUpperCase();
+return (card.status || "") === "SOLD" || ss === "SOLD" || ss === "SHIPPED";
+}
+
+function netSaleValue(card){
+let sale = parseMoneyValue(card.salePrice);
+let fees = parseMoneyValue(card.saleFees);
+let shipping = parseMoneyValue(card.shippingCost);
+return Math.max(0, sale - fees - shipping);
+}
+
+function grossSaleValue(card){ return parseMoneyValue(card.salePrice); }
+
+function saleStatusLabel(card){
+let ss = (card.saleStatus || ((card.status || "") === "SOLD" ? "SOLD" : "IN_PORTFOLIO")).toUpperCase();
+if(ss === "LISTED"){ return "IN VENDITA"; }
+if(ss === "SOLD"){ return "VENDUTA"; }
+if(ss === "SHIPPED"){ return "SPEDITA"; }
+return "IN PORTFOLIO";
+}
+
+function aiNumericValue(card){
+let scenario = getDashboardScenario();
+let min = parseMoneyValue(card.aiMin);
+let avg = parseMoneyValue(card.aiAvg);
+let max = parseMoneyValue(card.aiMax);
+let est = parseMoneyValue(card.estimated);
+if(scenario === "min"){
+if(min > 0){ return min; }
+if(avg > 0){ return avg; }
+if(max > 0){ return max; }
+}
+if(scenario === "max"){
+if(max > 0){ return max; }
+if(avg > 0){ return avg; }
+if(min > 0){ return min; }
+}
+if(avg > 0){ return avg; }
+if(max > 0 && min > 0){ return (min + max) / 2; }
+if(max > 0){ return max; }
+if(min > 0){ return min; }
+if(est > 0){ return est; }
+return 0;
+}
+
+function normalizeClubName(value){
+let raw = (value || "").trim();
+let v = raw.toLowerCase();
+if(!v){ return ""; }
+if(v.includes("barça") || v.includes("barca") || v.includes("barcelona")){ return "Barcelona"; }
+if(v.includes("arsenal")){ return "Arsenal"; }
+if(v.includes("real madrid")){ return "Real Madrid"; }
+if(v.includes("milan") || v.includes("ac milan")){ return "Milan"; }
+if(v.includes("inter")){ return "Inter"; }
+if(v.includes("manchester city") || v === "city"){ return "Manchester City"; }
+if(v.includes("manchester united") || v.includes("man utd")){ return "Manchester United"; }
+if(v.includes("chelsea")){ return "Chelsea"; }
+if(v.includes("liverpool")){ return "Liverpool"; }
+if(v.includes("juventus")){ return "Juventus"; }
+if(v.includes("psg") || v.includes("paris saint")){ return "PSG"; }
+return raw.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function inferClubFromCard(card){
+let txt = `${card.player || ""} ${card.set || ""} ${card.parallel || ""} ${card.aiAnalysis || ""} ${card.aiSummary || ""}`.toLowerCase();
+if(txt.includes("barça") || txt.includes("barca") || txt.includes("barcelona")){ return "Barcelona"; }
+if(txt.includes("arsenal")){ return "Arsenal"; }
+if(txt.includes("real madrid")){ return "Real Madrid"; }
+if(txt.includes("milan")){ return "Milan"; }
+if(txt.includes("inter")){ return "Inter"; }
+if(txt.includes("juventus")){ return "Juventus"; }
+if(txt.includes("chelsea")){ return "Chelsea"; }
+if(txt.includes("liverpool")){ return "Liverpool"; }
+if(txt.includes("psg") || txt.includes("paris saint")){ return "PSG"; }
+return "";
+}
+
+function inferProspectLevel(card){
+let txt = `${card.aiAnalysis || ""} ${card.aiSummary || ""} ${card.player || ""}`.toLowerCase();
+if(txt.includes("elite prospect") || txt.includes("wonderkid") || txt.includes("top prospect")){ return "Elite Prospect"; }
+if(txt.includes("high potential") || txt.includes("alto potenziale") || txt.includes("prospect")){ return "High Potential"; }
+if(txt.includes("speculative") || txt.includes("speculativ")){ return "Speculative"; }
+return "";
+}
+
+function getCardClub(card){ return normalizeClubName(card.club || inferClubFromCard(card)); }
+
+function renderFootballBadges(card){
+let parts=[];
+let club=getCardClub(card);
+if(club){ parts.push(`<span class="ai-chip">Club: ${club}</span>`); }
+if(card.competition){ parts.push(`<span class="ai-chip">${card.competition}</span>`); }
+if(card.rookieFlag){ parts.push(`<span class="ai-chip ai-chip-high">Rookie</span>`); }
+if(card.academyFlag){ parts.push(`<span class="ai-chip ai-chip-mid">Academy</span>`); }
+if(card.prospectLevel){ parts.push(`<span class="ai-chip ai-chip-low">${card.prospectLevel}</span>`); }
+return parts.join(" ");
+}
+
+function populateFootballFilters(){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let clubSelect = document.getElementById("portfolioClubFilter");
+if(!clubSelect){ return; }
+let current = clubSelect.value || "ALL";
+let clubs = [...new Set(cards.map(getCardClub).filter(Boolean))].sort();
+clubSelect.innerHTML = '<option value="ALL">Tutti i club</option>' + clubs.map(c => `<option value="${c}">${c}</option>`).join("");
+clubSelect.value = clubs.includes(current) ? current : "ALL";
+}
+
+function getCardStrategy(card){
+let s = (card.saleStrategy || card.aiAdvice || "").toUpperCase().trim();
+if(s.includes("LOTTO")){ return "LOTTO"; }
+if(s.includes("SINGOLA") || s.includes("SELL SINGLE")){ return "SINGOLA"; }
+if(s.includes("HOLD")){ return "HOLD"; }
+if(s.includes("MONIT")){ return "MONITOR"; }
+return "NON ASSEGNATA";
+}
+
+function renderStrategyBadge(card){
+let st = getCardStrategy(card);
+let cls = st === "LOTTO" ? "ai-chip-mid" : st === "SINGOLA" ? "ai-chip-high" : st === "HOLD" ? "ai-chip" : st === "MONITOR" ? "ai-chip-low" : "";
+return `<span class="ai-chip ${cls}">Strategia: ${st}</span>`;
+}
+
+function loadDashboard(){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+
+let totalManualActive = 0;
+let totalAIActive = 0;
+let totalSoldRevenue = 0;
+let totalBoxes = 0;
+let holdCount = 0;
+let monitorCount = 0;
+let sellCount = 0;
+let soldCount = 0;
+let topCard = "";
+let topValue = 0;
+let topImage = "";
+let strategyCounts = {"SINGOLA":0,"LOTTO":0,"MONITOR":0,"HOLD":0,"NON ASSEGNATA":0};
+let valueBuckets = {"0-3€":0,"3-10€":0,"10-30€":0,"30€+":0};
+let watchTargets = JSON.parse(localStorage.getItem("watchlist")) || [];
+let watchHigh = watchTargets.filter(w => (w.priority || "") === "High").length;
+let watchReady = watchTargets.filter(w => (w.status || "") === "Ready to buy").length;
+let watchAvgTarget = watchTargets.length ? watchTargets.reduce((sum,w)=>sum+parseMoneyValue(w.targetPrice),0)/watchTargets.length : 0;
+
+for(let card of cards){
+let manualValue = parseFloat(card.estimated) || 0;
+let aiValue = aiNumericValue(card);
+let status = card.status || "MONITOR";
+let strategy = getCardStrategy(card);
+strategyCounts[strategy] = (strategyCounts[strategy] || 0) + 1;
+
+if(isCardSold(card)){
+totalSoldRevenue += netSaleValue(card);
+soldCount++;
+} else {
+totalManualActive += manualValue;
+totalAIActive += aiValue;
+if(aiValue < 3){ valueBuckets["0-3€"]++; }
+else if(aiValue < 10){ valueBuckets["3-10€"]++; }
+else if(aiValue < 30){ valueBuckets["10-30€"]++; }
+else { valueBuckets["30€+"]++; }
+}
+
+if(status === "HOLD"){ holdCount++; }
+if(status === "MONITOR"){ monitorCount++; }
+if(status === "SELL"){ sellCount++; }
+
+if(aiValue > topValue){
+topValue = aiValue;
+topCard = `${card.player || "Carta"} ${card.parallel || ""} ${card.numbering || ""}`.trim();
+topImage = card.image || "";
+}
+}
+
+for(let box of boxes){ totalBoxes += parseFloat(box.cost) || 0; }
+
+let totalAIResultValue = totalAIActive + totalSoldRevenue;
+let resultAI = totalAIResultValue - totalBoxes;
+let resultAIText = resultAI >= 0 ? "+" + resultAI.toFixed(2) : resultAI.toFixed(2);
+let resultAIClass = resultAI >= 0 ? "kpi-positive" : "kpi-negative";
+let roiAI = totalBoxes > 0 ? ((resultAI / totalBoxes) * 100).toFixed(1) : "0.0";
+let roiAIText = resultAI >= 0 ? "+" + roiAI + "%" : roiAI + "%";
+
+let boxRows = boxes.map(box => {
+let cost = parseFloat(box.cost) || 0;
+let linkedCards = cards.filter(card => card.boxId === box.id);
+let aiValue = linkedCards.reduce((sum, card) => sum + (isCardSold(card) ? netSaleValue(card) : aiNumericValue(card)), 0);
+let soldCardsCount = linkedCards.filter(card => isCardSold(card)).length;
+let boxResult = aiValue - cost;
+let boxRoi = cost > 0 ? ((boxResult / cost) * 100) : 0;
+return {box, cost, linkedCards, aiValue, soldCardsCount, boxResult, boxRoi};
+}).sort((a,b) => b.boxRoi - a.boxRoi);
+
+let singles = cards.filter(c => !isCardSold(c) && getCardStrategy(c) === "SINGOLA");
+let lots = cards.filter(c => !isCardSold(c) && getCardStrategy(c) === "LOTTO");
+let watch = cards.filter(c => !isCardSold(c) && (getCardStrategy(c) === "MONITOR" || getCardStrategy(c) === "HOLD"));
+let dueReviews = cards.filter(c => !isCardSold(c) && c.nextReviewDate && c.nextReviewDate <= todayString());
+let listNames = arr => arr.slice(0,8).map(c => `• ${c.player || "Carta"} ${c.parallel || ""} ${c.numbering || ""} (${aiNumericValue(c).toFixed(2)} €)`).join("<br>") || "Nessuna carta";
+
+
+let activeCards = cards.filter(c => !isCardSold(c));
+let clubExposure = {};
+let academyCards = [];
+let prospectHeat = {"Elite Prospect":0,"High Potential":0,"Development":0,"Speculative":0,"Established":0,"Non assegnato":0};
+for(let c of activeCards){
+  let club = getCardClub(c);
+  if(club){ clubExposure[club] = (clubExposure[club] || 0) + aiNumericValue(c); }
+  if(c.academyFlag){ academyCards.push(c); }
+  let level = c.prospectLevel || "Non assegnato";
+  prospectHeat[level] = (prospectHeat[level] || 0) + 1;
+}
+let clubExposureRows = Object.entries(clubExposure).sort((a,b)=>b[1]-a[1]).slice(0,8);
+let academyRows = academyCards.sort((a,b)=>aiNumericValue(b)-aiNumericValue(a)).slice(0,8);
+
+document.getElementById("dashboardBox").innerHTML = `
+<h2>Dashboard AI · Scenario ${getDashboardScenario() === "min" ? "Prudente" : getDashboardScenario() === "max" ? "Ottimistico" : "Realistico"}</h2>
+
+<div class="dashboard-grid">
+<div class="kpi"><div class="kpi-title">Carte attive / vendute</div><div class="kpi-value">${cards.length - soldCount} / ${soldCount}</div></div>
+<div class="kpi"><div class="kpi-title">Totale speso box</div><div class="kpi-value">${totalBoxes.toFixed(2)} €</div></div>
+<div class="kpi"><div class="kpi-title">Valore AI attivo + vendite</div><div class="kpi-value">${totalAIResultValue.toFixed(2)} €</div><div class="small-muted">AI attive ${totalAIActive.toFixed(2)} € · Vendute ${totalSoldRevenue.toFixed(2)} €</div></div>
+<div class="kpi"><div class="kpi-title">Risultato AI</div><div class="kpi-value ${resultAIClass}">${resultAIText} €</div></div>
+<div class="kpi"><div class="kpi-title">ROI AI totale</div><div class="kpi-value ${resultAIClass}">${roiAIText}</div></div>
+<div class="kpi"><div class="kpi-title">Strategie</div><div class="kpi-value" style="font-size:18px;">Singole ${strategyCounts["SINGOLA"] || 0} · Lotto ${strategyCounts["LOTTO"] || 0}</div><div class="small-muted">Monitor ${strategyCounts["MONITOR"] || 0} · Hold ${strategyCounts["HOLD"] || 0}</div></div>
+</div>
+
+<h3>Watchlist summary</h3>
+<div class="dashboard-grid">
+<div class="kpi"><div class="kpi-title">Target totali</div><div class="kpi-value">${watchTargets.length}</div></div>
+<div class="kpi"><div class="kpi-title">Alta priorità</div><div class="kpi-value">${watchHigh}</div></div>
+<div class="kpi"><div class="kpi-title">Ready to buy</div><div class="kpi-value">${watchReady}</div></div>
+<div class="kpi"><div class="kpi-title">Target medio</div><div class="kpi-value">${watchAvgTarget.toFixed(2)} €</div></div>
+</div>
+
+<h3>Pannello operativo</h3>
+<div class="dashboard-grid">
+<div class="card"><strong>Da listare singole (${singles.length})</strong><br><br>${listNames(singles)}</div>
+<div class="card"><strong>Da raggruppare in lotto (${lots.length})</strong><br><br>${listNames(lots)}</div>
+<div class="card"><strong>Da monitorare / hold (${watch.length})</strong><br><br>${listNames(watch)}</div>
+</div>
+
+<h3>Lotti suggeriti</h3>
+<div class="dashboard-grid">
+${buildSmartLotGroups(cards).slice(0,4).map(group => {
+let v = lotSummaryValues(group.cards);
+let key = group.key || normalizeLotKey(group.name);
+return `<div class="card" style="cursor:pointer;" onclick="openLotDetail('${key}')"><strong>${group.name}</strong><br><span class="small-muted">${group.cards.length} carte · realistico ${v.avg.toFixed(2)} €</span><br>Annuncio: <strong>${v.suggested.toFixed(2)} €</strong><br>Minimo: ${v.minimum.toFixed(2)} €<br><span class="small-muted">Clicca per aprire il lotto</span></div>`;
+}).join("") || `<div class="card">Nessun lotto suggerito.</div>`}
+</div>
+
+<h3>Distribuzione valore AI</h3>
+<div class="dashboard-grid">
+${Object.entries(valueBuckets).map(([label,count]) => `<div class="kpi"><div class="kpi-title">${label}</div><div class="kpi-value">${count}</div></div>`).join("")}
+</div>
+
+<div class="card" style="margin-top:18px;">
+<strong>Top hit AI:</strong><br><br>
+${topImage ? `<img src="${topImage}" style="width:160px;border-radius:12px;margin-bottom:10px;">` : ""}<br>
+${topCard || "Nessuna carta inserita"} ${topValue > 0 ? "- " + topValue.toFixed(2) + " €" : ""}
+</div>
+
+
+<h3>Football intelligence</h3>
+<div class="dashboard-grid">
+<div class="card"><strong>Academy Radar (${academyRows.length})</strong><br><br>${academyRows.map(c => `• ${c.player || "Carta"} · ${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "n/d"} · ${aiNumericValue(c).toFixed(2)} €`).join("<br>") || "Nessuna academy monitorata"}</div>
+<div class="card"><strong>Club Exposure</strong><br><br>${clubExposureRows.map(([club,val]) => `• ${club}: ${val.toFixed(2)} €`).join("<br>") || "Nessun club assegnato"}</div>
+<div class="card"><strong>Prospect Heat</strong><br><br>${Object.entries(prospectHeat).filter(([k,v])=>v>0).map(([k,v]) => `• ${k}: ${v}`).join("<br>") || "Nessun dato prospect"}</div>
+</div>
+
+<h3>ROI AI per box</h3>
+<div class="dashboard-grid">
+${boxRows.map(row => {
+let boxClass = row.boxResult >= 0 ? "kpi-positive" : "kpi-negative";
+return `<div class="kpi"><div class="kpi-title">${getBoxLabel(row.box)}</div><div class="kpi-value ${boxClass}">${row.boxRoi.toFixed(1)}%</div><div class="small-muted">${row.linkedCards.length} carte (${row.soldCardsCount} vendute) · Valore AI ${row.aiValue.toFixed(2)} € · Costo ${row.cost.toFixed(2)} € · Risultato ${row.boxResult.toFixed(2)} €</div></div>`;
+}).join("") || `<div class="card">Nessun box inserito</div>`}
+</div>
+`;
+}
+
+function getBackupPayload(includeImages=true){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+
+if(!includeImages){
+cards = cards.map(card => ({...card, image:""}));
+}
+
+return {
+app:"Card Portfolio Finder",
+backupVersion:"13.0",
+createdAt:new Date().toISOString(),
+includeImages:includeImages,
+settings:{
+dashboardScenario: localStorage.getItem("dashboardScenario") || "avg"
+},
+cards:cards,
+boxes:boxes,
+watchlist: JSON.parse(localStorage.getItem("watchlist")) || []
+};
+}
+
+function downloadJson(data, filename){
+let blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+let url = URL.createObjectURL(blob);
+let a = document.createElement("a");
+a.href = url;
+a.download = filename;
+a.click();
+URL.revokeObjectURL(url);
+}
+
+function backupFileName(prefix){
+let d = new Date();
+let stamp = d.toISOString().slice(0,19).replace(/[:T]/g,"-");
+return `${prefix}-${stamp}.json`;
+}
+
+function exportPortfolio(){
+let data = getBackupPayload(true);
+downloadJson(data, backupFileName("card-portfolio-backup-completo"));
+showBackupInfo(`Backup completo esportato: ${data.cards.length} carte, ${data.boxes.length} box, foto incluse.`);
+}
+
+function exportPortfolioLite(){
+let data = getBackupPayload(false);
+downloadJson(data, backupFileName("card-portfolio-backup-leggero-no-foto"));
+showBackupInfo(`Backup leggero esportato: ${data.cards.length} carte, ${data.boxes.length} box, foto escluse.`);
+}
+
+function showBackupInfo(message){
+let el = document.getElementById("backupInfo");
+if(el){
+el.innerHTML = `<strong>Backup:</strong><br>${message}<br><span class="small-muted">Salva il file JSON in una cartella sicura, per esempio Google Drive o una chiavetta.</span>`;
+}
+updateBackupStats();
+}
+
+function updateBackupStats(){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+let aiCount = cards.filter(card => card.aiMin || card.aiAvg || card.aiMax || card.aiSummary).length;
+let c = document.getElementById("backupCardsCount");
+let b = document.getElementById("backupBoxesCount");
+let a = document.getElementById("backupAiCount");
+if(c){c.textContent = cards.length;}
+if(b){b.textContent = boxes.length;}
+if(a){a.textContent = aiCount;}
+let info = document.getElementById("backupInfo");
+if(info && !info.innerHTML){
+info.innerHTML = `<strong>Consiglio:</strong><br>Prima di provare una nuova versione, fai sempre un backup completo. Usa quello leggero solo se vuoi condividere i dati senza foto o se il file completo pesa troppo.`;
+}
+}
+
+function importPortfolio(event){
+let file = event.target.files[0];
+
+if(!file){return;}
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+try{
+let data = JSON.parse(e.target.result);
+
+if(Array.isArray(data)){
+localStorage.setItem("cards", JSON.stringify(data));
+} else {
+localStorage.setItem("cards", JSON.stringify(data.cards || []));
+localStorage.setItem("boxes", JSON.stringify(data.boxes || []));
+localStorage.setItem("watchlist", JSON.stringify(data.watchlist || []));
+if(data.settings && data.settings.dashboardScenario){
+localStorage.setItem("dashboardScenario", data.settings.dashboardScenario);
+}
+}
+
+migrateCards();
+migrateBoxes();
+syncDashboardScenario();
+loadPortfolio();
+loadBoxes();
+populateBoxSelect();
+populatePortfolioBoxFilter();
+loadDashboard();
+loadWatchlist();
+updateBackupStats();
+alert("Backup importato correttamente");
+
+}catch(error){
+alert("Errore nel file importato");
+}
+};
+
+reader.readAsText(file);
+}
+
+function migrateCards(){
+let cards = JSON.parse(localStorage.getItem("cards")) || [];
+
+cards = cards.map(card => ({
+player:"",
+set:"",
+parallel:"",
+numbering:"",
+exclude:"",
+aiQuery:"",
+aiQueryWide:"",
+aiQuerySold:"",
+aiExclude:"",
+aiAnalysis:"",
+aiMin:"",
+aiAvg:"",
+aiMax:"",
+aiLiquidity:"",
+aiAdvice:"",
+aiSummary:"",
+saleStrategy:"",
+lotGroup:"",
+club:"",
+competition:"",
+rookieFlag:false,
+academyFlag:false,
+prospectLevel:"",
+saleStatus:"IN_PORTFOLIO",
+listingPrice:"",
+saleFees:"",
+shippingCost:"",
+shippedDate:"",
+watchReason:"",
+nextReviewDate:"",
+aiHistory:[],
+aiLastUpdated:"",
+paid:"",
+estimated:"",
+salePrice:"",
+soldDate:"",
+status:"MONITOR",
+image:"",
+dateAdded:todayString(),
+boxId:"",
+...card
+}));
+
+cards = cards.map(card => ({
+...card,
+club: normalizeClubName(card.club || inferClubFromCard(card)),
+competition: card.competition || "",
+rookieFlag: !!card.rookieFlag,
+academyFlag: !!card.academyFlag,
+prospectLevel: card.prospectLevel || inferProspectLevel(card),
+saleStatus: card.saleStatus || ((card.status || "") === "SOLD" ? "SOLD" : "IN_PORTFOLIO"),
+aiQuery: cleanAIQuery(card.aiQuery || ""),
+aiQueryWide: cleanAIQuery(card.aiQueryWide || ""),
+aiQuerySold: cleanAIQuery(card.aiQuerySold || ""),
+aiExclude: cleanAIExclude(card.aiExclude || ""),
+aiSummary: cleanAISummary(card.aiSummary || "")
+}));
+
+localStorage.setItem("cards", JSON.stringify(cards));
+}
+
+function migrateBoxes(){
+let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+boxes = boxes.map(box => ({
+id: box.id || generateId(),
+name:"",
+cost:"",
+date:"",
+...box
+}));
+localStorage.setItem("boxes", JSON.stringify(boxes));
+}
+
+
+
+function getWatchlist(){
+  return JSON.parse(localStorage.getItem("watchlist")) || [];
+}
+function saveWatchlist(items){
+  localStorage.setItem("watchlist", JSON.stringify(items));
+}
+function getWatchFormData(existing){
+  return {
+    id: existing?.id || generateId(),
+    player: document.getElementById("watchPlayer")?.value || "",
+    club: normalizeClubName(document.getElementById("watchClub")?.value || ""),
+    age: document.getElementById("watchAge")?.value || "",
+    category: document.getElementById("watchCategory")?.value || "Prospect",
+    targetPrice: document.getElementById("watchTargetPrice")?.value || "",
+    priority: document.getElementById("watchPriority")?.value || "Medium",
+    status: document.getElementById("watchStatus")?.value || "Monitoring",
+    notes: document.getElementById("watchNotes")?.value || "",
+    createdAt: existing?.createdAt || todayString(),
+    updatedAt: todayString()
+  };
+}
+function resetWatchForm(){
+  document.getElementById("watchEditIndex").value = "";
+  document.getElementById("watchPlayer").value = "";
+  document.getElementById("watchClub").value = "";
+  document.getElementById("watchAge").value = "";
+  document.getElementById("watchCategory").value = "Prospect";
+  document.getElementById("watchTargetPrice").value = "";
+  document.getElementById("watchPriority").value = "Medium";
+  document.getElementById("watchStatus").value = "Monitoring";
+  document.getElementById("watchNotes").value = "";
+}
+function saveWatchTarget(){
+  let items = getWatchlist();
+  let target = getWatchFormData(null);
+  if(!target.player.trim()){ alert("Inserisci almeno il nome del giocatore."); return; }
+  items.push(target);
+  saveWatchlist(items);
+  resetWatchForm();
+  loadWatchlist();
+  loadDashboard();
+}
+function editWatchTarget(index){
+  let items = getWatchlist();
+  let t = items[index];
+  if(!t){ return; }
+  document.getElementById("watchEditIndex").value = index;
+  document.getElementById("watchPlayer").value = t.player || "";
+  document.getElementById("watchClub").value = t.club || "";
+  document.getElementById("watchAge").value = t.age || "";
+  document.getElementById("watchCategory").value = t.category || "Prospect";
+  document.getElementById("watchTargetPrice").value = t.targetPrice || "";
+  document.getElementById("watchPriority").value = t.priority || "Medium";
+  document.getElementById("watchStatus").value = t.status || "Monitoring";
+  document.getElementById("watchNotes").value = t.notes || "";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function updateWatchTarget(){
+  let index = document.getElementById("watchEditIndex").value;
+  if(index === ""){ alert("Carica prima un target da modificare."); return; }
+  let items = getWatchlist();
+  if(!items[index]){ return; }
+  items[index] = getWatchFormData(items[index]);
+  saveWatchlist(items);
+  resetWatchForm();
+  loadWatchlist();
+  loadDashboard();
+}
+function deleteWatchTarget(index){
+  if(!confirm("Eliminare questo target dalla watchlist?")){ return; }
+  let items = getWatchlist();
+  items.splice(index,1);
+  saveWatchlist(items);
+  loadWatchlist();
+  loadDashboard();
+}
+function moveWatchToPortfolio(index){
+  let items = getWatchlist();
+  let t = items[index];
+  if(!t){ return; }
+  openNewCardForm();
+  document.getElementById("player").value = t.player || "";
+  document.getElementById("club").value = t.club || "";
+  document.getElementById("paid").value = t.targetPrice || "";
+  document.getElementById("academyFlag").checked = ["Prospect","Rookie","Speculative"].includes(t.category || "");
+  document.getElementById("rookieFlag").checked = (t.category || "") === "Rookie";
+  document.getElementById("prospectLevel").value = t.priority === "High" ? "High Potential" : (t.category === "Speculative" ? "Speculative" : "");
+  document.getElementById("watchReason").value = t.notes || "";
+  showTempMessage("Target copiato nella nuova carta. Completa foto, set e box, poi salva.");
+}
+function priorityClass(priority){
+  if(priority === "High"){ return "priority-high"; }
+  if(priority === "Low"){ return "priority-low"; }
+  return "priority-medium";
+}
+function loadWatchlist(){
+  let items = getWatchlist();
+  let search = (document.getElementById("watchSearch")?.value || "").toLowerCase();
+  let pf = document.getElementById("watchPriorityFilter")?.value || "ALL";
+  let sf = document.getElementById("watchStatusFilter")?.value || "ALL";
+  let html = "";
+  items.forEach((t,index)=>{
+    let hay = [t.player,t.club,t.category,t.status,t.notes].join(" ").toLowerCase();
+    if(search && !hay.includes(search)){ return; }
+    if(pf !== "ALL" && t.priority !== pf){ return; }
+    if(sf !== "ALL" && t.status !== sf){ return; }
+    html += `<div class="watch-card">
+      <h3>${t.player || "Target"}</h3>
+      <div class="watch-meta">${t.club || "Club n/d"}${t.age ? " · " + t.age + " anni" : ""}<br>${t.category || "Prospect"} · ${t.status || "Monitoring"}</div>
+      <div style="margin:10px 0;"><span class="ai-chip ${priorityClass(t.priority)}">${t.priority || "Medium"}</span>${t.targetPrice ? `<span class="ai-chip">Target ${t.targetPrice} €</span>` : ""}</div>
+      ${t.notes ? `<div class="small-muted" style="min-height:38px;">${t.notes}</div>` : `<div class="small-muted">Nessuna nota.</div>`}
+      <div class="quick-actions-grid" style="margin-top:12px;"><button onclick="moveWatchToPortfolio(${index})">➕ Portfolio</button><button class="secondary-button" onclick="editWatchTarget(${index})">Modifica</button><button class="danger-button" onclick="deleteWatchTarget(${index})">Elimina</button></div>
+    </div>`;
+  });
+  document.getElementById("watchlist").innerHTML = html || '<div class="card">Nessun target in watchlist.</div>';
+}
+
+function enableEnterShortcuts(){
+  const ids = ["player","set","parallel","numbering","club","boxName","boxCost","portfolioSearch"];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el){ return; }
+    el.addEventListener("keydown", function(e){
+      if(e.key !== "Enter"){ return; }
+      if(el.tagName === "TEXTAREA"){ return; }
+      e.preventDefault();
+      if(id === "portfolioSearch"){ loadPortfolio(); return; }
+      if(id === "boxName" || id === "boxCost"){ saveBox(); return; }
+      if(["player","set","parallel","numbering","club"].includes(id)){
+        const editIndex = document.getElementById("editIndex")?.value || "";
+        if(editIndex !== ""){ updateCard(); }
+        else { searchCard(true); }
+      }
+    });
+  });
+}
+
+window.onload = function(){
+migrateBoxes();
+migrateCards();
+populateBoxSelect();
+populatePortfolioBoxFilter();
+document.getElementById("dateAdded").value = todayString();
+loadPortfolio();
+loadSoldCards();
+loadBoxes();
+loadDashboard();
+loadWatchlist();
+updateBackupStats();
+enableEnterShortcuts();
+};
 </script>
+
 </body>
 </html>
