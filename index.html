@@ -2440,6 +2440,8 @@ renderDashboardProfileCard();
 document.getElementById("dashboardBox").innerHTML = `
 <h2>Dashboard AI · Scenario ${getDashboardScenario() === "min" ? "Prudente" : getDashboardScenario() === "max" ? "Ottimistico" : "Realistico"}</h2>
 
+${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, resultAIText, roiAIText, strategyCounts)}
+
 <div class="dashboard-grid">
 <div class="kpi"><div class="kpi-title">Carte attive / vendute</div><div class="kpi-value">${cards.length - soldCount} / ${soldCount}</div></div>
 <div class="kpi"><div class="kpi-title">Totale speso box</div><div class="kpi-value">${totalBoxes.toFixed(2)} €</div></div>
@@ -2448,7 +2450,7 @@ document.getElementById("dashboardBox").innerHTML = `
 <div class="kpi"><div class="kpi-title">ROI AI totale</div><div class="kpi-value ${resultAIClass}">${roiAIText}</div></div>
 <div class="kpi"><div class="kpi-title">Strategie</div><div class="kpi-value" style="font-size:18px;">Singole ${strategyCounts["SINGOLA"] || 0} · Lotto ${strategyCounts["LOTTO"] || 0}</div><div class="small-muted">Monitor ${strategyCounts["MONITOR"] || 0} · Hold ${strategyCounts["HOLD"] || 0}</div></div>
 </div>
-${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, resultAIText, roiAIText, strategyCounts)}
+
 <h3>Watchlist summary</h3>
 <div class="dashboard-grid">
 <div class="kpi"><div class="kpi-title">Target totali</div><div class="kpi-value">${watchTargets.length}</div></div>
@@ -2876,7 +2878,8 @@ function saveCollectorProfile(){
 
   showTempMessage("Profilo salvato: " + autoProfile + ". Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
 }
-
+loadDashboard();
+  
 function skipCollectorOnboarding(){
   localStorage.setItem("pv_onboarding_done", "1");
   const modal = document.getElementById("pvOnboardingModal");
