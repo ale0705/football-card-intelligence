@@ -2746,6 +2746,108 @@ function enableEnterShortcuts(){
   });
 }
 
+function getCollectorProfile(){
+  try{
+    return JSON.parse(localStorage.getItem("pv_collector_profile")) || null;
+  }catch(e){
+    return null;
+  }
+}
+
+function inferCollectorProfile(usage, goal){
+  if(goal === "Scoprire occasioni" || goal === "Seguire prospect e valore futuro"){
+    return "Trader";
+  }
+  if(usage === "Investo" || goal === "Vendere meglio"){
+    return "Investor";
+  }
+  return "Collector";
+}
+
+function saveCollectorProfile(){
+  const usage = document.getElementById("onboardingUsage")?.value || "Entrambe";
+  const cardsManaged = document.getElementById("onboardingCardsManaged")?.value || "50-200";
+  const goal = document.getElementById("onboardingGoal")?.value || "Monitorare valore";
+  const experience = document.getElementById("onboardingExperience")?.value || "Intermedio";
+  const autoProfile = inferCollectorProfile(usage, goal);
+
+  const profile = {
+    usage,
+    cardsManaged,
+    goal,
+    experience,
+    autoProfile,
+    createdAt: new Date().toISOString()
+  };
+
+  localStorage.setItem("pv_collector_profile", JSON.stringify(profile));
+  localStorage.setItem("pv_onboarding_done", "1");
+
+  const modal = document.getElementById("pvOnboardingModal");
+  if(modal){ modal.remove(); }
+
+  showTempMessage("Profilo salvato: " + autoProfile + ". Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
+}
+
+function skipCollectorOnboarding(){
+  localStorage.setItem("pv_onboarding_done", "1");
+  const modal = document.getElementById("pvOnboardingModal");
+  if(modal){ modal.remove(); }
+}
+
+function showOnboardingIfNeeded(){
+  if(localStorage.getItem("pv_onboarding_done") === "1"){ return; }
+  if(document.getElementById("pvOnboardingModal")){ return; }
+
+  const modal = document.createElement("div");
+  modal.id = "pvOnboardingModal";
+  modal.style.cssText = "position:fixed;inset:0;background:rgba(15,23,42,.68);z-index:999999;display:flex;align-items:center;justify-content:center;padding:18px;box-sizing:border-box;";
+
+  modal.innerHTML = `
+    <div style="background:white;border-radius:24px;max-width:520px;width:100%;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.35);">
+      <h2 style="margin:0 0 6px;color:#0f172a;">Configura PitchValue</h2>
+<p class="small-muted" style="margin:0 0 16px;">Rispondi a 4 domande rapide. Ti assegneremo un profilo automatico: Collector, Investor o Trader.</p>
+
+<label>Come usi PitchValue?</label>
+<select id="onboardingUsage">
+  <option value="Colleziono">Colleziono</option>
+  <option value="Investo">Investo</option>
+  <option value="Entrambe">Entrambe</option>
+</select>
+
+<label>Quante carte gestisci?</label>
+<select id="onboardingCardsManaged">
+  <option value="lt50">&lt;50 carte</option>
+  <option value="50-200">50–200</option>
+  <option value="200+">200+</option>
+  <option value="500+">500+</option>
+</select>
+
+<label>Obiettivo principale</label>
+<select id="onboardingGoal">
+  <option value="Monitorare valore">Monitorare valore</option>
+  <option value="Vendere meglio">Vendere meglio</option>
+  <option value="Organizzare portfolio">Organizzare portfolio</option>
+  <option value="Scoprire occasioni">Scoprire occasioni</option>
+  <option value="Seguire prospect e valore futuro">Seguire prospect e valore futuro</option>
+</select>
+
+<label>Esperienza</label>
+<select id="onboardingExperience">
+  <option value="Nuovo">Nuovo</option>
+  <option value="Intermedio">Intermedio</option>
+  <option value="Avanzato">Avanzato</option>
+</select>
+        <div class="inline-actions" style="margin-top:14px;">
+  <button onclick="saveCollectorProfile()">Salva profilo</button>
+  <button class="secondary-button" onclick="skipCollectorOnboarding()">Salta per ora</button>
+</div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}  
 window.onload = function(){
 migrateBoxes();
 migrateCards();
@@ -2759,6 +2861,7 @@ loadDashboard();
 loadWatchlist();
 updateBackupStats();
 enableEnterShortcuts();
+showOnboardingIfNeeded();
 };
 </script>
 
