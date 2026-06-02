@@ -576,6 +576,38 @@ input,select,textarea{
     font-size:38px;
   }
 }
+/* Sidebar active/inactive visual fix */
+.side-nav{
+  gap:10px !important;
+}
+
+.side-nav button{
+  background:rgba(255,255,255,.055) !important;
+  color:#dbeafe !important;
+  border:1px solid rgba(255,255,255,.11) !important;
+  box-shadow:none !important;
+  margin-top:0 !important;
+}
+
+.side-nav button:hover{
+  background:rgba(96,165,250,.18) !important;
+  border-color:rgba(147,197,253,.38) !important;
+  transform:translateX(3px);
+  box-shadow:0 10px 22px rgba(37,99,235,.14) !important;
+}
+
+.side-nav button:first-child{
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.22) !important;
+  box-shadow:0 16px 34px rgba(37,99,235,.36) !important;
+}
+
+.side-nav button:first-child:hover{
+  background:linear-gradient(135deg,#1d4ed8,#6d28d9) !important;
+  transform:translateX(3px);
+  box-shadow:0 18px 42px rgba(37,99,235,.44) !important;
+}
   
 </style>
 </head>
