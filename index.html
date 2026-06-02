@@ -293,6 +293,7 @@ html, body { min-height: 100%; }
 <option value="max">Ottimistico · usa AI massimo</option>
 </select>
 </div>
+<div id="profileDashboardBox" class="box"></div>  
 <div id="dashboardBox" class="box"></div>
 </section>
 
@@ -2257,6 +2258,47 @@ let cls = st === "LOTTO" ? "ai-chip-mid" : st === "SINGOLA" ? "ai-chip-high" : s
 return `<span class="ai-chip ${cls}">Strategia: ${st}</span>`;
 }
 
+function profileBadgeClass(profile){
+  if(profile === "Trader"){ return "ai-chip-high"; }
+  if(profile === "Investor"){ return "ai-chip-mid"; }
+  return "ai-chip";
+}
+
+function renderDashboardProfileCard(){
+  const el = document.getElementById("profileDashboardBox");
+  if(!el){ return; }
+
+  const profile = getCollectorProfile();
+  if(!profile){
+    el.innerHTML = `
+      <div class="section-title-row">
+        <div>
+          <h2 style="margin:0;">Profilo PitchValue</h2>
+          <p class="page-subtitle">Configura il tuo profilo per dashboard, alert e suggerimenti futuri.</p>
+        </div>
+        <button class="secondary-button compact-btn" onclick="localStorage.removeItem('pv_onboarding_done'); showOnboardingIfNeeded();">Configura profilo</button>
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="section-title-row">
+      <div>
+        <span class="eyebrow">Profilo PitchValue</span>
+        <h2 style="margin:2px 0 0;">${profile.autoProfile || "Collector"}</h2>
+        <p class="page-subtitle">${profile.goal || "Obiettivo non impostato"}</p>
+      </div>
+      <button class="secondary-button compact-btn" onclick="localStorage.removeItem('pv_onboarding_done'); localStorage.removeItem('pv_collector_profile'); showOnboardingIfNeeded();">Modifica profilo</button>
+    </div>
+    <div>
+      <span class="ai-chip ${profileBadgeClass(profile.autoProfile)}">${profile.autoProfile || "Collector"}</span>
+      <span class="ai-chip">${profile.usage || "Uso n/d"}</span>
+      <span class="ai-chip">${profile.cardsManaged || "Carte n/d"}</span>
+      <span class="ai-chip">${profile.experience || "Esperienza n/d"}</span>
+    </div>
+  `;
+}  
 function loadDashboard(){
 let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
@@ -2348,7 +2390,7 @@ for(let c of activeCards){
 }
 let clubExposureRows = Object.entries(clubExposure).sort((a,b)=>b[1]-a[1]).slice(0,8);
 let academyRows = academyCards.sort((a,b)=>aiNumericValue(b)-aiNumericValue(a)).slice(0,8);
-
+renderDashboardProfileCard();
 document.getElementById("dashboardBox").innerHTML = `
 <h2>Dashboard AI · Scenario ${getDashboardScenario() === "min" ? "Prudente" : getDashboardScenario() === "max" ? "Ottimistico" : "Realistico"}</h2>
 
