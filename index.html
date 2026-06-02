@@ -2754,13 +2754,29 @@ function getCollectorProfile(){
   }
 }
 
+function inferCollectorProfile(usage, goal){
+  if(goal === "Scoprire occasioni" || goal === "Seguire prospect e valore futuro"){
+    return "Trader";
+  }
+  if(usage === "Investo" || goal === "Vendere meglio"){
+    return "Investor";
+  }
+  return "Collector";
+}
+
 function saveCollectorProfile(){
+  const usage = document.getElementById("onboardingUsage")?.value || "Entrambe";
+  const cardsManaged = document.getElementById("onboardingCardsManaged")?.value || "50-200";
+  const goal = document.getElementById("onboardingGoal")?.value || "Monitorare valore";
+  const experience = document.getElementById("onboardingExperience")?.value || "Intermedio";
+  const autoProfile = inferCollectorProfile(usage, goal);
+
   const profile = {
-    name: document.getElementById("onboardingName")?.value.trim() || "Collector",
-    type: document.getElementById("onboardingType")?.value || "Hybrid",
-    sport: document.getElementById("onboardingSport")?.value || "Calcio",
-    budget: document.getElementById("onboardingBudget")?.value || "50-200",
-    goal: document.getElementById("onboardingGoal")?.value || "Entrambi",
+    usage,
+    cardsManaged,
+    goal,
+    experience,
+    autoProfile,
     createdAt: new Date().toISOString()
   };
 
@@ -2770,7 +2786,7 @@ function saveCollectorProfile(){
   const modal = document.getElementById("pvOnboardingModal");
   if(modal){ modal.remove(); }
 
-  showTempMessage("Profilo salvato. Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
+  showTempMessage("Profilo salvato: " + autoProfile + ". Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
 }
 
 function skipCollectorOnboarding(){
@@ -2790,42 +2806,38 @@ function showOnboardingIfNeeded(){
   modal.innerHTML = `
     <div style="background:white;border-radius:24px;max-width:520px;width:100%;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.35);">
       <h2 style="margin:0 0 6px;color:#0f172a;">Configura PitchValue</h2>
-      <p class="small-muted" style="margin:0 0 16px;">Rispondi a 5 domande rapide. Serviranno per dashboard, alert e suggerimenti futuri.</p>
+<p class="small-muted" style="margin:0 0 16px;">Rispondi a 4 domande rapide. Ti assegneremo un profilo automatico: Collector, Investor o Trader.</p>
 
-      <label>Nome profilo</label>
-      <input id="onboardingName" placeholder="Es. Alessandro">
+<label>Come usi PitchValue?</label>
+<select id="onboardingUsage">
+  <option value="Colleziono">Colleziono</option>
+  <option value="Investo">Investo</option>
+  <option value="Entrambe">Entrambe</option>
+</select>
 
-      <label>Che tipo di utente sei?</label>
-      <select id="onboardingType">
-        <option value="Hybrid">Misto · collezione + investimento</option>
-        <option value="Collector">Collector · tengo le carte che mi piacciono</option>
-        <option value="Investor">Investor · punto al profitto</option>
-      </select>
+<label>Quante carte gestisci?</label>
+<select id="onboardingCardsManaged">
+  <option value="<50 carte">&lt;50 carte</option>
+  <option value="50-200">50–200</option>
+  <option value="200+">200+</option>
+  <option value="500+">500+</option>
+</select>
 
-      <label>Sport principale</label>
-      <select id="onboardingSport">
-        <option value="Calcio">Calcio</option>
-        <option value="Basket">Basket</option>
-        <option value="Baseball">Baseball</option>
-        <option value="Altro">Altro</option>
-      </select>
+<label>Obiettivo principale</label>
+<select id="onboardingGoal">
+  <option value="Monitorare valore">Monitorare valore</option>
+  <option value="Vendere meglio">Vendere meglio</option>
+  <option value="Organizzare portfolio">Organizzare portfolio</option>
+  <option value="Scoprire occasioni">Scoprire occasioni</option>
+  <option value="Seguire prospect e valore futuro">Seguire prospect e valore futuro</option>
+</select>
 
-      <label>Budget mensile indicativo</label>
-      <select id="onboardingBudget">
-        <option value="<50">Meno di 50 €</option>
-        <option value="50-200">50 - 200 €</option>
-        <option value="200-500">200 - 500 €</option>
-        <option value=">500">Oltre 500 €</option>
-      </select>
-
-      <label>Obiettivo principale</label>
-      <select id="onboardingGoal">
-        <option value="Entrambi">Divertimento + profitto</option>
-        <option value="Divertimento">Divertimento / collezione</option>
-        <option value="Profitto">Profitto / investimento</option>
-      </select>
-
-      <div class="inline-actions" style="margin-top:14px;">
+<label>Esperienza</label>
+<select id="onboardingExperience">
+  <option value="Nuovo">Nuovo</option>
+  <option value="Intermedio">Intermedio</option>
+  <option value="Avanzato">Avanzato</option>
+</select>
         <button onclick="saveCollectorProfile()">Salva profilo</button>
         <button class="secondary-button" onclick="skipCollectorOnboarding()">Salta per ora</button>
       </div>
