@@ -2746,6 +2746,94 @@ function enableEnterShortcuts(){
   });
 }
 
+function getCollectorProfile(){
+  try{
+    return JSON.parse(localStorage.getItem("pv_collector_profile")) || null;
+  }catch(e){
+    return null;
+  }
+}
+
+function saveCollectorProfile(){
+  const profile = {
+    name: document.getElementById("onboardingName")?.value.trim() || "Collector",
+    type: document.getElementById("onboardingType")?.value || "Hybrid",
+    sport: document.getElementById("onboardingSport")?.value || "Calcio",
+    budget: document.getElementById("onboardingBudget")?.value || "50-200",
+    goal: document.getElementById("onboardingGoal")?.value || "Entrambi",
+    createdAt: new Date().toISOString()
+  };
+
+  localStorage.setItem("pv_collector_profile", JSON.stringify(profile));
+  localStorage.setItem("pv_onboarding_done", "1");
+
+  const modal = document.getElementById("pvOnboardingModal");
+  if(modal){ modal.remove(); }
+
+  showTempMessage("Profilo salvato. Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
+}
+
+function skipCollectorOnboarding(){
+  localStorage.setItem("pv_onboarding_done", "1");
+  const modal = document.getElementById("pvOnboardingModal");
+  if(modal){ modal.remove(); }
+}
+
+function showOnboardingIfNeeded(){
+  if(localStorage.getItem("pv_onboarding_done") === "1"){ return; }
+  if(document.getElementById("pvOnboardingModal")){ return; }
+
+  const modal = document.createElement("div");
+  modal.id = "pvOnboardingModal";
+  modal.style.cssText = "position:fixed;inset:0;background:rgba(15,23,42,.68);z-index:999999;display:flex;align-items:center;justify-content:center;padding:18px;box-sizing:border-box;";
+
+  modal.innerHTML = `
+    <div style="background:white;border-radius:24px;max-width:520px;width:100%;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.35);">
+      <h2 style="margin:0 0 6px;color:#0f172a;">Configura PitchValue</h2>
+      <p class="small-muted" style="margin:0 0 16px;">Rispondi a 5 domande rapide. Serviranno per dashboard, alert e suggerimenti futuri.</p>
+
+      <label>Nome profilo</label>
+      <input id="onboardingName" placeholder="Es. Alessandro">
+
+      <label>Che tipo di utente sei?</label>
+      <select id="onboardingType">
+        <option value="Hybrid">Misto · collezione + investimento</option>
+        <option value="Collector">Collector · tengo le carte che mi piacciono</option>
+        <option value="Investor">Investor · punto al profitto</option>
+      </select>
+
+      <label>Sport principale</label>
+      <select id="onboardingSport">
+        <option value="Calcio">Calcio</option>
+        <option value="Basket">Basket</option>
+        <option value="Baseball">Baseball</option>
+        <option value="Altro">Altro</option>
+      </select>
+
+      <label>Budget mensile indicativo</label>
+      <select id="onboardingBudget">
+        <option value="<50">Meno di 50 €</option>
+        <option value="50-200">50 - 200 €</option>
+        <option value="200-500">200 - 500 €</option>
+        <option value=">500">Oltre 500 €</option>
+      </select>
+
+      <label>Obiettivo principale</label>
+      <select id="onboardingGoal">
+        <option value="Entrambi">Divertimento + profitto</option>
+        <option value="Divertimento">Divertimento / collezione</option>
+        <option value="Profitto">Profitto / investimento</option>
+      </select>
+
+      <div class="inline-actions" style="margin-top:14px;">
+        <button onclick="saveCollectorProfile()">Salva profilo</button>
+        <button class="secondary-button" onclick="skipCollectorOnboarding()">Salta per ora</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}  
 window.onload = function(){
 migrateBoxes();
 migrateCards();
@@ -2759,6 +2847,7 @@ loadDashboard();
 loadWatchlist();
 updateBackupStats();
 enableEnterShortcuts();
+showOnboardingIfNeeded();
 };
 </script>
 
