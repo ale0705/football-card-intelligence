@@ -2876,9 +2876,9 @@ function saveCollectorProfile(){
   const modal = document.getElementById("pvOnboardingModal");
   if(modal){ modal.remove(); }
 
-  showTempMessage("Profilo salvato: " + autoProfile + ". Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
-}
+showTempMessage("Profilo salvato: " + autoProfile + ". Useremo queste informazioni per dashboard, alert e suggerimenti futuri.");
 loadDashboard();
+}
   
 function skipCollectorOnboarding(){
   localStorage.setItem("pv_onboarding_done", "1");
