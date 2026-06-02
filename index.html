@@ -241,7 +241,269 @@ html, body { min-height: 100%; }
 .priority-high{background:#fee2e2;color:#991b1b}.priority-medium{background:#fef3c7;color:#92400e}.priority-low{background:#dcfce7;color:#166534}
 .watch-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;align-items:end}
 .watch-form textarea{grid-column:1/-1;min-height:70px}
+/* Premium B+C restyle · safe CSS only */
+:root{
+  --pv-bg:#f6f8ff;
+  --pv-ink:#071437;
+  --pv-muted:#64748b;
+  --pv-line:rgba(148,163,184,.22);
+  --pv-blue:#2563eb;
+  --pv-purple:#6d5dfc;
+  --pv-violet:#7c3aed;
+  --pv-cyan:#06b6d4;
+  --pv-green:#16a34a;
+  --pv-card:#ffffff;
+  --pv-dark:#061126;
+}
 
+body{
+  background:
+    radial-gradient(circle at 72% 0%, rgba(124,58,237,.14), transparent 34%),
+    radial-gradient(circle at 24% 8%, rgba(37,99,235,.12), transparent 30%),
+    linear-gradient(180deg,#f8fbff 0%,#f4f7ff 44%,#eef3fb 100%) !important;
+  color:var(--pv-ink) !important;
+}
+
+main{
+  max-width:1280px !important;
+}
+
+.app-sidebar{
+  background:
+    radial-gradient(circle at 20% 0%, rgba(109,93,252,.36), transparent 28%),
+    linear-gradient(180deg,#08142d 0%,#061126 58%,#040914 100%) !important;
+  border-right:1px solid rgba(255,255,255,.10) !important;
+  box-shadow:24px 0 60px rgba(15,23,42,.22) !important;
+}
+
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#7c3aed,#06b6d4) !important;
+  box-shadow:0 16px 40px rgba(99,102,241,.38) !important;
+}
+
+.side-nav button{
+  border-radius:16px !important;
+  color:#dbeafe !important;
+  transition:all .18s ease !important;
+}
+
+.side-nav button:hover{
+  transform:translateX(3px);
+  background:rgba(99,102,241,.16) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+.side-nav button:first-child{
+  background:linear-gradient(135deg,#2563eb,#6d5dfc) !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(37,99,235,.34) !important;
+}
+
+.quick-start-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.045)) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.topbar{
+  margin-bottom:22px !important;
+}
+
+.topbar h2{
+  font-size:34px !important;
+  letter-spacing:-.04em !important;
+  color:#071437 !important;
+}
+
+.eyebrow{
+  color:#3154e8 !important;
+  letter-spacing:.12em !important;
+  font-weight:900 !important;
+}
+
+.box{
+  background:rgba(255,255,255,.82) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  border-radius:24px !important;
+  box-shadow:
+    0 18px 50px rgba(15,23,42,.08),
+    inset 0 1px 0 rgba(255,255,255,.72) !important;
+  backdrop-filter:blur(14px) !important;
+}
+
+#dashboardScenario{
+  border-radius:18px !important;
+  background:#fff !important;
+  box-shadow:0 10px 24px rgba(15,23,42,.06) !important;
+}
+
+#profileDashboardBox{
+  background:
+    radial-gradient(circle at 88% 22%, rgba(124,58,237,.22), transparent 22%),
+    linear-gradient(135deg,#ffffff 0%,#f7f9ff 58%,#eef4ff 100%) !important;
+}
+
+#profileDashboardBox h2{
+  font-size:28px !important;
+  letter-spacing:-.035em !important;
+}
+
+#dashboardBox{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+}
+
+#dashboardBox > h2{
+  font-size:28px !important;
+  letter-spacing:-.04em !important;
+  margin-bottom:18px !important;
+}
+
+.dashboard-grid{
+  gap:16px !important;
+}
+
+.kpi,
+.card,
+.watch-card,
+.box-card,
+.lot-card{
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%) !important;
+  border:1px solid rgba(148,163,184,.22) !important;
+  border-radius:22px !important;
+  box-shadow:
+    0 16px 36px rgba(15,23,42,.075),
+    inset 0 1px 0 rgba(255,255,255,.75) !important;
+}
+
+.kpi{
+  min-height:116px;
+  position:relative;
+  overflow:hidden;
+}
+
+.kpi:after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  top:-34px;
+  width:94px;
+  height:94px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(109,93,252,.16),transparent 66%);
+}
+
+.kpi-title{
+  color:#52627f !important;
+  font-size:11px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+}
+
+.kpi-value{
+  color:#071437 !important;
+  font-size:30px !important;
+  letter-spacing:-.04em !important;
+}
+
+.kpi-positive{
+  color:#16a34a !important;
+}
+
+.kpi-negative{
+  color:#dc2626 !important;
+}
+
+#dashboardBox h3{
+  margin-top:26px !important;
+  font-size:17px !important;
+  letter-spacing:-.02em !important;
+  color:#172554 !important;
+}
+
+.ai-chip{
+  border-radius:999px !important;
+  border:1px solid rgba(99,102,241,.16) !important;
+  background:linear-gradient(135deg,#eef2ff,#e0f2fe) !important;
+  color:#1d4ed8 !important;
+  font-weight:900 !important;
+}
+
+.ai-chip-high{
+  background:linear-gradient(135deg,#dcfce7,#bbf7d0) !important;
+  color:#166534 !important;
+}
+
+.ai-chip-mid{
+  background:linear-gradient(135deg,#fef3c7,#ffedd5) !important;
+  color:#92400e !important;
+}
+
+button,
+.primary-pill{
+  border-radius:16px !important;
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  box-shadow:0 14px 30px rgba(37,99,235,.24) !important;
+  transition:transform .16s ease, box-shadow .16s ease !important;
+}
+
+button:hover,
+.primary-pill:hover{
+  transform:translateY(-1px);
+  box-shadow:0 18px 38px rgba(37,99,235,.32) !important;
+}
+
+.secondary-button{
+  background:linear-gradient(135deg,#334155,#1e293b) !important;
+}
+
+.ghost-button{
+  background:#f8fafc !important;
+  color:#0f172a !important;
+  border:1px solid rgba(148,163,184,.35) !important;
+  box-shadow:none !important;
+}
+
+.form-card{
+  border-radius:24px !important;
+  box-shadow:0 16px 34px rgba(15,23,42,.065) !important;
+}
+
+input,select,textarea{
+  border-radius:16px !important;
+  border:1px solid rgba(148,163,184,.28) !important;
+  background:#fbfdff !important;
+}
+
+.portfolio-card.compact,
+.portfolio-card.detailed{
+  transition:transform .16s ease, box-shadow .16s ease !important;
+}
+
+.portfolio-card.compact:hover,
+.portfolio-card.detailed:hover{
+  transform:translateY(-2px);
+  box-shadow:0 22px 52px rgba(15,23,42,.12) !important;
+}
+
+@media(max-width:980px){
+  .app-sidebar{
+    border-radius:0 0 24px 24px !important;
+  }
+
+  .topbar h2{
+    font-size:28px !important;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .kpi-value{
+    font-size:26px !important;
+  }
+}
+  
 </style>
 </head>
 
