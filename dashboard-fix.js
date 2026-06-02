@@ -60,6 +60,33 @@ function pvSmartLots(cards){
   }).sort((a,b)=>b.avg-a.avg);
 }
 
+function pvGetOnboardingProfile(){
+  return localStorage.getItem('pv_collector_profile') || 'Collector';
+}
+
+function pvGetStrategyCard(active, singles, lots, watch, academy){
+  const profile = pvGetOnboardingProfile();
+  let title = 'Profilo Collector';
+  let text = 'Focus consigliato: organizza la collezione, completa i dati mancanti e monitora il valore delle carte più importanti.';
+  let action = 'Prossimo passo: aggiungi foto e analisi AI alle carte senza valutazione.';
+
+  if(profile === 'Trader'){
+    title = 'Profilo Trader';
+    text = 'Focus consigliato: liquidità, profitto realizzato e carte da mettere in vendita singola o in lotto.';
+    action = `Priorità attuale: ${singles.length} carte da listare singole e ${lots.length} candidate per lotto.`;
+  } else if(profile === 'Investor'){
+    title = 'Profilo Investor';
+    text = 'Focus consigliato: prospect, academy, esposizione per club e valore futuro nello scenario realistico/ottimistico.';
+    action = `Priorità attuale: ${academy.length} academy monitorate e ${watch.length} carte in hold/monitor.`;
+  }
+
+  return `<div class="card" style="margin:14px 0 18px;border-left:6px solid #7c3aed;background:#fbfaff;">
+    <strong>${title}</strong><br>
+    <span class="small-muted">${text}</span><br><br>
+    <span>${action}</span>
+  </div>`;
+}
+
 function loadDashboard(){
   const cards = JSON.parse(localStorage.getItem('cards')) || [];
   const boxes = (typeof getBoxes === 'function') ? getBoxes() : (JSON.parse(localStorage.getItem('boxes')) || []);
@@ -117,6 +144,7 @@ function loadDashboard(){
   if(!div) return;
   div.innerHTML = `
     <h2>Dashboard AI · Scenario ${scenario === 'min' ? 'Prudente' : scenario === 'max' ? 'Ottimistico' : 'Realistico'}</h2>
+    ${pvGetStrategyCard(active, singles, lots, watch, academy)}
     <div class="dashboard-grid">
       <div class="kpi"><div class="kpi-title">Carte attive / vendute</div><div class="kpi-value">${active.length} / ${sold.length}</div></div>
       <div class="kpi"><div class="kpi-title">Totale speso box</div><div class="kpi-value">${boxCost.toFixed(2)} €</div></div>
