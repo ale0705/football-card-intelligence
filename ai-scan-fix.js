@@ -40,6 +40,26 @@ function openAIScanSimpleModal(){
   };
 }
 
+function improveDashboardScenarioSelectorUI(){
+  const select = document.getElementById('dashboardScenario');
+  if(!select){ return; }
+
+  const card = select.closest('.box') || select.parentElement;
+  if(!card || card.dataset.scenarioUiEnhanced === '1'){ return; }
+
+  card.dataset.scenarioUiEnhanced = '1';
+  card.style.borderLeft = '6px solid #8b5cf6';
+  card.style.background = '#fbfaff';
+  card.style.marginBottom = '12px';
+
+  const oldLabel = card.querySelector('label');
+  if(oldLabel){ oldLabel.style.display = 'none'; }
+
+  const header = document.createElement('div');
+  header.innerHTML = '<h3 style="margin:0 0 6px;font-size:15px;color:#0f172a;">Scenario valutazione AI</h3><p class="page-subtitle" style="margin:0 0 12px;color:#64748b;font-size:14px;">Scegli se vedere la dashboard con valutazioni prudenti, realistiche o ottimistiche.</p>';
+  card.insertBefore(header, select);
+}
+
 function installAIScanFix(){
   window.aiScanCard = function(index){
     openAIScanSimpleModal();
@@ -48,8 +68,14 @@ function installAIScanFix(){
   window.aiScanCurrentCard = function(){
     openAIScanSimpleModal();
   };
+
+  improveDashboardScenarioSelectorUI();
 }
 
 installAIScanFix();
-window.addEventListener('load', function(){ setTimeout(installAIScanFix, 300); });
+window.addEventListener('load', function(){
+  setTimeout(installAIScanFix, 300);
+  setTimeout(improveDashboardScenarioSelectorUI, 700);
+});
 setTimeout(installAIScanFix, 700);
+setTimeout(improveDashboardScenarioSelectorUI, 1200);
