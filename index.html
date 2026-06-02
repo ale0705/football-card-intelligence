@@ -2817,7 +2817,7 @@ function showOnboardingIfNeeded(){
 
 <label>Quante carte gestisci?</label>
 <select id="onboardingCardsManaged">
-  <option value="<50 carte">&lt;50 carte</option>
+  <option value="lt50">&lt;50 carte</option>
   <option value="50-200">50–200</option>
   <option value="200+">200+</option>
   <option value="500+">500+</option>
@@ -2838,8 +2838,10 @@ function showOnboardingIfNeeded(){
   <option value="Intermedio">Intermedio</option>
   <option value="Avanzato">Avanzato</option>
 </select>
-        <button onclick="saveCollectorProfile()">Salva profilo</button>
-        <button class="secondary-button" onclick="skipCollectorOnboarding()">Salta per ora</button>
+        <div class="inline-actions" style="margin-top:14px;">
+  <button onclick="saveCollectorProfile()">Salva profilo</button>
+  <button class="secondary-button" onclick="skipCollectorOnboarding()">Salta per ora</button>
+</div>
       </div>
     </div>
   `;
