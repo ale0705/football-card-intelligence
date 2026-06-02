@@ -657,7 +657,8 @@ let cards = JSON.parse(localStorage.getItem("cards")) || [];
 if(cards[index]){ aiScanCard(parseInt(index)); return; }
 }
 copyAIPrompt();
-openAIModePage();
+visualSearchCurrentCard();
+setTimeout(openAIModePage, 400);;
 }
 
 function normalizeMoneyText(value){
