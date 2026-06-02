@@ -2264,6 +2264,52 @@ function profileBadgeClass(profile){
   return "ai-chip";
 }
 
+function renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, resultAIText, roiAIText, strategyCounts){
+  const profile = getCollectorProfile();
+  const type = profile?.autoProfile || "Collector";
+  const goal = profile?.goal || "Monitorare valore";
+  const activeCards = cards.filter(c => !isCardSold(c));
+  const topCards = activeCards
+    .slice()
+    .sort((a,b) => aiNumericValue(b) - aiNumericValue(a))
+    .slice(0,3)
+    .map(c => `${c.player || "Carta"} · ${aiNumericValue(c).toFixed(2)} €`)
+    .join("<br>") || "Nessuna carta attiva.";
+
+  if(type === "Trader"){
+    return `
+      <h3>Focus Trader</h3>
+      <div class="dashboard-grid">
+        <div class="kpi"><div class="kpi-title">Obiettivo</div><div class="kpi-value" style="font-size:18px;">Opportunità</div><div class="small-muted">${goal}</div></div>
+        <div class="kpi"><div class="kpi-title">Carte da lavorare</div><div class="kpi-value">${(strategyCounts["SINGOLA"] || 0) + (strategyCounts["LOTTO"] || 0)}</div><div class="small-muted">Singole + lotti candidati</div></div>
+        <div class="card"><strong>Top carte da monitorare</strong><br><br>${topCards}</div>
+        <div class="card"><strong>Consiglio operativo</strong><br><br>Cerca carte sottovalutate, privilegia liquidità e rivaluta spesso i prospect con hype recente.</div>
+      </div>
+    `;
+  }
+
+  if(type === "Investor"){
+    return `
+      <h3>Focus Investor</h3>
+      <div class="dashboard-grid">
+        <div class="kpi"><div class="kpi-title">Valore totale scenario</div><div class="kpi-value">${totalAIResultValue.toFixed(2)} €</div><div class="small-muted">Attive + vendute</div></div>
+        <div class="kpi"><div class="kpi-title">ROI scenario</div><div class="kpi-value">${roiAIText}</div><div class="small-muted">Risultato ${resultAIText} €</div></div>
+        <div class="card"><strong>Top posizioni</strong><br><br>${topCards}</div>
+        <div class="card"><strong>Consiglio operativo</strong><br><br>Concentrati su capitale investito, ROI per box e carte con valore AI sopra il prezzo pagato.</div>
+      </div>
+    `;
+  }
+
+  return `
+    <h3>Focus Collector</h3>
+    <div class="dashboard-grid">
+      <div class="kpi"><div class="kpi-title">Carte in collezione</div><div class="kpi-value">${activeCards.length}</div><div class="small-muted">${soldCount} vendute</div></div>
+      <div class="kpi"><div class="kpi-title">Box registrati</div><div class="kpi-value">${boxes.length}</div><div class="small-muted">Origine carte tracciata</div></div>
+      <div class="card"><strong>Carte principali</strong><br><br>${topCards}</div>
+      <div class="card"><strong>Consiglio operativo</strong><br><br>Organizza il portfolio, completa i dati mancanti e tieni monitorate le carte più rappresentative della collezione.</div>
+    </div>
+  `;
+}  
 function renderDashboardProfileCard(){
   const el = document.getElementById("profileDashboardBox");
   if(!el){ return; }
@@ -2402,7 +2448,7 @@ document.getElementById("dashboardBox").innerHTML = `
 <div class="kpi"><div class="kpi-title">ROI AI totale</div><div class="kpi-value ${resultAIClass}">${roiAIText}</div></div>
 <div class="kpi"><div class="kpi-title">Strategie</div><div class="kpi-value" style="font-size:18px;">Singole ${strategyCounts["SINGOLA"] || 0} · Lotto ${strategyCounts["LOTTO"] || 0}</div><div class="small-muted">Monitor ${strategyCounts["MONITOR"] || 0} · Hold ${strategyCounts["HOLD"] || 0}</div></div>
 </div>
-
+${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, resultAIText, roiAIText, strategyCounts)}
 <h3>Watchlist summary</h3>
 <div class="dashboard-grid">
 <div class="kpi"><div class="kpi-title">Target totali</div><div class="kpi-value">${watchTargets.length}</div></div>
