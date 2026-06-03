@@ -1695,6 +1695,384 @@ input,select,textarea{
     grid-template-columns:1fr 1fr;
   }
 }
+/* Portfolio Premium Phase 1 · clean card renderer */
+#portfolio .pv-market-card{
+  position:relative;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(37,99,235,.20), transparent 34%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98)) !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  border-radius:26px !important;
+  box-shadow:0 22px 58px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  color:#f8fbff !important;
+  overflow:hidden;
+}
+
+#portfolio .pv-market-topline{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:4px;
+  background:#f59e0b;
+}
+
+#portfolio .pv-market-topline.sell{
+  background:#ef4444;
+}
+
+#portfolio .pv-market-topline.monitor{
+  background:#f59e0b;
+}
+
+#portfolio .pv-market-topline.hold{
+  background:#22c55e;
+}
+
+#portfolio .pv-market-grid{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:22px;
+  padding:22px !important;
+}
+
+#portfolio .pv-market-left{
+  display:grid;
+  align-content:start;
+  gap:12px;
+}
+
+#portfolio .pv-cardshot{
+  width:178px;
+  height:238px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid rgba(147,197,253,.18);
+  background:#020617;
+  box-shadow:0 18px 38px rgba(0,0,0,.28);
+}
+
+#portfolio .pv-cardshot-empty{
+  display:grid;
+  place-items:center;
+  font-size:40px;
+}
+
+#portfolio .pv-photo-buttons{
+  display:grid;
+  gap:8px;
+}
+
+#portfolio .pv-photo-buttons:empty{
+  display:none;
+}
+
+#portfolio .pv-market-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+#portfolio .pv-market-club{
+  color:#93c5fd;
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+#portfolio .pv-market-header h3{
+  margin:0 !important;
+  color:#fff !important;
+  font-size:28px !important;
+  line-height:1.02 !important;
+  letter-spacing:-.04em;
+}
+
+#portfolio .pv-market-header p{
+  margin:8px 0 0 !important;
+  color:#b8c7e6 !important;
+  font-size:15px !important;
+  line-height:1.35;
+}
+
+#portfolio .pv-status-pill{
+  flex:0 0 auto;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+  color:#fff;
+  background:rgba(37,99,235,.22);
+  border:1px solid rgba(147,197,253,.22);
+}
+
+#portfolio .pv-status-pill.sell{
+  background:rgba(239,68,68,.22);
+  color:#fecaca;
+  border-color:rgba(239,68,68,.38);
+}
+
+#portfolio .pv-status-pill.monitor{
+  background:rgba(245,158,11,.20);
+  color:#fde68a;
+  border-color:rgba(245,158,11,.36);
+}
+
+#portfolio .pv-status-pill.hold{
+  background:rgba(34,197,94,.18);
+  color:#bbf7d0;
+  border-color:rgba(34,197,94,.30);
+}
+
+#portfolio .pv-market-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:10px 0 14px;
+}
+
+#portfolio .pv-market-ai-box{
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:12px;
+  background:rgba(2,6,23,.40);
+  border:1px solid rgba(147,197,253,.14);
+  border-radius:20px;
+  padding:14px;
+  margin:12px 0;
+}
+
+#portfolio .pv-market-ai-main{
+  border-right:1px solid rgba(147,197,253,.14);
+  padding-right:14px;
+}
+
+#portfolio .pv-market-ai-main span,
+#portfolio .pv-market-ai-side span{
+  display:block;
+  color:#60a5fa;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:10px;
+  font-weight:900;
+}
+
+#portfolio .pv-market-ai-main strong{
+  display:block;
+  color:#fff !important;
+  font-size:30px;
+  margin:7px 0 5px;
+}
+
+#portfolio .pv-market-ai-main small{
+  color:#c5d3ee;
+  font-size:13px;
+}
+
+#portfolio .pv-market-ai-side{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+#portfolio .pv-market-ai-side div{
+  min-width:0;
+  background:rgba(8,20,42,.52);
+  border:1px solid rgba(147,197,253,.10);
+  border-radius:14px;
+  padding:10px;
+}
+
+#portfolio .pv-market-ai-side strong{
+  display:block;
+  color:#fff !important;
+  font-size:14px;
+  margin-top:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#portfolio .pv-market-ai-side strong.positive,
+#portfolio .pv-market-value em.positive{
+  color:#22c55e !important;
+}
+
+#portfolio .pv-market-ai-side strong.negative,
+#portfolio .pv-market-value em.negative{
+  color:#ef4444 !important;
+}
+
+#portfolio .pv-market-summary{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  gap:12px;
+  align-items:start;
+  background:rgba(15,23,42,.52);
+  border:1px solid rgba(147,197,253,.12);
+  border-radius:18px;
+  padding:12px;
+  margin:12px 0;
+}
+
+#portfolio .pv-market-summary p{
+  margin:0 !important;
+  color:#c5d3ee !important;
+  font-size:14px !important;
+  line-height:1.45;
+}
+
+#portfolio .pv-liquidity{
+  display:inline-flex;
+  justify-content:center;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(37,99,235,.20);
+  color:#bfdbfe;
+}
+
+#portfolio .pv-liquidity.high{
+  background:rgba(34,197,94,.20);
+  color:#bbf7d0;
+}
+
+#portfolio .pv-liquidity.mid{
+  background:rgba(245,158,11,.20);
+  color:#fde68a;
+}
+
+#portfolio .pv-liquidity.low{
+  background:rgba(239,68,68,.20);
+  color:#fecaca;
+}
+
+#portfolio .pv-market-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+#portfolio .pv-market-actions button,
+#portfolio .pv-photo-buttons button{
+  border-radius:14px !important;
+  min-height:42px;
+  padding:10px 13px !important;
+  background:linear-gradient(180deg,rgba(37,99,235,.38),rgba(29,78,216,.30)) !important;
+  border:1px solid rgba(147,197,253,.30) !important;
+  color:#f8fbff !important;
+  font-weight:900;
+  text-shadow:none !important;
+}
+
+#portfolio .pv-market-actions button:hover,
+#portfolio .pv-photo-buttons button:hover{
+  background:linear-gradient(180deg,rgba(37,99,235,.52),rgba(29,78,216,.42)) !important;
+}
+
+#portfolio .pv-market-compact{
+  display:grid !important;
+  grid-template-columns:90px 1fr 135px auto;
+  gap:14px;
+  align-items:center;
+  padding:14px !important;
+}
+
+#portfolio .pv-market-compact .pv-cardshot{
+  width:86px;
+  height:116px;
+}
+
+#portfolio .pv-market-info strong{
+  display:block;
+  color:#fff !important;
+  font-size:18px;
+  line-height:1.08;
+}
+
+#portfolio .pv-market-info p{
+  margin:5px 0 0 !important;
+  color:#b8c7e6 !important;
+  font-size:13px !important;
+}
+
+#portfolio .pv-market-value{
+  text-align:right;
+}
+
+#portfolio .pv-market-value span{
+  display:block;
+  color:#60a5fa;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:10px;
+  font-weight:900;
+}
+
+#portfolio .pv-market-value strong{
+  display:block;
+  color:#fff !important;
+  font-size:22px;
+  margin-top:5px;
+}
+
+#portfolio .pv-market-value em{
+  display:block;
+  font-style:normal;
+  color:#93a9d6;
+  font-size:12px;
+  margin-top:4px;
+}
+
+#portfolio .pv-market-actions.compact{
+  display:flex;
+  gap:6px;
+  margin:0;
+}
+
+#portfolio .ai-mini-card,
+#portfolio .pv-portfolio-metrics,
+#portfolio .pv-portfolio-detail,
+#portfolio .pv-portfolio-card{
+  box-shadow:none;
+}
+
+@media(max-width:1050px){
+  #portfolio .pv-market-grid,
+  #portfolio .pv-market-compact{
+    grid-template-columns:1fr !important;
+  }
+
+  #portfolio .pv-cardshot{
+    width:100%;
+    max-width:240px;
+    height:auto;
+  }
+
+  #portfolio .pv-market-ai-box,
+  #portfolio .pv-market-summary{
+    grid-template-columns:1fr;
+  }
+
+  #portfolio .pv-market-ai-main{
+    border-right:none;
+    border-bottom:1px solid rgba(147,197,253,.14);
+    padding-right:0;
+    padding-bottom:12px;
+  }
+
+  #portfolio .pv-market-ai-side{
+    grid-template-columns:1fr;
+  }
+
+  #portfolio .pv-market-value{
+    text-align:left;
+  }
+}
   
 </style>
 </head>
@@ -3247,77 +3625,90 @@ let salePrice = parseFloat(card.salePrice);
 let estimatedOrSale = (card.status === "SOLD" && !isNaN(salePrice)) ? salePrice : estimated;
 let profitValue = (!isNaN(paid) && !isNaN(estimatedOrSale)) ? estimatedOrSale - paid : null;
 let profitClass = profitValue === null ? "" : profitValue >= 0 ? "positive" : "negative";
-let img = card.image ? `<img class="pv-portfolio-img" src="${card.image}" alt="${card.player || "carta"}">` : `<div class="pv-portfolio-img pv-portfolio-placeholder">⭐</div>`;
+let profitHtml = profitValue === null ? "n/d" : profitValue.toFixed(2) + " €";
+let img = card.image ? `<img class="pv-cardshot" src="${card.image}" alt="${card.player || "carta"}">` : `<div class="pv-cardshot pv-cardshot-empty">⭐</div>`;
+let liqClass = card.aiLiquidity === "ALTA" ? "high" : card.aiLiquidity === "MEDIA" ? "mid" : card.aiLiquidity === "BASSA" ? "low" : "";
 let compactBadges = `${renderStrategyBadge(card)} ${card.rookieFlag ? '<span class="ai-chip">Rookie</span>' : ''} ${card.academyFlag ? '<span class="ai-chip">Academy</span>' : ''}`;
 
 if(portfolioViewMode === "compact"){
 return `
-<div class="card portfolio-card compact pv-portfolio-card pv-portfolio-compact status-${status}">
+<div class="card portfolio-card compact pv-market-card pv-market-compact status-${status}">
   ${img}
-  <div class="pv-portfolio-main">
-    <div class="pv-portfolio-title-row">
-      <strong>${card.player || "Carta senza nome"}</strong>
-      <span class="badge badge-${status}">${status}</span>
-    </div>
-    <div class="pv-portfolio-meta">${club || "Club n/d"} · ${card.set || "Set n/d"}</div>
-    <div class="pv-portfolio-submeta">${subtitle || "Parallela n/d"}</div>
-    <div class="pv-portfolio-badges">${compactBadges}</div>
+  <div class="pv-market-info">
+    <div class="pv-market-club">${club || "Club n/d"}</div>
+    <strong>${card.player || "Carta senza nome"}</strong>
+    <p>${card.set || "Set n/d"}${subtitle ? " · " + subtitle : ""}</p>
+    <div class="pv-market-chips">${compactBadges}</div>
   </div>
-  <div class="pv-portfolio-side">
+  <div class="pv-market-value">
     <span>Valore AI</span>
     <strong>${valueText}</strong>
-    <div class="pv-portfolio-actions">
-      <button onclick="quickSearchCard(${index})">🔎</button>
-      <button onclick="openEditCard(${index})">✏️</button>
-      <button onclick="setPortfolioView('detail')">Apri</button>
-    </div>
+    <em class="${profitClass}">${profitHtml}</em>
+  </div>
+  <div class="pv-market-actions compact">
+    <button onclick="quickSearchCard(${index})">🔎</button>
+    <button onclick="openEditCard(${index})">✏️</button>
+    <button onclick="setPortfolioView('detail')">Apri</button>
   </div>
 </div>`;
 }
 
-let profitHtml = profitValue === null ? "n/d" : profitValue.toFixed(2) + " €";
-
 return `
-<div class="card portfolio-card detailed pv-portfolio-card pv-portfolio-detail status-${status}">
-  <div class="pv-portfolio-media">
-    ${img}
-    ${card.image ? `<div class="pv-portfolio-photo-actions"><button onclick="openPhotoCard(${index})">Foto</button><button onclick="downloadPhotoCard(${index})">Download</button></div>` : ""}
-  </div>
+<div class="card portfolio-card detailed pv-market-card status-${status}">
+  <div class="pv-market-topline ${status.toLowerCase()}"></div>
 
-  <div class="pv-portfolio-content">
-    <div class="pv-portfolio-title-row">
-      <div>
-        <span class="pv-card-kicker">${club || "Club n/d"}</span>
-        <strong>${card.player || "Carta"}</strong>
-        <p>${card.set || "Set n/d"} ${subtitle ? "· " + subtitle : ""}</p>
+  <div class="pv-market-grid">
+    <div class="pv-market-left">
+      ${img}
+      <div class="pv-photo-buttons">
+        ${card.image ? `<button onclick="openPhotoCard(${index})">📷 Foto</button><button onclick="downloadPhotoCard(${index})">⬇️ Download</button>` : ""}
       </div>
-      <span class="badge badge-${status}">${status}</span>
     </div>
 
-    <div class="pv-portfolio-chip-row">
-      ${renderFootballBadges(card)}
-      ${renderStrategyBadge(card)}
-      ${renderLotOverrideButton(card, index)}
-      <span class="ai-chip">${saleStatusLabel(card)}</span>
-      ${card.lotGroup ? `<span class="ai-chip">Lotto: ${card.lotGroup}</span>` : ""}
-    </div>
+    <div class="pv-market-body">
+      <div class="pv-market-header">
+        <div>
+          <div class="pv-market-club">${club || "Club n/d"}</div>
+          <h3>${card.player || "Carta"}</h3>
+          <p>${card.set || "Set n/d"}${subtitle ? " · " + subtitle : ""}</p>
+        </div>
+        <span class="pv-status-pill ${status.toLowerCase()}">${status}</span>
+      </div>
 
-    ${renderAIMiniCard(card)}
+      <div class="pv-market-chips">
+        ${renderFootballBadges(card)}
+        ${renderStrategyBadge(card)}
+        ${renderLotOverrideButton(card, index)}
+        <span class="ai-chip">${saleStatusLabel(card)}</span>
+        ${card.lotGroup ? `<span class="ai-chip">Lotto: ${card.lotGroup}</span>` : ""}
+      </div>
 
-    <div class="pv-portfolio-metrics">
-      <div><span>Valore AI</span><strong>${valueText}</strong></div>
-      <div><span>Pagato</span><strong>${card.paid || "n/d"} €</strong></div>
-      <div><span>Profit/Loss</span><strong class="${profitClass}">${profitHtml}</strong></div>
-      <div><span>Origine</span><strong>${card.boxId ? getBoxNameById(card.boxId) : "Singola"}</strong></div>
-      <div><span>Data</span><strong>${card.dateAdded || "n/d"}</strong></div>
-    </div>
+      <div class="pv-market-ai-box">
+        <div class="pv-market-ai-main">
+          <span>Valore AI</span>
+          <strong>${valueText}</strong>
+          <small>${card.aiAdvice || getCardStrategy(card) || "Strategia n/d"}</small>
+        </div>
+        <div class="pv-market-ai-side">
+          <div><span>Pagato</span><strong>${card.paid || "n/d"} €</strong></div>
+          <div><span>Profit</span><strong class="${profitClass}">${profitHtml}</strong></div>
+          <div><span>Origine</span><strong>${card.boxId ? getBoxNameById(card.boxId) : "Singola"}</strong></div>
+        </div>
+      </div>
 
-    <div class="pv-portfolio-actions-row">
-      <button onclick="quickSearchCard(${index})">🔎 Ricerca</button>
-      <button onclick="openEditCard(${index})">✏️ Modifica</button>
-      <button onclick="aiScanCard(${index})">🧠 AI Scan</button>
-      <button onclick="markCardSold(${index})">💰 Venduta</button>
-      <button class="danger-button" onclick="deleteCard(${index})">Elimina</button>
+      ${card.aiSummary ? `
+      <div class="pv-market-summary">
+        <span class="pv-liquidity ${liqClass}">${card.aiLiquidity || "AI"}</span>
+        <p>${card.aiSummary}</p>
+      </div>` : ""}
+
+      <div class="pv-market-actions">
+        <button onclick="quickSearchCard(${index})">🔎 Ricerca</button>
+        <button onclick="openEditCard(${index})">✏️ Modifica</button>
+        <button onclick="aiScanCard(${index})">🧠 AI Scan</button>
+        <button onclick="markCardSold(${index})">💰 Venduta</button>
+        <button class="danger-button" onclick="deleteCard(${index})">Elimina</button>
+      </div>
     </div>
   </div>
 </div>`;
