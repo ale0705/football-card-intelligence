@@ -1010,6 +1010,155 @@ input,select,textarea{
     padding-bottom:12px;
   }
 }  
+/* Dashboard Premium v4 · unified dashboard sections */
+#dashboard .pv-dashboard-hero-v4{
+  display:grid;
+  grid-template-columns:1.05fr 1.35fr;
+  gap:18px;
+  align-items:stretch;
+  padding:24px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(59,130,246,.28), transparent 32%),
+    linear-gradient(135deg,#020617 0%,#071a3a 48%,#123eb5 100%);
+  border:1px solid rgba(96,165,250,.24);
+  box-shadow:0 30px 80px rgba(37,99,235,.22);
+  margin:14px 0 18px;
+}
+
+#dashboard .pv-hero-copy h1{
+  font-size:50px;
+  margin:8px 0 6px;
+  color:#fff !important;
+  letter-spacing:-.06em;
+}
+
+#dashboard .pv-hero-copy p{
+  color:#b8c7e6 !important;
+  max-width:480px;
+  margin:0;
+}
+
+#dashboard .pv-hero-stat-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+#dashboard .pv-hero-stat-grid div{
+  min-width:0;
+  background:rgba(2,6,23,.30);
+  border:1px solid rgba(147,197,253,.16);
+  border-radius:18px;
+  padding:14px;
+}
+
+#dashboard .pv-hero-stat-grid span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+#dashboard .pv-hero-stat-grid strong{
+  display:block;
+  color:#fff !important;
+  font-size:18px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#dashboard .pv-dashboard-block{
+  margin-top:18px;
+}
+
+#dashboard .pv-focus-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.35fr .95fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#dashboard .pv-focus-number{
+  font-size:40px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.05em;
+  color:#fff;
+  margin:10px 0 8px;
+}
+
+#dashboard .pv-advice-text{
+  color:#c5d3ee !important;
+  font-size:14px;
+  line-height:1.55;
+  margin:0;
+}
+
+#dashboard #dashboardBox > h2{
+  display:none;
+}
+
+#dashboard #dashboardBox > h3{
+  margin-top:26px !important;
+  margin-bottom:10px !important;
+  font-size:22px !important;
+}
+
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid){
+  gap:14px !important;
+}
+
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid) .kpi,
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid) .card{
+  background:linear-gradient(180deg,rgba(10,23,45,.95),rgba(4,13,28,.95)) !important;
+  border:1px solid rgba(96,165,250,.16) !important;
+  border-radius:20px !important;
+  box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid) .kpi{
+  min-height:96px;
+}
+
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid) .kpi-value{
+  font-size:24px !important;
+}
+
+#dashboard #dashboardBox > .dashboard-grid:not(.pv-intelligence-grid) .card{
+  line-height:1.5;
+}
+
+#dashboard #dashboardBox img{
+  border:1px solid rgba(147,197,253,.16);
+  background:#020617;
+}
+
+@media(max-width:1150px){
+  #dashboard .pv-dashboard-hero-v4,
+  #dashboard .pv-focus-grid{
+    grid-template-columns:1fr;
+  }
+
+  #dashboard .pv-hero-stat-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  #dashboard .pv-hero-copy h1{
+    font-size:36px;
+  }
+
+  #dashboard .pv-hero-stat-grid{
+    grid-template-columns:1fr;
+  }
+}
+  
 </style>
 </head>
 
@@ -3249,61 +3398,112 @@ function renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResult
   const type = profile?.autoProfile || "Collector";
   const goal = profile?.goal || "Monitorare valore";
   const activeCards = cards.filter(c => !isCardSold(c));
-  const topCards = activeCards
-    .slice()
-    .sort((a,b) => aiNumericValue(b) - aiNumericValue(a))
-    .slice(0,3)
-    .map(c => `${c.player || "Carta"} · ${aiNumericValue(c).toFixed(2)} €`)
-    .join("<br>") || "Nessuna carta attiva.";
+  const top = activeCards.slice().sort((a,b) => aiNumericValue(b) - aiNumericValue(a)).slice(0,4);
+
+  const topRows = top.map((c,index) => `
+    <div class="pv-data-row">
+      <div class="pv-rank">${index + 1}</div>
+      <div class="pv-data-main">
+        <strong>${c.player || "Carta"}</strong>
+        <span>${getCardClub(c) || "Club n/d"} · ${c.set || "Set n/d"}</span>
+      </div>
+      <div class="pv-data-value">
+        <strong>${aiNumericValue(c).toFixed(2)} €</strong>
+      </div>
+    </div>
+  `).join("");
+
+  let title = "Focus Collector";
+  let primaryLabel = "Carte in collezione";
+  let primaryValue = activeCards.length;
+  let secondaryLabel = "Box registrati";
+  let secondaryValue = boxes.length;
+  let advice = "Organizza il portfolio, completa i dati mancanti e tieni monitorate le carte più rappresentative della collezione.";
 
   if(type === "Trader"){
-    return `
-      <h3>Focus Trader</h3>
-      <div class="dashboard-grid">
-        <div class="kpi"><div class="kpi-title">Obiettivo</div><div class="kpi-value" style="font-size:18px;">Opportunità</div><div class="small-muted">${goal}</div></div>
-        <div class="kpi"><div class="kpi-title">Carte da lavorare</div><div class="kpi-value">${(strategyCounts["SINGOLA"] || 0) + (strategyCounts["LOTTO"] || 0)}</div><div class="small-muted">Singole + lotti candidati</div></div>
-        <div class="card"><strong>Top carte da monitorare</strong><br><br>${topCards}</div>
-        <div class="card"><strong>Consiglio operativo</strong><br><br>Cerca carte sottovalutate, privilegia liquidità e rivaluta spesso i prospect con hype recente.</div>
-      </div>
-    `;
+    title = "Focus Trader";
+    primaryLabel = "Carte da lavorare";
+    primaryValue = (strategyCounts["SINGOLA"] || 0) + (strategyCounts["LOTTO"] || 0);
+    secondaryLabel = "Target operativo";
+    secondaryValue = "Flip";
+    advice = "Cerca carte sottovalutate, privilegia liquidità e rivaluta spesso i prospect con hype recente.";
   }
 
   if(type === "Investor"){
-    return `
-      <h3>Focus Investor</h3>
-      <div class="dashboard-grid">
-        <div class="kpi"><div class="kpi-title">Valore totale scenario</div><div class="kpi-value">${totalAIResultValue.toFixed(2)} €</div><div class="small-muted">Attive + vendute</div></div>
-        <div class="kpi"><div class="kpi-title">ROI scenario</div><div class="kpi-value">${roiAIText}</div><div class="small-muted">Risultato ${resultAIText} €</div></div>
-        <div class="card"><strong>Top posizioni</strong><br><br>${topCards}</div>
-        <div class="card"><strong>Consiglio operativo</strong><br><br>Concentrati su capitale investito, ROI per box e carte con valore AI sopra il prezzo pagato.</div>
-      </div>
-    `;
+    title = "Focus Investor";
+    primaryLabel = "Valore scenario";
+    primaryValue = totalAIResultValue.toFixed(2) + " €";
+    secondaryLabel = "ROI scenario";
+    secondaryValue = roiAIText;
+    advice = "Concentrati su capitale investito, ROI per box e carte con valore AI sopra il prezzo pagato.";
   }
 
   return `
-    <h3>Focus Collector</h3>
-    <div class="dashboard-grid">
-      <div class="kpi"><div class="kpi-title">Carte in collezione</div><div class="kpi-value">${activeCards.length}</div><div class="small-muted">${soldCount} vendute</div></div>
-      <div class="kpi"><div class="kpi-title">Box registrati</div><div class="kpi-value">${boxes.length}</div><div class="small-muted">Origine carte tracciata</div></div>
-      <div class="card"><strong>Carte principali</strong><br><br>${topCards}</div>
-      <div class="card"><strong>Consiglio operativo</strong><br><br>Organizza il portfolio, completa i dati mancanti e tieni monitorate le carte più rappresentative della collezione.</div>
+    <div class="pv-dashboard-block">
+      <div class="pv-section-header">
+        <div>
+          <span class="eyebrow">Profilo operativo</span>
+          <h3>${title}</h3>
+          <p class="page-subtitle">${goal}</p>
+        </div>
+      </div>
+
+      <div class="pv-focus-grid">
+        <div class="pv-premium-card">
+          <div class="pv-premium-head">
+            <div>
+              <span class="pv-card-kicker">Sintesi</span>
+              <h3>${primaryLabel}</h3>
+            </div>
+            <span class="pv-icon-badge">🎯</span>
+          </div>
+          <div class="pv-focus-number">${primaryValue}</div>
+          <div class="small-muted">${secondaryLabel}: ${secondaryValue}</div>
+        </div>
+
+        <div class="pv-premium-card">
+          <div class="pv-premium-head">
+            <div>
+              <span class="pv-card-kicker">Top posizioni</span>
+              <h3>Carte principali</h3>
+            </div>
+          </div>
+          <div class="pv-data-list">
+            ${topRows || "<div class='small-muted'>Nessuna carta attiva.</div>"}
+          </div>
+        </div>
+
+        <div class="pv-premium-card">
+          <div class="pv-premium-head">
+            <div>
+              <span class="pv-card-kicker">AI Coach</span>
+              <h3>Consiglio operativo</h3>
+            </div>
+            <span class="pv-icon-badge heat">💡</span>
+          </div>
+          <p class="pv-advice-text">${advice}</p>
+        </div>
+      </div>
     </div>
   `;
-}  
+}
 function renderDashboardHero(totalAIResultValue, roiAIText, resultAIText, totalBoxes, cards, soldCount){
   const activeCount = cards.length - soldCount;
+  const soldRate = cards.length ? ((soldCount / cards.length) * 100).toFixed(0) : "0";
   return `
-    <div class="pv-hero-card">
-      <div>
-        <span class="eyebrow">AI Portfolio Intelligence</span>
+    <div class="pv-dashboard-hero-v4">
+      <div class="pv-hero-copy">
+        <span class="pv-card-kicker">AI Portfolio Intelligence</span>
         <h1>${totalAIResultValue.toFixed(2)} €</h1>
-        <p>Valore portfolio nello scenario selezionato</p>
+        <p>Valore portfolio nello scenario selezionato, con ROI e capitale tracciato.</p>
       </div>
-      <div class="pv-hero-metrics">
-        <div><strong>${roiAIText}</strong><span>ROI AI</span></div>
-        <div><strong>${resultAIText} €</strong><span>Risultato AI</span></div>
-        <div><strong>${activeCount}</strong><span>Carte attive</span></div>
-        <div><strong>${totalBoxes.toFixed(2)} €</strong><span>Speso box</span></div>
+
+      <div class="pv-hero-stat-grid">
+        <div><span>ROI AI</span><strong>${roiAIText}</strong></div>
+        <div><span>Risultato AI</span><strong>${resultAIText} €</strong></div>
+        <div><span>Carte attive</span><strong>${activeCount}</strong></div>
+        <div><span>Vendute</span><strong>${soldRate}%</strong></div>
+        <div><span>Speso box</span><strong>${totalBoxes.toFixed(2)} €</strong></div>
       </div>
     </div>
   `;
