@@ -850,6 +850,21 @@ activeBtn.classList.add("nav-active");
   
 function showSection(id, trigger){
 setActiveSidebarButton(id, trigger);
+  const pageTitles = {
+  dashboard: "Dashboard",
+  portfolioPage: "Portfolio",
+  watchlistPage: "Watchlist",
+  search: "Nuova carta",
+  lotsPage: "Lotti",
+  boxesPage: "Box",
+  soldPage: "Vendute",
+  backup: "Backup"
+};
+
+let pageTitle = document.getElementById("pageTitle");
+if(pageTitle && pageTitles[id]){
+  pageTitle.textContent = pageTitles[id];
+}
 if(id !== "search"){
   let searchSection = document.getElementById("search");
   if(searchSection){ searchSection.classList.remove("modal-section"); }
