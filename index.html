@@ -1458,6 +1458,243 @@ input,select,textarea{
     grid-template-columns:1fr !important;
   }
 }
+/* Portfolio Premium v1 */
+#portfolioPage{
+  background:
+    radial-gradient(circle at 82% 0%, rgba(37,99,235,.16), transparent 30%),
+    linear-gradient(180deg,#061126 0%,#081427 58%,#0b1220 100%);
+  padding:24px;
+  border-radius:28px;
+  color:#e5edff;
+}
+
+#portfolioPage h2,
+#portfolioPage h3,
+#portfolioPage strong{
+  color:#f8fbff !important;
+}
+
+#portfolioPage .small-muted,
+#portfolioPage p{
+  color:#aebdda !important;
+}
+
+#portfolio{
+  display:grid;
+  gap:16px;
+}
+
+#portfolio .pv-portfolio-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98)) !important;
+  border:1px solid rgba(96,165,250,.18) !important;
+  border-radius:24px !important;
+  color:#e5edff !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  overflow:hidden;
+}
+
+#portfolio .pv-portfolio-img{
+  width:118px;
+  height:158px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid rgba(147,197,253,.16);
+  background:#020617;
+}
+
+#portfolio .pv-portfolio-placeholder{
+  display:grid;
+  place-items:center;
+  font-size:34px;
+}
+
+#portfolio .pv-portfolio-compact{
+  display:grid;
+  grid-template-columns:92px 1fr 170px;
+  gap:16px;
+  align-items:center;
+  padding:14px !important;
+}
+
+#portfolio .pv-portfolio-compact .pv-portfolio-img{
+  width:92px;
+  height:124px;
+}
+
+#portfolio .pv-portfolio-title-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+#portfolio .pv-portfolio-title-row strong{
+  display:block;
+  font-size:18px;
+  letter-spacing:-.03em;
+}
+
+#portfolio .pv-portfolio-meta{
+  color:#93a9d6;
+  font-size:13px;
+  margin-top:5px;
+}
+
+#portfolio .pv-portfolio-submeta{
+  color:#64748b;
+  font-size:12px;
+  margin-top:3px;
+}
+
+#portfolio .pv-portfolio-badges,
+#portfolio .pv-portfolio-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+
+#portfolio .pv-portfolio-side{
+  text-align:right;
+}
+
+#portfolio .pv-portfolio-side span,
+#portfolio .pv-portfolio-metrics span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+#portfolio .pv-portfolio-side strong{
+  display:block;
+  font-size:24px;
+  margin:6px 0 12px;
+}
+
+#portfolio .pv-portfolio-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+}
+
+#portfolio .pv-portfolio-detail{
+  display:grid;
+  grid-template-columns:155px 1fr;
+  gap:18px;
+  padding:18px !important;
+}
+
+#portfolio .pv-portfolio-media{
+  display:grid;
+  align-content:start;
+  gap:10px;
+}
+
+#portfolio .pv-portfolio-photo-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+
+#portfolio .pv-portfolio-content{
+  min-width:0;
+}
+
+#portfolio .pv-portfolio-title-row p{
+  margin:4px 0 0;
+  font-size:13px;
+}
+
+#portfolio .pv-portfolio-metrics{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+
+#portfolio .pv-portfolio-metrics div{
+  background:rgba(2,6,23,.30);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:16px;
+  padding:12px;
+  min-width:0;
+}
+
+#portfolio .pv-portfolio-metrics strong{
+  display:block;
+  font-size:15px;
+  margin-top:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#portfolio .pv-portfolio-metrics strong.positive{
+  color:#22c55e !important;
+}
+
+#portfolio .pv-portfolio-metrics strong.negative{
+  color:#ef4444 !important;
+}
+
+#portfolio .pv-portfolio-actions-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+#portfolio button,
+#portfolioPage button{
+  border-radius:13px !important;
+  border:1px solid rgba(96,165,250,.24) !important;
+  background:rgba(37,99,235,.16) !important;
+  color:#bfdbfe !important;
+  font-weight:800;
+}
+
+#portfolio button:hover,
+#portfolioPage button:hover{
+  background:rgba(37,99,235,.28) !important;
+}
+
+#portfolioPage input,
+#portfolioPage select{
+  background:#081426 !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  color:#e5edff !important;
+}
+
+#portfolioPage option{
+  background:#081426;
+  color:#e5edff;
+}
+
+@media(max-width:900px){
+  #portfolioPage{
+    padding:14px;
+    border-radius:22px;
+  }
+
+  #portfolio .pv-portfolio-compact,
+  #portfolio .pv-portfolio-detail{
+    grid-template-columns:1fr;
+  }
+
+  #portfolio .pv-portfolio-side{
+    text-align:left;
+  }
+
+  #portfolio .pv-portfolio-actions{
+    justify-content:flex-start;
+  }
+
+  #portfolio .pv-portfolio-metrics{
+    grid-template-columns:1fr 1fr;
+  }
+}
   
 </style>
 </head>
@@ -2778,37 +3015,89 @@ loadPortfolio();
 }
 function renderPortfolioItem(card, index){
 let aiValue = aiNumericValue(card);
-let valueText = aiValue > 0 ? aiValue.toFixed(2) + " € AI" : ((card.estimated || "") ? card.estimated + " €" : "Valore n/d");
+let valueText = aiValue > 0 ? aiValue.toFixed(2) + " €" : ((card.estimated || "") ? card.estimated + " €" : "n/d");
 let subtitle = `${card.parallel || ""} ${card.numbering || ""}`.trim();
-let img = card.image ? `<img class="thumb" src="${card.image}" alt="${card.player || "carta"}">` : `<div class="thumb"></div>`;
 let club = getCardClub(card);
+let status = card.status || "MONITOR";
+let paid = parseFloat(card.paid);
+let estimated = parseFloat(card.estimated);
+let salePrice = parseFloat(card.salePrice);
+let estimatedOrSale = (card.status === "SOLD" && !isNaN(salePrice)) ? salePrice : estimated;
+let profitValue = (!isNaN(paid) && !isNaN(estimatedOrSale)) ? estimatedOrSale - paid : null;
+let profitClass = profitValue === null ? "" : profitValue >= 0 ? "positive" : "negative";
+let img = card.image ? `<img class="pv-portfolio-img" src="${card.image}" alt="${card.player || "carta"}">` : `<div class="pv-portfolio-img pv-portfolio-placeholder">⭐</div>`;
 let compactBadges = `${renderStrategyBadge(card)} ${card.rookieFlag ? '<span class="ai-chip">Rookie</span>' : ''} ${card.academyFlag ? '<span class="ai-chip">Academy</span>' : ''}`;
+
 if(portfolioViewMode === "compact"){
-return `<div class="card portfolio-card compact status-${card.status || "MONITOR"}">
-${img}
-<div class="compact-info">
-<strong>${card.player || "Carta senza nome"}</strong>
-<div class="compact-meta">${subtitle || card.set || ""}${club ? `<br>${club}` : ""}</div>
-<div class="compact-badges">${compactBadges}</div>
-<div class="compact-value">${valueText}</div>
-</div>
-<div class="compact-actions"><button onclick="quickSearchCard(${index})">🔎</button><button onclick="openEditCard(${index})">✏️</button><button onclick="setPortfolioView('detail')">Apri</button></div>
+return `
+<div class="card portfolio-card compact pv-portfolio-card pv-portfolio-compact status-${status}">
+  ${img}
+  <div class="pv-portfolio-main">
+    <div class="pv-portfolio-title-row">
+      <strong>${card.player || "Carta senza nome"}</strong>
+      <span class="badge badge-${status}">${status}</span>
+    </div>
+    <div class="pv-portfolio-meta">${club || "Club n/d"} · ${card.set || "Set n/d"}</div>
+    <div class="pv-portfolio-submeta">${subtitle || "Parallela n/d"}</div>
+    <div class="pv-portfolio-badges">${compactBadges}</div>
+  </div>
+  <div class="pv-portfolio-side">
+    <span>Valore AI</span>
+    <strong>${valueText}</strong>
+    <div class="pv-portfolio-actions">
+      <button onclick="quickSearchCard(${index})">🔎</button>
+      <button onclick="openEditCard(${index})">✏️</button>
+      <button onclick="setPortfolioView('detail')">Apri</button>
+    </div>
+  </div>
 </div>`;
 }
-let paid = parseFloat(card.paid), estimated = parseFloat(card.estimated), salePrice = parseFloat(card.salePrice);
-let estimatedOrSale = (card.status === "SOLD" && !isNaN(salePrice)) ? salePrice : estimated;
-let profit = "";
-if(!isNaN(paid) && !isNaN(estimatedOrSale)){ let diff = estimatedOrSale - paid; let color = diff >= 0 ? "#16a34a" : "#dc2626"; profit = `<span style="color:${color}">Profit/Loss: ${diff.toFixed(2)} €</span>`; }
-return `<div class="card portfolio-card detailed status-${card.status || "MONITOR"}">
-${card.image ? `<img src="${card.image}" alt="${card.player}"><div class="action-row"><button onclick="openPhotoCard(${index})">🖼️ Foto</button><button onclick="aiScanCard(${index})">🧠 AI</button><button onclick="downloadPhotoCard(${index})">⬇️</button></div>` : ""}
-<div class="card-header-row"><strong>${card.player || "Carta"}</strong><span class="badge badge-${card.status || "MONITOR"}">${card.status || "MONITOR"}</span></div>
-<div class="small-muted">${card.set || ""}</div><div>${card.parallel || ""} ${card.numbering || ""}</div>
-${renderAIMiniCard(card)}
-<div>${renderFootballBadges(card)}</div><div>${renderStrategyBadge(card)} ${renderLotOverrideButton(card, index)}</div>
-<div><span class="ai-chip">${saleStatusLabel(card)}</span>${card.lotGroup ? `<span class="ai-chip">Lotto: ${card.lotGroup}</span>` : ""}</div>
-<div class="metric-row"><div class="metric-pill"><small>Valore</small><b>${valueText}</b></div><div class="metric-pill"><small>Box</small><b style="font-size:13px;line-height:1.25">${card.boxId ? getBoxNameById(card.boxId) : "Singola"}</b></div><div class="metric-pill"><small>Data</small><b style="font-size:14px">${card.dateAdded || "n/d"}</b></div></div>
-Prezzo pagato: ${card.paid || ""}<br>Valore stimato: ${card.estimated || ""}<br><span class="profit">${profit}</span>
-<div class="quick-actions-grid"><button onclick="quickSearchCard(${index})">🔎 Ricerca</button><button onclick="openEditCard(${index})">✏️ Modifica</button><button onclick="markCardSold(${index})">💰 Venduta</button><button class="danger-button" onclick="deleteCard(${index})">Elimina</button></div>
+
+let profitHtml = profitValue === null ? "n/d" : profitValue.toFixed(2) + " €";
+
+return `
+<div class="card portfolio-card detailed pv-portfolio-card pv-portfolio-detail status-${status}">
+  <div class="pv-portfolio-media">
+    ${img}
+    ${card.image ? `<div class="pv-portfolio-photo-actions"><button onclick="openPhotoCard(${index})">Foto</button><button onclick="downloadPhotoCard(${index})">Download</button></div>` : ""}
+  </div>
+
+  <div class="pv-portfolio-content">
+    <div class="pv-portfolio-title-row">
+      <div>
+        <span class="pv-card-kicker">${club || "Club n/d"}</span>
+        <strong>${card.player || "Carta"}</strong>
+        <p>${card.set || "Set n/d"} ${subtitle ? "· " + subtitle : ""}</p>
+      </div>
+      <span class="badge badge-${status}">${status}</span>
+    </div>
+
+    <div class="pv-portfolio-chip-row">
+      ${renderFootballBadges(card)}
+      ${renderStrategyBadge(card)}
+      ${renderLotOverrideButton(card, index)}
+      <span class="ai-chip">${saleStatusLabel(card)}</span>
+      ${card.lotGroup ? `<span class="ai-chip">Lotto: ${card.lotGroup}</span>` : ""}
+    </div>
+
+    ${renderAIMiniCard(card)}
+
+    <div class="pv-portfolio-metrics">
+      <div><span>Valore AI</span><strong>${valueText}</strong></div>
+      <div><span>Pagato</span><strong>${card.paid || "n/d"} €</strong></div>
+      <div><span>Profit/Loss</span><strong class="${profitClass}">${profitHtml}</strong></div>
+      <div><span>Origine</span><strong>${card.boxId ? getBoxNameById(card.boxId) : "Singola"}</strong></div>
+      <div><span>Data</span><strong>${card.dateAdded || "n/d"}</strong></div>
+    </div>
+
+    <div class="pv-portfolio-actions-row">
+      <button onclick="quickSearchCard(${index})">🔎 Ricerca</button>
+      <button onclick="openEditCard(${index})">✏️ Modifica</button>
+      <button onclick="aiScanCard(${index})">🧠 AI Scan</button>
+      <button onclick="markCardSold(${index})">💰 Venduta</button>
+      <button class="danger-button" onclick="deleteCard(${index})">Elimina</button>
+    </div>
+  </div>
 </div>`;
 }
 
