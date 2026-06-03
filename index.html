@@ -1158,6 +1158,252 @@ input,select,textarea{
     grid-template-columns:1fr;
   }
 }
+/* Dashboard Premium v5 · lower dashboard polish */
+#dashboard .pv-premium-metric-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+#dashboard .pv-mini-metric{
+  background:linear-gradient(180deg,rgba(10,23,45,.95),rgba(4,13,28,.95));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 16px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#dashboard .pv-mini-metric span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+#dashboard .pv-mini-metric strong{
+  display:block;
+  color:#fff !important;
+  font-size:28px;
+  letter-spacing:-.04em;
+}
+
+#dashboard .pv-action-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+#dashboard .pv-action-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:24px;
+  padding:18px;
+  min-height:210px;
+  box-shadow:0 18px 46px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#dashboard .pv-action-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(37,99,235,.16);
+  border:1px solid rgba(96,165,250,.24);
+  margin-bottom:12px;
+}
+
+#dashboard .pv-action-card span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:900;
+}
+
+#dashboard .pv-action-card strong{
+  display:block;
+  color:#fff !important;
+  font-size:34px;
+  margin:6px 0 10px;
+}
+
+#dashboard .pv-action-card p{
+  color:#c5d3ee !important;
+  font-size:14px;
+  line-height:1.45;
+  margin:0;
+}
+
+#dashboard .pv-lot-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+#dashboard .pv-lot-card{
+  cursor:pointer;
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 18px 46px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  transition:transform .18s ease,border-color .18s ease;
+}
+
+#dashboard .pv-lot-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(96,165,250,.34);
+}
+
+#dashboard .pv-lot-card > span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:900;
+}
+
+#dashboard .pv-lot-card > strong{
+  display:block;
+  color:#fff !important;
+  font-size:19px;
+  margin:6px 0;
+}
+
+#dashboard .pv-lot-meta{
+  color:#93a9d6;
+  font-size:13px;
+  margin-bottom:14px;
+}
+
+#dashboard .pv-lot-price{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+#dashboard .pv-lot-price div{
+  background:rgba(2,6,23,.28);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:16px;
+  padding:12px;
+}
+
+#dashboard .pv-lot-price small{
+  display:block;
+  color:#93a9d6;
+  text-transform:uppercase;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.07em;
+}
+
+#dashboard .pv-lot-price b{
+  display:block;
+  color:#fff;
+  font-size:20px;
+  margin-top:4px;
+}
+
+#dashboard .pv-lot-card em{
+  color:#60a5fa;
+  font-style:normal;
+  font-size:13px;
+}
+
+#dashboard .pv-value-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+#dashboard .pv-value-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 16px 42px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#dashboard .pv-value-card span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:900;
+}
+
+#dashboard .pv-value-card strong{
+  display:block;
+  color:#fff !important;
+  font-size:34px;
+  margin-top:8px;
+}
+
+#dashboard .pv-top-hit-card{
+  display:grid;
+  grid-template-columns:1fr 160px;
+  gap:20px;
+  align-items:center;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(124,58,237,.25), transparent 30%),
+    linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98));
+  border:1px solid rgba(96,165,250,.18);
+  border-radius:26px;
+  padding:20px;
+  box-shadow:0 22px 58px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#dashboard .pv-top-hit-copy h3{
+  margin:6px 0;
+  color:#fff !important;
+  font-size:26px;
+}
+
+#dashboard .pv-top-hit-copy p{
+  color:#c5d3ee !important;
+  margin:0;
+}
+
+#dashboard .pv-top-hit-card img,
+#dashboard .pv-top-hit-placeholder{
+  width:150px;
+  height:200px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid rgba(147,197,253,.18);
+  background:#020617;
+}
+
+#dashboard .pv-top-hit-placeholder{
+  display:grid;
+  place-items:center;
+  font-size:42px;
+}
+
+@media(max-width:900px){
+  #dashboard .pv-premium-metric-grid,
+  #dashboard .pv-action-grid,
+  #dashboard .pv-lot-grid,
+  #dashboard .pv-value-grid,
+  #dashboard .pv-top-hit-card{
+    grid-template-columns:1fr;
+  }
+
+  #dashboard .pv-top-hit-card img,
+  #dashboard .pv-top-hit-placeholder{
+    width:100%;
+    height:220px;
+  }
+}
   
 </style>
 </head>
@@ -3803,39 +4049,111 @@ ${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, 
 <div class="kpi"><div class="kpi-title">Strategie</div><div class="kpi-value" style="font-size:18px;">Singole ${strategyCounts["SINGOLA"] || 0} · Lotto ${strategyCounts["LOTTO"] || 0}</div><div class="small-muted">Monitor ${strategyCounts["MONITOR"] || 0} · Hold ${strategyCounts["HOLD"] || 0}</div></div>
 </div>
 
-<h3>Watchlist summary</h3>
-<div class="dashboard-grid">
-<div class="kpi"><div class="kpi-title">Target totali</div><div class="kpi-value">${watchTargets.length}</div></div>
-<div class="kpi"><div class="kpi-title">Alta priorità</div><div class="kpi-value">${watchHigh}</div></div>
-<div class="kpi"><div class="kpi-title">Ready to buy</div><div class="kpi-value">${watchReady}</div></div>
-<div class="kpi"><div class="kpi-title">Target medio</div><div class="kpi-value">${watchAvgTarget.toFixed(2)} €</div></div>
+<div class="pv-dashboard-block pv-watchlist-premium">
+  <div class="pv-section-header">
+    <div>
+      <span class="eyebrow">Watchlist Intelligence</span>
+      <h3>Target monitorati</h3>
+      <p class="page-subtitle">Priorità, readiness e valore medio dei target prima dell'acquisto.</p>
+    </div>
+  </div>
+
+  <div class="pv-premium-metric-grid">
+    <div class="pv-mini-metric"><span>Target totali</span><strong>${watchTargets.length}</strong></div>
+    <div class="pv-mini-metric"><span>Alta priorità</span><strong>${watchHigh}</strong></div>
+    <div class="pv-mini-metric"><span>Ready to buy</span><strong>${watchReady}</strong></div>
+    <div class="pv-mini-metric"><span>Target medio</span><strong>${watchAvgTarget.toFixed(2)} €</strong></div>
+  </div>
 </div>
 
-<h3>Pannello operativo</h3>
-<div class="dashboard-grid">
-<div class="card"><strong>Da listare singole (${singles.length})</strong><br><br>${listNames(singles)}</div>
-<div class="card"><strong>Da raggruppare in lotto (${lots.length})</strong><br><br>${listNames(lots)}</div>
-<div class="card"><strong>Da monitorare / hold (${watch.length})</strong><br><br>${listNames(watch)}</div>
+<div class="pv-dashboard-block">
+  <div class="pv-section-header">
+    <div>
+      <span class="eyebrow">Operatività</span>
+      <h3>Pannello operativo</h3>
+      <p class="page-subtitle">Azioni pratiche suggerite in base a strategia, valore e stato delle carte.</p>
+    </div>
+  </div>
+
+  <div class="pv-action-grid">
+    <div class="pv-action-card">
+      <div class="pv-action-icon">🏷️</div>
+      <span>Lista ora</span>
+      <strong>${singles.length}</strong>
+      <p>${listNames(singles)}</p>
+    </div>
+    <div class="pv-action-card">
+      <div class="pv-action-icon">📦</div>
+      <span>Costruisci lotti</span>
+      <strong>${lots.length}</strong>
+      <p>${listNames(lots)}</p>
+    </div>
+    <div class="pv-action-card">
+      <div class="pv-action-icon">👁️</div>
+      <span>Monitor / Hold</span>
+      <strong>${watch.length}</strong>
+      <p>${listNames(watch)}</p>
+    </div>
+  </div>
 </div>
 
-<h3>Lotti suggeriti</h3>
-<div class="dashboard-grid">
-${buildSmartLotGroups(cards).slice(0,4).map(group => {
-let v = lotSummaryValues(group.cards);
-let key = group.key || normalizeLotKey(group.name);
-return `<div class="card" style="cursor:pointer;" onclick="openLotDetail('${key}')"><strong>${group.name}</strong><br><span class="small-muted">${group.cards.length} carte · realistico ${v.avg.toFixed(2)} €</span><br>Annuncio: <strong>${v.suggested.toFixed(2)} €</strong><br>Minimo: ${v.minimum.toFixed(2)} €<br><span class="small-muted">Clicca per aprire il lotto</span></div>`;
-}).join("") || `<div class="card">Nessun lotto suggerito.</div>`}
+<div class="pv-dashboard-block">
+  <div class="pv-section-header">
+    <div>
+      <span class="eyebrow">Lot Builder</span>
+      <h3>Lotti suggeriti</h3>
+      <p class="page-subtitle">Gruppi automatici con prezzo annuncio e minimo operativo.</p>
+    </div>
+  </div>
+
+  <div class="pv-lot-grid">
+    ${buildSmartLotGroups(cards).slice(0,4).map(group => {
+      let v = lotSummaryValues(group.cards);
+      let key = group.key || normalizeLotKey(group.name);
+      return `
+        <div class="pv-lot-card" onclick="openLotDetail('${key}')">
+          <span>LOTTO</span>
+          <strong>${group.name}</strong>
+          <div class="pv-lot-meta">${group.cards.length} carte · realistico ${v.avg.toFixed(2)} €</div>
+          <div class="pv-lot-price">
+            <div><small>Annuncio</small><b>${v.suggested.toFixed(2)} €</b></div>
+            <div><small>Minimo</small><b>${v.minimum.toFixed(2)} €</b></div>
+          </div>
+          <em>Clicca per aprire il lotto →</em>
+        </div>
+      `;
+    }).join("") || `<div class="pv-premium-card">Nessun lotto suggerito.</div>`}
+  </div>
 </div>
 
-<h3>Distribuzione valore AI</h3>
-<div class="dashboard-grid">
-${Object.entries(valueBuckets).map(([label,count]) => `<div class="kpi"><div class="kpi-title">${label}</div><div class="kpi-value">${count}</div></div>`).join("")}
+<div class="pv-dashboard-block">
+  <div class="pv-section-header">
+    <div>
+      <span class="eyebrow">Value Distribution</span>
+      <h3>Distribuzione valore AI</h3>
+      <p class="page-subtitle">Segmentazione rapida del portfolio per fascia di valore.</p>
+    </div>
+  </div>
+
+  <div class="pv-value-grid">
+    ${Object.entries(valueBuckets).map(([label,count]) => `
+      <div class="pv-value-card">
+        <span>${label}</span>
+        <strong>${count}</strong>
+      </div>
+    `).join("")}
+  </div>
 </div>
 
-<div class="card" style="margin-top:18px;">
-<strong>Top hit AI:</strong><br><br>
-${topImage ? `<img src="${topImage}" style="width:160px;border-radius:12px;margin-bottom:10px;">` : ""}<br>
-${topCard || "Nessuna carta inserita"} ${topValue > 0 ? "- " + topValue.toFixed(2) + " €" : ""}
+<div class="pv-dashboard-block">
+  <div class="pv-top-hit-card">
+    <div class="pv-top-hit-copy">
+      <span class="eyebrow">Top Hit AI</span>
+      <h3>${topCard || "Nessuna carta inserita"}</h3>
+      <p>${topValue > 0 ? "Valore AI " + topValue.toFixed(2) + " €" : "Aggiungi carte per vedere il top hit."}</p>
+    </div>
+    ${topImage ? `<img src="${topImage}" alt="Top hit AI">` : `<div class="pv-top-hit-placeholder">⭐</div>`}
+  </div>
 </div>
 
 
