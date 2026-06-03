@@ -2742,6 +2742,53 @@ function renderAIInsight(cards){
     </div>
   `;
 }
+function renderAcademyRadarPremium(academyRows){
+  const rows = (academyRows || []).slice().sort((a,b) => aiNumericValue(b) - aiNumericValue(a));
+  const totalValue = rows.reduce((sum,c) => sum + aiNumericValue(c), 0);
+  const top = rows[0];
+  const topClub = top ? (getCardClub(top) || "Club n/d") : "Nessun club";
+  const topName = top ? (top.player || "Carta") : "Nessuna academy monitorata";
+
+  const items = rows.slice(0,5).map((c,index) => {
+    const score = Math.min(99, Math.round(65 + aiNumericValue(c) * 3 + (c.rookieFlag ? 6 : 0)));
+    return `
+      <div style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #e2e8f0;">
+        <div>
+          <strong>${index + 1}. ${c.player || "Carta"}</strong><br>
+          <span class="small-muted">${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "Prospect n/d"}</span>
+        </div>
+        <div style="text-align:right;">
+          <strong>${score}</strong><br>
+          <span class="small-muted">${aiNumericValue(c).toFixed(2)} €</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="card" style="border-left:6px solid #7c3aed;background:linear-gradient(135deg,#f5f3ff,#ffffff);">
+      <div class="section-title-row">
+        <div>
+          <span class="eyebrow">Academy Radar Premium</span>
+          <h3 style="margin:4px 0 6px;">Talenti academy monitorati</h3>
+          <p class="page-subtitle">Ranking interno basato su valore AI, club, prospect level e flag academy.</p>
+        </div>
+        <div style="text-align:right;">
+          <div class="kpi-value" style="font-size:24px;">${rows.length}</div>
+          <div class="small-muted">academy cards</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid" style="margin:12px 0;">
+        <div class="kpi"><div class="kpi-title">Valore radar</div><div class="kpi-value">${totalValue.toFixed(2)} €</div></div>
+        <div class="kpi"><div class="kpi-title">Top club</div><div class="kpi-value" style="font-size:18px;">${topClub}</div></div>
+        <div class="kpi"><div class="kpi-title">Top prospect</div><div class="kpi-value" style="font-size:18px;">${topName}</div></div>
+      </div>
+
+      ${items || "Nessuna academy monitorata. Spunta “Academy monitored” nelle carte da seguire."}
+    </div>
+  `;
+}  
 function renderDashboardProfileCard(){
   const el = document.getElementById("profileDashboardBox");
   if(!el){ return; }
@@ -2924,7 +2971,7 @@ ${topCard || "Nessuna carta inserita"} ${topValue > 0 ? "- " + topValue.toFixed(
 
 <h3>Football intelligence</h3>
 <div class="dashboard-grid">
-<div class="card"><strong>Academy Radar (${academyRows.length})</strong><br><br>${academyRows.map(c => `• ${c.player || "Carta"} · ${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "n/d"} · ${aiNumericValue(c).toFixed(2)} €`).join("<br>") || "Nessuna academy monitorata"}</div>
+${renderAcademyRadarPremium(academyRows)}
 <div class="card"><strong>Club Exposure</strong><br><br>${clubExposureRows.map(([club,val]) => `• ${club}: ${val.toFixed(2)} €`).join("<br>") || "Nessun club assegnato"}</div>
 <div class="card"><strong>Prospect Heat</strong><br><br>${Object.entries(prospectHeat).filter(([k,v])=>v>0).map(([k,v]) => `• ${k}: ${v}`).join("<br>") || "Nessun dato prospect"}</div>
 </div>
