@@ -2470,6 +2470,64 @@ input,select,textarea{
     grid-template-columns:1fr 1fr !important;
   }
 }
+/* Portfolio Compact Actions Fix · no overlap */
+#portfolio .pv-market-compact{
+  grid-template-columns:86px minmax(0,1fr) 130px !important;
+  grid-template-areas:
+    "img info value"
+    "img info actions" !important;
+  align-items:center !important;
+}
+
+#portfolio .pv-market-compact .pv-cardshot{
+  grid-area:img !important;
+}
+
+#portfolio .pv-market-compact .pv-market-info{
+  grid-area:info !important;
+  min-width:0 !important;
+}
+
+#portfolio .pv-market-compact .pv-market-value{
+  grid-area:value !important;
+  min-width:120px !important;
+}
+
+#portfolio .pv-market-compact .pv-market-actions.compact{
+  grid-area:actions !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:6px !important;
+  width:100% !important;
+  margin:0 !important;
+}
+
+#portfolio .pv-market-compact .pv-market-actions.compact button{
+  width:100% !important;
+  min-height:30px !important;
+  padding:6px 8px !important;
+  margin:0 !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  border-radius:12px !important;
+}
+
+@media(max-width:760px){
+  #portfolio .pv-market-compact{
+    grid-template-columns:74px minmax(0,1fr) !important;
+    grid-template-areas:
+      "img info"
+      "value value"
+      "actions actions" !important;
+  }
+
+  #portfolio .pv-market-compact .pv-market-actions.compact{
+    grid-template-columns:repeat(3,1fr) !important;
+  }
+}
   
 </style>
 </head>
