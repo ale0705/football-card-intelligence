@@ -1404,6 +1404,60 @@ input,select,textarea{
     height:220px;
   }
 }
+/* Dashboard v5.1 · compact operative cards */
+#dashboard .pv-action-grid-compact{
+  grid-template-columns:repeat(3,1fr) !important;
+}
+
+#dashboard .pv-action-card-compact{
+  min-height:0 !important;
+  padding:18px !important;
+}
+
+#dashboard .pv-action-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+#dashboard .pv-action-card-compact .pv-action-icon{
+  margin-bottom:0 !important;
+}
+
+#dashboard .pv-action-card-compact > strong{
+  font-size:44px !important;
+  margin:4px 0 8px !important;
+}
+
+#dashboard .pv-action-card-compact p{
+  min-height:42px;
+  font-size:14px !important;
+  color:#c5d3ee !important;
+  margin-bottom:14px !important;
+}
+
+#dashboard .pv-action-card-compact button{
+  width:100%;
+  border-radius:14px !important;
+  padding:10px 12px !important;
+  background:rgba(37,99,235,.18) !important;
+  border:1px solid rgba(96,165,250,.28) !important;
+  color:#bfdbfe !important;
+  font-weight:900;
+  cursor:pointer;
+}
+
+#dashboard .pv-action-card-compact button:hover{
+  background:rgba(37,99,235,.30) !important;
+}
+
+@media(max-width:900px){
+  #dashboard .pv-action-grid-compact{
+    grid-template-columns:1fr !important;
+  }
+}
   
 </style>
 </head>
@@ -4075,25 +4129,35 @@ ${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, 
     </div>
   </div>
 
-  <div class="pv-action-grid">
-    <div class="pv-action-card">
+  <div class="pv-action-grid pv-action-grid-compact">
+  <div class="pv-action-card pv-action-card-compact">
+    <div class="pv-action-top">
       <div class="pv-action-icon">🏷️</div>
-      <span>Lista ora</span>
-      <strong>${singles.length}</strong>
-      <p>${listNames(singles)}</p>
+      <span>LIST NOW</span>
     </div>
-    <div class="pv-action-card">
+    <strong>${singles.length}</strong>
+    <p>${singles[0]?.player || "Nessuna carta"} ${singles[0] ? "· " + aiNumericValue(singles[0]).toFixed(2) + " €" : ""}</p>
+    <button onclick="showSection('portfolioPage')">Apri portfolio</button>
+  </div>
+
+  <div class="pv-action-card pv-action-card-compact">
+    <div class="pv-action-top">
       <div class="pv-action-icon">📦</div>
-      <span>Costruisci lotti</span>
-      <strong>${lots.length}</strong>
-      <p>${listNames(lots)}</p>
+      <span>LOT BUILDER</span>
     </div>
-    <div class="pv-action-card">
+    <strong>${lots.length}</strong>
+    <p>${lots[0]?.player || "Nessuna carta"} ${lots[0] ? "· " + aiNumericValue(lots[0]).toFixed(2) + " €" : ""}</p>
+    <button onclick="showSection('lotsPage')">Apri lotti</button>
+  </div>
+
+  <div class="pv-action-card pv-action-card-compact">
+    <div class="pv-action-top">
       <div class="pv-action-icon">👁️</div>
-      <span>Monitor / Hold</span>
-      <strong>${watch.length}</strong>
-      <p>${listNames(watch)}</p>
+      <span>WATCH</span>
     </div>
+    <strong>${watch.length}</strong>
+    <p>${watch[0]?.player || "Nessuna priorità"} ${watch[0] ? "· " + aiNumericValue(watch[0]).toFixed(2) + " €" : ""}</p>
+    <button onclick="showSection('portfolioPage')">Apri monitor</button>
   </div>
 </div>
 
