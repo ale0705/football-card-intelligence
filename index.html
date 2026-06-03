@@ -1487,7 +1487,193 @@ input,select,textarea{border:1px solid var(--line);background:#f8fafc;border-rad
 .priority-high{background:#fee2e2;color:#991b1b}.priority-medium{background:#fef3c7;color:#92400e}.priority-low{background:#dcfce7;color:#166534}
 .watch-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;align-items:end}
 .watch-form textarea{grid-column:1/-1;min-height:70px}
+/* Dashboard Premium v2 · compact intelligence widgets */
+#dashboard .dashboard-grid:has(.pv-radar-card){
+  grid-template-columns:1.35fr .85fr .85fr !important;
+  align-items:stretch !important;
+}
 
+#dashboard .pv-radar-card{
+  background:
+    radial-gradient(circle at 86% 8%, rgba(59,130,246,.22), transparent 30%),
+    linear-gradient(180deg,rgba(13,28,56,.98),rgba(7,17,34,.98)) !important;
+  border:1px solid rgba(96,165,250,.24) !important;
+  border-radius:24px !important;
+  box-shadow:0 22px 58px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.05) !important;
+  padding:18px !important;
+  color:#e5edff !important;
+  min-height:auto !important;
+}
+
+#dashboard .pv-radar-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+
+#dashboard .pv-radar-head h3{
+  margin:4px 0 4px !important;
+  font-size:20px !important;
+  letter-spacing:-.03em !important;
+}
+
+#dashboard .pv-radar-head p{
+  margin:0 !important;
+  font-size:13px !important;
+  color:#9fb0d0 !important;
+}
+
+#dashboard .pv-radar-badge{
+  width:46px;
+  height:46px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  font-weight:900;
+  font-size:20px;
+  box-shadow:0 14px 30px rgba(37,99,235,.28);
+}
+
+#dashboard .pv-radar-kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+
+#dashboard .pv-radar-kpis div{
+  background:rgba(2,6,23,.32);
+  border:1px solid rgba(147,197,253,.14);
+  border-radius:16px;
+  padding:10px;
+  min-width:0;
+}
+
+#dashboard .pv-radar-kpis strong{
+  display:block;
+  color:#fff !important;
+  font-size:15px;
+  line-height:1.1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#dashboard .pv-radar-kpis span{
+  display:block;
+  color:#93a9d6;
+  font-size:10px;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-weight:800;
+}
+
+#dashboard .pv-radar-feature{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  background:rgba(37,99,235,.13);
+  border:1px solid rgba(96,165,250,.22);
+  border-radius:16px;
+  padding:10px 12px;
+  margin-bottom:8px;
+}
+
+#dashboard .pv-radar-feature span{
+  color:#93a9d6;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+#dashboard .pv-radar-feature strong{
+  font-size:14px;
+  text-align:right;
+  color:#fff !important;
+}
+
+#dashboard .pv-radar-list{
+  display:grid;
+  gap:6px;
+}
+
+#dashboard .pv-radar-row{
+  display:grid;
+  grid-template-columns:34px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:8px 0;
+  border-bottom:1px solid rgba(147,197,253,.10);
+}
+
+#dashboard .pv-radar-row:last-child{
+  border-bottom:none;
+}
+
+#dashboard .pv-radar-rank{
+  width:28px;
+  height:28px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(96,165,250,.14);
+  color:#bfdbfe;
+  font-weight:900;
+  font-size:12px;
+}
+
+#dashboard .pv-radar-main strong{
+  display:block;
+  font-size:13px;
+  color:#fff !important;
+}
+
+#dashboard .pv-radar-main span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  margin-top:2px;
+}
+
+#dashboard .pv-radar-score{
+  text-align:right;
+}
+
+#dashboard .pv-radar-score strong{
+  color:#60a5fa !important;
+  font-size:14px;
+  display:block;
+}
+
+#dashboard .pv-radar-score span{
+  color:#93a9d6;
+  font-size:11px;
+}
+
+#dashboard .dashboard-grid:has(.pv-radar-card) > .card:not(.pv-radar-card){
+  padding:16px !important;
+  min-height:auto !important;
+}
+
+#dashboard .dashboard-grid:has(.pv-radar-card) > .card:not(.pv-radar-card) strong{
+  font-size:15px !important;
+}
+
+@media(max-width:1100px){
+  #dashboard .dashboard-grid:has(.pv-radar-card){
+    grid-template-columns:1fr !important;
+  }
+
+  #dashboard .pv-radar-kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
 </style>
 </head>
 <body>
@@ -2877,47 +3063,56 @@ function renderAcademyRadarPremium(academyRows){
   const top = rows[0];
   const topClub = top ? (getCardClub(top) || "Club n/d") : "Nessun club";
   const topName = top ? (top.player || "Carta") : "Nessuna academy monitorata";
+  const eliteCount = rows.filter(c => (c.prospectLevel || "").toLowerCase().includes("elite")).length;
+  const rookieCount = rows.filter(c => c.rookieFlag).length;
 
   const items = rows.slice(0,5).map((c,index) => {
-    const score = Math.min(99, Math.round(65 + aiNumericValue(c) * 3 + (c.rookieFlag ? 6 : 0)));
+    const value = aiNumericValue(c);
+    const score = Math.min(99, Math.round(65 + value * 3 + (c.rookieFlag ? 6 : 0)));
     return `
-      <div style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #e2e8f0;">
-        <div>
-          <strong>${index + 1}. ${c.player || "Carta"}</strong><br>
-          <span class="small-muted">${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "Prospect n/d"}</span>
+      <div class="pv-radar-row">
+        <div class="pv-radar-rank">${index + 1}</div>
+        <div class="pv-radar-main">
+          <strong>${c.player || "Carta"}</strong>
+          <span>${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "Prospect n/d"}</span>
         </div>
-        <div style="text-align:right;">
-          <strong>${score}</strong><br>
-          <span class="small-muted">${aiNumericValue(c).toFixed(2)} €</span>
+        <div class="pv-radar-score">
+          <strong>${score}</strong>
+          <span>${value.toFixed(2)} €</span>
         </div>
       </div>
     `;
   }).join("");
 
   return `
-    <div class="card" style="border-left:6px solid #7c3aed;background:linear-gradient(135deg,#f5f3ff,#ffffff);">
-      <div class="section-title-row">
+    <div class="pv-radar-card">
+      <div class="pv-radar-head">
         <div>
           <span class="eyebrow">Academy Radar Premium</span>
-          <h3 style="margin:4px 0 6px;">Talenti academy monitorati</h3>
-          <p class="page-subtitle">Ranking interno basato su valore AI, club, prospect level e flag academy.</p>
+          <h3>Talenti academy</h3>
+          <p>Ranking compatto per prospect, club e valore AI.</p>
         </div>
-        <div style="text-align:right;">
-          <div class="kpi-value" style="font-size:24px;">${rows.length}</div>
-          <div class="small-muted">academy cards</div>
-        </div>
+        <div class="pv-radar-badge">${rows.length}</div>
       </div>
 
-      <div class="dashboard-grid" style="margin:12px 0;">
-        <div class="kpi"><div class="kpi-title">Valore radar</div><div class="kpi-value">${totalValue.toFixed(2)} €</div></div>
-        <div class="kpi"><div class="kpi-title">Top club</div><div class="kpi-value" style="font-size:18px;">${topClub}</div></div>
-        <div class="kpi"><div class="kpi-title">Top prospect</div><div class="kpi-value" style="font-size:18px;">${topName}</div></div>
+      <div class="pv-radar-kpis">
+        <div><strong>${totalValue.toFixed(2)} €</strong><span>Valore radar</span></div>
+        <div><strong>${topClub}</strong><span>Top club</span></div>
+        <div><strong>${eliteCount}</strong><span>Elite</span></div>
+        <div><strong>${rookieCount}</strong><span>Rookie</span></div>
       </div>
 
-      ${items || "Nessuna academy monitorata. Spunta “Academy monitored” nelle carte da seguire."}
+      <div class="pv-radar-feature">
+        <span>Top prospect</span>
+        <strong>${topName}</strong>
+      </div>
+
+      <div class="pv-radar-list">
+        ${items || "<div class='small-muted'>Nessuna academy monitorata. Spunta “Academy monitored” nelle carte da seguire.</div>"}
+      </div>
     </div>
   `;
-}  
+}
 function renderDashboardProfileCard(){
   const el = document.getElementById("profileDashboardBox");
   if(!el){ return; }
