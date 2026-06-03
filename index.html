@@ -2298,13 +2298,30 @@ showTempMessage("Analisi AI importata: mini scheda" + (found.length ? " + " + fo
 function renderAIMiniCard(card){
 let hasAI = card.aiMin || card.aiAvg || card.aiMax || card.aiLiquidity || card.aiAdvice || card.aiSummary;
 if(!hasAI){ return ""; }
+
 let liqClass = card.aiLiquidity === "ALTA" ? "ai-chip-high" : card.aiLiquidity === "MEDIA" ? "ai-chip-mid" : card.aiLiquidity === "BASSA" ? "ai-chip-low" : "";
-let range = [card.aiMin, card.aiAvg, card.aiMax].filter(Boolean).join(" / ");
-return `<div class="ai-mini-card">
-<strong>AI valuation</strong><br>
-${range ? `<div class="ai-mini-row"><span>Min/Med/Max</span><strong>${range} €</strong></div>` : ""}
-<div>${card.aiLiquidity ? `<span class="ai-chip ${liqClass}">${card.aiLiquidity}</span>` : ""}${card.aiAdvice ? `<span class="ai-chip">${card.aiAdvice}</span>` : ""}</div>
-${card.aiSummary ? `<div class="small-muted ai-summary">${card.aiSummary}</div>` : ""}
+let min = card.aiMin || "n/d";
+let avg = card.aiAvg || "n/d";
+let max = card.aiMax || "n/d";
+
+return `
+<div class="ai-mini-card pv-ai-mini-card-v2">
+  <div class="pv-ai-mini-head">
+    <span>AI Valuation</span>
+    ${card.aiLiquidity ? `<b class="${liqClass}">${card.aiLiquidity}</b>` : ""}
+  </div>
+
+  <div class="pv-ai-mini-grid">
+    <div><small>Min</small><strong>${min} €</strong></div>
+    <div><small>Med</small><strong>${avg} €</strong></div>
+    <div><small>Max</small><strong>${max} €</strong></div>
+  </div>
+
+  <div class="pv-ai-mini-tags">
+    ${card.aiAdvice ? `<span class="ai-chip">${card.aiAdvice}</span>` : ""}
+  </div>
+
+  ${card.aiSummary ? `<p>${card.aiSummary}</p>` : ""}
 </div>`;
 }
 
@@ -2632,6 +2649,211 @@ input,select,textarea{border:1px solid var(--line);background:#f8fafc;border-rad
     grid-template-columns:repeat(2,1fr);
   }
 }
+/* Portfolio Premium v2 · readability fixes */
+#portfolioPage{
+  color:#f8fbff !important;
+}
+
+#portfolioPage > .card,
+#portfolioPage .card:first-of-type{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96)) !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  color:#f8fbff !important;
+}
+
+#portfolioPage .view-toggle button,
+#portfolioPage .filter-tabs button{
+  opacity:1 !important;
+  color:#f8fbff !important;
+  background:rgba(37,99,235,.18) !important;
+  border:1px solid rgba(96,165,250,.28) !important;
+}
+
+#portfolioPage .view-toggle button.active,
+#portfolioPage .filter-tabs button.active{
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(37,99,235,.28);
+}
+
+#portfolio .pv-portfolio-card{
+  display:grid !important;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(37,99,235,.16), transparent 30%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98)) !important;
+}
+
+#portfolio .pv-portfolio-detail{
+  grid-template-columns:180px 1fr !important;
+  min-height:0 !important;
+}
+
+#portfolio .pv-portfolio-media{
+  align-content:start !important;
+}
+
+#portfolio .pv-portfolio-detail .pv-portfolio-img{
+  width:170px !important;
+  height:230px !important;
+  object-fit:cover !important;
+}
+
+#portfolio .pv-portfolio-photo-actions button,
+#portfolio .pv-portfolio-actions-row button,
+#portfolio .pv-portfolio-actions button{
+  color:#f8fbff !important;
+  background:linear-gradient(180deg,rgba(37,99,235,.36),rgba(29,78,216,.30)) !important;
+  border:1px solid rgba(147,197,253,.32) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  text-shadow:none !important;
+}
+
+#portfolio .pv-portfolio-photo-actions button{
+  min-height:42px;
+}
+
+#portfolio .pv-portfolio-metrics{
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+}
+
+#portfolio .pv-portfolio-metrics div{
+  background:rgba(2,6,23,.42) !important;
+  border:1px solid rgba(147,197,253,.14) !important;
+  min-height:70px;
+}
+
+#portfolio .pv-portfolio-metrics span{
+  white-space:nowrap;
+}
+
+#portfolio .pv-ai-mini-card-v2{
+  background:linear-gradient(180deg,rgba(2,6,23,.52),rgba(8,20,42,.46)) !important;
+  border:1px solid rgba(96,165,250,.20) !important;
+  border-radius:20px !important;
+  padding:14px !important;
+  margin:14px 0 !important;
+  color:#e5edff !important;
+}
+
+#portfolio .pv-ai-mini-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+#portfolio .pv-ai-mini-head span{
+  color:#60a5fa;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-size:11px;
+  font-weight:900;
+}
+
+#portfolio .pv-ai-mini-head b{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:62px;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  color:#fff;
+  background:rgba(37,99,235,.22);
+}
+
+#portfolio .pv-ai-mini-head b.ai-chip-high{
+  background:rgba(34,197,94,.22);
+  color:#bbf7d0;
+}
+
+#portfolio .pv-ai-mini-head b.ai-chip-mid{
+  background:rgba(245,158,11,.22);
+  color:#fde68a;
+}
+
+#portfolio .pv-ai-mini-head b.ai-chip-low{
+  background:rgba(239,68,68,.22);
+  color:#fecaca;
+}
+
+#portfolio .pv-ai-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+#portfolio .pv-ai-mini-grid div{
+  background:rgba(2,6,23,.36);
+  border:1px solid rgba(147,197,253,.12);
+  border-radius:14px;
+  padding:10px;
+  min-width:0;
+}
+
+#portfolio .pv-ai-mini-grid small{
+  display:block;
+  color:#93a9d6;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:900;
+}
+
+#portfolio .pv-ai-mini-grid strong{
+  display:block;
+  color:#fff !important;
+  font-size:16px;
+  margin-top:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#portfolio .pv-ai-mini-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+
+#portfolio .pv-ai-mini-card-v2 p{
+  margin:10px 0 0 !important;
+  color:#aebdda !important;
+  font-size:13px !important;
+  line-height:1.45;
+}
+
+#portfolio .ai-mini-card:not(.pv-ai-mini-card-v2){
+  background:transparent !important;
+}
+
+#portfolio .ai-chip{
+  opacity:1 !important;
+}
+
+#portfolio .badge{
+  opacity:1 !important;
+}
+
+@media(max-width:1000px){
+  #portfolio .pv-portfolio-detail{
+    grid-template-columns:1fr !important;
+  }
+
+  #portfolio .pv-portfolio-detail .pv-portfolio-img{
+    width:100% !important;
+    max-width:260px;
+    height:auto !important;
+  }
+
+  #portfolio .pv-portfolio-metrics,
+  #portfolio .pv-ai-mini-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
 </style>
 </head>
 <body>
