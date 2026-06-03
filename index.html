@@ -2375,6 +2375,101 @@ input,select,textarea{
     grid-template-columns:1fr 1fr !important;
   }
 }
+/* Portfolio Actions Fix 4 · aligned cards and readable actions */
+#portfolio.portfolio-grid.detailed-view,
+#portfolio.detailed-view{
+  align-items:stretch !important;
+}
+
+#portfolio .pv-market-card{
+  height:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+#portfolio .pv-market-grid{
+  flex:1 !important;
+  height:100% !important;
+}
+
+#portfolio .pv-market-body{
+  height:100% !important;
+}
+
+#portfolio .pv-market-actions{
+  margin-top:auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(110px,1fr)) !important;
+  gap:8px !important;
+  width:100% !important;
+}
+
+#portfolio .pv-market-actions button{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:40px !important;
+  padding:8px 10px !important;
+  margin:0 !important;
+  font-size:12px !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  border-radius:14px !important;
+}
+
+#portfolio .pv-market-actions button.danger-button{
+  grid-column:auto !important;
+}
+
+#portfolio .pv-market-summary{
+  min-height:74px !important;
+}
+
+#portfolio .pv-market-ai-box{
+  min-height:150px !important;
+}
+
+#portfolio .pv-market-ai-side{
+  align-items:stretch !important;
+}
+
+#portfolio .pv-market-ai-side div{
+  min-height:66px !important;
+}
+
+#portfolio .pv-market-header{
+  min-height:82px !important;
+}
+
+#portfolio .pv-market-chips{
+  min-height:34px !important;
+}
+
+#portfolio .pv-photo-buttons{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:8px !important;
+}
+
+#portfolio .pv-photo-buttons button{
+  width:100% !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+@media(max-width:1200px){
+  #portfolio .pv-market-actions{
+    grid-template-columns:repeat(2,minmax(120px,1fr)) !important;
+  }
+}
+
+@media(max-width:900px){
+  #portfolio .pv-market-actions{
+    grid-template-columns:1fr 1fr !important;
+  }
+}
   
 </style>
 </head>
