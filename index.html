@@ -737,7 +737,279 @@ input,select,textarea{
     border-radius:22px;
   }
 }
-  
+/* Dashboard Premium v3 · readable intelligence system */
+#dashboard .pv-intelligence-shell{
+  margin-top:18px;
+}
+
+#dashboard .pv-section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:14px;
+  margin:10px 0 12px;
+}
+
+#dashboard .pv-section-header h3{
+  margin:4px 0 0 !important;
+  font-size:24px !important;
+}
+
+#dashboard .pv-intelligence-grid{
+  display:grid;
+  grid-template-columns:1.55fr .95fr .95fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#dashboard .pv-premium-card,
+#dashboard .pv-trend-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98)) !important;
+  border:1px solid rgba(96,165,250,.20) !important;
+  border-radius:24px !important;
+  box-shadow:0 22px 58px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  padding:18px !important;
+  color:#e5edff !important;
+}
+
+#dashboard .pv-premium-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+
+#dashboard .pv-card-kicker{
+  display:block;
+  color:#3b82f6;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+}
+
+#dashboard .pv-premium-head h3{
+  margin:4px 0 4px !important;
+  font-size:20px !important;
+}
+
+#dashboard .pv-premium-head p{
+  margin:0 !important;
+  color:#9fb0d0 !important;
+  font-size:13px !important;
+}
+
+#dashboard .pv-pill,
+#dashboard .pv-icon-badge{
+  border:1px solid rgba(96,165,250,.35);
+  background:rgba(37,99,235,.14);
+  color:#bfdbfe;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:900;
+}
+
+#dashboard .pv-icon-badge{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border-radius:14px;
+}
+
+#dashboard .pv-icon-badge.heat{
+  background:rgba(249,115,22,.14);
+  border-color:rgba(249,115,22,.32);
+}
+
+#dashboard .pv-academy-layout{
+  display:grid;
+  grid-template-columns:155px 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#dashboard .pv-academy-summary{
+  border-right:1px solid rgba(147,197,253,.14);
+  padding-right:14px;
+  text-align:center;
+}
+
+#dashboard .pv-big-circle{
+  width:70px;
+  height:70px;
+  margin:2px auto 12px;
+  border-radius:26px;
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  background:radial-gradient(circle,rgba(124,58,237,.35),rgba(37,99,235,.12));
+  border:1px solid rgba(147,197,253,.18);
+}
+
+#dashboard .pv-academy-summary > strong{
+  display:block;
+  font-size:24px;
+  color:#fff !important;
+}
+
+#dashboard .pv-academy-summary > span{
+  display:block;
+  color:#93a9d6;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+#dashboard .pv-mini-stat{
+  border-top:1px solid rgba(147,197,253,.12);
+  padding:9px 0;
+}
+
+#dashboard .pv-mini-stat b{
+  display:block;
+  color:#fff;
+  font-size:15px;
+}
+
+#dashboard .pv-mini-stat span{
+  color:#93a9d6;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+#dashboard .pv-data-list{
+  display:grid;
+  gap:2px;
+}
+
+#dashboard .pv-data-row{
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:9px 0;
+  border-bottom:1px solid rgba(147,197,253,.10);
+}
+
+#dashboard .pv-data-row:last-child{
+  border-bottom:none;
+}
+
+#dashboard .pv-rank{
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:#bfdbfe;
+  background:rgba(96,165,250,.13);
+  font-weight:900;
+  font-size:12px;
+}
+
+#dashboard .pv-dot,
+#dashboard .pv-heat-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#3b82f6;
+  margin-left:8px;
+}
+
+#dashboard .pv-heat-dot{
+  background:#f97316;
+}
+
+#dashboard .pv-data-main strong{
+  display:block;
+  font-size:14px;
+  color:#fff !important;
+}
+
+#dashboard .pv-data-main span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  margin-top:2px;
+}
+
+#dashboard .pv-data-value{
+  text-align:right;
+}
+
+#dashboard .pv-data-value strong{
+  display:block;
+  color:#fff !important;
+  font-size:14px;
+}
+
+#dashboard .pv-data-value span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  margin-top:2px;
+}
+
+#dashboard .pv-trend-card{
+  margin-top:18px;
+}
+
+#dashboard .pv-trend-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+#dashboard .pv-trend-grid div{
+  background:rgba(2,6,23,.28);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:18px;
+  padding:14px;
+}
+
+#dashboard .pv-trend-grid span{
+  display:block;
+  color:#3b82f6;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+#dashboard .pv-trend-grid strong{
+  display:block;
+  font-size:18px;
+  margin:8px 0 4px;
+  color:#fff !important;
+}
+
+#dashboard .pv-trend-grid em{
+  color:#93a9d6;
+  font-size:13px;
+  font-style:normal;
+}
+
+@media(max-width:1100px){
+  #dashboard .pv-intelligence-grid,
+  #dashboard .pv-trend-grid{
+    grid-template-columns:1fr;
+  }
+
+  #dashboard .pv-academy-layout{
+    grid-template-columns:1fr;
+  }
+
+  #dashboard .pv-academy-summary{
+    border-right:none;
+    border-bottom:1px solid rgba(147,197,253,.14);
+    padding-right:0;
+    padding-bottom:12px;
+  }
+}  
 </style>
 </head>
 
@@ -3057,58 +3329,132 @@ function renderAIInsight(cards){
     </div>
   `;
 }
+function academyScore(card){
+  const value = aiNumericValue(card);
+  const level = (card.prospectLevel || "").toLowerCase();
+  let bonus = 0;
+  if(level.includes("elite")) bonus += 18;
+  if(level.includes("high")) bonus += 10;
+  if(level.includes("development")) bonus += 4;
+  if(card.rookieFlag) bonus += 6;
+  return Math.min(99, Math.round(62 + value * 2.6 + bonus));
+}
+
 function renderAcademyRadarPremium(academyRows){
-  const rows = (academyRows || []).slice().sort((a,b) => aiNumericValue(b) - aiNumericValue(a));
+  const rows = (academyRows || []).slice().sort((a,b) => academyScore(b) - academyScore(a));
   const totalValue = rows.reduce((sum,c) => sum + aiNumericValue(c), 0);
   const top = rows[0];
-  const topClub = top ? (getCardClub(top) || "Club n/d") : "Nessun club";
-  const topName = top ? (top.player || "Carta") : "Nessuna academy monitorata";
-  const eliteCount = rows.filter(c => (c.prospectLevel || "").toLowerCase().includes("elite")).length;
-  const rookieCount = rows.filter(c => c.rookieFlag).length;
 
-  const items = rows.slice(0,5).map((c,index) => {
-    const value = aiNumericValue(c);
-    const score = Math.min(99, Math.round(65 + value * 3 + (c.rookieFlag ? 6 : 0)));
-    return `
-      <div class="pv-radar-row">
-        <div class="pv-radar-rank">${index + 1}</div>
-        <div class="pv-radar-main">
-          <strong>${c.player || "Carta"}</strong>
-          <span>${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "Prospect n/d"}</span>
-        </div>
-        <div class="pv-radar-score">
-          <strong>${score}</strong>
-          <span>${value.toFixed(2)} €</span>
-        </div>
+  const items = rows.slice(0,5).map((c,index) => `
+    <div class="pv-data-row">
+      <div class="pv-rank">${index + 1}</div>
+      <div class="pv-data-main">
+        <strong>${c.player || "Carta"}</strong>
+        <span>${getCardClub(c) || "Club n/d"} · ${c.prospectLevel || "Prospect n/d"}</span>
       </div>
-    `;
-  }).join("");
+      <div class="pv-data-value">
+        <strong>${academyScore(c)}</strong>
+        <span>${aiNumericValue(c).toFixed(2)} €</span>
+      </div>
+    </div>
+  `).join("");
 
   return `
-    <div class="pv-radar-card">
-      <div class="pv-radar-head">
+    <div class="pv-premium-card pv-academy-card">
+      <div class="pv-premium-head">
         <div>
-          <span class="eyebrow">Academy Radar Premium</span>
+          <span class="pv-card-kicker">Academy Radar Premium</span>
           <h3>Talenti academy</h3>
-          <p>Ranking compatto per prospect, club e valore AI.</p>
+          <p>Ranking AI per valore, club e potenziale.</p>
         </div>
-        <div class="pv-radar-badge">${rows.length}</div>
+        <span class="pv-pill">Premium</span>
       </div>
 
-      <div class="pv-radar-kpis">
-        <div><strong>${totalValue.toFixed(2)} €</strong><span>Valore radar</span></div>
-        <div><strong>${topClub}</strong><span>Top club</span></div>
-        <div><strong>${eliteCount}</strong><span>Elite</span></div>
-        <div><strong>${rookieCount}</strong><span>Rookie</span></div>
-      </div>
+      <div class="pv-academy-layout">
+        <div class="pv-academy-summary">
+          <div class="pv-big-circle">🎓</div>
+          <strong>${totalValue.toFixed(2)} €</strong>
+          <span>Valore radar</span>
+          <div class="pv-mini-stat"><b>${rows.length}</b><span>Academy cards</span></div>
+          <div class="pv-mini-stat"><b>${top ? getCardClub(top) || "Club n/d" : "n/d"}</b><span>Top club</span></div>
+          <div class="pv-mini-stat"><b>${top ? top.player || "Carta" : "n/d"}</b><span>Top prospect</span></div>
+        </div>
 
-      <div class="pv-radar-feature">
-        <span>Top prospect</span>
-        <strong>${topName}</strong>
+        <div class="pv-data-list">
+          ${items || "<div class='small-muted'>Nessuna academy monitorata.</div>"}
+        </div>
       </div>
+    </div>
+  `;
+}
 
-      <div class="pv-radar-list">
-        ${items || "<div class='small-muted'>Nessuna academy monitorata. Spunta “Academy monitored” nelle carte da seguire.</div>"}
+function renderClubExposurePremium(clubExposureRows){
+  const rows = (clubExposureRows || []).slice(0,7);
+  return `
+    <div class="pv-premium-card">
+      <div class="pv-premium-head">
+        <div>
+          <span class="pv-card-kicker">Club Exposure</span>
+          <h3>Esposizione club</h3>
+        </div>
+        <span class="pv-icon-badge">🏟️</span>
+      </div>
+      <div class="pv-data-list">
+        ${rows.map(([club,val]) => `
+          <div class="pv-data-row">
+            <div class="pv-dot"></div>
+            <div class="pv-data-main"><strong>${club}</strong></div>
+            <div class="pv-data-value"><strong>${val.toFixed(2)} €</strong></div>
+          </div>
+        `).join("") || "<div class='small-muted'>Nessun club assegnato.</div>"}
+      </div>
+    </div>
+  `;
+}
+
+function renderProspectHeatPremium(prospectHeat){
+  const rows = Object.entries(prospectHeat || {}).filter(([k,v]) => v > 0);
+  return `
+    <div class="pv-premium-card">
+      <div class="pv-premium-head">
+        <div>
+          <span class="pv-card-kicker">Prospect Heat</span>
+          <h3>Calore prospect</h3>
+        </div>
+        <span class="pv-icon-badge heat">🔥</span>
+      </div>
+      <div class="pv-data-list">
+        ${rows.map(([label,count]) => `
+          <div class="pv-data-row">
+            <div class="pv-heat-dot"></div>
+            <div class="pv-data-main"><strong>${label}</strong></div>
+            <div class="pv-data-value"><strong>${count}</strong></div>
+          </div>
+        `).join("") || "<div class='small-muted'>Nessun dato prospect.</div>"}
+      </div>
+    </div>
+  `;
+}
+
+function renderTrendOpportunitiesPremium(cards, academyRows, clubExposureRows, prospectHeat){
+  const academy = (academyRows || []).slice().sort((a,b) => academyScore(b) - academyScore(a));
+  const top = academy[0];
+  const topClub = (clubExposureRows || [])[0];
+  const elite = (prospectHeat || {})["Elite Prospect"] || 0;
+
+  return `
+    <div class="pv-trend-card">
+      <div class="pv-premium-head">
+        <div>
+          <span class="pv-card-kicker">Trend & Opportunità</span>
+          <h3>Azioni suggerite</h3>
+        </div>
+      </div>
+      <div class="pv-trend-grid">
+        <div><span>Top performer</span><strong>${top ? top.player || "Carta" : "n/d"}</strong><em>${top ? academyScore(top) + " score AI" : "Nessun dato"}</em></div>
+        <div><span>Club dominante</span><strong>${topClub ? topClub[0] : "n/d"}</strong><em>${topClub ? topClub[1].toFixed(2) + " € exposure" : "Nessun dato"}</em></div>
+        <div><span>Miglior prospect</span><strong>${top ? top.prospectLevel || "n/d" : "n/d"}</strong><em>${elite} elite monitorati</em></div>
+        <div><span>Focus mercato</span><strong>${academy.length}</strong><em>talenti academy</em></div>
       </div>
     </div>
   `;
@@ -3294,11 +3640,23 @@ ${topCard || "Nessuna carta inserita"} ${topValue > 0 ? "- " + topValue.toFixed(
 
 
 <h3>Football intelligence</h3>
-<div class="dashboard-grid">
-${renderAcademyRadarPremium(academyRows)}
-<div class="card"><strong>Club Exposure</strong><br><br>${clubExposureRows.map(([club,val]) => `• ${club}: ${val.toFixed(2)} €`).join("<br>") || "Nessun club assegnato"}</div>
-<div class="card"><strong>Prospect Heat</strong><br><br>${Object.entries(prospectHeat).filter(([k,v])=>v>0).map(([k,v]) => `• ${k}: ${v}`).join("<br>") || "Nessun dato prospect"}</div>
+<div class="pv-intelligence-shell">
+  <div class="pv-section-header">
+    <div>
+      <span class="eyebrow">Football Intelligence</span>
+      <h3>Radar mercato</h3>
+      <p class="page-subtitle">Academy, club exposure e prospect heat in un pannello unico.</p>
+    </div>
+  </div>
+
+  <div class="pv-intelligence-grid">
+    ${renderAcademyRadarPremium(academyRows)}
+    ${renderClubExposurePremium(clubExposureRows)}
+    ${renderProspectHeatPremium(prospectHeat)}
+  </div>
 </div>
+
+${renderTrendOpportunitiesPremium(cards, academyRows, clubExposureRows, prospectHeat)}
 
 <h3>ROI AI per box</h3>
 <div class="dashboard-grid">
