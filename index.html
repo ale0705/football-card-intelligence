@@ -2073,6 +2073,152 @@ input,select,textarea{
     text-align:left;
   }
 }
+/* Portfolio Premium Fix 2 · visibility and card sizing */
+#portfolioPage .chip-btn,
+#portfolioPage .filter-tabs button,
+#portfolioPage .view-toggle button,
+#portfolioPage button.compact-btn{
+  opacity:1 !important;
+  color:#0f172a !important;
+  background:linear-gradient(180deg,#f8fbff,#eaf2ff) !important;
+  border:1px solid rgba(37,99,235,.32) !important;
+  box-shadow:0 8px 18px rgba(15,23,42,.08) !important;
+  text-shadow:none !important;
+}
+
+#portfolioPage .chip-btn.active,
+#portfolioPage .filter-tabs button.active,
+#portfolioPage .view-toggle button.active,
+#portfolioPage button.compact-btn.active{
+  color:#fff !important;
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  border-color:rgba(147,197,253,.55) !important;
+  box-shadow:0 12px 28px rgba(37,99,235,.28) !important;
+}
+
+#portfolioPage .toolbar{
+  background:linear-gradient(180deg,rgba(248,251,255,.94),rgba(232,241,255,.92)) !important;
+  border:1px solid rgba(37,99,235,.18) !important;
+  box-shadow:0 18px 44px rgba(15,23,42,.10) !important;
+}
+
+#portfolioPage .toolbar input,
+#portfolioPage .toolbar select{
+  color:#f8fbff !important;
+  background:linear-gradient(180deg,#111827,#020617) !important;
+  border:1px solid rgba(147,197,253,.28) !important;
+  opacity:1 !important;
+}
+
+#portfolioPage .toolbar input::placeholder{
+  color:#94a3b8 !important;
+}
+
+#portfolio,
+#portfolio .portfolio-grid,
+#portfolio.portfolio-grid{
+  overflow:visible !important;
+}
+
+#portfolio .pv-market-card,
+#portfolio .portfolio-card,
+#portfolio .card{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+#portfolio .pv-market-grid{
+  align-items:start !important;
+}
+
+#portfolio .pv-market-body{
+  min-width:0 !important;
+  overflow:visible !important;
+}
+
+#portfolio .pv-market-ai-box{
+  grid-template-columns:minmax(165px,.8fr) minmax(260px,1.2fr) !important;
+  align-items:stretch !important;
+}
+
+#portfolio .pv-market-ai-main strong{
+  white-space:nowrap !important;
+  font-size:28px !important;
+  line-height:1 !important;
+}
+
+#portfolio .pv-market-ai-side{
+  grid-template-columns:repeat(3,minmax(120px,1fr)) !important;
+}
+
+#portfolio .pv-market-ai-side div{
+  min-width:120px !important;
+}
+
+#portfolio .pv-market-ai-side strong{
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:unset !important;
+  line-height:1.2 !important;
+}
+
+#portfolio .pv-market-summary{
+  overflow:visible !important;
+}
+
+#portfolio .pv-market-summary p{
+  color:#dbeafe !important;
+}
+
+#portfolio .pv-market-actions{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+#portfolio .pv-market-actions button,
+#portfolio .pv-photo-buttons button{
+  opacity:1 !important;
+  color:#f8fbff !important;
+  background:linear-gradient(180deg,#1d4ed8,#1e40af) !important;
+  border:1px solid rgba(191,219,254,.38) !important;
+}
+
+#portfolio .pv-market-compact{
+  min-height:150px !important;
+}
+
+#portfolio .pv-market-compact .pv-market-value{
+  min-width:140px !important;
+}
+
+#portfolio .pv-market-value strong{
+  white-space:nowrap !important;
+}
+
+@media(max-width:1150px){
+  #portfolio .pv-market-ai-box{
+    grid-template-columns:1fr !important;
+  }
+
+  #portfolio .pv-market-ai-main{
+    border-right:none !important;
+    border-bottom:1px solid rgba(147,197,253,.14) !important;
+    padding-right:0 !important;
+    padding-bottom:12px !important;
+  }
+
+  #portfolio .pv-market-ai-side{
+    grid-template-columns:repeat(3,minmax(100px,1fr)) !important;
+  }
+}
+
+@media(max-width:800px){
+  #portfolio .pv-market-ai-side{
+    grid-template-columns:1fr !important;
+  }
+}
   
 </style>
 </head>
