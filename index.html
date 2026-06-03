@@ -2219,6 +2219,162 @@ input,select,textarea{
     grid-template-columns:1fr !important;
   }
 }
+/* Portfolio Layout Fix 3 · compact card flow */
+#portfolioPage .section-title-row,
+#portfolioPage .box > .section-title-row,
+#portfolioPage h2,
+#portfolioPage .page-subtitle{
+  color:#0f172a !important;
+}
+
+#portfolioPage .page-subtitle{
+  color:#334155 !important;
+  font-weight:600 !important;
+}
+
+#portfolioPage .box{
+  background:linear-gradient(180deg,#f8fbff,#eef5ff) !important;
+  border:1px solid rgba(37,99,235,.18) !important;
+}
+
+#portfolio.portfolio-grid.detailed-view,
+#portfolio.detailed-view{
+  grid-template-columns:repeat(auto-fit,minmax(420px,1fr)) !important;
+  align-items:start !important;
+}
+
+#portfolio .pv-market-grid{
+  grid-template-columns:150px minmax(0,1fr) !important;
+  gap:16px !important;
+  padding:18px !important;
+}
+
+#portfolio .pv-cardshot{
+  width:138px !important;
+  height:184px !important;
+  border-radius:16px !important;
+}
+
+#portfolio .pv-market-header{
+  margin-bottom:8px !important;
+}
+
+#portfolio .pv-market-header h3{
+  font-size:22px !important;
+  line-height:1.05 !important;
+}
+
+#portfolio .pv-market-header p{
+  font-size:13px !important;
+  margin-top:5px !important;
+}
+
+#portfolio .pv-market-chips{
+  margin:8px 0 10px !important;
+  gap:6px !important;
+}
+
+#portfolio .pv-market-chips .ai-chip,
+#portfolio .pv-market-chips .badge{
+  margin:0 !important;
+}
+
+#portfolio .pv-market-ai-box{
+  grid-template-columns:1fr !important;
+  gap:10px !important;
+  padding:12px !important;
+  margin:10px 0 !important;
+}
+
+#portfolio .pv-market-ai-main{
+  border-right:none !important;
+  border-bottom:1px solid rgba(147,197,253,.14) !important;
+  padding-right:0 !important;
+  padding-bottom:10px !important;
+}
+
+#portfolio .pv-market-ai-main strong{
+  font-size:24px !important;
+}
+
+#portfolio .pv-market-ai-side{
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:8px !important;
+}
+
+#portfolio .pv-market-ai-side div{
+  min-width:0 !important;
+  padding:9px !important;
+}
+
+#portfolio .pv-market-ai-side strong{
+  font-size:13px !important;
+}
+
+#portfolio .pv-market-summary{
+  grid-template-columns:76px 1fr !important;
+  padding:10px !important;
+  margin:10px 0 !important;
+}
+
+#portfolio .pv-market-summary p{
+  font-size:13px !important;
+  line-height:1.35 !important;
+}
+
+#portfolio .pv-market-actions{
+  display:grid !important;
+  grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+  gap:7px !important;
+  margin-top:10px !important;
+}
+
+#portfolio .pv-market-actions button{
+  width:100% !important;
+  min-height:38px !important;
+  padding:8px 8px !important;
+  margin:0 !important;
+  font-size:12px !important;
+  white-space:nowrap !important;
+}
+
+#portfolio .pv-photo-buttons button{
+  margin:0 !important;
+  min-height:36px !important;
+  padding:8px !important;
+  font-size:12px !important;
+}
+
+#portfolio .pv-market-card{
+  margin:0 !important;
+}
+
+#portfolio .pv-market-body{
+  display:flex;
+  flex-direction:column;
+  min-height:0 !important;
+}
+
+@media(max-width:900px){
+  #portfolio.portfolio-grid.detailed-view,
+  #portfolio.detailed-view{
+    grid-template-columns:1fr !important;
+  }
+
+  #portfolio .pv-market-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #portfolio .pv-cardshot{
+    width:100% !important;
+    max-width:220px !important;
+    height:auto !important;
+  }
+
+  #portfolio .pv-market-actions{
+    grid-template-columns:1fr 1fr !important;
+  }
+}
   
 </style>
 </head>
