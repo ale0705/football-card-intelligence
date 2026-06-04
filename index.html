@@ -3161,6 +3161,398 @@ input,select,textarea{
   }
 }
 
+/* Lotti Premium v1 */
+#lotsPage{
+  background:
+    radial-gradient(circle at 82% 0%, rgba(245,158,11,.16), transparent 31%),
+    linear-gradient(180deg,#061126 0%,#081427 58%,#0b1220 100%);
+  padding:24px;
+  border-radius:28px;
+  color:#e5edff;
+}
+
+#lotsPage .box{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  overflow:visible !important;
+}
+
+#lotsPage h2,
+#lotsPage h3,
+#lotsPage strong{
+  color:#f8fbff !important;
+}
+
+#lotsPage p,
+#lotsPage .small-muted{
+  color:#aebdda !important;
+}
+
+#lotsPage input,
+#lotsPage select,
+#lotsPage textarea{
+  background:#081426 !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  color:#e5edff !important;
+}
+
+#lotsPage option{
+  background:#081426;
+  color:#e5edff;
+}
+
+.pv-lots-premium{
+  display:grid;
+  gap:18px;
+}
+
+.pv-lots-hero{
+  display:grid;
+  grid-template-columns:minmax(320px,.9fr) minmax(560px,1.4fr);
+  gap:24px;
+  align-items:stretch;
+  padding:28px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(245,158,11,.24), transparent 30%),
+    linear-gradient(135deg,#020617 0%,#10172a 48%,#92400e 100%);
+  border:1px solid rgba(251,191,36,.22);
+  box-shadow:0 30px 80px rgba(245,158,11,.16);
+}
+
+.pv-lots-hero h2{
+  margin:5px 0 7px !important;
+  color:#fff !important;
+  font-size:36px !important;
+  line-height:1.02 !important;
+  letter-spacing:-.05em !important;
+  max-width:460px;
+}
+
+.pv-lots-hero p{
+  max-width:460px;
+  line-height:1.45;
+  margin:0 !important;
+  color:#fde68a !important;
+}
+
+.pv-lots-hero-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(120px,1fr));
+  gap:12px;
+  min-width:0;
+}
+
+.pv-lots-hero-metrics div{
+  min-width:0;
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:16px;
+  background:rgba(2,6,23,.36);
+  border:1px solid rgba(253,230,138,.15);
+  border-radius:18px;
+}
+
+.pv-lots-hero-metrics strong{
+  display:block;
+  color:#fff !important;
+  font-size:30px;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pv-lots-hero-metrics span{
+  display:block;
+  color:#fbbf24;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-top:8px;
+  line-height:1.25;
+}
+
+.pv-lots-coach{
+  background:linear-gradient(135deg,rgba(253,230,138,.12),rgba(255,255,255,.04));
+  border:1px solid rgba(251,191,36,.20);
+  border-left:6px solid #f59e0b;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 18px 42px rgba(0,0,0,.20);
+}
+
+.pv-lots-coach strong{
+  font-size:17px;
+}
+
+.pv-lots-coach p{
+  margin:8px 0 0 !important;
+  color:#fef3c7 !important;
+  font-weight:700;
+}
+
+.pv-lots-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(440px,1fr));
+  gap:18px;
+}
+
+#lotsPage .pv-lot-premium-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(245,158,11,.16), transparent 34%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98)) !important;
+  border:1px solid rgba(251,191,36,.18) !important;
+  border-radius:26px !important;
+  padding:20px !important;
+  color:#e5edff !important;
+  box-shadow:0 22px 58px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+#lotsPage .pv-lot-premium-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:6px;
+  background:linear-gradient(#f59e0b,#f97316);
+}
+
+#lotsPage .pv-lot-premium-card.highlight{
+  border-color:rgba(96,165,250,.46) !important;
+  box-shadow:0 0 0 4px rgba(37,99,235,.14), 0 22px 58px rgba(0,0,0,.26) !important;
+}
+
+.pv-lot-card-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+
+.pv-lot-kicker{
+  display:block;
+  color:#fbbf24;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+}
+
+.pv-lot-card-head h3{
+  margin:5px 0 5px !important;
+  font-size:26px !important;
+  line-height:1.04;
+  letter-spacing:-.04em;
+}
+
+.pv-lot-meta-premium{
+  color:#fde68a !important;
+  font-size:13px;
+  margin:0 !important;
+}
+
+.pv-lot-status-wrap{
+  min-width:170px;
+  text-align:right;
+}
+
+.pv-lot-status-wrap span{
+  display:block;
+  color:#fbbf24;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+
+.pv-lot-status-wrap select{
+  margin:0 !important;
+  min-height:42px;
+  border-radius:14px !important;
+}
+
+.pv-lot-metrics-premium{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(112px,1fr));
+  gap:10px;
+  margin:14px 0;
+}
+
+.pv-lot-metrics-premium div{
+  min-width:0;
+  background:rgba(2,6,23,.38);
+  border:1px solid rgba(253,230,138,.12);
+  border-radius:16px;
+  padding:12px;
+}
+
+.pv-lot-metrics-premium span{
+  display:block;
+  color:#fbbf24;
+  text-transform:uppercase;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.pv-lot-metrics-premium strong{
+  display:block;
+  color:#fff !important;
+  font-size:18px;
+  margin-top:6px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pv-lot-top-card{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  background:rgba(15,23,42,.46);
+  border:1px solid rgba(253,230,138,.11);
+  border-radius:18px;
+  padding:14px;
+  margin:12px 0;
+}
+
+.pv-lot-top-card span{
+  display:block;
+  color:#fbbf24;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.pv-lot-top-card strong{
+  display:block;
+  margin-top:4px;
+  font-size:16px;
+  color:#fff !important;
+}
+
+.pv-lot-top-card em{
+  color:#fde68a;
+  font-style:normal;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.pv-lot-cards-list{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+
+.pv-lot-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  border-top:1px solid rgba(253,230,138,.10);
+  padding:12px 0 0;
+}
+
+.pv-lot-item strong{
+  display:block;
+  font-size:15px;
+  color:#fff !important;
+}
+
+.pv-lot-item span{
+  display:block;
+  color:#c5d3ee;
+  font-size:12px;
+  line-height:1.4;
+  margin-top:4px;
+}
+
+.pv-lot-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+#lotsPage .pv-lot-actions button{
+  min-height:38px;
+  padding:8px 11px !important;
+  border-radius:13px !important;
+  border:1px solid rgba(251,191,36,.22) !important;
+  color:#fef3c7 !important;
+  background:rgba(245,158,11,.15) !important;
+  box-shadow:none !important;
+  white-space:nowrap;
+}
+
+#lotsPage .pv-lot-actions button.secondary-button{
+  background:rgba(51,65,85,.95) !important;
+  color:#e5edff !important;
+  border-color:rgba(148,163,184,.22) !important;
+}
+
+.pv-lots-empty{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px dashed rgba(251,191,36,.28);
+  border-radius:22px;
+  padding:24px;
+  color:#e5edff;
+}
+
+@media(max-width:1180px){
+  .pv-lots-hero{
+    grid-template-columns:1fr;
+  }
+  .pv-lots-hero-metrics{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  .pv-lot-metrics-premium{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:850px){
+  #lotsPage{
+    padding:14px;
+    border-radius:22px;
+  }
+  .pv-lots-hero-metrics,
+  .pv-lots-grid{
+    grid-template-columns:1fr;
+  }
+  .pv-lot-card-head,
+  .pv-lot-top-card,
+  .pv-lot-item{
+    display:block;
+  }
+  .pv-lot-status-wrap{
+    min-width:0;
+    text-align:left;
+    margin-top:12px;
+  }
+  .pv-lot-metrics-premium{
+    grid-template-columns:1fr;
+  }
+  .pv-lot-actions{
+    justify-content:stretch;
+    margin-top:10px;
+  }
+  #lotsPage .pv-lot-actions button{
+    flex:1;
+  }
+}
+
 </style>
 </head>
 
@@ -3318,8 +3710,6 @@ input,select,textarea{
 
 <section id="lotsPage" class="section">
 <div class="box">
-<h2>Lotto builder</h2>
-<p class="small-muted">Qui trovi le carte che l’AI consiglia per lotto. Puoi assegnare un nome lotto e poi filtrare/organizzare le inserzioni.</p>
 <div id="lotsBox"></div>
 </div>
 </section>
@@ -5328,29 +5718,96 @@ return `<select onchange="setLotStatus('${key}', this.value)">${options.map(o =>
 function loadLots(highlightKey){
 let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let groups = buildSmartLotGroups(cards);
-let html = "";
+let totalCards = groups.reduce((sum, group) => sum + group.cards.length, 0);
+let totalValues = groups.reduce((acc, group) => {
+let v = lotSummaryValues(group.cards);
+acc.min += v.min;
+acc.avg += v.avg;
+acc.max += v.max;
+acc.suggested += v.suggested;
+acc.minimum += v.minimum;
+return acc;
+}, {min:0, avg:0, max:0, suggested:0, minimum:0});
+let readyCount = groups.filter(group => {
+let statuses = JSON.parse(localStorage.getItem("lotStatuses")) || {};
+let key = group.key || normalizeLotKey(group.name);
+return statuses[key] === "PRONTO DA LISTARE" || statuses[key] === "LISTATO";
+}).length;
+let bestGroup = groups[0] || null;
+let bestGroupValues = bestGroup ? lotSummaryValues(bestGroup.cards) : null;
+let coachText = groups.length
+  ? `${readyCount} lotti pronti/listati · ${totalCards} carte raggruppate · valore realistico totale ${totalValues.avg.toFixed(2)} € · prezzo suggerito totale ${totalValues.suggested.toFixed(2)} €.`
+  : `Nessun lotto pronto. Marca alcune carte come LOTTO o assegna un nome lotto dalla scheda carta.`;
+
+let html = `<div class="pv-lots-premium">
+  <div class="pv-lots-hero">
+    <div>
+      <span class="pv-lot-kicker">Lot intelligence</span>
+      <h2>Centro operativo lotti</h2>
+      <p>Organizza le carte che conviene vendere insieme, monitora il valore complessivo e prepara inserzioni più leggibili.</p>
+    </div>
+    <div class="pv-lots-hero-metrics">
+      <div><strong>${groups.length}</strong><span>Lotti attivi</span></div>
+      <div><strong>${totalCards}</strong><span>Carte nei lotti</span></div>
+      <div><strong>${totalValues.avg.toFixed(2)} €</strong><span>Valore realistico</span></div>
+      <div><strong>${totalValues.suggested.toFixed(2)} €</strong><span>Prezzo suggerito</span></div>
+    </div>
+  </div>
+  <div class="pv-lots-coach">
+    <strong>Lotto Coach</strong>
+    <p>${coachText}</p>
+  </div>
+  <div class="pv-lots-grid">`;
 
 for(let group of groups){
 let arr = group.cards;
 let key = group.key || normalizeLotKey(group.name);
 let v = lotSummaryValues(arr);
-let highlightStyle = highlightKey && highlightKey === key ? "border:2px solid #2f6fed;box-shadow:0 0 0 4px rgba(47,111,237,0.12);" : "";
-html += `<div class="lot-card" id="lot-${key}" style="${highlightStyle}">
-<h3>${group.name}</h3>
-<p class="small-muted">${arr.length} carte · prudente ${v.min.toFixed(2)} € · realistico ${v.avg.toFixed(2)} € · ottimistico ${v.max.toFixed(2)} €</p>
-<div class="metric-row"><div class="metric-pill"><small>Prezzo suggerito</small><b>${v.suggested.toFixed(2)} €</b></div><div class="metric-pill"><small>Minimo accettabile</small><b>${v.minimum.toFixed(2)} €</b></div><div class="metric-pill"><small>Stato lotto</small>${lotStatusSelect(key)}</div></div>`;
+let highlightClass = highlightKey && highlightKey === key ? " highlight" : "";
+let topCard = arr.slice().sort((a,b)=>cardAiRange(b).avg - cardAiRange(a).avg)[0];
+let topRange = topCard ? cardAiRange(topCard) : {avg:0};
+html += `<div class="pv-lot-premium-card${highlightClass}" id="lot-${key}">
+  <div class="pv-lot-card-head">
+    <div>
+      <span class="pv-lot-kicker">Lotto #${groups.indexOf(group)+1}</span>
+      <h3>${group.name}</h3>
+      <p class="pv-lot-meta-premium">${arr.length} carte · prudente ${v.min.toFixed(2)} € · realistico ${v.avg.toFixed(2)} € · ottimistico ${v.max.toFixed(2)} €</p>
+    </div>
+    <div class="pv-lot-status-wrap"><span>Stato lotto</span>${lotStatusSelect(key)}</div>
+  </div>
+  <div class="pv-lot-metrics-premium">
+    <div><span>Prudente</span><strong>${v.min.toFixed(2)} €</strong></div>
+    <div><span>Realistico</span><strong>${v.avg.toFixed(2)} €</strong></div>
+    <div><span>Ottimistico</span><strong>${v.max.toFixed(2)} €</strong></div>
+    <div><span>Prezzo suggerito</span><strong>${v.suggested.toFixed(2)} €</strong></div>
+    <div><span>Minimo accettabile</span><strong>${v.minimum.toFixed(2)} €</strong></div>
+  </div>`;
+if(topCard){
+html += `<div class="pv-lot-top-card">
+  <div><span>Top card del lotto</span><strong>${topCard.player || "Carta"} ${topCard.parallel || ""} ${topCard.numbering || ""}</strong></div>
+  <em>${topRange.avg.toFixed(2)} €</em>
+</div>`;
+}
+html += `<div class="pv-lot-cards-list">`;
 html += arr.map(c => {
 let r = cardAiRange(c);
-return `<div style="border-top:1px solid #e2e8f0;padding:8px 0;">
-<strong>${c.player || "Carta"}</strong> ${c.parallel || ""} ${c.numbering || ""}<br>
-<span class="small-muted">AI ${r.min.toFixed(2)} / ${r.avg.toFixed(2)} / ${r.max.toFixed(2)} € · ${c.aiSummary || ""}</span><br>
-<button style="width:auto;" onclick="openEditCard(${c.originalIndex})">Apri carta</button>
-<button style="width:auto;" class="secondary-button" onclick="removeCardFromLot(${c.originalIndex})">Rimuovi dal lotto</button>
+return `<div class="pv-lot-item">
+  <div>
+    <strong>${c.player || "Carta"} ${c.parallel || ""} ${c.numbering || ""}</strong>
+    <span>AI ${r.min.toFixed(2)} / ${r.avg.toFixed(2)} / ${r.max.toFixed(2)} € · ${c.aiSummary || ""}</span>
+  </div>
+  <div class="pv-lot-actions">
+    <button onclick="openEditCard(${c.originalIndex})">Visualizza</button>
+    <button class="secondary-button" onclick="removeCardFromLot(${c.originalIndex})">Rimuovi</button>
+  </div>
 </div>`;
 }).join("");
-html += `</div>`;
+html += `</div></div>`;
 }
-if(!html){ html = `<div class="card">Nessun lotto suggerito. Le carte marcate LOTTO vengono raggruppate solo se formano un lotto sensato; i micro-lotti da una carta vengono nascosti o fusi.</div>`; }
+if(!groups.length){
+html += `<div class="pv-lots-empty"><strong>Nessun lotto suggerito.</strong><p>Le carte marcate LOTTO vengono raggruppate solo se formano un lotto sensato; i micro-lotti da una carta vengono nascosti o fusi.</p></div>`;
+}
+html += `</div></div>`;
 document.getElementById("lotsBox").innerHTML = html;
 }
 
