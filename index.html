@@ -2956,6 +2956,211 @@ input,select,textarea{
   }
 }
   
+
+/* Watchlist Add Target Premium · scoped form restyle */
+#watchlistPage .pv-watch-add-card{
+  position:relative;
+  overflow:hidden;
+  margin:18px 0 20px;
+  padding:22px;
+  border-radius:28px;
+  color:#e5edff;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(37,99,235,.24), transparent 34%),
+    radial-gradient(circle at 0% 100%, rgba(124,58,237,.18), transparent 32%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98));
+  border:1px solid rgba(96,165,250,.20);
+  box-shadow:0 22px 58px rgba(15,23,42,.22), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+#watchlistPage .pv-watch-add-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:6px;
+  background:linear-gradient(180deg,#2563eb,#7c3aed,#06b6d4);
+}
+
+#watchlistPage .pv-watch-add-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+  margin-bottom:18px;
+}
+
+#watchlistPage .pv-watch-add-kicker{
+  display:block;
+  color:#60a5fa;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:7px;
+}
+
+#watchlistPage .pv-watch-add-head h3{
+  margin:0 0 6px;
+  color:#fff !important;
+  font-size:30px;
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+
+#watchlistPage .pv-watch-add-head p{
+  margin:0;
+  max-width:620px;
+  color:#b8c7e6 !important;
+  font-size:14px;
+  line-height:1.45;
+}
+
+#watchlistPage .pv-watch-add-badge{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:8px 12px;
+  border-radius:999px;
+  color:#bfdbfe;
+  background:rgba(37,99,235,.18);
+  border:1px solid rgba(147,197,253,.22);
+  font-size:12px;
+  font-weight:900;
+}
+
+#watchlistPage .pv-watch-add-layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#watchlistPage .pv-watch-add-panel,
+#watchlistPage .pv-watch-add-notes{
+  min-width:0;
+  background:rgba(2,6,23,.34);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:22px;
+  padding:16px;
+}
+
+#watchlistPage .pv-watch-add-panel-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+#watchlistPage .pv-watch-add-panel-title span{
+  width:30px;
+  height:30px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:rgba(37,99,235,.20);
+  border:1px solid rgba(147,197,253,.18);
+  color:#bfdbfe;
+  font-size:11px;
+  font-weight:900;
+}
+
+#watchlistPage .pv-watch-add-panel-title strong{
+  color:#fff !important;
+  font-size:15px;
+  letter-spacing:-.01em;
+}
+
+#watchlistPage .pv-watch-add-fields{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+#watchlistPage .pv-watch-add-wide{
+  grid-column:1/-1;
+}
+
+#watchlistPage .pv-watch-add-card label{
+  display:block;
+  margin:0 0 6px;
+  color:#93c5fd;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+#watchlistPage .pv-watch-add-card input,
+#watchlistPage .pv-watch-add-card select,
+#watchlistPage .pv-watch-add-card textarea{
+  width:100%;
+  margin:0 !important;
+  background:rgba(8,20,38,.92) !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  color:#e5edff !important;
+  border-radius:16px !important;
+  box-shadow:none !important;
+}
+
+#watchlistPage .pv-watch-add-card input::placeholder,
+#watchlistPage .pv-watch-add-card textarea::placeholder{
+  color:#64748b;
+}
+
+#watchlistPage .pv-watch-add-card option{
+  background:#081426;
+  color:#e5edff;
+}
+
+#watchlistPage .pv-watch-add-notes{
+  margin-top:16px;
+}
+
+#watchlistPage .pv-watch-add-notes textarea{
+  min-height:112px;
+  resize:vertical;
+}
+
+#watchlistPage .pv-watch-add-actions{
+  display:grid;
+  grid-template-columns:1.2fr .9fr .7fr;
+  gap:10px;
+  margin-top:16px;
+}
+
+#watchlistPage .pv-watch-add-actions button{
+  width:100% !important;
+  min-height:44px;
+  margin:0 !important;
+  border-radius:16px !important;
+  font-weight:900;
+}
+
+@media(max-width:900px){
+  #watchlistPage .pv-watch-add-layout,
+  #watchlistPage .pv-watch-add-actions{
+    grid-template-columns:1fr;
+  }
+
+  #watchlistPage .pv-watch-add-head{
+    display:block;
+  }
+
+  #watchlistPage .pv-watch-add-badge{
+    margin-top:12px;
+  }
+
+  #watchlistPage .pv-watch-add-fields{
+    grid-template-columns:1fr;
+  }
+
+  #watchlistPage .pv-watch-add-head h3{
+    font-size:26px;
+  }
+}
+
 </style>
 </head>
 
@@ -3043,20 +3248,56 @@ input,select,textarea{
 <div class="box">
 <div class="section-title-row"><div><h2 style="margin:0;">Watchlist</h2><p class="page-subtitle">Giocatori e carte da monitorare prima dell'acquisto. È il ponte tra scouting e portfolio reale.</p></div></div>
 <input type="hidden" id="watchEditIndex">
-<div class="form-card football">
-<h3>Aggiungi target</h3>
-<p class="helper">Inserisci giocatori/carte che vuoi seguire. Quando acquisti, usa “Porta nel portfolio”.</p>
-<div class="watch-form">
+<div class="pv-watch-add-card">
+<div class="pv-watch-add-head">
+<div>
+<span class="pv-watch-add-kicker">Scouting desk</span>
+<h3>Scouting Target</h3>
+<p>Registra un giocatore o una carta da seguire prima dell'acquisto. Quando diventa interessante, portalo nel portfolio.</p>
+</div>
+<div class="pv-watch-add-badge">Watchlist</div>
+</div>
+
+<div class="pv-watch-add-layout">
+<div class="pv-watch-add-panel">
+<div class="pv-watch-add-panel-title">
+<span>01</span>
+<strong>Identità target</strong>
+</div>
+<div class="pv-watch-add-fields">
 <div><label>Giocatore</label><input id="watchPlayer" placeholder="es. Max Dowman"></div>
 <div><label>Club</label><input id="watchClub" placeholder="Arsenal / Barcelona"></div>
 <div><label>Età</label><input id="watchAge" placeholder="es. 15"></div>
 <div><label>Categoria</label><select id="watchCategory"><option value="Prospect">Prospect</option><option value="Rookie">Rookie</option><option value="Breakout">Breakout</option><option value="Undervalued">Undervalued</option><option value="Speculative">Speculative</option></select></div>
+</div>
+</div>
+
+<div class="pv-watch-add-panel">
+<div class="pv-watch-add-panel-title">
+<span>02</span>
+<strong>Strategia acquisto</strong>
+</div>
+<div class="pv-watch-add-fields">
 <div><label>Target buy €</label><input id="watchTargetPrice" placeholder="es. 15"></div>
 <div><label>Priorità</label><select id="watchPriority"><option value="Medium">Medium</option><option value="High">High</option><option value="Low">Low</option></select></div>
-<div><label>Status</label><select id="watchStatus"><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+<div class="pv-watch-add-wide"><label>Status</label><select id="watchStatus"><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
+</div>
+</div>
+</div>
+
+<div class="pv-watch-add-notes">
+<div class="pv-watch-add-panel-title">
+<span>03</span>
+<strong>Note scouting</strong>
+</div>
 <textarea id="watchNotes" placeholder="Motivo interesse, evento da controllare, carta target, link utili..."></textarea>
 </div>
-<div class="action-row"><button onclick="saveWatchTarget()">Salva target</button><button class="secondary-button" onclick="updateWatchTarget()">Aggiorna target</button><button class="ghost-button" onclick="resetWatchForm()">Reset</button></div>
+
+<div class="pv-watch-add-actions">
+<button onclick="saveWatchTarget()">Salva target</button>
+<button class="secondary-button" onclick="updateWatchTarget()">Aggiorna target</button>
+<button class="ghost-button" onclick="resetWatchForm()">Reset</button>
+</div>
 </div>
 <div class="toolbar"><input class="search-input" id="watchSearch" placeholder="Cerca watchlist..." onkeyup="loadWatchlist()"><select id="watchPriorityFilter" onchange="loadWatchlist()"><option value="ALL">Tutte le priorità</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select><select id="watchStatusFilter" onchange="loadWatchlist()"><option value="ALL">Tutti gli status</option><option value="Monitoring">Monitoring</option><option value="Buy if dip">Buy if dip</option><option value="Ready to buy">Ready to buy</option><option value="Hold observation">Hold observation</option><option value="Remove">Remove</option></select></div>
 <div id="watchlist" class="watchlist-grid"></div>
