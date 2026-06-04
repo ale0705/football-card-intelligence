@@ -6539,7 +6539,7 @@ if(setName){ return `Lotto ${setName}`; }
 return "Lotto low value football";
 }
 
-function lotSummaryValues(arr){
+function lotSummaryValues(arr, scenario){
 let totals = arr.reduce((acc, card) => {
 let r = cardAiRange(card);
 acc.min += r.min;
@@ -6547,9 +6547,14 @@ acc.avg += r.avg;
 acc.max += r.max;
 return acc;
 }, {min:0, avg:0, max:0});
-let suggested = totals.avg * 0.75;
-let minimum = totals.avg * 0.60;
-return {...totals, suggested, minimum};
+let activeScenario = scenario || "avg";
+let scenarioValue = totals.avg;
+if(activeScenario === "min"){ scenarioValue = totals.min || totals.avg || totals.max; }
+if(activeScenario === "max"){ scenarioValue = totals.max || totals.avg || totals.min; }
+if(activeScenario === "avg"){ scenarioValue = totals.avg || ((totals.min && totals.max) ? (totals.min + totals.max) / 2 : (totals.max || totals.min || 0)); }
+let suggested = scenarioValue * 0.75;
+let minimum = scenarioValue * 0.60;
+return {...totals, scenarioValue, suggested, minimum};
 }
 
 function guessFootballLotGroupName(card){
@@ -7129,6 +7134,14 @@ if(est > 0){ return est; }
 return 0;
 }
 
+function dashboardScenarioLabel(){
+let scenario = getDashboardScenario();
+if(scenario === "min"){ return "prudente"; }
+if(scenario === "max"){ return "ottimistico"; }
+return "realistico";
+}
+
+
 function normalizeClubName(value){
 let raw = (value || "").trim();
 let v = raw.toLowerCase();
@@ -7691,14 +7704,17 @@ ${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, 
   </div>
 
   <div class="pv-lot-grid">
-    ${buildSmartLotGroups(cards).slice(0,4).map(group => {
-      let v = lotSummaryValues(group.cards);
+    ${buildSmartLotGroups(cards)
+      .sort((a,b)=>lotSummaryValues(b.cards, getDashboardScenario()).scenarioValue - lotSummaryValues(a.cards, getDashboardScenario()).scenarioValue)
+      .slice(0,4).map(group => {
+      let v = lotSummaryValues(group.cards, getDashboardScenario());
       let key = group.key || normalizeLotKey(group.name);
+      let scenarioLabel = dashboardScenarioLabel();
       return `
         <div class="pv-lot-card" onclick="openLotDetail('${key}')">
           <span>LOTTO</span>
           <strong>${group.name}</strong>
-          <div class="pv-lot-meta">${group.cards.length} carte · realistico ${v.avg.toFixed(2)} €</div>
+          <div class="pv-lot-meta">${group.cards.length} carte · scenario ${scenarioLabel} ${v.scenarioValue.toFixed(2)} €</div>
           <div class="pv-lot-price">
             <div><small>Annuncio</small><b>${v.suggested.toFixed(2)} €</b></div>
             <div><small>Minimo</small><b>${v.minimum.toFixed(2)} €</b></div>
