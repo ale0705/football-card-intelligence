@@ -4343,6 +4343,131 @@ input,select,textarea{
   }
 }
 
+
+/* AI Scan 2.0 guided flow */
+.pv-ai-scan-card{
+  position:relative;
+  overflow:hidden;
+}
+.pv-ai-scan-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:6px;
+  background:linear-gradient(180deg,#7c3aed,#06b6d4);
+}
+.pv-ai-scan-status{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding:12px 14px;
+  margin:12px 0;
+  border-radius:16px;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  border:1px solid rgba(99,102,241,.22);
+  color:#172554;
+}
+.pv-ai-scan-status strong{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.pv-ai-scan-status span{
+  color:#475569;
+  font-size:13px;
+  text-align:right;
+}
+.pv-ai-scan-status.ok{
+  background:linear-gradient(135deg,#dcfce7,#f8fafc);
+  border-color:rgba(22,163,74,.24);
+}
+.pv-ai-scan-status.warn{
+  background:linear-gradient(135deg,#fef3c7,#f8fafc);
+  border-color:rgba(245,158,11,.28);
+}
+.pv-ai-scan-status.bad{
+  background:linear-gradient(135deg,#fee2e2,#f8fafc);
+  border-color:rgba(220,38,38,.22);
+}
+.pv-ai-scan-workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:12px 0;
+}
+.pv-ai-step{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:12px;
+  min-height:112px;
+}
+.pv-ai-step b{
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  margin-bottom:9px;
+}
+.pv-ai-step strong{
+  display:block;
+  color:#0f172a;
+  font-size:13px;
+  margin-bottom:4px;
+}
+.pv-ai-step span{
+  color:#64748b;
+  font-size:12px;
+  line-height:1.35;
+}
+.pv-ai-actions-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:12px 0;
+}
+.pv-ai-actions-grid button{
+  width:100%;
+}
+.pv-ai-help-box{
+  margin:12px 0;
+  padding:14px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px dashed #cbd5e1;
+  color:#334155;
+  font-size:13px;
+}
+.pv-ai-help-box ol{
+  margin:8px 0 0 18px;
+  padding:0;
+  line-height:1.6;
+}
+@media(max-width:900px){
+  .pv-ai-scan-workflow,
+  .pv-ai-actions-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media(max-width:620px){
+  .pv-ai-scan-status{
+    display:block;
+  }
+  .pv-ai-scan-status span{
+    display:block;
+    text-align:left;
+    margin-top:6px;
+  }
+  .pv-ai-scan-workflow,
+  .pv-ai-actions-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
 
@@ -4418,15 +4543,34 @@ input,select,textarea{
 <div class="form-card manual"><h3>1 · Dati da compilare a mano</h3><p class="helper">La parte minima per registrare la carta. Il resto può arrivare dall’AI Scan.</p><div class="field-grid">
 <div><label>Giocatore</label><input id="player" placeholder="es. Roony Bardghji"></div><div><label>Set / prodotto</label><input id="set" placeholder="es. Topps Chrome UEFA"></div><div><label>Parallel</label><input id="parallel" placeholder="es. Aqua / Refractor"></div><div><label>Numerazione</label><input id="numbering" placeholder="es. /199"></div><div><label>Prezzo pagato</label><input id="paid" placeholder="es. pull oppure 20"></div><div><label>Valore stimato manuale</label><input id="estimated" placeholder="facoltativo"></div><div><label>Data inserimento</label><input id="dateAdded" type="date"></div><div><label>Box di provenienza</label><select id="boxId"><option value="">Nessun box / acquisto singolo</option></select></div><div><label>Foto carta</label><input id="imageFile" type="file" accept="image/*"></div><div><label>Status collezione</label><select id="status"><option value="HOLD">HOLD</option><option value="MONITOR">MONITOR</option><option value="SELL">SELL</option><option value="SOLD">VENDUTA</option></select></div>
 </div></div>
-<div class="form-card ai-auto"><h3>2 · AI Scan e import automatico</h3><p class="helper">1 click: AI Scan copia il prompt, apre la foto e apre AI Mode. Poi trascina la foto nella chat, incolla il prompt e copia qui il BLOCCO WEBAPP.</p><div class="action-row"><button type="button" onclick="aiScanCurrentCard()">🧠 Avvia AI Scan completo</button><button type="button" class="secondary-button" onclick="copyAIPrompt()">Copia prompt</button><button type="button" class="ghost-button" onclick="visualSearchCurrentCard()">Apri foto</button></div><div style="margin:10px 0;padding:12px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;color:#334155;font-size:13px;line-height:1.45;">
-<strong>Dopo AI Scan:</strong><br>
-1. Trascina la foto nella chat AI.<br>
-2. Incolla il prompt già copiato.<br>
-3. Copia solo il <b>BLOCCO WEBAPP</b> dalla risposta.<br>
-4. Incollalo qui sotto e premi <b>Estrai dati AI</b>.
+<div class="form-card ai-auto pv-ai-scan-card"><h3>2 · AI Scan 2.0 guidato</h3><p class="helper">Flusso assistito: prepara il prompt, apre la foto, apre AI Mode e importa il BLOCCO WEBAPP con meno passaggi manuali.</p>
+<div class="pv-ai-scan-status" id="aiScanStatus"><strong>Pronto</strong><span>Carica una foto o apri una carta salvata, poi avvia AI Scan.</span></div>
+<div class="pv-ai-scan-workflow">
+  <div class="pv-ai-step"><b>1</b><strong>Avvia scan</strong><span>Copia prompt, apre foto e apre AI Mode.</span></div>
+  <div class="pv-ai-step"><b>2</b><strong>Trascina foto</strong><span>Porta la foto aperta dentro la chat AI.</span></div>
+  <div class="pv-ai-step"><b>3</b><strong>Incolla prompt</strong><span>Il prompt è già negli appunti.</span></div>
+  <div class="pv-ai-step"><b>4</b><strong>Importa blocco</strong><span>Copia il BLOCCO WEBAPP e premi Estrai.</span></div>
+</div>
+<div class="pv-ai-actions-grid">
+  <button type="button" onclick="aiScanCurrentCard()">🧠 Avvia AI Scan guidato</button>
+  <button type="button" class="secondary-button" onclick="copyAIPrompt()">📋 Copia prompt</button>
+  <button type="button" class="ghost-button" onclick="visualSearchCurrentCard()">🖼️ Apri foto</button>
+  <button type="button" class="ghost-button" onclick="openAIModePage()">🤖 Apri AI Mode</button>
+</div>
+<div class="pv-ai-help-box">
+  <strong>Procedura consigliata</strong>
+  <ol>
+    <li>Premi <b>Avvia AI Scan guidato</b>.</li>
+    <li>Se il browser lo chiede, consenti popup e appunti.</li>
+    <li>Trascina la foto nella chat AI e incolla il prompt.</li>
+    <li>Copia solo il <b>BLOCCO WEBAPP</b> dalla risposta.</li>
+    <li>Incollalo qui sotto e premi <b>Estrai dati AI</b>.</li>
+  </ol>
 </div>
 <label>Analisi AI / BLOCCO WEBAPP</label>
-<textarea id="aiAnalysis" placeholder="Incolla qui solo il BLOCCO WEBAPP generato dall’AI"></textarea><div class="action-row"><button type="button" onclick="extractAIValuationFromText()">📌 Estrai dati AI</button></div><div class="field-grid"><div><label>AI min €</label><input id="aiMin" placeholder="min"></div><div><label>AI medio €</label><input id="aiAvg" placeholder="medio"></div><div><label>AI max €</label><input id="aiMax" placeholder="max"></div><div><label>Liquidità</label><select id="aiLiquidity"><option value="">Liquidità</option><option value="BASSA">BASSA</option><option value="MEDIA">MEDIA</option><option value="ALTA">ALTA</option></select></div><div><label>Consiglio AI</label><select id="aiAdvice"><option value="">Consiglio AI</option><option value="LOTTO">LOTTO</option><option value="VENDI SINGOLA">VENDI SINGOLA</option><option value="HOLD">HOLD</option><option value="MONITORA">MONITORA</option></select></div><div><label>Sintesi breve</label><input id="aiSummary" placeholder="es. 2-5€, meglio in lotto"></div></div><div id="aiHistoryBox" class="card" style="display:none;background:#f8fafc;margin-top:10px;"></div></div>
+<textarea id="aiAnalysis" placeholder="Incolla qui solo il BLOCCO WEBAPP generato dall’AI"></textarea>
+<div class="action-row"><button type="button" onclick="extractAIValuationFromText()">📌 Estrai dati AI</button><button type="button" class="ghost-button" onclick="clearAIBlockInput()">Pulisci blocco</button></div>
+<div class="field-grid"><div><label>AI min €</label><input id="aiMin" placeholder="min"></div><div><label>AI medio €</label><input id="aiAvg" placeholder="medio"></div><div><label>AI max €</label><input id="aiMax" placeholder="max"></div><div><label>Liquidità</label><select id="aiLiquidity"><option value="">Liquidità</option><option value="BASSA">BASSA</option><option value="MEDIA">MEDIA</option><option value="ALTA">ALTA</option></select></div><div><label>Consiglio AI</label><select id="aiAdvice"><option value="">Consiglio AI</option><option value="LOTTO">LOTTO</option><option value="VENDI SINGOLA">VENDI SINGOLA</option><option value="HOLD">HOLD</option><option value="MONITORA">MONITORA</option></select></div><div><label>Sintesi breve</label><input id="aiSummary" placeholder="es. 2-5€, meglio in lotto"></div></div><div id="aiHistoryBox" class="card" style="display:none;background:#f8fafc;margin-top:10px;"></div></div>
 <div class="form-card market"><h3>3 · Query e ricerche mercato</h3><p class="helper">Campi riempiti dall’AI per controllare eBay, venduti e 130Point.</p><label>Query precisa / titolo migliore</label><textarea id="aiQuery" placeholder="Query principale estratta dall'analisi AI"></textarea><div class="field-grid"><div><label>Query ampia</label><textarea id="aiQueryWide" placeholder="Query ampia"></textarea></div><div><label>Query venduti</label><textarea id="aiQuerySold" placeholder="Query venduti/completed"></textarea></div><div><label>Parole da escludere</label><input id="aiExclude" placeholder="box case pack sealed lot"></div><div><label>Escludi manuale</label><input id="exclude" placeholder="auto sapphire gold"></div></div><div class="action-row"><button type="button" class="secondary-button" onclick="searchAIQueryType('precise')">Cerca precisa</button><button type="button" class="secondary-button" onclick="searchAIQueryType('wide')">Cerca ampia</button><button type="button" class="secondary-button" onclick="searchAIQueryType('sold')">Cerca venduti</button></div></div>
 <div class="form-card football"><h3>4 · Football layer</h3><p class="helper">Dati calcio per club exposure, academy radar, prospect e lotti più sensati.</p><div class="field-grid"><div><label>Club</label><input id="club" placeholder="Barcelona / Arsenal / Milan"></div><div><label>Competizione</label><select id="competition"><option value="">Competizione</option><option value="Club Competitions">Club Competitions</option><option value="Champions League">Champions League</option><option value="Domestic League">Domestic League</option><option value="National Team">National Team</option><option value="Youth / Academy">Youth / Academy</option><option value="Friendly / Other">Friendly / Other</option></select></div><div><label>Prospect level</label><select id="prospectLevel"><option value="">Prospect level</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select></div><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="rookieFlag" type="checkbox" style="width:auto;margin-right:8px;"> Rookie card</label><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="academyFlag" type="checkbox" style="width:auto;margin-right:8px;"> Academy monitored</label></div></div>
 <div class="form-card sales"><h3>5 · Strategia e vendita</h3><p class="helper">Compila solo per listing, lotto, vendita reale o monitoraggio futuro.</p><div class="field-grid"><div><label>Strategia vendita</label><select id="saleStrategy"><option value="">Automatica da AI</option><option value="SINGOLA">Singola</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option></select></div><div><label>Nome lotto</label><input id="lotGroup" placeholder="Barça low value / Rookie lotto"></div><div><label>Stato vendita</label><select id="saleStatus"><option value="IN_PORTFOLIO">In portfolio</option><option value="LISTED">In vendita</option><option value="SOLD">Venduta</option><option value="SHIPPED">Spedita</option></select></div><div><label>Prezzo annuncio</label><input id="listingPrice" placeholder="es. 9.99"></div><div><label>Prezzo vendita reale</label><input id="salePrice" placeholder="es. 60"></div><div><label>Fee / commissioni</label><input id="saleFees" placeholder="es. 1.20"></div><div><label>Spedizione a tuo carico</label><input id="shippingCost" placeholder="es. 1.50"></div><div><label>Data vendita</label><input id="soldDate" type="date"></div><div><label>Data spedizione</label><input id="shippedDate" type="date"></div><div><label>Motivo monitoraggio</label><input id="watchReason" placeholder="primo gol / trasferimento / hype"></div><div><label>Prossima rivalutazione</label><input id="nextReviewDate" type="date"></div></div></div>
@@ -4796,6 +4940,30 @@ alert(message.replace(/<[^>]*>/g, ""));
 }
 }
 
+function setAIScanStatus(title, message, type){
+let box = document.getElementById("aiScanStatus");
+if(!box){ return; }
+box.className = "pv-ai-scan-status" + (type ? " " + type : "");
+box.innerHTML = `<strong>${title || "AI Scan"}</strong><span>${message || ""}</span>`;
+}
+
+function clearAIBlockInput(){
+let el = document.getElementById("aiAnalysis");
+if(el){ el.value = ""; }
+setAIScanStatus("Pulito", "Campo BLOCCO WEBAPP svuotato. Puoi incollare una nuova risposta AI.", "ok");
+}
+
+function hasCurrentCardPhoto(){
+let fileInput = document.getElementById("imageFile");
+if(fileInput && fileInput.files && fileInput.files[0]){ return true; }
+let index = document.getElementById("editIndex")?.value;
+if(index !== ""){
+  let cards = JSON.parse(localStorage.getItem("cards")) || [];
+  return !!(cards[index] && cards[index].image);
+}
+return false;
+}
+
 function fallbackCopyText(text){
 let textarea = document.createElement("textarea");
 textarea.value = text;
@@ -4831,6 +4999,7 @@ else{ alert("Copia non riuscita. Seleziona e copia manualmente:\n\n" + text); }
 function copyAIPrompt(){
 let prompt = buildAIPrompt();
 copyText(prompt, "Prompt AI copiato. Ora apri AI Mode, carica la foto e incolla il prompt.");
+setAIScanStatus("Prompt copiato", "Ora apri AI Mode, trascina la foto e incolla il prompt.", "ok");
 }
 
 function copyCurrentAIQuery(){
@@ -4845,8 +5014,12 @@ copyText(query, "Query copiata.");
 function openAIModePage(){
 let win = window.open("https://www.google.com/search?udm=50", "_blank");
 if(!win){
+setAIScanStatus("Popup bloccato", "Consenti i popup per questa pagina oppure apri manualmente Google AI Mode.", "bad");
 alert("Popup bloccato: consenti i popup oppure apri manualmente Google AI Mode.");
+return false;
 }
+setAIScanStatus("AI Mode aperto", "Trascina la foto nella chat AI e incolla il prompt copiato.", "ok");
+return true;
 }
 
 
@@ -4856,13 +5029,16 @@ let card = cards[index];
 if(!card){return;}
 let prompt = buildAIPrompt(card);
 copyText(prompt, "Prompt AI Scan copiato. Ora carica/trascina la foto in AI Mode e incolla il prompt.");
+setAIScanStatus("Prompt copiato", "Foto aperta se disponibile. Ora trascinala in AI Mode e incolla il prompt.", "ok");
 }
 
 function aiScanCard(index){
 let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let card = cards[index];
 if(!card){return;}
+setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto salvata e poi AI Mode.", "warn");
 if(card.image){ openImagePreview(card.image, card.player || "Foto carta"); }
+else{ setAIScanStatus("Foto mancante", "Prompt copiato, ma questa carta non ha una foto salvata.", "warn"); }
 copyAIPromptForCard(index);
 setTimeout(openAIModePage, 400);
 }
@@ -4873,9 +5049,14 @@ if(index !== ""){
 let cards = JSON.parse(localStorage.getItem("cards")) || [];
 if(cards[index]){ aiScanCard(parseInt(index)); return; }
 }
+setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto caricata e poi AI Mode.", "warn");
 copyAIPrompt();
-visualSearchCurrentCard();
-setTimeout(openAIModePage, 400);;
+if(hasCurrentCardPhoto()){
+  visualSearchCurrentCard();
+}else{
+  setAIScanStatus("Foto non ancora caricata", "Prompt copiato. Puoi comunque aprire AI Mode, ma per l’analisi serve la foto.", "warn");
+}
+setTimeout(openAIModePage, 400);
 }
 
 function normalizeMoneyText(value){
@@ -4975,6 +5156,7 @@ return "";
 function extractAIValuationFromText(){
 let text = document.getElementById("aiAnalysis")?.value || "";
 if(!text.trim()){
+setAIScanStatus("Blocco mancante", "Incolla prima il BLOCCO WEBAPP generato da AI Mode.", "bad");
 alert("Incolla prima la risposta completa di AI Mode nel campo Analisi AI completa.");
 return;
 }
@@ -5021,6 +5203,7 @@ if(wideQuery){ found.push("query ampia"); }
 if(soldQuery){ found.push("query venduti"); }
 if(excludes){ found.push("esclusioni"); }
 showTempMessage("Analisi AI importata: mini scheda" + (found.length ? " + " + found.join(", ") : "") + ". Controlla e clicca Aggiorna Carta.");
+setAIScanStatus("Dati AI importati", "Valori, strategia e query compilati. Controlla i campi e salva o aggiorna la carta.", "ok");
 }
 
 function renderAIMiniCard(card){
@@ -5681,6 +5864,7 @@ reader.onload = function(e){
 resizeImage(e.target.result, function(resized){
 let title = buildQuery(false) || "Foto carta";
 openVisualSearchTools(resized, title);
+setAIScanStatus("Foto aperta", "Trascina questa immagine dentro AI Mode.", "ok");
 });
 };
 reader.readAsDataURL(file);
@@ -5693,6 +5877,7 @@ visualSearchCard(parseInt(index));
 return;
 }
 
+setAIScanStatus("Foto mancante", "Carica una foto o apri una carta già salvata prima di usare la ricerca visuale.", "bad");
 alert("Carica una foto o apri una carta già salvata prima di usare la ricerca visuale.");
 }
 
