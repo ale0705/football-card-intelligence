@@ -2823,6 +2823,138 @@ input,select,textarea{
     grid-template-columns:1fr;
   }
 }
+/* Watchlist Premium v2 · full width layout correction */
+#watchlist{
+  width:100% !important;
+  max-width:none !important;
+  display:block !important;
+}
+
+#watchlist .pv-watch-premium{
+  width:100% !important;
+  max-width:none !important;
+  display:grid !important;
+  gap:22px !important;
+}
+
+#watchlist .pv-watch-hero{
+  width:100% !important;
+  max-width:none !important;
+  display:grid !important;
+  grid-template-columns:minmax(320px,.9fr) minmax(520px,1.4fr) !important;
+  gap:24px !important;
+  align-items:stretch !important;
+  padding:28px !important;
+}
+
+#watchlist .pv-watch-hero > div:first-child{
+  min-width:0 !important;
+}
+
+#watchlist .pv-watch-hero h2{
+  font-size:36px !important;
+  line-height:1.02 !important;
+  max-width:420px !important;
+}
+
+#watchlist .pv-watch-hero p{
+  max-width:420px !important;
+  line-height:1.45 !important;
+}
+
+#watchlist .pv-watch-hero-metrics{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(120px,1fr)) !important;
+  gap:12px !important;
+  min-width:0 !important;
+}
+
+#watchlist .pv-watch-hero-metrics div{
+  min-width:0 !important;
+  min-height:110px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  padding:16px !important;
+}
+
+#watchlist .pv-watch-hero-metrics strong{
+  font-size:30px !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+}
+
+#watchlist .pv-watch-hero-metrics span{
+  font-size:10px !important;
+  line-height:1.25 !important;
+  word-break:normal !important;
+}
+
+#watchlist .pv-watch-coach{
+  width:100% !important;
+  max-width:none !important;
+}
+
+#watchlist .pv-watch-grid{
+  width:100% !important;
+  max-width:none !important;
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(420px,1fr)) !important;
+  gap:18px !important;
+}
+
+#watchlist .pv-watch-card{
+  min-height:0 !important;
+  grid-template-columns:60px minmax(0,1fr) !important;
+  gap:16px !important;
+  padding:20px !important;
+}
+
+#watchlist .pv-watch-title-row h3{
+  font-size:26px !important;
+  line-height:1.04 !important;
+}
+
+#watchlist .pv-watch-metrics{
+  grid-template-columns:repeat(3,minmax(110px,1fr)) !important;
+}
+
+#watchlist .pv-watch-actions{
+  grid-template-columns:repeat(3,minmax(110px,1fr)) !important;
+}
+
+#watchlist .pv-watch-actions button{
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+
+@media(max-width:1180px){
+  #watchlist .pv-watch-hero{
+    grid-template-columns:1fr !important;
+  }
+
+  #watchlist .pv-watch-hero-metrics{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:850px){
+  #watchlist .pv-watch-hero-metrics{
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  #watchlist .pv-watch-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #watchlist .pv-watch-metrics{
+    grid-template-columns:1fr !important;
+  }
+
+  #watchlist .pv-watch-actions{
+    grid-template-columns:1fr !important;
+  }
+}
   
 </style>
 </head>
