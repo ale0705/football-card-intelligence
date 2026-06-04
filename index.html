@@ -3161,6 +3161,383 @@ input,select,textarea{
   }
 }
 
+
+/* Vendite Premium v1 */
+#soldPage{
+  background:
+    radial-gradient(circle at 82% 0%, rgba(34,197,94,.16), transparent 31%),
+    linear-gradient(180deg,#061126 0%,#081427 58%,#0b1220 100%);
+  padding:24px;
+  border-radius:28px;
+  color:#e5edff;
+}
+
+#soldPage .box{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  overflow:visible !important;
+}
+
+#soldPage h2,
+#soldPage h3,
+#soldPage strong{
+  color:#f8fbff !important;
+}
+
+#soldPage p,
+#soldPage .small-muted{
+  color:#aebdda !important;
+}
+
+.pv-sales-premium{
+  display:grid;
+  gap:18px;
+}
+
+.pv-sales-hero{
+  display:grid;
+  grid-template-columns:minmax(320px,.9fr) minmax(560px,1.4fr);
+  gap:24px;
+  align-items:stretch;
+  padding:28px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(34,197,94,.24), transparent 30%),
+    linear-gradient(135deg,#020617 0%,#10201b 48%,#166534 100%);
+  border:1px solid rgba(134,239,172,.22);
+  box-shadow:0 30px 80px rgba(34,197,94,.16);
+}
+
+.pv-sales-hero h2{
+  margin:5px 0 7px !important;
+  color:#fff !important;
+  font-size:36px !important;
+  line-height:1.02 !important;
+  letter-spacing:-.05em !important;
+  max-width:460px;
+}
+
+.pv-sales-hero p{
+  max-width:470px;
+  line-height:1.45;
+  margin:0 !important;
+  color:#bbf7d0 !important;
+}
+
+.pv-sales-hero-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(120px,1fr));
+  gap:12px;
+  min-width:0;
+}
+
+.pv-sales-hero-metrics div{
+  min-width:0;
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:16px;
+  background:rgba(2,6,23,.36);
+  border:1px solid rgba(187,247,208,.15);
+  border-radius:18px;
+}
+
+.pv-sales-hero-metrics strong{
+  display:block;
+  color:#fff !important;
+  font-size:30px;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pv-sales-hero-metrics span{
+  display:block;
+  color:#4ade80;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-top:8px;
+  line-height:1.25;
+}
+
+.pv-sales-coach{
+  background:linear-gradient(135deg,rgba(187,247,208,.12),rgba(255,255,255,.04));
+  border:1px solid rgba(134,239,172,.20);
+  border-left:6px solid #22c55e;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 18px 42px rgba(0,0,0,.20);
+}
+
+.pv-sales-coach strong{
+  font-size:17px;
+}
+
+.pv-sales-coach p{
+  margin:8px 0 0 !important;
+  color:#dcfce7 !important;
+  font-weight:700;
+}
+
+.pv-sales-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
+  gap:18px;
+}
+
+.pv-sale-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98));
+  border:1px solid rgba(96,165,250,.18);
+  border-radius:26px;
+  padding:18px;
+  box-shadow:0 22px 58px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.035);
+  color:#e5edff;
+  overflow:hidden;
+  position:relative;
+}
+
+.pv-sale-card:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:6px;
+  background:linear-gradient(#22c55e,#06b6d4);
+}
+
+.pv-sale-card.sale-negative:before{
+  background:linear-gradient(#ef4444,#f97316);
+}
+
+.pv-sale-top{
+  display:grid;
+  grid-template-columns:112px 1fr;
+  gap:16px;
+  align-items:start;
+}
+
+.pv-sale-img,
+.pv-sale-placeholder{
+  width:112px;
+  height:150px;
+  border-radius:18px;
+  border:1px solid rgba(147,197,253,.16);
+  background:#020617;
+  object-fit:cover;
+}
+
+.pv-sale-placeholder{
+  display:grid;
+  place-items:center;
+  font-size:34px;
+}
+
+.pv-sale-kicker{
+  display:block;
+  color:#22c55e;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  margin-bottom:7px;
+}
+
+.pv-sale-title{
+  margin:0 0 5px !important;
+  font-size:21px !important;
+  line-height:1.08;
+  letter-spacing:-.035em;
+  color:#fff !important;
+}
+
+.pv-sale-meta{
+  color:#93a9d6;
+  font-size:13px;
+  line-height:1.45;
+}
+
+.pv-sale-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+
+.pv-sale-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  padding:6px 10px;
+  border:1px solid rgba(96,165,250,.22);
+  background:rgba(37,99,235,.12);
+  color:#bfdbfe;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.pv-sale-badge.profit{
+  background:rgba(34,197,94,.12);
+  border-color:rgba(34,197,94,.26);
+  color:#bbf7d0;
+}
+
+.pv-sale-badge.loss{
+  background:rgba(239,68,68,.12);
+  border-color:rgba(239,68,68,.26);
+  color:#fecaca;
+}
+
+.pv-sale-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+
+.pv-sale-metrics div{
+  min-width:0;
+  background:rgba(2,6,23,.30);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:16px;
+  padding:12px;
+}
+
+.pv-sale-metrics span{
+  display:block;
+  color:#60a5fa;
+  text-transform:uppercase;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+
+.pv-sale-metrics strong{
+  display:block;
+  color:#fff !important;
+  font-size:18px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pv-sale-metrics strong.positive{
+  color:#22c55e !important;
+}
+
+.pv-sale-metrics strong.negative{
+  color:#ef4444 !important;
+}
+
+.pv-sale-details{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px 14px;
+  padding:12px;
+  border-radius:18px;
+  background:rgba(2,6,23,.22);
+  border:1px solid rgba(147,197,253,.10);
+  color:#93a9d6;
+  font-size:13px;
+}
+
+.pv-sale-details b{
+  color:#e5edff;
+}
+
+.pv-sale-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+
+#soldPage button{
+  border-radius:13px !important;
+  border:1px solid rgba(96,165,250,.24) !important;
+  background:rgba(37,99,235,.16) !important;
+  color:#bfdbfe !important;
+  font-weight:800;
+}
+
+#soldPage button:hover{
+  background:rgba(37,99,235,.28) !important;
+}
+
+#soldPage .danger-button{
+  background:rgba(239,68,68,.18) !important;
+  color:#fecaca !important;
+  border-color:rgba(239,68,68,.32) !important;
+}
+
+#soldPage .secondary-button{
+  background:rgba(51,65,85,.82) !important;
+  color:#e5edff !important;
+  border-color:rgba(148,163,184,.22) !important;
+}
+
+.pv-sales-empty{
+  grid-column:1/-1;
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:24px;
+  padding:22px;
+  color:#cbd5e1;
+  box-shadow:0 18px 46px rgba(0,0,0,.20);
+}
+
+@media(max-width:1100px){
+  .pv-sales-hero{
+    grid-template-columns:1fr;
+  }
+
+  .pv-sales-hero-metrics{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  #soldPage{
+    padding:14px;
+    border-radius:22px;
+  }
+
+  .pv-sales-hero{
+    padding:20px;
+  }
+
+  .pv-sales-hero h2{
+    font-size:30px !important;
+  }
+
+  .pv-sales-hero-metrics,
+  .pv-sale-metrics,
+  .pv-sale-details,
+  .pv-sale-top{
+    grid-template-columns:1fr;
+  }
+
+  .pv-sale-img,
+  .pv-sale-placeholder{
+    width:100%;
+    height:220px;
+  }
+
+  .pv-sales-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 /* Lotti Premium v1 */
 #lotsPage{
   background:
@@ -5459,6 +5836,15 @@ let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let html = "";
 let soldTotal = 0;
 let soldProfit = 0;
+let paidTotal = 0;
+let soldCount = 0;
+let shippedCount = 0;
+let bestSale = null;
+
+function euro(value){
+return `${Number(value || 0).toFixed(2)} €`;
+}
+
 for(let i=0;i<cards.length;i++){
 let card = cards[i];
 if(!isCardSold(card)){
@@ -5467,41 +5853,100 @@ continue;
 let sale = grossSaleValue(card);
 let net = netSaleValue(card);
 let paid = parseMoneyValue(card.paid);
+let estimated = parseMoneyValue(card.estimated);
 let profit = net - paid;
+let roi = paid > 0 ? (profit / paid) * 100 : null;
 soldTotal += net;
 soldProfit += profit;
-let profitClass = profit >= 0 ? "kpi-positive" : "kpi-negative";
+paidTotal += paid;
+soldCount++;
+if(String(card.saleStatus || "").toUpperCase() === "SHIPPED" || card.shippedDate){
+shippedCount++;
+}
+if(!bestSale || net > bestSale.net){
+bestSale = {card, net, profit};
+}
+let profitClass = profit >= 0 ? "positive" : "negative";
+let cardTitle = card.player || "Carta senza nome";
+let cardSubtitle = [card.set, card.parallel, card.numbering].filter(Boolean).join(" · ");
+let roiLabel = roi === null ? "n/d" : `${roi >= 0 ? "+" : ""}${roi.toFixed(1)}%`;
+let boxName = card.boxId ? getBoxNameById(card.boxId) : "Acquisto singolo / non collegata";
 html += `
-<div class="card status-SOLD">
-${card.image ? `<img src="${card.image}" alt="${card.player}">` : ""}
-<strong>${card.player || "Carta senza nome"}</strong><br>
-${card.set || ""}<br>
-${card.parallel || ""} ${card.numbering || ""}<br>
-<div class="badge badge-SOLD">VENDUTA</div><br>
-<span class="small-muted">Box: ${card.boxId ? getBoxNameById(card.boxId) : "Acquisto singolo / non collegata"}</span><br>
-Prezzo pagato: ${card.paid || ""}<br>
-Valore stimato precedente: ${card.estimated || ""}<br>
-Prezzo vendita lordo: ${card.salePrice || ""} €<br>
-Netto stimato: ${net.toFixed(2)} €<br>
-Fee/spedizione: ${card.saleFees || "0"} / ${card.shippingCost || "0"} €<br>
-Stato: ${saleStatusLabel(card)}<br>
-Data vendita: ${card.soldDate || "Non indicata"}<br>
-Data spedizione: ${card.shippedDate || "Non indicata"}<br>
-<span class="profit ${profitClass}">Profitto reale netto: ${profit.toFixed(2)} €</span><br><br>
-<button onclick="openEditCard(${i})">Modifica</button>
-<button onclick="restoreSoldCard(${i})" class="secondary-button">Rimetti nel portfolio</button>
-<button onclick="deleteCard(${i})" class="danger-button">Elimina definitivamente</button>
-</div>`;
+<article class="pv-sale-card ${profit < 0 ? "sale-negative" : ""}">
+  <div class="pv-sale-top">
+    ${card.image ? `<img class="pv-sale-img" src="${card.image}" alt="${cardTitle}">` : `<div class="pv-sale-placeholder">💰</div>`}
+    <div>
+      <span class="pv-sale-kicker">Carta venduta</span>
+      <h3 class="pv-sale-title">${cardTitle}</h3>
+      <div class="pv-sale-meta">${cardSubtitle || "Dettagli carta non indicati"}</div>
+      <div class="pv-sale-badges">
+        <span class="pv-sale-badge profit">Venduta</span>
+        <span class="pv-sale-badge ${profit >= 0 ? "profit" : "loss"}">${profit >= 0 ? "Profitto" : "Perdita"}</span>
+        <span class="pv-sale-badge">${saleStatusLabel(card)}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pv-sale-metrics">
+    <div><span>Prezzo vendita</span><strong>${euro(sale)}</strong></div>
+    <div><span>Netto stimato</span><strong>${euro(net)}</strong></div>
+    <div><span>Profitto netto</span><strong class="${profitClass}">${euro(profit)}</strong></div>
+    <div><span>ROI reale</span><strong class="${profitClass}">${roiLabel}</strong></div>
+  </div>
+
+  <div class="pv-sale-details">
+    <div>Box: <b>${boxName}</b></div>
+    <div>Prezzo pagato: <b>${card.paid || "n/d"}</b></div>
+    <div>Valore precedente: <b>${estimated ? euro(estimated) : (card.estimated || "n/d")}</b></div>
+    <div>Fee/spedizione: <b>${card.saleFees || "0"} / ${card.shippingCost || "0"} €</b></div>
+    <div>Data vendita: <b>${card.soldDate || "Non indicata"}</b></div>
+    <div>Data spedizione: <b>${card.shippedDate || "Non indicata"}</b></div>
+  </div>
+
+  <div class="pv-sale-actions">
+    <button onclick="openEditCard(${i})">Modifica</button>
+    <button onclick="restoreSoldCard(${i})" class="secondary-button">Rimetti nel portfolio</button>
+    <button onclick="deleteCard(${i})" class="danger-button">Elimina definitivamente</button>
+  </div>
+</article>`;
 }
+
+let averageSale = soldCount ? soldTotal / soldCount : 0;
+let roiTotal = paidTotal > 0 ? (soldProfit / paidTotal) * 100 : null;
+let roiTotalLabel = roiTotal === null ? "n/d" : `${roiTotal >= 0 ? "+" : ""}${roiTotal.toFixed(1)}%`;
+let coachText = soldCount
+? `${soldCount} vendite registrate · ${shippedCount} spedite · prezzo medio ${euro(averageSale)} · miglior vendita ${bestSale ? `${bestSale.card.player || "Carta senza nome"} (${euro(bestSale.net)})` : "n/d"}.`
+: "Nessuna vendita registrata: quando sposti una carta in vendita conclusa, qui comparirà lo storico economico reale.";
+
 if(!html){
-html = `<div class="card">Nessuna carta venduta.</div>`;
+html = `<div class="pv-sales-empty">Nessuna carta venduta. Quando completi una vendita, questa sezione diventerà il tuo registro economico reale.</div>`;
 }
+
 document.getElementById("soldCards").innerHTML = `
-<div class="card" style="grid-column:1/-1;">
-<strong>Totale vendite:</strong> ${soldTotal.toFixed(2)} €<br>
-<strong>Profitto reale vendite:</strong> <span class="${soldProfit >= 0 ? "kpi-positive" : "kpi-negative"}">${soldProfit.toFixed(2)} €</span>
-</div>
-${html}`;
+<div class="pv-sales-premium">
+  <section class="pv-sales-hero">
+    <div>
+      <span class="eyebrow">Sales Intelligence</span>
+      <h2>Centro operativo vendite</h2>
+      <p>Monitora incassi, profitto netto, ROI realizzato e stato delle carte uscite dal portfolio.</p>
+    </div>
+    <div class="pv-sales-hero-metrics">
+      <div><strong>${soldCount}</strong><span>Carte vendute</span></div>
+      <div><strong>${euro(soldTotal)}</strong><span>Fatturato netto</span></div>
+      <div><strong>${euro(soldProfit)}</strong><span>Profitto netto</span></div>
+      <div><strong>${roiTotalLabel}</strong><span>ROI realizzato</span></div>
+    </div>
+  </section>
+
+  <section class="pv-sales-coach">
+    <strong>Sales Coach</strong>
+    <p>${coachText}</p>
+  </section>
+
+  <section class="pv-sales-grid">
+    ${html}
+  </section>
+</div>`;
 }
 
 function assignLotGroup(index){
