@@ -2528,6 +2528,301 @@ input,select,textarea{
     grid-template-columns:repeat(3,1fr) !important;
   }
 }
+/* Watchlist Premium v1 */
+#watchlist{
+  overflow:visible !important;
+}
+
+#watchlist .pv-watch-premium{
+  display:grid;
+  gap:18px;
+}
+
+#watchlist .pv-watch-hero{
+  display:grid;
+  grid-template-columns:1.1fr 1.4fr;
+  gap:18px;
+  align-items:stretch;
+  background:
+    radial-gradient(circle at 84% 0%, rgba(37,99,235,.20), transparent 32%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98));
+  border:1px solid rgba(96,165,250,.22);
+  border-radius:28px;
+  padding:24px;
+  color:#f8fbff;
+  box-shadow:0 24px 60px rgba(15,23,42,.22);
+}
+
+#watchlist .pv-watch-hero h2{
+  margin:5px 0 7px;
+  color:#fff !important;
+  font-size:34px;
+  letter-spacing:-.05em;
+}
+
+#watchlist .pv-watch-hero p{
+  color:#b8c7e6 !important;
+  margin:0;
+}
+
+#watchlist .pv-watch-hero-metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+
+#watchlist .pv-watch-hero-metrics div{
+  background:rgba(2,6,23,.38);
+  border:1px solid rgba(147,197,253,.14);
+  border-radius:18px;
+  padding:14px;
+}
+
+#watchlist .pv-watch-hero-metrics strong{
+  display:block;
+  color:#fff !important;
+  font-size:24px;
+  line-height:1;
+}
+
+#watchlist .pv-watch-hero-metrics span{
+  display:block;
+  color:#93c5fd;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-top:7px;
+}
+
+#watchlist .pv-watch-coach{
+  background:linear-gradient(135deg,#eff6ff,#ffffff);
+  border:1px solid rgba(37,99,235,.16);
+  border-left:6px solid #2563eb;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 14px 34px rgba(15,23,42,.08);
+}
+
+#watchlist .pv-watch-coach strong{
+  color:#0f172a !important;
+  font-size:17px;
+}
+
+#watchlist .pv-watch-coach p{
+  margin:8px 0 0 !important;
+  color:#334155 !important;
+  font-weight:600;
+}
+
+#watchlist .pv-watch-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+  gap:16px;
+  align-items:stretch;
+}
+
+#watchlist .pv-watch-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr);
+  gap:14px;
+  height:100%;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(37,99,235,.16), transparent 34%),
+    linear-gradient(180deg,rgba(7,18,38,.98),rgba(3,10,22,.98));
+  border:1px solid rgba(96,165,250,.20);
+  border-radius:24px;
+  padding:18px;
+  color:#f8fbff;
+  box-shadow:0 18px 48px rgba(15,23,42,.18);
+  overflow:hidden;
+}
+
+#watchlist .pv-watch-card:before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:5px;
+  background:#64748b;
+}
+
+#watchlist .pv-watch-card.priority-high:before,
+#watchlist .pv-watch-card.priority-alta:before{
+  background:#ef4444;
+}
+
+#watchlist .pv-watch-card.priority-medium:before,
+#watchlist .pv-watch-card.priority-media:before{
+  background:#f59e0b;
+}
+
+#watchlist .pv-watch-card.priority-low:before,
+#watchlist .pv-watch-card.priority-bassa:before{
+  background:#22c55e;
+}
+
+#watchlist .pv-watch-rank{
+  width:44px;
+  height:44px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  background:rgba(37,99,235,.22);
+  color:#bfdbfe;
+  font-weight:900;
+  border:1px solid rgba(147,197,253,.18);
+}
+
+#watchlist .pv-watch-main{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+#watchlist .pv-watch-title-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+#watchlist .pv-watch-kicker{
+  color:#93c5fd;
+  font-size:12px;
+  font-weight:900;
+}
+
+#watchlist .pv-watch-title-row h3{
+  color:#fff !important;
+  margin:4px 0 4px;
+  font-size:24px;
+  line-height:1.04;
+  letter-spacing:-.04em;
+}
+
+#watchlist .pv-watch-title-row p{
+  color:#b8c7e6 !important;
+  margin:0 !important;
+  font-size:13px;
+}
+
+#watchlist .pv-watch-priority{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:900;
+  color:#fff !important;
+  background:rgba(37,99,235,.22);
+  border:1px solid rgba(147,197,253,.18);
+}
+
+#watchlist .pv-watch-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin:14px 0;
+}
+
+#watchlist .pv-watch-metrics div{
+  min-width:0;
+  background:rgba(2,6,23,.38);
+  border:1px solid rgba(147,197,253,.12);
+  border-radius:15px;
+  padding:10px;
+}
+
+#watchlist .pv-watch-metrics span{
+  display:block;
+  color:#60a5fa;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+#watchlist .pv-watch-metrics strong{
+  display:block;
+  color:#fff !important;
+  font-size:14px;
+  margin-top:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#watchlist .pv-watch-notes{
+  color:#c5d3ee;
+  font-size:13px;
+  line-height:1.45;
+  background:rgba(15,23,42,.42);
+  border:1px solid rgba(147,197,253,.10);
+  border-radius:16px;
+  padding:12px;
+  min-height:58px;
+}
+
+#watchlist .pv-watch-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-top:auto;
+  padding-top:14px;
+}
+
+#watchlist .pv-watch-actions button{
+  width:100% !important;
+  margin:0 !important;
+  min-height:40px;
+  padding:8px 10px !important;
+  border-radius:14px !important;
+  color:#fff !important;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+#watchlist .pv-watch-empty{
+  background:linear-gradient(180deg,#ffffff,#eff6ff);
+  border:1px dashed rgba(37,99,235,.30);
+  border-radius:22px;
+  padding:24px;
+  color:#0f172a;
+}
+
+#watchlist .pv-watch-empty strong{
+  color:#0f172a !important;
+}
+
+#watchlist .pv-watch-empty p{
+  color:#334155 !important;
+}
+
+@media(max-width:900px){
+  #watchlist .pv-watch-hero{
+    grid-template-columns:1fr;
+  }
+
+  #watchlist .pv-watch-hero-metrics{
+    grid-template-columns:1fr 1fr;
+  }
+
+  #watchlist .pv-watch-grid{
+    grid-template-columns:1fr;
+  }
+
+  #watchlist .pv-watch-metrics{
+    grid-template-columns:1fr;
+  }
+
+  #watchlist .pv-watch-actions{
+    grid-template-columns:1fr;
+  }
+}
   
 </style>
 </head>
@@ -5902,23 +6197,116 @@ function loadWatchlist(){
   let search = (document.getElementById("watchSearch")?.value || "").toLowerCase();
   let pf = document.getElementById("watchPriorityFilter")?.value || "ALL";
   let sf = document.getElementById("watchStatusFilter")?.value || "ALL";
-  let html = "";
-  items.forEach((t,index)=>{
-    let hay = [t.player,t.club,t.category,t.status,t.notes].join(" ").toLowerCase();
-    if(search && !hay.includes(search)){ return; }
-    if(pf !== "ALL" && t.priority !== pf){ return; }
-    if(sf !== "ALL" && t.status !== sf){ return; }
-    html += `<div class="watch-card">
-      <h3>${t.player || "Target"}</h3>
-      <div class="watch-meta">${t.club || "Club n/d"}${t.age ? " · " + t.age + " anni" : ""}<br>${t.category || "Prospect"} · ${t.status || "Monitoring"}</div>
-      <div style="margin:10px 0;"><span class="ai-chip ${priorityClass(t.priority)}">${t.priority || "Medium"}</span>${t.targetPrice ? `<span class="ai-chip">Target ${t.targetPrice} €</span>` : ""}</div>
-      ${t.notes ? `<div class="small-muted" style="min-height:38px;">${t.notes}</div>` : `<div class="small-muted">Nessuna nota.</div>`}
-      <div class="quick-actions-grid" style="margin-top:12px;"><button onclick="moveWatchToPortfolio(${index})">➕ Portfolio</button><button class="secondary-button" onclick="editWatchTarget(${index})">Modifica</button><button class="danger-button" onclick="deleteWatchTarget(${index})">Elimina</button></div>
-    </div>`;
-  });
-  document.getElementById("watchlist").innerHTML = html || '<div class="card">Nessun target in watchlist.</div>';
-}
 
+  let filtered = items
+    .map((t,index)=>({...t, originalIndex:index}))
+    .filter(t => {
+      let hay = [t.player,t.club,t.category,t.status,t.notes].join(" ").toLowerCase();
+      if(search && !hay.includes(search)){ return false; }
+      if(pf !== "ALL" && t.priority !== pf){ return false; }
+      if(sf !== "ALL" && t.status !== sf){ return false; }
+      return true;
+    });
+
+  let highCount = filtered.filter(t => (t.priority || "").toLowerCase() === "high" || (t.priority || "").toLowerCase() === "alta").length;
+  let readyCount = filtered.filter(t => (t.status || "").toLowerCase().includes("ready") || (t.status || "").toLowerCase().includes("buy")).length;
+  let targetSum = filtered.reduce((sum,t)=>sum + (parseFloat(t.targetPrice) || 0),0);
+  let avgTarget = filtered.length ? targetSum / filtered.length : 0;
+
+  let sorted = filtered.slice().sort((a,b)=>{
+    const p = v => {
+      let x = (v || "").toLowerCase();
+      if(x === "high" || x === "alta") return 3;
+      if(x === "medium" || x === "media") return 2;
+      if(x === "low" || x === "bassa") return 1;
+      return 0;
+    };
+    return p(b.priority) - p(a.priority);
+  });
+
+  let cardsHtml = sorted.map((t,rank)=>{
+    let priority = t.priority || "Medium";
+    let status = t.status || "Monitoring";
+    let target = parseFloat(t.targetPrice) || 0;
+    let category = t.category || "Prospect";
+    let priorityLabel = priority;
+    let statusKey = status.toLowerCase().replace(/\s+/g,"-");
+
+    return `
+      <div class="pv-watch-card priority-${priority.toLowerCase()} status-${statusKey}">
+        <div class="pv-watch-rank">#${rank + 1}</div>
+
+        <div class="pv-watch-main">
+          <div class="pv-watch-title-row">
+            <div>
+              <span class="pv-watch-kicker">${t.club || "Club n/d"}${t.age ? " · " + t.age + " anni" : ""}</span>
+              <h3>${t.player || "Target"}</h3>
+              <p>${category} · ${status}</p>
+            </div>
+            <span class="pv-watch-priority ${priorityClass(priority)}">${priorityLabel}</span>
+          </div>
+
+          <div class="pv-watch-metrics">
+            <div><span>Target price</span><strong>${target ? target.toFixed(2) + " €" : "n/d"}</strong></div>
+            <div><span>Categoria</span><strong>${category}</strong></div>
+            <div><span>Stato</span><strong>${status}</strong></div>
+          </div>
+
+          <div class="pv-watch-notes">
+            ${t.notes ? t.notes : "Nessuna nota. Aggiungi un motivo chiaro per cui questo target è in watchlist."}
+          </div>
+
+          <div class="pv-watch-actions">
+            <button onclick="moveWatchToPortfolio(${t.originalIndex})">➕ Portfolio</button>
+            <button class="secondary-button" onclick="editWatchTarget(${t.originalIndex})">✏️ Modifica</button>
+            <button class="danger-button" onclick="deleteWatchTarget(${t.originalIndex})">Elimina</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  let emptyState = `
+    <div class="pv-watch-empty">
+      <strong>Nessun target in watchlist.</strong>
+      <p>Aggiungi giocatori, rookie o academy card da monitorare. La Watchlist diventerà il centro operativo per acquisti, target price e future opportunità di mercato.</p>
+    </div>
+  `;
+
+  let html = `
+    <div class="pv-watch-premium">
+      <div class="pv-watch-hero">
+        <div>
+          <span class="eyebrow">Watchlist Intelligence</span>
+          <h2>Centro operativo acquisti</h2>
+          <p>Monitora target, priorità, prezzo desiderato e opportunità future.</p>
+        </div>
+        <div class="pv-watch-hero-metrics">
+          <div><strong>${filtered.length}</strong><span>Target filtrati</span></div>
+          <div><strong>${highCount}</strong><span>Alta priorità</span></div>
+          <div><strong>${readyCount}</strong><span>Ready to buy</span></div>
+          <div><strong>${avgTarget.toFixed(2)} €</strong><span>Target medio</span></div>
+        </div>
+      </div>
+
+      <div class="pv-watch-coach">
+        <strong>Watchlist Coach</strong>
+        <p>
+          ${filtered.length === 0 ? 
+            "Nessun target attivo con questi filtri. Aggiungi i giocatori che vuoi monitorare o allarga i filtri." :
+            `${highCount} target ad alta priorità · ${readyCount} potenzialmente pronti all'acquisto · budget target complessivo ${targetSum.toFixed(2)} €.`
+          }
+        </p>
+      </div>
+
+      <div class="pv-watch-grid">
+        ${cardsHtml || emptyState}
+      </div>
+    </div>
+  `;
+
+  document.getElementById("watchlist").innerHTML = html;
+}
 function enableEnterShortcuts(){
   const ids = ["player","set","parallel","numbering","club","boxName","boxCost","portfolioSearch"];
   ids.forEach(id => {
