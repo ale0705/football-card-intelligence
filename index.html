@@ -4468,6 +4468,189 @@ input,select,textarea{
   }
 }
 
+
+/* Analytics Premium v1 */
+#dashboard .pv-analytics-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#dashboard .pv-analytics-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 18px 46px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  color:#e5edff;
+}
+
+#dashboard .pv-analytics-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+
+#dashboard .pv-analytics-head h3{
+  margin:4px 0 2px !important;
+  color:#fff !important;
+  font-size:20px !important;
+  letter-spacing:-.03em;
+}
+
+#dashboard .pv-analytics-head p{
+  margin:0 !important;
+  color:#93a9d6 !important;
+  font-size:13px;
+}
+
+#dashboard .pv-analytics-icon{
+  width:38px;
+  height:38px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:rgba(37,99,235,.16);
+  border:1px solid rgba(96,165,250,.24);
+}
+
+#dashboard .pv-analytics-list{
+  display:grid;
+  gap:9px;
+}
+
+#dashboard .pv-analytics-row{
+  display:grid;
+  grid-template-columns:28px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid rgba(147,197,253,.10);
+}
+
+#dashboard .pv-analytics-row:last-child{
+  border-bottom:none;
+}
+
+#dashboard .pv-analytics-rank{
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:#bfdbfe;
+  background:rgba(96,165,250,.13);
+  font-weight:900;
+  font-size:12px;
+}
+
+#dashboard .pv-analytics-main strong{
+  display:block;
+  color:#fff !important;
+  font-size:14px;
+}
+
+#dashboard .pv-analytics-main span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  margin-top:2px;
+}
+
+#dashboard .pv-analytics-value{
+  text-align:right;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+#dashboard .pv-analytics-value.positive{
+  color:#22c55e;
+}
+
+#dashboard .pv-analytics-value.negative{
+  color:#ef4444;
+}
+
+#dashboard .pv-status-bars{
+  display:grid;
+  gap:12px;
+}
+
+#dashboard .pv-status-line{
+  display:grid;
+  gap:7px;
+}
+
+#dashboard .pv-status-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:#c5d3ee;
+  font-size:13px;
+  font-weight:800;
+}
+
+#dashboard .pv-status-track{
+  height:10px;
+  border-radius:999px;
+  background:rgba(2,6,23,.42);
+  border:1px solid rgba(147,197,253,.12);
+  overflow:hidden;
+}
+
+#dashboard .pv-status-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
+}
+
+#dashboard .pv-capital-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+#dashboard .pv-capital-box{
+  background:rgba(2,6,23,.28);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:18px;
+  padding:14px;
+}
+
+#dashboard .pv-capital-box span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+#dashboard .pv-capital-box strong{
+  display:block;
+  color:#fff !important;
+  font-size:22px;
+  letter-spacing:-.04em;
+}
+
+#dashboard .pv-analytics-note{
+  margin-top:12px;
+  color:#93a9d6;
+  font-size:13px;
+  line-height:1.45;
+}
+
+@media(max-width:1000px){
+  #dashboard .pv-analytics-grid,
+  #dashboard .pv-capital-grid{
+    grid-template-columns:1fr;
+  }
+}
+
 </style>
 </head>
 
@@ -5762,6 +5945,189 @@ input,select,textarea{border:1px solid var(--line);background:#f8fafc;border-rad
   #portfolio .pv-portfolio-metrics,
   #portfolio .pv-ai-mini-grid{
     grid-template-columns:1fr !important;
+  }
+}
+
+
+/* Analytics Premium v1 */
+#dashboard .pv-analytics-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#dashboard .pv-analytics-card{
+  background:linear-gradient(180deg,rgba(10,23,45,.96),rgba(4,13,28,.96));
+  border:1px solid rgba(96,165,250,.16);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 18px 46px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  color:#e5edff;
+}
+
+#dashboard .pv-analytics-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+
+#dashboard .pv-analytics-head h3{
+  margin:4px 0 2px !important;
+  color:#fff !important;
+  font-size:20px !important;
+  letter-spacing:-.03em;
+}
+
+#dashboard .pv-analytics-head p{
+  margin:0 !important;
+  color:#93a9d6 !important;
+  font-size:13px;
+}
+
+#dashboard .pv-analytics-icon{
+  width:38px;
+  height:38px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:rgba(37,99,235,.16);
+  border:1px solid rgba(96,165,250,.24);
+}
+
+#dashboard .pv-analytics-list{
+  display:grid;
+  gap:9px;
+}
+
+#dashboard .pv-analytics-row{
+  display:grid;
+  grid-template-columns:28px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid rgba(147,197,253,.10);
+}
+
+#dashboard .pv-analytics-row:last-child{
+  border-bottom:none;
+}
+
+#dashboard .pv-analytics-rank{
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  color:#bfdbfe;
+  background:rgba(96,165,250,.13);
+  font-weight:900;
+  font-size:12px;
+}
+
+#dashboard .pv-analytics-main strong{
+  display:block;
+  color:#fff !important;
+  font-size:14px;
+}
+
+#dashboard .pv-analytics-main span{
+  display:block;
+  color:#93a9d6;
+  font-size:11px;
+  margin-top:2px;
+}
+
+#dashboard .pv-analytics-value{
+  text-align:right;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+#dashboard .pv-analytics-value.positive{
+  color:#22c55e;
+}
+
+#dashboard .pv-analytics-value.negative{
+  color:#ef4444;
+}
+
+#dashboard .pv-status-bars{
+  display:grid;
+  gap:12px;
+}
+
+#dashboard .pv-status-line{
+  display:grid;
+  gap:7px;
+}
+
+#dashboard .pv-status-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:#c5d3ee;
+  font-size:13px;
+  font-weight:800;
+}
+
+#dashboard .pv-status-track{
+  height:10px;
+  border-radius:999px;
+  background:rgba(2,6,23,.42);
+  border:1px solid rgba(147,197,253,.12);
+  overflow:hidden;
+}
+
+#dashboard .pv-status-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
+}
+
+#dashboard .pv-capital-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+#dashboard .pv-capital-box{
+  background:rgba(2,6,23,.28);
+  border:1px solid rgba(147,197,253,.13);
+  border-radius:18px;
+  padding:14px;
+}
+
+#dashboard .pv-capital-box span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+#dashboard .pv-capital-box strong{
+  display:block;
+  color:#fff !important;
+  font-size:22px;
+  letter-spacing:-.04em;
+}
+
+#dashboard .pv-analytics-note{
+  margin-top:12px;
+  color:#93a9d6;
+  font-size:13px;
+  line-height:1.45;
+}
+
+@media(max-width:1000px){
+  #dashboard .pv-analytics-grid,
+  #dashboard .pv-capital-grid{
+    grid-template-columns:1fr;
   }
 }
 
@@ -7677,6 +8043,158 @@ function renderTrendOpportunitiesPremium(cards, academyRows, clubExposureRows, p
     </div>
   `;
 }
+
+function cardDisplayName(card){
+  return `${card.player || "Carta"} ${card.parallel || ""} ${card.numbering || ""}`.trim();
+}
+
+function cardInvestedValue(card){
+  let paid = parseMoneyValue(card.paid);
+  if(paid > 0){ return paid; }
+  let box = (JSON.parse(localStorage.getItem("boxes")) || []).find(b => b.id === card.boxId);
+  return 0;
+}
+
+function cardTheoreticalProfit(card){
+  return aiNumericValue(card) - cardInvestedValue(card);
+}
+
+function analyticsPercent(count,total){
+  return total > 0 ? ((count / total) * 100).toFixed(0) : "0";
+}
+
+function renderAnalyticsList(rows, emptyText){
+  if(!rows.length){ return `<div class="small-muted">${emptyText}</div>`; }
+  return rows.map((row,index) => {
+    let valueClass = row.profit >= 0 ? "positive" : "negative";
+    let valueText = row.profit >= 0 ? `+${row.profit.toFixed(2)} €` : `${row.profit.toFixed(2)} €`;
+    return `
+      <div class="pv-analytics-row">
+        <div class="pv-analytics-rank">${index + 1}</div>
+        <div class="pv-analytics-main">
+          <strong>${cardDisplayName(row.card)}</strong>
+          <span>${row.value.toFixed(2)} € scenario · pagato ${row.paid.toFixed(2)} €</span>
+        </div>
+        <div class="pv-analytics-value ${valueClass}">${valueText}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderAnalyticsPremium(cards, totalBoxes, totalAIActive, totalSoldRevenue){
+  let activeCards = cards.filter(c => !isCardSold(c));
+  let pricedCards = activeCards.map(card => {
+    let paid = cardInvestedValue(card);
+    let value = aiNumericValue(card);
+    return {card, paid, value, profit:value - paid};
+  });
+
+  let performers = pricedCards
+    .filter(row => row.value > 0 || row.paid > 0)
+    .slice()
+    .sort((a,b) => b.profit - a.profit)
+    .slice(0,5);
+
+  let flops = pricedCards
+    .filter(row => row.value > 0 || row.paid > 0)
+    .slice()
+    .sort((a,b) => a.profit - b.profit)
+    .slice(0,5);
+
+  let activeCount = activeCards.length;
+  let hold = activeCards.filter(c => (c.status || "MONITOR") === "HOLD").length;
+  let monitor = activeCards.filter(c => (c.status || "MONITOR") === "MONITOR").length;
+  let sell = activeCards.filter(c => (c.status || "MONITOR") === "SELL").length;
+
+  let cardInvested = activeCards.reduce((sum,c)=>sum + cardInvestedValue(c),0);
+  let trackedCapital = totalBoxes + cardInvested;
+  let theoreticalValue = totalAIActive + totalSoldRevenue;
+  let theoreticalProfit = theoreticalValue - trackedCapital;
+  let theoreticalClass = theoreticalProfit >= 0 ? "positive" : "negative";
+  let theoreticalText = theoreticalProfit >= 0 ? `+${theoreticalProfit.toFixed(2)} €` : `${theoreticalProfit.toFixed(2)} €`;
+
+  return `
+    <div class="pv-dashboard-block">
+      <div class="pv-section-header">
+        <div>
+          <span class="eyebrow">Analytics Premium</span>
+          <h3>Analytics avanzate</h3>
+          <p class="page-subtitle">Lettura rapida di performer, flop, distribuzione operativa e capitale tracciato nello scenario attivo.</p>
+        </div>
+      </div>
+
+      <div class="pv-analytics-grid">
+        <div class="pv-analytics-card">
+          <div class="pv-analytics-head">
+            <div>
+              <span class="pv-card-kicker">Top Performer</span>
+              <h3>Migliori carte</h3>
+              <p>Ordinate per profitto teorico nello scenario attivo.</p>
+            </div>
+            <div class="pv-analytics-icon">🚀</div>
+          </div>
+          <div class="pv-analytics-list">${renderAnalyticsList(performers, "Nessuna carta attiva con dati sufficienti.")}</div>
+        </div>
+
+        <div class="pv-analytics-card">
+          <div class="pv-analytics-head">
+            <div>
+              <span class="pv-card-kicker">Risk Radar</span>
+              <h3>Top flop</h3>
+              <p>Carte che pesano di più sul rendimento teorico.</p>
+            </div>
+            <div class="pv-analytics-icon">⚠️</div>
+          </div>
+          <div class="pv-analytics-list">${renderAnalyticsList(flops, "Nessuna criticità rilevata.")}</div>
+        </div>
+
+        <div class="pv-analytics-card">
+          <div class="pv-analytics-head">
+            <div>
+              <span class="pv-card-kicker">Portfolio Mix</span>
+              <h3>Distribuzione status</h3>
+              <p>Composizione operativa delle carte attive.</p>
+            </div>
+            <div class="pv-analytics-icon">🎛️</div>
+          </div>
+          <div class="pv-status-bars">
+            <div class="pv-status-line">
+              <div class="pv-status-meta"><span>HOLD</span><span>${hold} · ${analyticsPercent(hold, activeCount)}%</span></div>
+              <div class="pv-status-track"><div class="pv-status-fill" style="width:${analyticsPercent(hold, activeCount)}%"></div></div>
+            </div>
+            <div class="pv-status-line">
+              <div class="pv-status-meta"><span>MONITOR</span><span>${monitor} · ${analyticsPercent(monitor, activeCount)}%</span></div>
+              <div class="pv-status-track"><div class="pv-status-fill" style="width:${analyticsPercent(monitor, activeCount)}%"></div></div>
+            </div>
+            <div class="pv-status-line">
+              <div class="pv-status-meta"><span>SELL</span><span>${sell} · ${analyticsPercent(sell, activeCount)}%</span></div>
+              <div class="pv-status-track"><div class="pv-status-fill" style="width:${analyticsPercent(sell, activeCount)}%"></div></div>
+            </div>
+          </div>
+          <div class="pv-analytics-note">Totale carte attive analizzate: ${activeCount}</div>
+        </div>
+
+        <div class="pv-analytics-card">
+          <div class="pv-analytics-head">
+            <div>
+              <span class="pv-card-kicker">Capital Overview</span>
+              <h3>Capitale tracciato</h3>
+              <p>Box + acquisti singoli rispetto al valore teorico attuale.</p>
+            </div>
+            <div class="pv-analytics-icon">💰</div>
+          </div>
+          <div class="pv-capital-grid">
+            <div class="pv-capital-box"><span>Investito</span><strong>${trackedCapital.toFixed(2)} €</strong></div>
+            <div class="pv-capital-box"><span>Valore</span><strong>${theoreticalValue.toFixed(2)} €</strong></div>
+            <div class="pv-capital-box"><span>Profitto</span><strong class="${theoreticalClass}">${theoreticalText}</strong></div>
+          </div>
+          <div class="pv-analytics-note">Il capitale box è contato come costo intero del box; gli acquisti singoli usano il campo “prezzo pagato”.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderDashboardProfileCard(){
   const el = document.getElementById("profileDashboardBox");
   if(!el){ return; }
@@ -7809,6 +8327,8 @@ document.getElementById("dashboardBox").innerHTML = `
 ${renderDashboardHero(totalAIResultValue, roiAIText, resultAIText, totalBoxes, cards, soldCount)}
 
 ${renderAIInsight(cards)}
+
+${renderAnalyticsPremium(cards, totalBoxes, totalAIActive, totalSoldRevenue)}
 
 ${renderPersonalizedDashboardFocus(cards, boxes, soldCount, totalAIResultValue, resultAIText, roiAIText, strategyCounts)}
 
