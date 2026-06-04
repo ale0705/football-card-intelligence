@@ -4056,6 +4056,293 @@ input,select,textarea{
 @media(max-width:1050px){.pv-box-hero,.pv-box-coach,.pv-box-form-grid{grid-template-columns:1fr;}.pv-box-hero-metrics{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:700px){#boxesPage{padding:14px;border-radius:22px;}.pv-box-hero h2{font-size:34px!important;}.pv-box-hero-metrics,.pv-box-grid,.pv-box-metrics,.pv-box-hit-grid{grid-template-columns:1fr;}.pv-box-rank-row{grid-template-columns:30px 1fr;}.pv-box-rank-roi{grid-column:2;}}
 
+
+
+/* Nuova Carta + Backup Premium v1 */
+#search.pv-new-card-page,
+#backup.pv-backup-page{
+  background:
+    radial-gradient(circle at 82% 0%, rgba(37,99,235,.18), transparent 30%),
+    radial-gradient(circle at 12% 10%, rgba(124,58,237,.16), transparent 28%),
+    linear-gradient(180deg,#061126 0%,#081427 58%,#0b1220 100%);
+  padding:24px;
+  border-radius:28px;
+  color:#e5edff;
+}
+
+#search .pv-newcard-shell,
+#backup .pv-backup-shell{
+  display:grid;
+  gap:18px;
+}
+
+#search .pv-newcard-hero,
+#backup .pv-backup-hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+  padding:24px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(96,165,250,.28), transparent 30%),
+    linear-gradient(135deg,#020617 0%,#071a3a 52%,#123eb5 100%);
+  border:1px solid rgba(96,165,250,.24);
+  box-shadow:0 30px 80px rgba(37,99,235,.22);
+}
+
+#search .pv-newcard-hero h1,
+#backup .pv-backup-hero h1{
+  margin:8px 0 8px;
+  color:#fff !important;
+  font-size:46px;
+  line-height:.95;
+  letter-spacing:-.06em;
+}
+
+#search .pv-newcard-hero p,
+#backup .pv-backup-hero p{
+  margin:0;
+  max-width:620px;
+  color:#b8c7e6 !important;
+  font-size:14px;
+  line-height:1.55;
+}
+
+#search .pv-newcard-actions-top,
+#backup .pv-backup-actions-top{
+  display:grid;
+  gap:10px;
+  align-content:center;
+  background:rgba(2,6,23,.30);
+  border:1px solid rgba(147,197,253,.16);
+  border-radius:22px;
+  padding:16px;
+}
+
+#search .pv-newcard-actions-top button,
+#backup .pv-backup-actions-top button{
+  width:100%;
+  border-radius:16px !important;
+  border:1px solid rgba(147,197,253,.22) !important;
+}
+
+#search .pv-newcard-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:start;
+}
+
+#search .form-card{
+  margin:0 !important;
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98)) !important;
+  border:1px solid rgba(96,165,250,.18) !important;
+  border-radius:24px !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  color:#e5edff !important;
+  overflow:hidden;
+}
+
+#search .form-card.manual,
+#search .form-card.ai-auto,
+#search .form-card.market,
+#search .form-card.football,
+#search .form-card.sales{
+  border-left:0 !important;
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98)) !important;
+}
+
+#search .form-card::before{
+  content:"";
+  display:block;
+  height:4px;
+  margin:-18px -18px 16px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
+}
+
+#search .form-card h3{
+  color:#fff !important;
+  font-size:20px !important;
+  letter-spacing:-.03em;
+  margin-bottom:6px !important;
+}
+
+#search .form-card p.helper,
+#search .form-card label,
+#search .small-muted{
+  color:#9fb0d0 !important;
+}
+
+#search .form-card label{
+  font-size:11px !important;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-weight:900;
+}
+
+#search input,
+#search select,
+#search textarea{
+  background:#081426 !important;
+  border:1px solid rgba(96,165,250,.22) !important;
+  color:#e5edff !important;
+  border-radius:16px !important;
+}
+
+#search input::placeholder,
+#search textarea::placeholder{
+  color:#64748b !important;
+}
+
+#search option{
+  background:#081426;
+  color:#e5edff;
+}
+
+#search .action-row{
+  background:rgba(2,6,23,.24);
+  border:1px solid rgba(147,197,253,.11);
+  border-radius:18px;
+  padding:10px;
+}
+
+#search .action-row button,
+#search .pv-newcard-actions button{
+  border:1px solid rgba(96,165,250,.24) !important;
+  color:#bfdbfe !important;
+  font-weight:900;
+}
+
+#search .pv-newcard-actions{
+  position:sticky;
+  bottom:16px;
+  z-index:20;
+  background:rgba(2,6,23,.78) !important;
+  border:1px solid rgba(96,165,250,.24) !important;
+  border-radius:22px !important;
+  box-shadow:0 -10px 36px rgba(0,0,0,.28) !important;
+  backdrop-filter:blur(16px) !important;
+}
+
+#search #results{
+  color:#e5edff;
+}
+
+#backup .pv-backup-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+#backup .pv-backup-metric,
+#backup .pv-backup-card,
+#backup #backupInfo{
+  background:linear-gradient(180deg,rgba(10,23,45,.98),rgba(4,13,28,.98)) !important;
+  border:1px solid rgba(96,165,250,.18) !important;
+  border-radius:24px !important;
+  box-shadow:0 18px 46px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  color:#e5edff !important;
+}
+
+#backup .pv-backup-metric{
+  padding:18px;
+}
+
+#backup .pv-backup-metric span,
+#backup .pv-backup-card span{
+  display:block;
+  color:#3b82f6;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+#backup .pv-backup-metric strong{
+  display:block;
+  color:#fff !important;
+  font-size:34px;
+  letter-spacing:-.04em;
+}
+
+#backup .pv-backup-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1.1fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+#backup .pv-backup-card{
+  padding:20px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+#backup .pv-backup-card h3{
+  margin:0;
+  color:#fff !important;
+  font-size:22px;
+  letter-spacing:-.03em;
+}
+
+#backup .pv-backup-card p,
+#backup #backupInfo{
+  color:#aebdda !important;
+  line-height:1.5;
+}
+
+#backup .pv-backup-card button{
+  width:100%;
+  margin-top:auto;
+  border:1px solid rgba(96,165,250,.24) !important;
+  color:#bfdbfe !important;
+  font-weight:900;
+}
+
+#backup .pv-backup-card .secondary-button{
+  margin-top:0;
+}
+
+#backup #backupInfo{
+  margin:0 !important;
+  padding:20px !important;
+  min-height:220px;
+}
+
+@media(max-width:1000px){
+  #search .pv-newcard-hero,
+  #backup .pv-backup-hero,
+  #search .pv-newcard-grid,
+  #backup .pv-backup-grid{
+    grid-template-columns:1fr;
+  }
+
+  #backup .pv-backup-metrics{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  #search.pv-new-card-page,
+  #backup.pv-backup-page{
+    padding:14px;
+    border-radius:22px;
+  }
+
+  #search .pv-newcard-hero h1,
+  #backup .pv-backup-hero h1{
+    font-size:36px;
+  }
+
+  #search .pv-newcard-actions{
+    position:static;
+  }
+}
+
 </style>
 </head>
 
@@ -4111,10 +4398,23 @@ input,select,textarea{
 <div id="dashboardBox" class="box"></div>
 </section>
 
-<section id="search" class="section">
-<div class="box">
-<div class="section-title-row"><div><h2 id="searchTitle" style="margin:0;">Nuova carta</h2><p class="page-subtitle">Inserisci i dati essenziali, poi lascia che l’AI compili valutazione, query e strategia.</p></div><button id="closeEditModalBtn" type="button" class="secondary-button compact-btn" style="display:none;" onclick="closeEditModal()">Chiudi modifica</button></div>
+<section id="search" class="section pv-new-card-page">
+<div class="pv-newcard-shell">
+<div class="pv-newcard-hero">
+  <div>
+    <div class="eyebrow">Card intake</div>
+    <h1 id="searchTitle">Nuova Carta</h1>
+    <p>Inserisci una nuova carta nel portfolio oppure utilizza AI Scan per compilare valutazioni, query mercato e strategia operativa.</p>
+  </div>
+  <div class="pv-newcard-actions-top">
+    <button type="button" onclick="aiScanCurrentCard()">🧠 Avvia AI Scan</button>
+    <button type="button" class="secondary-button" onclick="copyAIPrompt()">Copia prompt AI</button>
+    <button type="button" class="ghost-button" onclick="visualSearchCurrentCard()">Apri foto carta</button>
+    <button id="closeEditModalBtn" type="button" class="secondary-button compact-btn" style="display:none;" onclick="closeEditModal()">Chiudi modifica</button>
+  </div>
+</div>
 <input type="hidden" id="editIndex">
+<div class="pv-newcard-grid">
 <div class="form-card manual"><h3>1 · Dati da compilare a mano</h3><p class="helper">La parte minima per registrare la carta. Il resto può arrivare dall’AI Scan.</p><div class="field-grid">
 <div><label>Giocatore</label><input id="player" placeholder="es. Roony Bardghji"></div><div><label>Set / prodotto</label><input id="set" placeholder="es. Topps Chrome UEFA"></div><div><label>Parallel</label><input id="parallel" placeholder="es. Aqua / Refractor"></div><div><label>Numerazione</label><input id="numbering" placeholder="es. /199"></div><div><label>Prezzo pagato</label><input id="paid" placeholder="es. pull oppure 20"></div><div><label>Valore stimato manuale</label><input id="estimated" placeholder="facoltativo"></div><div><label>Data inserimento</label><input id="dateAdded" type="date"></div><div><label>Box di provenienza</label><select id="boxId"><option value="">Nessun box / acquisto singolo</option></select></div><div><label>Foto carta</label><input id="imageFile" type="file" accept="image/*"></div><div><label>Status collezione</label><select id="status"><option value="HOLD">HOLD</option><option value="MONITOR">MONITOR</option><option value="SELL">SELL</option><option value="SOLD">VENDUTA</option></select></div>
 </div></div>
@@ -4130,7 +4430,8 @@ input,select,textarea{
 <div class="form-card market"><h3>3 · Query e ricerche mercato</h3><p class="helper">Campi riempiti dall’AI per controllare eBay, venduti e 130Point.</p><label>Query precisa / titolo migliore</label><textarea id="aiQuery" placeholder="Query principale estratta dall'analisi AI"></textarea><div class="field-grid"><div><label>Query ampia</label><textarea id="aiQueryWide" placeholder="Query ampia"></textarea></div><div><label>Query venduti</label><textarea id="aiQuerySold" placeholder="Query venduti/completed"></textarea></div><div><label>Parole da escludere</label><input id="aiExclude" placeholder="box case pack sealed lot"></div><div><label>Escludi manuale</label><input id="exclude" placeholder="auto sapphire gold"></div></div><div class="action-row"><button type="button" class="secondary-button" onclick="searchAIQueryType('precise')">Cerca precisa</button><button type="button" class="secondary-button" onclick="searchAIQueryType('wide')">Cerca ampia</button><button type="button" class="secondary-button" onclick="searchAIQueryType('sold')">Cerca venduti</button></div></div>
 <div class="form-card football"><h3>4 · Football layer</h3><p class="helper">Dati calcio per club exposure, academy radar, prospect e lotti più sensati.</p><div class="field-grid"><div><label>Club</label><input id="club" placeholder="Barcelona / Arsenal / Milan"></div><div><label>Competizione</label><select id="competition"><option value="">Competizione</option><option value="Club Competitions">Club Competitions</option><option value="Champions League">Champions League</option><option value="Domestic League">Domestic League</option><option value="National Team">National Team</option><option value="Youth / Academy">Youth / Academy</option><option value="Friendly / Other">Friendly / Other</option></select></div><div><label>Prospect level</label><select id="prospectLevel"><option value="">Prospect level</option><option value="Elite Prospect">Elite Prospect</option><option value="High Potential">High Potential</option><option value="Development">Development</option><option value="Speculative">Speculative</option><option value="Established">Established</option></select></div><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="rookieFlag" type="checkbox" style="width:auto;margin-right:8px;"> Rookie card</label><label style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px;"><input id="academyFlag" type="checkbox" style="width:auto;margin-right:8px;"> Academy monitored</label></div></div>
 <div class="form-card sales"><h3>5 · Strategia e vendita</h3><p class="helper">Compila solo per listing, lotto, vendita reale o monitoraggio futuro.</p><div class="field-grid"><div><label>Strategia vendita</label><select id="saleStrategy"><option value="">Automatica da AI</option><option value="SINGOLA">Singola</option><option value="LOTTO">Lotto</option><option value="MONITOR">Monitor</option><option value="HOLD">Hold</option></select></div><div><label>Nome lotto</label><input id="lotGroup" placeholder="Barça low value / Rookie lotto"></div><div><label>Stato vendita</label><select id="saleStatus"><option value="IN_PORTFOLIO">In portfolio</option><option value="LISTED">In vendita</option><option value="SOLD">Venduta</option><option value="SHIPPED">Spedita</option></select></div><div><label>Prezzo annuncio</label><input id="listingPrice" placeholder="es. 9.99"></div><div><label>Prezzo vendita reale</label><input id="salePrice" placeholder="es. 60"></div><div><label>Fee / commissioni</label><input id="saleFees" placeholder="es. 1.20"></div><div><label>Spedizione a tuo carico</label><input id="shippingCost" placeholder="es. 1.50"></div><div><label>Data vendita</label><input id="soldDate" type="date"></div><div><label>Data spedizione</label><input id="shippedDate" type="date"></div><div><label>Motivo monitoraggio</label><input id="watchReason" placeholder="primo gol / trasferimento / hype"></div><div><label>Prossima rivalutazione</label><input id="nextReviewDate" type="date"></div></div></div>
-<div class="form-footer-sticky"><button onclick="saveCard()">Salva nuova carta</button><button onclick="updateCard()" class="secondary-button">Aggiorna carta</button><button onclick="searchCard(true)" class="ghost-button">Ricerca mirata</button><button onclick="searchCard(false)" class="ghost-button">Ricerca ampia</button><button onclick="resetFields()" class="danger-button">Reset</button></div><div id="results"></div>
+</div>
+<div class="form-footer-sticky pv-newcard-actions"><button onclick="saveCard()">Salva nuova carta</button><button onclick="updateCard()" class="secondary-button">Aggiorna carta</button><button onclick="searchCard(true)" class="ghost-button">Ricerca mirata</button><button onclick="searchCard(false)" class="ghost-button">Ricerca ampia</button><button onclick="resetFields()" class="danger-button">Reset</button></div><div id="results"></div>
 </div></section>
 
 <section id="portfolioPage" class="section">
@@ -4247,32 +4548,52 @@ input,select,textarea{
 </div>
 </section>
 
-<section id="backup" class="section">
-<div class="box">
-<h2>Backup</h2>
-<p class="small-muted">Esporta un file JSON completo con carte, foto, box, analisi AI, storico, stati vendita e impostazioni dashboard. Tienine una copia prima di usare nuove versioni.</p>
+<section id="backup" class="section pv-backup-page">
+<div class="pv-backup-shell">
+  <div class="pv-backup-hero">
+    <div>
+      <div class="eyebrow">Data safety</div>
+      <h1>Backup</h1>
+      <p>Proteggi portfolio, foto, box, lotti, vendite, analisi AI e impostazioni dashboard. Esporta una copia prima di ogni nuova release o sessione di test.</p>
+    </div>
+    <div class="pv-backup-actions-top">
+      <button onclick="exportPortfolio()">Esporta backup completo</button>
+      <button onclick="exportPortfolioLite()" class="secondary-button">Backup leggero senza foto</button>
+      <button onclick="document.getElementById('importFile').click()" class="ghost-button">Importa backup</button>
+    </div>
+  </div>
 
-<div class="dashboard-grid">
-<div class="kpi">
-<div class="kpi-title">Carte salvate</div>
-<div class="kpi-value" id="backupCardsCount">0</div>
-</div>
-<div class="kpi">
-<div class="kpi-title">Box salvati</div>
-<div class="kpi-value" id="backupBoxesCount">0</div>
-</div>
-<div class="kpi">
-<div class="kpi-title">Analisi AI</div>
-<div class="kpi-value" id="backupAiCount">0</div>
-</div>
-</div>
+  <div class="pv-backup-metrics">
+    <div class="pv-backup-metric"><span>Carte salvate</span><strong id="backupCardsCount">0</strong></div>
+    <div class="pv-backup-metric"><span>Box salvati</span><strong id="backupBoxesCount">0</strong></div>
+    <div class="pv-backup-metric"><span>Analisi AI</span><strong id="backupAiCount">0</strong></div>
+  </div>
 
-<button onclick="exportPortfolio()">Esporta backup completo</button>
-<button onclick="exportPortfolioLite()" class="secondary-button">Esporta backup leggero senza foto</button>
-<input type="file" id="importFile" style="display:none" onchange="importPortfolio(event)">
-<button onclick="document.getElementById('importFile').click()">Importa backup</button>
+  <div class="pv-backup-grid">
+    <article class="pv-backup-card">
+      <span>Export completo</span>
+      <h3>Backup totale</h3>
+      <p>Salva tutto: carte, immagini, box, lotti, vendite, storico AI e impostazioni. È la copia più sicura prima di aggiornare la webapp.</p>
+      <button onclick="exportPortfolio()">Esporta completo</button>
+    </article>
 
-<div id="backupInfo" class="card" style="margin-top:15px;"></div>
+    <article class="pv-backup-card">
+      <span>Export rapido</span>
+      <h3>Backup leggero</h3>
+      <p>Esporta dati e struttura senza foto. File più piccolo, utile per invio rapido, debug o copie intermedie.</p>
+      <button onclick="exportPortfolioLite()" class="secondary-button">Esporta leggero</button>
+    </article>
+
+    <article class="pv-backup-card">
+      <span>Import dati</span>
+      <h3>Ripristina backup</h3>
+      <p>Importa un file JSON esportato da PitchValue. Prima di importare, crea sempre un backup della situazione attuale.</p>
+      <input type="file" id="importFile" style="display:none" onchange="importPortfolio(event)">
+      <button onclick="document.getElementById('importFile').click()" class="ghost-button">Importa backup</button>
+    </article>
+  </div>
+
+  <div id="backupInfo" class="card"></div>
 </div>
 </section>
 
