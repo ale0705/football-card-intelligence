@@ -5195,13 +5195,14 @@ copyText(query, "Query copiata.");
 }
 
 function openAIModePage(preopenedWindow){
-let win = preopenedWindow || window.open("", "_blank");
+let url = "https://www.google.com/search?udm=50";
+let win = preopenedWindow || window.open(url, "_blank");
 if(!win){
 setAIScanStatus("Popup bloccato", "Consenti i popup per questa pagina oppure apri manualmente Google AI Mode.", "bad");
 alert("Popup bloccato: consenti i popup oppure apri manualmente Google AI Mode.");
 return false;
 }
-win.location.href = "https://www.google.com/search?udm=50";
+if(preopenedWindow){ win.location.href = url; }
 setAIScanStatus("AI Mode aperto", "Trascina la foto nella chat AI e incolla il prompt copiato.", "ok");
 return true;
 }
@@ -5221,8 +5222,8 @@ let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let card = cards[index];
 if(!card){return;}
 setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto salvata e poi AI Mode.", "warn");
-let imageWindow = card.image ? window.open("", "_blank") : null;
 let aiModeWindow = window.open("", "_blank");
+let imageWindow = card.image ? window.open("", "_blank") : null;
 if(card.image){ openImagePreview(card.image, card.player || "Foto carta", imageWindow); }
 else{ setAIScanStatus("Foto mancante", "Prompt copiato, ma questa carta non ha una foto salvata.", "warn"); }
 copyAIPromptForCard(index);
@@ -5237,8 +5238,8 @@ if(cards[index]){ aiScanCard(parseInt(index)); return; }
 }
 setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto caricata e poi AI Mode.", "warn");
 let hasPhoto = hasCurrentCardPhoto();
-let imageWindow = hasPhoto ? window.open("", "_blank") : null;
 let aiModeWindow = window.open("", "_blank");
+let imageWindow = hasPhoto ? window.open("", "_blank") : null;
 copyAIPrompt();
 if(hasPhoto){
   visualSearchCurrentCard(imageWindow);
@@ -6183,12 +6184,12 @@ return;
 openImagePreview(imageData, title, preopenedWindow);
 }
 
-function openVisualSearchGuide(imageData, title, preopenedWindow){
+function openVisualSearchGuide(imageData, title){
 if(!imageData){
 alert("Nessuna foto disponibile per questa carta.");
 return;
 }
-openImagePreview(imageData, title, preopenedWindow);
+openImagePreview(imageData, title);
 openLensPage();
 }
 
