@@ -5194,13 +5194,14 @@ return;
 copyText(query, "Query copiata.");
 }
 
-function openAIModePage(){
-let win = window.open("https://www.google.com/search?udm=50", "_blank");
+function openAIModePage(preopenedWindow){
+let win = preopenedWindow || window.open("", "_blank");
 if(!win){
 setAIScanStatus("Popup bloccato", "Consenti i popup per questa pagina oppure apri manualmente Google AI Mode.", "bad");
 alert("Popup bloccato: consenti i popup oppure apri manualmente Google AI Mode.");
 return false;
 }
+win.location.href = "https://www.google.com/search?udm=50";
 setAIScanStatus("AI Mode aperto", "Trascina la foto nella chat AI e incolla il prompt copiato.", "ok");
 return true;
 }
@@ -5220,10 +5221,12 @@ let cards = JSON.parse(localStorage.getItem("cards")) || [];
 let card = cards[index];
 if(!card){return;}
 setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto salvata e poi AI Mode.", "warn");
-if(card.image){ openImagePreview(card.image, card.player || "Foto carta"); }
+let imageWindow = card.image ? window.open("", "_blank") : null;
+let aiModeWindow = window.open("", "_blank");
+if(card.image){ openImagePreview(card.image, card.player || "Foto carta", imageWindow); }
 else{ setAIScanStatus("Foto mancante", "Prompt copiato, ma questa carta non ha una foto salvata.", "warn"); }
 copyAIPromptForCard(index);
-setTimeout(openAIModePage, 400);
+openAIModePage(aiModeWindow);
 }
 
 function aiScanCurrentCard(){
@@ -5233,13 +5236,16 @@ let cards = JSON.parse(localStorage.getItem("cards")) || [];
 if(cards[index]){ aiScanCard(parseInt(index)); return; }
 }
 setAIScanStatus("Preparazione AI Scan", "Copio il prompt, apro la foto caricata e poi AI Mode.", "warn");
+let hasPhoto = hasCurrentCardPhoto();
+let imageWindow = hasPhoto ? window.open("", "_blank") : null;
+let aiModeWindow = window.open("", "_blank");
 copyAIPrompt();
-if(hasCurrentCardPhoto()){
-  visualSearchCurrentCard();
+if(hasPhoto){
+  visualSearchCurrentCard(imageWindow);
 }else{
   setAIScanStatus("Foto non ancora caricata", "Prompt copiato. Puoi comunque aprire AI Mode, ma per l’analisi serve la foto.", "warn");
 }
-setTimeout(openAIModePage, 400);
+openAIModePage(aiModeWindow);
 }
 
 function normalizeMoneyText(value){
@@ -5451,8 +5457,8 @@ return `<strong>Storico valutazioni AI</strong><br>${rows}`;
 }
 
 
-function openImagePreview(imageData, title){
-let win = window.open("", "_blank");
+function openImagePreview(imageData, title, preopenedWindow){
+let win = preopenedWindow || window.open("", "_blank");
 if(!win){
 alert("Popup bloccato: consenti i popup per aprire la foto.");
 return;
@@ -6169,20 +6175,20 @@ a.click();
 a.remove();
 }
 
-function openVisualSearchTools(imageData, title){
+function openVisualSearchTools(imageData, title, preopenedWindow){
 if(!imageData){
 alert("Nessuna foto disponibile per questa carta.");
 return;
 }
-openImagePreview(imageData, title);
+openImagePreview(imageData, title, preopenedWindow);
 }
 
-function openVisualSearchGuide(imageData, title){
+function openVisualSearchGuide(imageData, title, preopenedWindow){
 if(!imageData){
 alert("Nessuna foto disponibile per questa carta.");
 return;
 }
-openImagePreview(imageData, title);
+openImagePreview(imageData, title, preopenedWindow);
 openLensPage();
 }
 
@@ -6220,7 +6226,7 @@ return;
 downloadImageData(card.image, getCardTitle(card));
 }
 
-function visualSearchCurrentCard(){
+function visualSearchCurrentCard(preopenedWindow){
 let fileInput = document.getElementById("imageFile");
 let file = fileInput.files[0];
 
@@ -6229,7 +6235,7 @@ let reader = new FileReader();
 reader.onload = function(e){
 resizeImage(e.target.result, function(resized){
 let title = buildQuery(false) || "Foto carta";
-openVisualSearchTools(resized, title);
+openVisualSearchTools(resized, title, preopenedWindow);
 setAIScanStatus("Foto aperta", "Trascina questa immagine dentro AI Mode.", "ok");
 });
 };
